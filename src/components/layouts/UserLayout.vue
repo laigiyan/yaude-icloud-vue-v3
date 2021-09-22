@@ -5,11 +5,11 @@
         <div class="header">
           <a href="/">
             <img src="~@/assets/logo.svg" class="logo" alt="logo">
-            <span class="title">Yaude Boot</span>
+            <span class="title">Yaude HealthExam System</span>
           </a>
         </div>
         <div class="desc">
-          Yaude Boot 是最具影响力的 企业级 低代码平台
+          致力打造行業先進的健檢系統
         </div>
       </div>
 
@@ -17,12 +17,12 @@
 
       <div class="footer">
         <div class="links">
-          <a href="http://doc.jeecg.com" target="_blank">帮助</a>
-          <a href="https://github.com/zhangdaiscott/jeecg-boot" target="_blank">隐私</a>
-          <a href="https://github.com/zhangdaiscott/jeecg-boot/blob/master/LICENSE" target="_blank">条款</a>
+          <a href="http://www.yaude.com" target="_blank">幫助</a>
+          <a href="http://www.yaude.com" target="_blank">聯系</a>
+          <a href="http://www.yaude.com" target="_blank">條款</a>
         </div>
         <div class="copyright">
-          Copyright &copy; 2019 <a href="http://www.jeecg.com" target="_blank">JEECG开源社区</a> 出品
+          Copyright &copy; 2021 <a href="http://www.yaude.com" target="_blank">Yaude</a> Product
         </div>
       </div>
     </div>
