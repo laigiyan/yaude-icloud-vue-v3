@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="21b30dde-bf99-47e3-b2ea-e67a3a05ba32" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1wsldDymVLnKqfXlM8rjJHuRybS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\jeecg-uniapp\jeecg-boot-master\jeecg-boot-master\ant-design-vue-jeecg\src\views\system" />
+      <recent name="D:\jeecg-uniapp\jeecg-boot-master\jeecg-boot-master\ant-design-vue-jeecg\src\components\lang" />
+      <recent name="D:\jeecg-uniapp\jeecg-boot-master\jeecg-boot-master\ant-design-vue-jeecg\src\views\system\modules" />
+      <recent name="D:\jeecg-uniapp\jeecg-boot-master\jeecg-boot-master\ant-design-vue-jeecg\src\views\jeecg\modules" />
+      <recent name="D:\jeecg-uniapp\jeecg-boot-master\jeecg-boot-master\ant-design-vue-jeecg\src\views\jeecg" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.serve">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.serve" />
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="21b30dde-bf99-47e3-b2ea-e67a3a05ba32" name="Default Changelist" comment="" />
+      <created>1629255261128</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1629255261128</updated>
+      <workItem from="1629255263318" duration="1160000" />
+      <workItem from="1629430353226" duration="2097000" />
+      <workItem from="1629682403778" duration="20431000" />
+      <workItem from="1629767250462" duration="16613000" />
+      <workItem from="1629853606582" duration="10628000" />
+      <workItem from="1629940613572" duration="2438000" />
+      <workItem from="1630026580786" duration="3964000" />
+      <workItem from="1630285649794" duration="2409000" />
+      <workItem from="1630372390038" duration="1811000" />
+      <workItem from="1630458605855" duration="908000" />
+      <workItem from="1630544653106" duration="599000" />
+      <workItem from="1630631303617" duration="1218000" />
+      <workItem from="1630890123342" duration="643000" />
+      <workItem from="1630901652764" duration="18515000" />
+      <workItem from="1630976755400" duration="17000" />
+      <workItem from="1630978167349" duration="3644000" />
+      <workItem from="1631754423781" duration="5668000" />
+      <workItem from="1631764201823" duration="346000" />
+      <workItem from="1631852075886" duration="12485000" />
+      <workItem from="1631965053187" duration="400000" />
+      <workItem from="1632026846406" duration="5894000" />
+      <workItem from="1632272992507" duration="396000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1631869031513">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1631869031513" />
+    <state width="1899" height="177" key="GridCell.Tab.0.bottom" timestamp="1632032789355">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="177" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1632032789355" />
+    <state width="1899" height="177" key="GridCell.Tab.0.center" timestamp="1632032789355">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="177" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1632032789355" />
+    <state width="1899" height="177" key="GridCell.Tab.0.left" timestamp="1632032789355">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="177" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1632032789355" />
+    <state width="1899" height="177" key="GridCell.Tab.0.right" timestamp="1632032789355">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="177" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1632032789355" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1631877275344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275344" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1631877275344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275344" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1631877275344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275344" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1631877275344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275344" />
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom" timestamp="1631877275344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275344" />
+    <state width="1899" height="348" key="GridCell.Tab.2.center" timestamp="1631877275344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275344" />
+    <state width="1899" height="348" key="GridCell.Tab.2.left" timestamp="1631877275344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275344" />
+    <state width="1899" height="348" key="GridCell.Tab.2.right" timestamp="1631877275344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275344" />
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom" timestamp="1631877275345">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275345" />
+    <state width="1899" height="348" key="GridCell.Tab.3.center" timestamp="1631877275345">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275345" />
+    <state width="1899" height="348" key="GridCell.Tab.3.left" timestamp="1631877275345">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275345" />
+    <state width="1899" height="348" key="GridCell.Tab.3.right" timestamp="1631877275345">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1899" height="348" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1631877275345" />
+    <state x="458" y="181" key="SettingsEditor" timestamp="1629767281188">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="458" y="181" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1629767281188" />
+    <state x="904" y="177" width="681" height="626" key="find.popup" timestamp="1632032303272">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="904" y="177" width="681" height="626" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1632032303272" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1630980241729">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1630980241729" />
+    <state x="620" y="246" width="672" height="678" key="search.everywhere.popup" timestamp="1631871629482">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="620" y="246" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1631871629482" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/node_modules/@jeecg/antd-online-mini/dist/OnlineForm.umd.min.js</url>
+          <line>167</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
