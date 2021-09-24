@@ -4,7 +4,7 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <img src="~@/assets/logo.svg" class="logo" alt="logo">
+            <img src="~@/assets/logo.jpeg" class="logo" alt="logo">
             <span class="title">Yaude HealthExam System</span>
           </a>
         </div>
