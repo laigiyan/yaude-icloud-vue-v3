@@ -10,6 +10,11 @@
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="鏡像名稱">
+              <a-input placeholder="请输入鏡像名稱" v-model="queryParam.imgName"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
@@ -26,13 +31,20 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('申請明細檔')">导出</a-button>
-      <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
-      </a-upload>
+      <a-button @click="handleAdd" type="primary" icon="plus">申請</a-button>
+      <a-button type="primary"  @click="handlePowerOn" >開機</a-button>
+      <a-button type="primary"  @click="handleShutDown" >關機</a-button>
+      <a-button type="primary"  @click="handleRestrt" >重啓</a-button>
+      <a-button type="primary"  @click="handleShowConsole" >控制臺</a-button>
+
+
+<!--      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>-->
+<!--      <a-button type="primary" icon="download" @click="handleExportXls('申請明細檔')">导出</a-button>-->
+<!--      <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">-->
+<!--        <a-button type="primary" icon="import">导入</a-button>-->
+<!--      </a-upload>-->
       <!-- 高级查询区域 -->
-      <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>
+<!--      <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>-->
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
@@ -90,14 +102,29 @@
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a @click="handleDetail(record)">详情</a>
+                <a @click="handleAdjustResource(record)">調整資源</a>
               </a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
-                </a-popconfirm>
+                <a @click="handleConnectVolume(record)">連接卷</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a @click="handleSeparateVolume(record)">分離卷</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a @click="handleShowConsole(record)">控制臺</a>
               </a-menu-item>
             </a-menu>
+<!--            <a-menu slot="overlay">-->
+<!--              <a-menu-item>-->
+<!--                <a @click="handleDetail(record)">详情</a>-->
+<!--              </a-menu-item>-->
+<!--              <a-menu-item>-->
+<!--                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">-->
+<!--                  <a>删除</a>-->
+<!--                </a-popconfirm>-->
+<!--              </a-menu-item>-->
+<!--            </a-menu>-->
+
           </a-dropdown>
         </span>
 
@@ -147,19 +174,34 @@
             dataIndex: 'status'
           },
           {
-            title:'鏡像id',
+            title:'鏡像名稱',
             align:"center",
-            dataIndex: 'imgId'
+            dataIndex: 'imgName'
           },
           {
             title:'實例類型',
             align:"center",
-            dataIndex: 'flavorId'
+            dataIndex: 'flavorName'
           },
           {
-            title:'運行狀態',
+            title:'實例配置',
             align:"center",
-            dataIndex: 'runStatus'
+            dataIndex: ''
+          },
+          {
+            title:'IP地址',
+            align:"center",
+            dataIndex: ''
+          },
+          {
+            title:'所屬項目',
+            align:"center",
+            dataIndex: ''
+          },
+          {
+            title:'運行時長',
+            align:"center",
+            dataIndex: ''
           },
           {
             title: '操作',
