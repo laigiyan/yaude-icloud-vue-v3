@@ -13,9 +13,12 @@
               <a-input v-model="model.represent" placeholder="请输入描述"  ></a-input>
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <a-col :span="24" >
             <a-form-model-item label="鏡像id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
-              <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="请选择鏡像id" />
+             <!-- <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="请选择鏡像id" />-->
+              <a-select v-model="model.imgId"  placeholder="请选择鏡像id">
+                <a-select-option v-for="imgs in imgIds":value="imgs.text">{{imgs.text}}</a-select-option>
+              </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -25,17 +28,26 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="實例類型id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
-              <j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />
+              <!--<j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />-->
+              <a-select v-model="model.flavorId"  placeholder="请选择實例類型id">
+                <a-select-option v-for="flavors in flavorIds":value="flavors.text">{{flavors.text}}</a-select-option>
+              </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="安全組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
-              <j-dict-select-tag type="list" v-model="model.securityName" dictCode="" placeholder="请选择安全組" />
+              <!--<j-dict-select-tag type="list" v-model="model.securityName" dictCode="" placeholder="请选择安全組" />-->
+              <a-select v-model="model.securityName"  placeholder="请选择安全組">
+                <a-select-option v-for="securitys in securityNames":value="securitys.text">{{securitys.text}}</a-select-option>
+              </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
-              <j-dict-select-tag type="list" v-model="model.networkId" dictCode="" placeholder="请选择網絡" />
+              <!--<j-dict-select-tag type="list" v-model="model.networkId" dictCode="" placeholder="请选择網絡" />-->
+              <a-select v-model="model.networkId"  placeholder="请选择安全組">
+                <a-select-option v-for="networks in networkIds":value="networks.text">{{networks.text}}</a-select-option>
+              </a-select>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -89,8 +101,16 @@
           add: "/os/osApply/add",
           edit: "/os/osApply/edit",
           queryById: "/os/osApply/queryById",
-          rdadData: "/os/osApply/rdadData"
-        }
+          readData: "/os/osApply/readData",
+          getImg: "/os/osApply/getImg",
+          getFlavor: "/os/osApply/getFlavor",
+          getSecurity: "/os/osApply/getSecurity",
+          getNetwork: "/os/osApply/getNetwork"
+        },
+        imgIds:[],
+        flavorIds:[],
+        securityNames:[],
+        networkIds:[]
       }
     },
     computed: {
@@ -100,12 +120,16 @@
     },
     created () {
        //备份model原始值
-      this.getdata();
+     // this.getdata();
+
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
+      this.getImgs(this.modelDefault);
+      this.getFlavorIds(this.modelDefault);
+      this.getSecurityNames(this.modelDefault);
+      this.getNetworkIds(this.modelDefault);
     },
     methods: {
       add () {
-        debugger
         this.edit(this.modelDefault);
       },
       edit (record) {
@@ -142,19 +166,80 @@
 
         })
       },
-      getdata(){
-        const that = this;
-        httpAction(this.url.rdadData,this.model,"put").then((res)=>{
+      getImgs(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getImg;
+        httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
-            that.$message.success(res.message);
-            that.$emit('ok');
-          }else{
-            that.$message.warning(res.message);
+            const result = res.result
+            result.forEach((r)=>{
+              this.imgIds.push({
+                value:r.value,
+                text:r.imgId
+              })
+            })
           }
-        }).finally(() => {
-          that.confirmLoading = false;
         })
       },
+      getFlavorIds(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getFlavor;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            debugger
+            const result = res.result
+            result.forEach((r)=>{
+              this.flavorIds.push({
+                value:r.value,
+                text:r.flavorId
+              })
+            })
+          }
+        })
+      },
+      getSecurityNames(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getSecurity;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            debugger
+            const result = res.result
+            result.forEach((r)=>{
+              this.securityNames.push({
+                value:r.value,
+                text:r.securityName
+              })
+            })
+          }
+        })
+      },
+      getNetworkIds(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getNetwork;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            debugger
+            const result = res.result
+            result.forEach((r)=>{
+              this.networkIds.push({
+                value:r.value,
+                text:r.networkId
+              })
+            })
+          }
+        })
+      },
+    /*  getdata(){
+        const that = this;
+        httpAction(this.url.readData,this.model,"post").then((res)=>{
+          debugger
+
+        })
+      },*/
     }
   }
 </script>
