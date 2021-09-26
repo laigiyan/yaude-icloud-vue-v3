@@ -141,6 +141,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import OsInstanceModal from './modules/OsInstanceModal'
+  import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
 
   export default {
     name: 'OsInstanceList',
@@ -218,6 +219,7 @@
           deleteBatch: "/openstack/osInstance/deleteBatch",
           exportXlsUrl: "/openstack/osInstance/exportXls",
           importExcelUrl: "openstack/osInstance/importExcel",
+          powerOnUrl: "/openstack/osInstance/powerOn",
 
         },
         dictOptions:{},
@@ -248,6 +250,23 @@
         fieldList.push({type:'string',value:'securityName',text:'安全組',dictCode:''})
         fieldList.push({type:'string',value:'networkId',text:'網絡',dictCode:''})
         this.superFieldList = fieldList
+      },
+      handlePowerOn(){
+        if (this.selectionRows.length != 1){
+          this.$message.error("請選擇一條記錄！")
+          return
+        }
+        let that = this;
+        getAction(that.url.powerOnUrl, this.selectionRows[0]).then((res) => {
+          if (res.success) {
+            that.$message.success(res.message);
+            that.loadData();
+            that.selectionRows = [];
+            that.selectedRowKeys = [];
+          } else {
+            that.$message.warning(res.message);
+          }
+        });
       }
     }
   }
