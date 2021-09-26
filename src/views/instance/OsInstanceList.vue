@@ -186,22 +186,22 @@
           {
             title:'實例配置',
             align:"center",
-            dataIndex: ''
+            dataIndex: 'configureInfo'
           },
           {
             title:'IP地址',
             align:"center",
-            dataIndex: ''
+            dataIndex: 'ipAddress'
           },
           {
             title:'所屬項目',
             align:"center",
-            dataIndex: ''
+            dataIndex: 'projectName'
           },
           {
             title:'運行時長',
             align:"center",
-            dataIndex: ''
+            dataIndex: 'runTime'
           },
           {
             title: '操作',
