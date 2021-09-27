@@ -40,22 +40,25 @@
         let id = this.$route.path
         this.id = id
         let that = this;
-         getAction("/openstack/osInstance/getConsoleUrl", {instanceID:instanceID }).then((res) => {
-           if (res.success) {
-             console.log(res.result)
-             url =res.result;
-             console.log("------url------"+url)
-             if (url !== null && url !== undefined) {
-               that.url = url;
-               //window.open(this.url);
-             }
+        if(instanceID){
+          getAction("/openstack/osInstance/getConsoleUrl", {instanceID:instanceID }).then((res) => {
+            if (res.success) {
+              console.log(res.result)
+              url =res.result;
+              console.log("------url------"+url)
+              if (url !== null && url !== undefined) {
+                that.url = url;
+                //window.open(this.url);
+              }
 
-           } else {
-             //that.$message.warning(res.message);
-           }
+            } else {
+              //that.$message.warning(res.message);
+            }
 
-         });
-        //url = "http://192.168.2.208:6080/vnc_lite.html?path=%3Ftoken%3D8f0b2851-07c3-44d5-94a9-1bfb024c568a"
+          });
+          //url = "http://192.168.2.208:6080/vnc_lite.html?path=%3Ftoken%3D8f0b2851-07c3-44d5-94a9-1bfb024c568a"
+        }
+
 
       }
     }

@@ -1,132 +1,231 @@
 <template>
-  <j-vxe-table
-    ref="vTable"
-    toolbar
-    row-number
-    row-selection
-    keep-source
-    :height="484"
-    :dataSource="dataSource"
-    :columns="columns"
-    @valueChange="handleValueChange"
-  />
+  <a-card :bordered="false">
+    <!--导航区域-->
+    <div>
+      <a-tabs defaultActiveKey="1" @change="callback">
+        <a-tab-pane tab="登录日志" key="1"></a-tab-pane>
+        <a-tab-pane tab="操作日志" key="2"></a-tab-pane>
+      </a-tabs>
+    </div>
+
+    <!-- 查询区域 -->
+    <div class="table-page-search-wrapper">
+      <a-form layout="inline" @keyup.enter.native="searchQuery">
+        <a-row :gutter="24">
+
+          <a-col :md="6" :sm="8">
+            <a-form-item label="搜索日志">
+              <a-input placeholder="请输入搜索关键词" v-model="queryParam.keyWord"></a-input>
+            </a-form-item>
+          </a-col>
+
+          <a-col :md="6" :sm="10">
+            <a-form-item label="创建时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-range-picker
+                style="width: 210px"
+                v-model="queryParam.createTimeRange"
+                format="YYYY-MM-DD"
+                :placeholder="['开始时间', '结束时间']"
+                @change="onDateChange"
+                @ok="onDateOk"
+              />
+            </a-form-item>
+          </a-col>
+          <a-col :md="5" :sm="8" v-if="tabKey === '2'">
+            <a-form-item label="操作类型" style="left: 10px">
+              <j-dict-select-tag v-model="queryParam.operateType" placeholder="请选择操作类型" dictCode="operate_type"/>
+            </a-form-item>
+          </a-col>
+
+          <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+            <a-col :md="6" :sm="24" >
+                <a-button type="primary"  style="left: 10px" @click="searchQuery" icon="search">查询</a-button>
+                <a-button type="primary"  @click="searchReset" icon="reload" style="margin-left: 8px;left: 10px">重置</a-button>
+            </a-col>
+          </span>
+
+        </a-row>
+      </a-form>
+    </div>
+
+    <!-- table区域-begin -->
+    <a-table
+      ref="table"
+      size="middle"
+      rowKey="id"
+      :columns="columns"
+      :dataSource="dataSource"
+      :pagination="ipagination"
+      :loading="loading"
+      @change="handleTableChange">
+
+      <div v-show="queryParam.logType==2" slot="expandedRowRender" slot-scope="record" style="margin: 0">
+        <div style="margin-bottom: 5px"><a-badge status="success" style="vertical-align: middle;"/><span style="vertical-align: middle;">请求方法:{{ record.method }}</span></div>
+        <div><a-badge status="processing" style="vertical-align: middle;"/><span style="vertical-align: middle;">请求参数:{{ record.requestParam }}</span></div>
+      </div>
+      <!-- 字符串超长截取省略号显示-->
+      <span slot="logContent" slot-scope="text, record">
+          <j-ellipsis :value="text" :length="40"/>
+        </span>
+    </a-table>
+    <!-- table区域-end -->
+  </a-card>
 </template>
 
 <script>
-  import moment from 'moment'
-  import { randomNumber, randomUUID } from '@/utils/util'
-  import { JVXETypes } from '@/components/jeecg/JVxeTable'
+  import { filterObj } from '@/utils/util';
+  import { JeecgListMixin } from '@/mixins/JeecgListMixin'
+  import JEllipsis from '@/components/jeecg/JEllipsis'
 
   export default {
-    name: 'operationLog',
-    data() {
+    name: "operationLog",
+    mixins:[JeecgListMixin],
+    components: {
+      JEllipsis
+    },
+    data () {
       return {
+        description: '这是日志管理页面',
+        // 查询条件
+        queryParam: {
+          ipInfo:'',
+          createTimeRange:[],
+          logType:'1',
+          keyWord:'',
+        },
+        tabKey: "1",
+        // 表头
         columns: [
           {
-            title: '省/直辖市/自治区',
-            key: 's1',
-            type: JVXETypes.select,
-            width: '240px',
-            options: [],
-            placeholder: '请选择${title}'
+            title: '#',
+            dataIndex: '',
+            key:'rowIndex',
+            align:"center",
+            customRender:function (t,r,index) {
+              return parseInt(index)+1;
+            }
           },
           {
-            title: '市',
-            key: 's2',
-            type: JVXETypes.select,
-            width: '240px',
-            options: [],
-            placeholder: '请选择${title}'
+            title: '日志内容',
+            align:"left",
+            dataIndex: 'logContent',
+            scopedSlots: { customRender: 'logContent' },
+            sorter: true
           },
           {
-            title: '县/区',
-            key: 's3',
-            type: JVXETypes.select,
-            width: '240px',
-            options: [],
-            placeholder: '请选择${title}'
+            title: '操作人ID',
+            dataIndex: 'userid',
+            align:"center",
+            sorter: true
+          },
+          {
+            title: '操作人名称',
+            dataIndex: 'username',
+            align:"center",
+            sorter: true
+          },
+          {
+            title: 'IP',
+            dataIndex: 'ip',
+            align:"center",
+            sorter: true
+          },
+          {
+            title: '耗时(毫秒)',
+            dataIndex: 'costTime',
+            align:"center",
+            sorter: true
+          },
+          {
+            title: '日志类型',
+            dataIndex: 'logType_dictText',
+            /*customRender:function (text) {
+              if(text==1){
+                return "登录日志";
+              }else if(text==2){
+                return "操作日志";
+              }else{
+                return text;
+              }
+            },*/
+            align:"center",
+          },
+          {
+            title: '创建时间',
+            dataIndex: 'createTime',
+            align:"center",
+            sorter: true
           }
         ],
-        dataSource: [],
-
-        mockData: [
-          { text: '北京市', value: '110000', parent: null },
-          { text: '天津市', value: '120000', parent: null },
-          { text: '河北省', value: '130000', parent: null },
-          { text: '上海市', value: '310000', parent: null },
-
-          { text: '北京市', value: '110100', parent: '110000' },
-          { text: '天津市市', value: '120100', parent: '120000' },
-          { text: '石家庄市', value: '130100', parent: '130000' },
-          { text: '唐山市', value: '130200', parent: '130000' },
-          { text: '秦皇岛市', value: '130300', parent: '130000' },
-          { text: '上海市', value: '310100', parent: '310000' },
-
-          { text: '东城区', value: '110101', parent: '110100' },
-          { text: '西城区', value: '110102', parent: '110100' },
-          { text: '朝阳区', value: '110105', parent: '110100' },
-          { text: '和平区', value: '120101', parent: '120100' },
-          { text: '河东区', value: '120102', parent: '120100' },
-          { text: '河西区', value: '120103', parent: '120100' },
-          { text: '黄浦区', value: '310101', parent: '310100' },
-          { text: '徐汇区', value: '310104', parent: '310100' },
-          { text: '长宁区', value: '310105', parent: '310100' },
-          { text: '长安区', value: '130102', parent: '130100' },
-          { text: '桥西区', value: '130104', parent: '130100' },
-          { text: '新华区', value: '130105', parent: '130100' },
-          { text: '路南区', value: '130202', parent: '130200' },
-          { text: '路北区', value: '130203', parent: '130200' },
-          { text: '古冶区', value: '130204', parent: '130200' },
-          { text: '海港区', value: '130302', parent: '130300' },
-          { text: '山海关区', value: '130303', parent: '130300' },
-          { text: '北戴河区', value: '130304', parent: '130300' },
-        ]
+        operateColumn:
+          {
+            title: '操作类型',
+            dataIndex: 'operateType_dictText',
+            align:"center",
+          },
+        labelCol: {
+          xs: { span: 1 },
+          sm: { span: 2 },
+        },
+        wrapperCol: {
+          xs: { span: 10 },
+          sm: { span: 16 },
+        },
+        url: {
+          list: "/sys/log/list",
+        },
       }
-
-    },
-    created() {
-      // 初始化数据
-      this.columns[0].options = this.request(null)
     },
     methods: {
-
-      request(parentId) {
-        return this.mockData.filter(i => i.parent === parentId)
+      getQueryParams(){
+        var param = Object.assign({}, this.queryParam,this.isorter);
+        param.field = this.getQueryField();
+        param.pageNo = this.ipagination.current;
+        param.pageSize = this.ipagination.pageSize;
+        delete param.createTimeRange; // 时间参数不传递后台
+        if (this.superQueryParams) {
+          param['superQueryParams'] = encodeURI(this.superQueryParams)
+          param['superQueryMatchType'] = this.superQueryMatchType
+        }
+        return filterObj(param);
       },
 
-      /** 当选项被改变时，联动其他组件 */
-      handleValueChange(event) {
-        const { type, row, column, value, target } = event
-        console.log("event",event)
-        if (type === JVXETypes.select) {
+      // 重置
+      searchReset(){
+        var that = this;
+        var logType = that.queryParam.logType;
+        that.queryParam = {}; //清空查询区域参数
+        that.queryParam.logType = logType;
+        that.loadData(this.ipagination.current);
+      },
+      // 日志类型
+      callback(key){
 
-          // 第一列
-          if (column.key === 's1') {
-            // 设置第二列的 options
-            console.log('this.request(value)::',this.request(value))
-            target.$refs.vxe.columns[3].options = this.request(value)
-            // 清空后两列的数据
-            target.setValues([{
-              rowKey: row.id,
-              values: { s2: '', s3: '' }
-            }])
-            target.$refs.vxe.columns[4].options = []
-          } else
-          // 第二列
-          if (column.key === 's2') {
-            target.$refs.vxe.columns[4].options = this.request(value)
-            target.setValues([{
-              rowKey: row.id,
-              values: { s3: '' }
-            }])
-          }
+        // 动态添加操作类型列
+        if (key == 2) {
+          this.tabKey = '2';
+          this.columns.splice(7, 0, this.operateColumn);
+        }else if(this.columns.length == 9)
+        {
+          this.tabKey = '1';
+          this.columns.splice(7,1);
         }
 
-      }
+        let that=this;
+        that.queryParam.logType=key;
+        that.loadData();
+      },
+      onDateChange: function (value, dateString) {
+        console.log(dateString[0],dateString[1]);
+        this.queryParam.createTime_begin=dateString[0];
+        this.queryParam.createTime_end=dateString[1];
+      },
+      onDateOk(value) {
+        console.log(value);
+      },
     }
   }
 </script>
-
 <style scoped>
-
+  @import '~@assets/less/common.less'
 </style>

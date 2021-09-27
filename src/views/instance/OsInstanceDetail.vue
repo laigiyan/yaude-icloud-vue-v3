@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false">
 
-    <a-tabs>
+    <a-tabs :defaultActiveKey="selectKey">
       <a-tab-pane tab="基本信息" key="1" forceRender>
         <basic-info/>
       </a-tab-pane>
@@ -29,6 +29,7 @@
     components: { OperationLog, Console, BasicInfo},
     data() {
       return {
+        selectKey: '1',
       }
     },
     props:{
@@ -44,6 +45,9 @@
     methods: {
       loadData(arg){
         this.dataSource = this.$route.params;
+        if(this.dataSource.selectKey){
+          this.selectKey = this.dataSource.selectKey;
+        }
       }
 
     },

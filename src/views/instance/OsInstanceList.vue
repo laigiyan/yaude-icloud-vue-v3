@@ -31,7 +31,7 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button @click="handleAdd" type="primary" icon="plus">申請</a-button>
+      <a-button @click="handleApply" type="primary" icon="plus">申請</a-button>
       <a-button type="primary"  @click="handlePowerOn" >開機</a-button>
       <a-button type="primary"  @click="handleShutDown" >關機</a-button>
       <a-button type="primary"  @click="handleReboot" >重啓</a-button>
@@ -125,6 +125,11 @@
               </a-menu-item>
               <a-menu-item>
                 <a @click="handleRebootByHARD(record)">硬重啓實例</a>
+              </a-menu-item>
+              <a-menu-item>
+                  <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+                  <a>删除</a>
+                   </a-popconfirm>
               </a-menu-item>
             </a-menu>
 <!--            <a-menu slot="overlay">-->
@@ -269,6 +274,9 @@
         fieldList.push({type:'string',value:'networkId',text:'網絡',dictCode:''})
         this.superFieldList = fieldList
       },
+      handleApply(){
+        this.$router.push({name: 'os-OsApplyList',params:{}})
+      },
       handlePowerOn(){
         if (this.selectionRows.length != 1){
           this.$message.error("請選擇一條記錄！")
@@ -398,9 +406,8 @@
           this.$message.error("請選擇一條記錄！")
           return
         }
-
-        let that = this;
-        alert(that.selectionRows[0].id);
+        //let that = this;
+        this.$router.push({name: 'instance-OsInstanceDetail',params:{id:this.selectionRows[0].id,selectKey:'2'}})
       },
       handleCreateSnapshot(record){
         let that = this;
@@ -429,7 +436,26 @@
           this.loading = false;
         });
 
-      }
+      },
+      handleDelete: function (id) {
+        if(!this.url.delete){
+          this.$message.error("请设置url.delete属性!")
+          return
+        }
+        var that = this;
+        this.loading = true;
+        deleteAction(that.url.delete, {id: id}).then((res) => {
+          if (res.success) {
+            //重新计算分页问题
+            that.reCalculatePage(1)
+            that.$message.success(res.message);
+            that.loadData();
+          } else {
+            that.$message.warning(res.message);
+          }
+          that.loading = false;
+        });
+      },
     }
   }
 </script>
