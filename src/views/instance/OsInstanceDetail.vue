@@ -3,15 +3,15 @@
 
     <a-tabs>
       <a-tab-pane tab="基本信息" key="1" forceRender>
-        <j-vxe-demo1/>
+        <basic-info/>
       </a-tab-pane>
 
       <a-tab-pane tab="控制臺" key="2" forceRender>
-        <j-vxe-demo2/>
+        <console :dataSource="dataSource"/>
       </a-tab-pane>
 
       <a-tab-pane tab="操作日志" key="3" forceRender>
-        <j-vxe-demo3/>
+        <operation-log/>
       </a-tab-pane>
 
     </a-tabs>
@@ -19,17 +19,34 @@
 </template>
 
 <script>
-  import JVxeDemo1 from '@views/jeecg/JVxeDemo/JVxeDemo1'
-  import JVxeDemo2 from '@views/jeecg/JVxeDemo/JVxeDemo2'
-  import JVxeDemo3 from '@views/jeecg/JVxeDemo/JVxeDemo3'
+
+  import BasicInfo from './details/basicInfo'
+  import Console from './details/console'
+  import OperationLog from './details/operationLog'
 
   export default {
     name: 'OsInstanceDetail',
-    components: {JVxeDemo2, JVxeDemo1,JVxeDemo3},
+    components: { OperationLog, Console, BasicInfo},
     data() {
-      return {}
+      return {
+      }
     },
-    methods: {},
+    props:{
+      dataSource:{
+        type: Object,
+        default: ()=>{},
+        required: false
+      }
+    },
+    created(){
+     this.loadData(1);
+    },
+    methods: {
+      loadData(arg){
+        this.dataSource = this.$route.params;
+      }
+
+    },
   }
 </script>
 

@@ -94,6 +94,10 @@
           </a-button>
         </template>
 
+        <span slot="instanceName" slot-scope="text, record">
+          <a @click="handleRouter(record)">{{ text }}</a>
+        </span>
+
         <span slot="action" slot-scope="text, record">
           <a @click="handleEdit(record)">编辑</a>
 
@@ -103,6 +107,9 @@
             <a-menu slot="overlay">
               <a-menu-item>
                 <a @click="handleAdjustResource(record)">調整資源</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a @click="handleCreateSnapshot(record)">快照</a>
               </a-menu-item>
               <a-menu-item>
                 <a @click="handleConnectVolume(record)">連接卷</a>
@@ -173,7 +180,8 @@
           {
             title:'實例名稱',
             align:"center",
-            dataIndex: 'instanceName'
+            dataIndex: 'instanceName',
+            scopedSlots: { customRender: 'instanceName' }
           },
           {
             title:'狀態',
@@ -229,6 +237,7 @@
           shutDownUrl: "/openstack/osInstance/shutDown",
           rebootByHARDUrl: "/openstack/osInstance/rebootByHARD",
           rebootBySOFTUrl: "/openstack/osInstance/rebootBySOFT",
+          createSnapshotUrl: "/openstack/osInstance/createSnapshot"
 
         },
         dictOptions:{},
@@ -380,7 +389,47 @@
           onCancel() {},
         });
       },
+      handleRouter(record){
+        console.log('handleRoute  '+record)
+        this.$router.push({name: 'instance-OsInstanceDetail',params:{id:record.id}})
+      },
+      handleShowConsole(){
+        if (this.selectionRows.length != 1){
+          this.$message.error("請選擇一條記錄！")
+          return
+        }
 
+        let that = this;
+        alert(that.selectionRows[0].id);
+      },
+      handleCreateSnapshot(record){
+        let that = this;
+        this.$confirm({
+          title: '确定'+record.instanceName+'創建快照吗?',
+          //content: 'When clicked the OK button, this dialog will be closed after 1 second',
+          onOk() {
+            that.createSnapshot(record);
+          },
+          onCancel() {},
+        });
+      },
+      createSnapshot(record){
+        let that = this;
+        this.loading = true;
+        record.imgName = '快照'+record.id;
+        getAction(this.url.createSnapshotUrl, record).then((res) => {
+          if (res.success) {
+            that.$message.success("快照創建成功");
+            //that.loadData();
+            that.selectionRows = [];
+            that.selectedRowKeys = [];
+          } else {
+            that.$message.warning("快照創建失敗");
+          }
+          this.loading = false;
+        });
+
+      }
     }
   }
 </script>
