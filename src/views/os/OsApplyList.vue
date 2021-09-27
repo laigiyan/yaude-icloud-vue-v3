@@ -10,8 +10,8 @@
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="鏡像id">
-              <a-input placeholder="请输入鏡像id" v-model="queryParam.imgId"></a-input>
+            <a-form-item label="鏡像">
+              <a-input placeholder="请输入鏡像" v-model="queryParam.imgName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -121,6 +121,7 @@
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import OsApplyModal from './modules/OsApplyModal'
 
+
   export default {
     name: 'OsApplyList',
     mixins:[JeecgListMixin, mixinDevice],
@@ -148,24 +149,24 @@
             dataIndex: 'instanceName'
           },
           {
-            title:'申請狀態',
+            title:'申請类型',
             align:"center",
-            dataIndex: 'options'
+            dataIndex: 'options_dictText'
           },
           {
             title:'狀態',
             align:"center",
-            dataIndex: 'status'
+            dataIndex: 'status_dictText'
           },
           {
-            title:'鏡像id',
+            title:'鏡像',
             align:"center",
-            dataIndex: 'imgId'
+            dataIndex: 'imgName'
           },
           {
             title:'實例類型',
             align:"center",
-            dataIndex: 'flavorId'
+            dataIndex: 'flavorName'
           },
           {
             title:'運行狀態',
