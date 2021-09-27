@@ -34,7 +34,7 @@
       <a-button @click="handleAdd" type="primary" icon="plus">申請</a-button>
       <a-button type="primary"  @click="handlePowerOn" >開機</a-button>
       <a-button type="primary"  @click="handleShutDown" >關機</a-button>
-      <a-button type="primary"  @click="handleRestrt" >重啓</a-button>
+      <a-button type="primary"  @click="handleReboot" >重啓</a-button>
       <a-button type="primary"  @click="handleShowConsole" >控制臺</a-button>
 
 
@@ -112,6 +112,12 @@
               </a-menu-item>
               <a-menu-item>
                 <a @click="handleShowConsole(record)">控制臺</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a @click="handleRebootBySOFT(record)">軟重啓實例</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a @click="handleRebootByHARD(record)">硬重啓實例</a>
               </a-menu-item>
             </a-menu>
 <!--            <a-menu slot="overlay">-->
@@ -220,6 +226,9 @@
           exportXlsUrl: "/openstack/osInstance/exportXls",
           importExcelUrl: "openstack/osInstance/importExcel",
           powerOnUrl: "/openstack/osInstance/powerOn",
+          shutDownUrl: "/openstack/osInstance/shutDown",
+          rebootByHARDUrl: "/openstack/osInstance/rebootByHARD",
+          rebootBySOFTUrl: "/openstack/osInstance/rebootBySOFT",
 
         },
         dictOptions:{},
@@ -256,7 +265,21 @@
           this.$message.error("請選擇一條記錄！")
           return
         }
+
         let that = this;
+        this.$confirm({
+          title: '确定開啓'+this.selectionRows[0].instanceName+'吗?',
+          //content: 'When clicked the OK button, this dialog will be closed after 1 second',
+          onOk() {
+            that.powerOn();
+          },
+          onCancel() {},
+        });
+
+      },
+      powerOn(){
+        let that = this;
+        this.loading = true;
         getAction(that.url.powerOnUrl, this.selectionRows[0]).then((res) => {
           if (res.success) {
             that.$message.success(res.message);
@@ -266,8 +289,98 @@
           } else {
             that.$message.warning(res.message);
           }
+          this.loading = false;
         });
-      }
+      },
+
+      handleShutDown(){
+        if (this.selectionRows.length != 1){
+          this.$message.error("請選擇一條記錄！")
+          return
+        }
+
+        let that = this;
+        this.$confirm({
+          title: '确定關閉'+this.selectionRows[0].instanceName+'吗?',
+          //content: 'When clicked the OK button, this dialog will be closed after 1 second',
+          onOk() {
+            that.shutDown();
+          },
+          onCancel() {},
+        });
+      },
+      shutDown(){
+        let that = this;
+        this.loading = true;
+        getAction(that.url.shutDownUrl, this.selectionRows[0]).then((res) => {
+          if (res.success) {
+            that.$message.success(res.message);
+            that.loadData();
+            that.selectionRows = [];
+            that.selectedRowKeys = [];
+          } else {
+            that.$message.warning(res.message);
+          }
+          this.loading = false;
+        });
+      },
+
+      handleReboot(){
+        if (this.selectionRows.length != 1){
+          this.$message.error("請選擇一條記錄！")
+          return
+        }
+
+        let that = this;
+        this.$confirm({
+          title: '确定重啓'+this.selectionRows[0].instanceName+'吗?',
+          //content: 'When clicked the OK button, this dialog will be closed after 1 second',
+          onOk() {
+            that.reboot(this.selectionRows[0],that.url.rebootByHARDUrl);
+          },
+          onCancel() {},
+        });
+      },
+      reboot(record,url){
+        let that = this;
+        this.loading = true;
+        getAction(url, record).then((res) => {
+          if (res.success) {
+            that.$message.success(res.message);
+            that.loadData();
+            that.selectionRows = [];
+            that.selectedRowKeys = [];
+          } else {
+            that.$message.warning(res.message);
+          }
+          this.loading = false;
+        });
+      },
+      //軟重啓實例
+      handleRebootBySOFT(record){
+        let that = this;
+        this.$confirm({
+          title: '确定軟重啓'+record.instanceName+'吗?',
+          //content: 'When clicked the OK button, this dialog will be closed after 1 second',
+          onOk() {
+            that.reboot(record,that.url.rebootBySOFTUrl);
+          },
+          onCancel() {},
+        });
+      },
+      //硬重啓實例
+      handleRebootByHARD(record){
+        let that = this;
+        this.$confirm({
+          title: '确定硬重啓'+record.instanceName+'吗?',
+          //content: 'When clicked the OK button, this dialog will be closed after 1 second',
+          onOk() {
+            that.reboot(record,that.url.rebootByHARDUrl);
+          },
+          onCancel() {},
+        });
+      },
+
     }
   }
 </script>
