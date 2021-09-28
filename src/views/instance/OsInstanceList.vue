@@ -353,7 +353,7 @@
           title: '确定重啓'+this.selectionRows[0].instanceName+'吗?',
           //content: 'When clicked the OK button, this dialog will be closed after 1 second',
           onOk() {
-            that.reboot(this.selectionRows[0],that.url.rebootByHARDUrl);
+            that.reboot(that.selectionRows[0],that.url.rebootByHARDUrl);
           },
           onCancel() {},
         });
