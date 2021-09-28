@@ -3,7 +3,7 @@
 
     <a-tabs :defaultActiveKey="selectKey">
       <a-tab-pane tab="基本信息" key="1" forceRender>
-        <basic-info/>
+        <basic-info :dataSource="dataSource"/>
       </a-tab-pane>
 
       <a-tab-pane tab="控制臺" key="2" forceRender>
