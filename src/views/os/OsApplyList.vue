@@ -32,6 +32,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">申请</a-button>
+      <a-button @click="handleSubmit" type="primary" icon="plus">提交</a-button>
       <!--<a-button @click="handleTrim" type="primary" icon="">调整</a-button>-->
       <a-button type="primary" icon="download" @click="handleExportXls('申請明細檔')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
@@ -120,6 +121,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import OsApplyModal from './modules/OsApplyModal'
+  import { httpAction, getAction } from '@/api/manage'
 
 
   export default {
@@ -169,6 +171,16 @@
             dataIndex: 'flavorName'
           },
           {
+            title:'开始时间',
+            align:"center",
+            dataIndex: 'startTime'
+          },
+          {
+            title:'终止时间',
+            align:"center",
+            dataIndex: 'endTime'
+          },
+          {
             title:'運行狀態',
             align:"center",
             dataIndex: 'runStatus'
@@ -188,7 +200,7 @@
           deleteBatch: "/os/osApply/deleteBatch",
           exportXlsUrl: "/os/osApply/exportXls",
           importExcelUrl: "os/osApply/importExcel",
-
+          submit: "/os/osApply/submit"
         },
         dictOptions:{},
         superFieldList:[],
@@ -205,6 +217,30 @@
     methods: {
       initDictConfig(){
       },
+      handleSubmit(){
+        var params = this.selectionRows[0] ;
+        let aa = params.options;
+        if (this.selectedRowKeys.length <= 0) {
+          this.$message.warning('请选择一条记录！');
+          return false;
+        }else if(params.options!=0){
+          this.$message.warning('该记录已申请！');
+        }else{
+          const that = this;
+          let method = "put";
+          let httpurl = this.url.submit;
+          httpAction(httpurl,params,method).then((res)=>{
+            if(res.success){
+              that.$message.success(res.message);
+              that.$emit('ok');
+            }else{
+              that.$message.warning(res.message);
+            }
+          })
+        }
+
+      },
+
       getSuperFieldList(){
         let fieldList=[];
         fieldList.push({type:'string',value:'instanceName',text:'實例名稱',dictCode:''})

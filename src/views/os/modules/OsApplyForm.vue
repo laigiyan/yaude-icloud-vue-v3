@@ -5,31 +5,31 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="實例名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="instanceName">
-              <a-input v-model="model.instanceName" placeholder="请输入實例名稱"  ></a-input>
+              <a-input v-model="model.instanceName" placeholder="请输入實例名稱"  :disabled="subable"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
-              <a-input v-model="model.represent" placeholder="请输入描述"  ></a-input>
+              <a-input v-model="model.represent" placeholder="请输入描述"  :disabled=subable></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" >
             <a-form-model-item label="鏡像" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
              <!-- <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="请选择鏡像id" />-->
-              <a-select v-model="model.imgId"  placeholder="请选择鏡像">
-                <a-select-option v-for="imgs in imgIds":value="imgs.value">{{imgs.text}}</a-select-option>
+              <a-select v-model="model.imgId"  placeholder="请选择鏡像" :disabled=subable>
+                <a-select-option v-for="imgs in imgIds":value="imgs.value" >{{imgs.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="刪除實例時是否刪除卷" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="isDelete">
-              <j-dict-select-tag type="radioButton" v-model="model.isDelete" dictCode="is_delete" placeholder="请选择刪除實例時是否刪除卷" />
+              <j-dict-select-tag type="radioButton" v-model="model.isDelete" dictCode="is_delete" :disabled=subable placeholder="请选择刪除實例時是否刪除卷" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="實例類型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
               <!--<j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />-->
-              <a-select v-model="model.flavorId"  placeholder="请选择實例類型">
+              <a-select v-model="model.flavorId"  placeholder="请选择實例類型" :disabled=subable>
                 <a-select-option v-for="flavors in flavorIds":value="flavors.value">{{flavors.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -40,31 +40,34 @@
               <j-date placeholder="请选择开始时间" v-model="model.startTime" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:50%"/>
             </a-form-model-item>
           </a-col>-->
-         <!-- <a-col :span="24">
-            <a-form-model-item label="合约日期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
-              &lt;!&ndash;<j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />&ndash;&gt;
-            &lt;!&ndash; <a-range-picker :default-value="model.startTime"  style="width: 100%"></a-range-picker>&ndash;&gt;
-              <a-range-picker :default-value="['2015-06-06', '2015-06-16']"  style="width: 100%"></a-range-picker>
-
+          <a-col :span="24">
+            <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+              <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%"></j-date>
+            <!--  <a-range-picker :default-value="[model.startTime, model.endTime]"  style="width: 100%"></a-range-picker>-->
             </a-form-model-item>
           </a-col>
--->
+          <a-col :span="24">
+            <a-form-model-item label="合约日期迄" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
+              <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%"></j-date>
+            </a-form-model-item>
+          </a-col>
+
 
 
 
           <a-col :span="24">
             <a-form-model-item label="安全組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
               <!--<j-dict-select-tag type="list" v-model="model.securityName" dictCode="" placeholder="请选择安全組" />-->
-              <a-select v-model="model.securityName"  placeholder="请选择安全組">
-                <a-select-option v-for="securitys in securityNames":value="securitys.text">{{securitys.text}}</a-select-option>
+              <a-select v-model="model.securityName"  placeholder="请选择安全組" :disabled=subable>
+                <a-select-option v-for="securitys in securityNames":value="securitys.text" >{{securitys.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
               <!--<j-dict-select-tag type="list" v-model="model.networkId" dictCode="" placeholder="请选择網絡" />-->
-              <a-select v-model="model.networkId"  placeholder="请选择網絡">
-                <a-select-option v-for="networks in networkIds":value="networks.value">{{networks.text}}</a-select-option>
+              <a-select v-model="model.networkId"  placeholder="请选择網絡" :disabled="subable">
+                <a-select-option v-for="networks in networkIds":value="networks.value" >{{networks.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
@@ -90,6 +93,7 @@
         type: Boolean,
         default: false,
         required: false
+
       }
     },
     data () {
@@ -118,12 +122,12 @@
             networkId: [
               { required: true, message: '请选择网络'},
             ],
-           /* startTime: [
+            startTime: [
               { required: true, message: '请输入开始时间!'},
             ],
             endTime: [
               { required: true, message: '请输入结束时间!'},
-            ]*/
+            ]
         },
         url: {
           add: "/os/osApply/add",
@@ -134,12 +138,14 @@
           getFlavor: "/os/osApply/getFlavor",
           getSecurity: "/os/osApply/getSecurity",
           getNetwork: "/os/osApply/getNetwork"
+
         },
         imgIds:[],
         flavorIds:[],
         securityNames:[],
         networkIds:[],
-        dateFormat:'YYYY-MM-DD'
+        dateFormat:'YYYY-MM-DD',
+        subable: false
 
       }
     },
@@ -147,6 +153,7 @@
       formDisabled(){
         return this.disabled
       },
+
     },
     created () {
        //备份model原始值
@@ -163,15 +170,17 @@
         this.edit(this.modelDefault);
       },
       edit (record) {
+        debugger;
         this.model = Object.assign({}, record);
         this.visible = true;
-        let starttime = record.startTime;
-        let endtime = record.endTime;
-        let danteRanges = [starttime,endtime];
-        this.startTime = danteRanges;
+        if(this.model.options=="1" || this.model.options=="2"){
+          this.subable=true
+        }
+
+
+
       },
       submitForm () {
-        debugger;
         //let times = this.model.startTime;
         const that = this;
         // 触发表单验证
@@ -187,11 +196,12 @@
               httpurl+=this.url.edit;
                method = 'put';
             }
-           // this.model.startTime = moment(times[0]).format('YYYY-MM-DD');
-            //this.model.endTime = moment(times[1]).format('YYYY-MM-DD');
+            let aa = that.model;
+            debugger;
+           /* this.model.startTime = moment(model.startTime).format('YYYY-MM-DD');
+            this.model.endTime = moment(model.endTime).format('YYYY-MM-DD');*/
             httpAction(httpurl,this.model,method).then((res)=>{
               if(res.success){
-                debugger
                 that.$message.success(res.message);
                 that.$emit('ok');
               }else{
@@ -204,13 +214,13 @@
 
         })
       },
+
       getImgs(record){
         this.model = Object.assign({}, record);
         let method = "post";
         let httpurl = this.url.getImg;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
-            debugger
             const result = res.result
             result.forEach((r)=>{
               this.imgIds.push({
@@ -227,7 +237,6 @@
         let httpurl = this.url.getFlavor;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
-            debugger
             const result = res.result
             result.forEach((r)=>{
               this.flavorIds.push({
@@ -244,7 +253,6 @@
         let httpurl = this.url.getSecurity;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
-            debugger
             const result = res.result
             result.forEach((r)=>{
               this.securityNames.push({

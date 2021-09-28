@@ -47,8 +47,8 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="审核意见" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionText" >
-              <a-textarea v-model="model.optionText" placeholder="请输入审核意见" ></a-textarea>
+            <a-form-model-item label="审核意见" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
+              <a-textarea v-model="model.optionsText" placeholder="请输入审核意见" ></a-textarea>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -97,7 +97,7 @@
            flavorId: [
               { required: true, message: '请输入實例類型id!'},
            ],
-          optionText: [
+          optionsText: [
             { required: true, message: '请输入意见!'},
           ],
         },
@@ -158,14 +158,14 @@
               }
             }).finally(() => {
               that.confirmLoading = false;
+              that.close();
             })
           }
 
         })
       },
       agree(){
-        debugger
-        let a = this.model;
+        const that = this;
         let method = "post";
         let httpurl = this.url.agree;
         httpAction(httpurl,this.model,method).then((res)=>{
@@ -176,11 +176,13 @@
             that.$message.warning(res.message);
           }
         }).finally(() => {
-          this.close();
+          that.confirmLoading = false;
         })
       },
       refuse(){
-        that.confirmLoading = true;
+        debugger
+        const that = this;
+        let aa = this.model;
         let method = "post";
         let httpurl = this.url.refuse;
         httpAction(httpurl,this.model,method).then((res)=>{
@@ -190,6 +192,8 @@
           }else{
             that.$message.warning(res.message);
           }
+        }).finally(() => {
+          that.confirmLoading = false;
         })
 
       },
