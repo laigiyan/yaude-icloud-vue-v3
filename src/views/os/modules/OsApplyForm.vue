@@ -40,13 +40,15 @@
               <j-date placeholder="请选择开始时间" v-model="model.startTime" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:50%"/>
             </a-form-model-item>
           </a-col>-->
-          <a-col :span="24">
+         <!-- <a-col :span="24">
             <a-form-model-item label="合约日期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
-              <!--<j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />-->
-             <a-range-picker v-model="model.startTime"  style="width: 100%"></a-range-picker>
+              &lt;!&ndash;<j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />&ndash;&gt;
+            &lt;!&ndash; <a-range-picker :default-value="model.startTime"  style="width: 100%"></a-range-picker>&ndash;&gt;
+              <a-range-picker :default-value="['2015-06-06', '2015-06-16']"  style="width: 100%"></a-range-picker>
+
             </a-form-model-item>
           </a-col>
-
+-->
 
 
 
@@ -116,12 +118,12 @@
             networkId: [
               { required: true, message: '请选择网络'},
             ],
-            startTime: [
+           /* startTime: [
               { required: true, message: '请输入开始时间!'},
             ],
             endTime: [
               { required: true, message: '请输入结束时间!'},
-            ]
+            ]*/
         },
         url: {
           add: "/os/osApply/add",
@@ -136,7 +138,8 @@
         imgIds:[],
         flavorIds:[],
         securityNames:[],
-        networkIds:[]
+        networkIds:[],
+        dateFormat:'YYYY-MM-DD'
 
       }
     },
@@ -168,7 +171,8 @@
         this.startTime = danteRanges;
       },
       submitForm () {
-        let times = this.model.startTime;
+        debugger;
+        //let times = this.model.startTime;
         const that = this;
         // 触发表单验证
         this.$refs.form.validate(valid => {
@@ -183,8 +187,8 @@
               httpurl+=this.url.edit;
                method = 'put';
             }
-            this.model.startTime = moment(times[0]).format('YYYY-MM-DD');
-            this.model.endTime = moment(times[1]).format('YYYY-MM-DD');
+           // this.model.startTime = moment(times[0]).format('YYYY-MM-DD');
+            //this.model.endTime = moment(times[1]).format('YYYY-MM-DD');
             httpAction(httpurl,this.model,method).then((res)=>{
               if(res.success){
                 debugger
