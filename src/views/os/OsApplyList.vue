@@ -215,6 +215,8 @@
         fieldList.push({type:'string',value:'isDelete',text:'刪除實例時是否刪除卷',dictCode:''})
         fieldList.push({type:'string',value:'flavorId',text:'實例類型id',dictCode:''})
         fieldList.push({type:'string',value:'runStatus',text:'運行狀態',dictCode:''})
+        fieldList.push({type:'date',value:'startTime',text:'开始时间'})
+        fieldList.push({type:'date',value:'endTime',text:'结束时间'})
         fieldList.push({type:'string',value:'securityName',text:'安全組',dictCode:''})
         fieldList.push({type:'string',value:'networkId',text:'網絡',dictCode:''})
         this.superFieldList = fieldList

@@ -34,6 +34,22 @@
               </a-select>
             </a-form-model-item>
           </a-col>
+
+          <!--<a-col :span="12">
+            <a-form-model-item label="开始时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <j-date placeholder="请选择开始时间" v-model="model.startTime" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:50%"/>
+            </a-form-model-item>
+          </a-col>-->
+          <a-col :span="24">
+            <a-form-model-item label="合约日期" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+              <!--<j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />-->
+             <a-range-picker v-model="model.startTime"  style="width: 100%"></a-range-picker>
+            </a-form-model-item>
+          </a-col>
+
+
+
+
           <a-col :span="24">
             <a-form-model-item label="安全組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
               <!--<j-dict-select-tag type="list" v-model="model.securityName" dictCode="" placeholder="请选择安全組" />-->
@@ -45,7 +61,7 @@
           <a-col :span="24">
             <a-form-model-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
               <!--<j-dict-select-tag type="list" v-model="model.networkId" dictCode="" placeholder="请选择網絡" />-->
-              <a-select v-model="model.networkId"  placeholder="请选择安全組">
+              <a-select v-model="model.networkId"  placeholder="请选择網絡">
                 <a-select-option v-for="networks in networkIds":value="networks.text">{{networks.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -60,6 +76,7 @@
 
   import { httpAction, getAction } from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
+  import  moment from "moment"
 
   export default {
     name: 'OsApplyForm',
@@ -96,6 +113,15 @@
            flavorId: [
               { required: true, message: '请输入實例類型id!'},
            ],
+            networkId: [
+              { required: true, message: '请选择网络'},
+            ],
+            startTime: [
+              { required: true, message: '请输入开始时间!'},
+            ],
+            endTime: [
+              { required: true, message: '请输入结束时间!'},
+            ]
         },
         url: {
           add: "/os/osApply/add",
@@ -111,6 +137,7 @@
         flavorIds:[],
         securityNames:[],
         networkIds:[]
+
       }
     },
     computed: {
@@ -135,9 +162,13 @@
       edit (record) {
         this.model = Object.assign({}, record);
         this.visible = true;
+        let starttime = record.startTime;
+        let endtime = record.endTime;
+        let danteRanges = [starttime,endtime];
+        this.startTime = danteRanges;
       },
       submitForm () {
-
+        let times = this.model.startTime;
         const that = this;
         // 触发表单验证
         this.$refs.form.validate(valid => {
@@ -152,8 +183,11 @@
               httpurl+=this.url.edit;
                method = 'put';
             }
+            this.model.startTime = moment(times[0]).format('YYYY-MM-DD');
+            this.model.endTime = moment(times[1]).format('YYYY-MM-DD');
             httpAction(httpurl,this.model,method).then((res)=>{
               if(res.success){
+                debugger
                 that.$message.success(res.message);
                 that.$emit('ok');
               }else{
@@ -233,13 +267,6 @@
           }
         })
       },
-    /*  getdata(){
-        const that = this;
-        httpAction(this.url.readData,this.model,"post").then((res)=>{
-          debugger
-
-        })
-      },*/
     }
   }
 </script>
