@@ -88,9 +88,9 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleOption1(record)">审核</a>
 
-          <a-divider type="vertical" />
+        <!--  <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
@@ -103,7 +103,7 @@
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
-          </a-dropdown>
+          </a-dropdown>-->
         </span>
 
       </a-table>
@@ -206,13 +206,18 @@
       initDictConfig(){
       },
       handleOption(){
+        debugger;
         if (this.selectedRowKeys.length <= 0) {
           this.$message.warning('请选择一条记录！');
           return false;
         }else{
           var params = this.selectionRows[0] ;
-          this.$refs.modalForm.edit(params);
+
+          this.handleOption1(params);
         }
+      },
+      handleOption1(record){
+        this.$refs.modalForm.edit(record);
       },
       getSuperFieldList(){
         let fieldList=[];
