@@ -105,17 +105,11 @@
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
-              <a-menu-item>
-                <a @click="handleAdjustResource(record)">調整資源</a>
-              </a-menu-item>
+<!--              <a-menu-item>-->
+<!--                <a @click="handleAdjustResource(record)">調整資源</a>-->
+<!--              </a-menu-item>-->
               <a-menu-item>
                 <a @click="handleCreateSnapshot(record)">快照</a>
-              </a-menu-item>
-              <a-menu-item>
-                <a @click="handleConnectVolume(record)">連接卷</a>
-              </a-menu-item>
-              <a-menu-item>
-                <a @click="handleSeparateVolume(record)">分離卷</a>
               </a-menu-item>
               <a-menu-item>
                 <a @click="handleShowConsole(record)">控制臺</a>
@@ -125,6 +119,12 @@
               </a-menu-item>
               <a-menu-item>
                 <a @click="handleRebootByHARD(record)">硬重啓實例</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a @click="handleConnectVolume(record)">連接卷</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a @click="handleSeparateVolume(record)">分離卷</a>
               </a-menu-item>
               <a-menu-item>
                   <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">

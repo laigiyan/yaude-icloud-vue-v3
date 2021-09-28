@@ -14,9 +14,11 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="鏡像id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
+            <a-form-model-item label="鏡像" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
 <!--              <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="请选择鏡像id" />-->
-              <a-input v-model="model.imgId" placeholder="请选择鏡像id"  ></a-input>
+              <a-select v-model="model.imgId"  placeholder="请选择鏡像">
+                <a-select-option v-for="imgs in imgIds":value="imgs.value">{{imgs.text}}</a-select-option>
+              </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -25,9 +27,11 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="實例類型id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
+            <a-form-model-item label="實例類型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
 <!--              <j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />-->
-              <a-input v-model="model.flavorId" placeholder="请选择實例類型id"  ></a-input>
+              <a-select v-model="model.flavorId"  placeholder="请选择實例類型">
+                <a-select-option v-for="flavors in flavorIds":value="flavors.value">{{flavors.text}}</a-select-option>
+              </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -92,10 +96,14 @@
               { required: true, message: '请输入實例類型id!'},
            ],
         },
+        imgIds:[],
+        flavorIds:[],
         url: {
           add: "/openstack/osInstance/add",
           edit: "/openstack/osInstance/edit",
-          queryById: "/openstack/osInstance/queryById"
+          queryById: "/openstack/osInstance/queryById",
+          getImg: "/os/osApply/getImg",
+          getFlavor: "/os/osApply/getFlavor",
         }
       }
     },
@@ -107,8 +115,44 @@
     created () {
        //备份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
+      this.getImgs(this.modelDefault);
+      this.getFlavorIds(this.modelDefault);
     },
     methods: {
+      getImgs(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getImg;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            debugger
+            const result = res.result
+            result.forEach((r)=>{
+              this.imgIds.push({
+                value:r.imgId,
+                text:r.imgName
+              })
+            })
+          }
+        })
+      },
+      getFlavorIds(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getFlavor;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            debugger
+            const result = res.result
+            result.forEach((r)=>{
+              this.flavorIds.push({
+                value:r.flavorId,
+                text:r.flavorName
+              })
+            })
+          }
+        })
+      },
       add () {
         this.edit(this.modelDefault);
       },
