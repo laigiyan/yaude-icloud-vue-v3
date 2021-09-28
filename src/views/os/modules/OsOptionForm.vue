@@ -42,7 +42,7 @@
           <a-col :span="24">
             <a-form-model-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
               <a-select v-model="model.networkId"  placeholder="请选择網絡":disabled="true" >
-                <a-select-option v-for="networks in networkIds":value="networks.text">{{networks.text}}</a-select-option>
+                <a-select-option v-for="networks in networkIds":value="networks.value">{{networks.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
@@ -164,6 +164,8 @@
         })
       },
       agree(){
+        debugger
+        let a = this.model;
         let method = "post";
         let httpurl = this.url.agree;
         httpAction(httpurl,this.model,method).then((res)=>{
@@ -251,8 +253,9 @@
             const result = res.result
             result.forEach((r)=>{
               this.networkIds.push({
-                value:r.value,
-                text:r.networkId
+
+                value:r.networkId,
+                text:r.networkName
               })
             })
           }

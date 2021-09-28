@@ -64,7 +64,7 @@
             <a-form-model-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
               <!--<j-dict-select-tag type="list" v-model="model.networkId" dictCode="" placeholder="请选择網絡" />-->
               <a-select v-model="model.networkId"  placeholder="请选择網絡">
-                <a-select-option v-for="networks in networkIds":value="networks.text">{{networks.text}}</a-select-option>
+                <a-select-option v-for="networks in networkIds":value="networks.value">{{networks.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
@@ -264,8 +264,8 @@
             const result = res.result
             result.forEach((r)=>{
               this.networkIds.push({
-                value:r.value,
-                text:r.networkId
+                value:r.networkId,
+                text:r.networkName
               })
             })
           }
