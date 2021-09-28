@@ -164,14 +164,9 @@
         })
       },
       agree(){
-        let formData = {
-          applyId: this.model.id,
-          optionsText: this.model.optionText,
-          optionsType: 0
-        }
         let method = "post";
         let httpurl = this.url.agree;
-        httpAction(httpurl,formData,method).then((res)=>{
+        httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
             that.$message.success(res.message);
             that.$emit('ok');
@@ -184,14 +179,9 @@
       },
       refuse(){
         that.confirmLoading = true;
-        let formData = {
-          applyId: this.model.id,
-          optionsText: this.model.optionText,
-          optionsType: 1
-        }
         let method = "post";
         let httpurl = this.url.refuse;
-        httpAction(httpurl,formData,method).then((res)=>{
+        httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
             that.$message.success(res.message);
             that.$emit('ok');
