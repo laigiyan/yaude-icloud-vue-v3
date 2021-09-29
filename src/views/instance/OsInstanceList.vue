@@ -36,6 +36,8 @@
       <a-button type="primary"  @click="handleShutDown" >關機</a-button>
       <a-button type="primary"  @click="handleReboot" >重啓</a-button>
       <a-button type="primary"  @click="handleShowConsole" >控制臺</a-button>
+      <a-button type="primary"  @click="searchQuery" >刷新</a-button>
+
 
 
 <!--      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>-->
