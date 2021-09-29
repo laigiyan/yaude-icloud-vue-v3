@@ -168,6 +168,21 @@
             dataIndex: 'flavorName'
           },
           {
+            title:'开始时间',
+            align:"center",
+            dataIndex: 'startTime'
+          },
+          {
+            title:'终止时间',
+            align:"center",
+            dataIndex: 'endTime'
+          },
+          {
+            title:'剩余天数',
+            align:"center",
+            dataIndex: 'sectionTime'
+          },
+          {
             title:'運行狀態',
             align:"center",
             dataIndex: 'runStatus'
@@ -182,7 +197,7 @@
           }
         ],
         url: {
-          list: "/os/osApply/list",
+          list: "/os/osApply/optionlist",
           delete: "/os/osApply/delete",
           deleteBatch: "/os/osApply/deleteBatch",
           exportXlsUrl: "/os/osApply/exportXls",
@@ -206,7 +221,6 @@
       initDictConfig(){
       },
       handleOption(){
-        debugger;
         if (this.selectedRowKeys.length <= 0) {
           this.$message.warning('请选择一条记录！');
           return false;
@@ -217,7 +231,11 @@
         }
       },
       handleOption1(record){
-        this.$refs.modalForm.edit(record);
+        if(!record.status=="0"){
+          this.$message.warning('已审核，请重新选择！');
+        }else{
+          this.$refs.modalForm.edit(record);
+        }
       },
       getSuperFieldList(){
         let fieldList=[];

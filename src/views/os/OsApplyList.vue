@@ -181,6 +181,11 @@
             dataIndex: 'endTime'
           },
           {
+            title:'剩余天数',
+            align:"center",
+            dataIndex: 'sectionTime'
+          },
+          {
             title:'運行狀態',
             align:"center",
             dataIndex: 'runStatus'
@@ -207,7 +212,8 @@
       }
     },
     created() {
-    this.getSuperFieldList();
+      this.getSuperFieldList();
+      this.getDate();
     },
     computed: {
       importExcelUrl: function(){
@@ -240,7 +246,6 @@
         }
 
       },
-
       getSuperFieldList(){
         let fieldList=[];
         fieldList.push({type:'string',value:'instanceName',text:'實例名稱',dictCode:''})

@@ -42,13 +42,13 @@
           </a-col>-->
           <a-col :span="24">
             <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
-              <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%"></j-date>
+              <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled="subable"></j-date>
             <!--  <a-range-picker :default-value="[model.startTime, model.endTime]"  style="width: 100%"></a-range-picker>-->
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="合约日期迄" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
-              <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%"></j-date>
+              <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled="subable"></j-date>
             </a-form-model-item>
           </a-col>
 
@@ -170,7 +170,6 @@
         this.edit(this.modelDefault);
       },
       edit (record) {
-        debugger;
         this.model = Object.assign({}, record);
         this.visible = true;
         if(this.model.options=="1" || this.model.options=="2"){
@@ -197,7 +196,6 @@
                method = 'put';
             }
             let aa = that.model;
-            debugger;
            /* this.model.startTime = moment(model.startTime).format('YYYY-MM-DD');
             this.model.endTime = moment(model.endTime).format('YYYY-MM-DD');*/
             httpAction(httpurl,this.model,method).then((res)=>{

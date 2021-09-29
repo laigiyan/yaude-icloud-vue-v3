@@ -33,6 +33,17 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
+            <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+              <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled="true"></j-date>
+              <!--  <a-range-picker :default-value="[model.startTime, model.endTime]"  style="width: 100%"></a-range-picker>-->
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="合约日期迄" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
+              <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled="true"></j-date>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
             <a-form-model-item label="安全組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
               <a-select v-model="model.securityName"  placeholder="请选择安全組" :disabled="true">
                 <a-select-option v-for="securitys in securityNames":value="securitys.text">{{securitys.text}}</a-select-option>
@@ -103,7 +114,7 @@
         },
         url: {
           add: "/os/osApply/add",
-          edit: "/os/osApply/edit",
+          edit: "/os/osOption/edit",
           queryById: "/os/osApply/queryById",
           readData: "/os/osApply/readData",
           agree: "/os/osOption/agree",
@@ -180,7 +191,6 @@
         })
       },
       refuse(){
-        debugger
         const that = this;
         let aa = this.model;
         let method = "post";
@@ -203,7 +213,6 @@
         let httpurl = this.url.getImg;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
-            debugger
             const result = res.result
             result.forEach((r)=>{
               this.imgIds.push({
@@ -220,7 +229,6 @@
         let httpurl = this.url.getFlavor;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
-            debugger
             const result = res.result
             result.forEach((r)=>{
               this.flavorIds.push({
@@ -237,7 +245,6 @@
         let httpurl = this.url.getSecurity;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
-            debugger
             const result = res.result
             result.forEach((r)=>{
               this.securityNames.push({
