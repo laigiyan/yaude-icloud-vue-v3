@@ -231,7 +231,8 @@
         }
       },
       handleOption1(record){
-        if(!record.status=="0"){
+        let aa =record.status;
+        if(record.status!="0"){
           this.$message.warning('已审核，请重新选择！');
         }else{
           this.$refs.modalForm.edit(record);
