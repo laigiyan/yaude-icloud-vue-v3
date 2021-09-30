@@ -1,64 +1,54 @@
 <template>
   <a-spin :spinning="confirmLoading">
     <j-form-container :disabled="formDisabled">
-      <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
+      <a-form-model  ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="實例名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="instanceName">
-              <a-input v-model="model.instanceName" placeholder="请输入實例名稱"  :disabled="subable"></a-input>
+              <a-input v-model="model.instanceName" placeholder="请输入實例名稱"  :disabled=editable></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
-              <a-input v-model="model.represent" placeholder="请输入描述"  :disabled=subable></a-input>
+              <a-input v-model="model.represent" placeholder="请输入描述"  :disabled=editable></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" >
             <a-form-model-item label="鏡像" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
              <!-- <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="请选择鏡像id" />-->
-              <a-select v-model="model.imgId"  placeholder="请选择鏡像" :disabled=subable>
+              <a-select v-model="model.imgId"  placeholder="请选择鏡像" :disabled=editable>
                 <a-select-option v-for="imgs in imgIds":value="imgs.value" >{{imgs.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="刪除實例時是否刪除卷" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="isDelete">
-              <j-dict-select-tag type="radioButton" v-model="model.isDelete" dictCode="is_delete" :disabled=subable placeholder="请选择刪除實例時是否刪除卷" />
+              <j-dict-select-tag type="radioButton" v-model="model.isDelete" dictCode="is_delete" :disabled=editable placeholder="请选择刪除實例時是否刪除卷" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="實例類型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
               <!--<j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />-->
-              <a-select v-model="model.flavorId"  placeholder="请选择實例類型" :disabled=subable>
+              <a-select v-model="model.flavorId"  placeholder="请选择實例類型" :disabled=justable>
                 <a-select-option v-for="flavors in flavorIds":value="flavors.value">{{flavors.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
-
-          <!--<a-col :span="12">
-            <a-form-model-item label="开始时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-date placeholder="请选择开始时间" v-model="model.startTime" :show-time="true" date-format="YYYY-MM-DD HH:mm:ss" style="width:50%"/>
-            </a-form-model-item>
-          </a-col>-->
           <a-col :span="24">
             <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
-              <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled="subable"></j-date>
+              <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
             <!--  <a-range-picker :default-value="[model.startTime, model.endTime]"  style="width: 100%"></a-range-picker>-->
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="合约日期迄" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
-              <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled="subable"></j-date>
+              <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
             </a-form-model-item>
           </a-col>
-
-
-
-
           <a-col :span="24">
             <a-form-model-item label="安全組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
               <!--<j-dict-select-tag type="list" v-model="model.securityName" dictCode="" placeholder="请选择安全組" />-->
-              <a-select v-model="model.securityName"  placeholder="请选择安全組" :disabled=subable>
+              <a-select v-model="model.securityName"  placeholder="请选择安全組" :disabled=justable>
                 <a-select-option v-for="securitys in securityNames":value="securitys.text" >{{securitys.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -66,7 +56,7 @@
           <a-col :span="24">
             <a-form-model-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
               <!--<j-dict-select-tag type="list" v-model="model.networkId" dictCode="" placeholder="请选择網絡" />-->
-              <a-select v-model="model.networkId"  placeholder="请选择網絡" :disabled="subable">
+              <a-select v-model="model.networkId"  placeholder="请选择網絡" :disabled=editable>
                 <a-select-option v-for="networks in networkIds":value="networks.value" >{{networks.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -137,7 +127,8 @@
           getImg: "/os/osApply/getImg",
           getFlavor: "/os/osApply/getFlavor",
           getSecurity: "/os/osApply/getSecurity",
-          getNetwork: "/os/osApply/getNetwork"
+          getNetwork: "/os/osApply/getNetwork",
+          adjust: "/os/osApply/adjust"
 
         },
         imgIds:[],
@@ -145,7 +136,8 @@
         securityNames:[],
         networkIds:[],
         dateFormat:'YYYY-MM-DD',
-        subable: false
+        editable: false,
+        justable: false
 
       }
     },
@@ -170,10 +162,15 @@
         this.edit(this.modelDefault);
       },
       edit (record) {
+        debugger
         this.model = Object.assign({}, record);
         this.visible = true;
-        if(this.model.options=="1" || this.model.options=="2"){
-          this.subable=true
+        if(this.model.options=="1" || (this.model.options=="2" && this.model.status!=null) ){
+          this.editable=true
+          this.justable=true
+        }else if(this.model.options=="2" && this.model.status==null){
+          this.editable=true
+          this.justable=false
         }
 
 
@@ -195,9 +192,6 @@
               httpurl+=this.url.edit;
                method = 'put';
             }
-            let aa = that.model;
-           /* this.model.startTime = moment(model.startTime).format('YYYY-MM-DD');
-            this.model.endTime = moment(model.endTime).format('YYYY-MM-DD');*/
             httpAction(httpurl,this.model,method).then((res)=>{
               if(res.success){
                 that.$message.success(res.message);

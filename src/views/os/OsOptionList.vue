@@ -147,11 +147,11 @@
             align:"center",
             dataIndex: 'instanceName'
           },
-         /* {
+          {
             title:'申請类型',
             align:"center",
             dataIndex: 'options_dictText'
-          },*/
+          },
           {
             title:'狀態',
             align:"center",
@@ -231,6 +231,7 @@
         }
       },
       handleOption1(record){
+        var that = this;
         let aa =record.status;
         if(record.status!="0"){
           this.$message.warning('已审核，请重新选择！');

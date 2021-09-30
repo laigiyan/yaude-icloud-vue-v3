@@ -33,7 +33,7 @@
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">申请</a-button>
       <a-button @click="handleSubmit" type="primary" icon="plus">提交</a-button>
-      <!--<a-button @click="handleTrim" type="primary" icon="">调整</a-button>-->
+      <a-button @click="handleAdjust" type="primary" icon="plus">调整</a-button>
       <a-button type="primary" icon="download" @click="handleExportXls('申請明細檔')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
@@ -112,6 +112,7 @@
     </div>
 
     <os-apply-modal ref="modalForm" @ok="modalFormOk"></os-apply-modal>
+    <os-adjust-modal ref="adjustModal"></os-adjust-modal>
   </a-card>
 </template>
 
@@ -122,13 +123,15 @@
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import OsApplyModal from './modules/OsApplyModal'
   import { httpAction, getAction } from '@/api/manage'
+  import OsAdjustModal from './modules/OsAdjustModal'
 
 
   export default {
     name: 'OsApplyList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      OsApplyModal
+      OsApplyModal,
+      OsAdjustModal
     },
     data () {
       return {
@@ -213,7 +216,6 @@
     },
     created() {
       this.getSuperFieldList();
-      this.getDate();
     },
     computed: {
       importExcelUrl: function(){
@@ -225,11 +227,10 @@
       },
       handleSubmit(){
         var params = this.selectionRows[0] ;
-        let aa = params.options;
         if (this.selectedRowKeys.length <= 0) {
           this.$message.warning('请选择一条记录！');
           return false;
-        }else if(params.options!=0){
+        }else if(params.status!=null){
           this.$message.warning('该记录已申请！');
         }else{
           const that = this;
@@ -239,12 +240,23 @@
             if(res.success){
               that.$message.success(res.message);
               that.$emit('ok');
+              that.loadData();
             }else{
               that.$message.warning(res.message);
             }
           })
         }
 
+      },
+      handleAdjust(){
+        const that = this;
+        var params = this.selectionRows[0] ;
+        if (this.selectedRowKeys.length <= 0) {
+          this.$message.warning('请选择一条记录！');
+          return false;
+        }else{
+          this.$refs.adjustModal.adjust(params);
+        }
       },
       getSuperFieldList(){
         let fieldList=[];

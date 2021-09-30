@@ -164,6 +164,7 @@
               if(res.success){
                 that.$message.success(res.message);
                 that.$emit('ok');
+                that.loadData();
               }else{
                 that.$message.warning(res.message);
               }
@@ -183,6 +184,7 @@
           if(res.success){
             that.$message.success(res.message);
             that.$emit('ok');
+            that.loadData();
           }else{
             that.$message.warning(res.message);
           }
@@ -199,6 +201,7 @@
           if(res.success){
             that.$message.success(res.message);
             that.$emit('ok');
+            that.loadData();
           }else{
             that.$message.warning(res.message);
           }
