@@ -3,6 +3,11 @@
     <j-form-container :disabled="formDisabled">
       <a-form-model  ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
+         <!-- <a-col :span="24">
+            <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
+              <a-input v-model="model.projectName" placeholder="请输入項目名稱"  :disabled=editable></a-input>
+            </a-form-model-item>
+          </a-col>-->
           <a-col :span="24">
             <a-form-model-item label="實例名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="instanceName">
               <a-input v-model="model.instanceName" placeholder="请输入實例名稱"  :disabled=editable></a-input>
@@ -138,7 +143,6 @@
         dateFormat:'YYYY-MM-DD',
         editable: false,
         justable: false
-
       }
     },
     computed: {

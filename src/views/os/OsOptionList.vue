@@ -183,6 +183,11 @@
             dataIndex: 'sectionTime'
           },
           {
+            title:'所屬項目',
+            align:"center",
+            dataIndex: 'projectName'
+          },
+          {
             title:'運行狀態',
             align:"center",
             dataIndex: 'runStatus'
