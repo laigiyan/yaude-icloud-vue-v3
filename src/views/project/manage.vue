@@ -65,7 +65,7 @@
         size="middle"
         :scroll="{x:true}"
         bordered
-        rowKey="id"
+        rowKey="projectId"
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
@@ -99,9 +99,9 @@
         </span>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <!--<a @click="handleEdit(record)">编辑</a>
 
-          <a-divider type="vertical" />
+          <a-divider type="vertical" />-->
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
@@ -112,7 +112,7 @@
 <!--                <a @click="handleAddUserProject(record)">指定管理员</a>-->
 <!--              </a-menu-item>-->
               <a-menu-item>
-               <new-j-select-multi-user v-model="formData.multiUser" selectButtonText="添加用户" :query-config="selectUserQueryConfig"/>
+               <new-j-select-multi-user v-model="record.projectUserNames" :projectData="record" selectButtonText="管理成員" :query-config="selectUserQueryConfig"/>
               </a-menu-item>
             </a-menu>
 <!--            <a-menu slot="overlay">-->
@@ -171,45 +171,42 @@
             }
           },
           {
-            title:'實例名稱',
+            title:'項目名稱',
             align:"center",
-            dataIndex: 'instanceName',
-            scopedSlots: { customRender: 'instanceName' }
+            dataIndex: 'projectName',
+            scopedSlots: { customRender: 'projectName' }
           },
           {
-            title:'狀態',
+            title:'描述',
             align:"center",
-            dataIndex: 'status'
+            dataIndex: 'description'
           },
           {
-            title:'鏡像名稱',
+            title:'項目ID',
             align:"center",
-            dataIndex: 'imgName'
+            dataIndex: 'projectId'
           },
           {
-            title:'實例類型',
+            title:'域名',
             align:"center",
-            dataIndex: 'flavorName'
+            dataIndex: 'domainName'
           },
           {
-            title:'實例配置',
+            title:'成员',
             align:"center",
-            dataIndex: 'configureInfo'
+            dataIndex: 'projectUserNames'
           },
           {
-            title:'IP地址',
+            title:'是否啓用',
             align:"center",
-            dataIndex: 'ipAddress'
-          },
-          {
-            title:'所屬項目',
-            align:"center",
-            dataIndex: 'projectName'
-          },
-          {
-            title:'運行時長',
-            align:"center",
-            dataIndex: 'runTime'
+            dataIndex: 'enabled',
+            customRender:function (enabled) {
+              if(enabled){
+                return "true";
+              }else {
+                return "false";
+              }
+            }
           },
           {
             title: '操作',
@@ -221,11 +218,11 @@
           }
         ],
         url: {
-          list: "/openstack/osInstance/list",
+          list: "/openstack/osUserProject/listProject",
           delete: "/openstack/osInstance/delete",
           deleteBatch: "/openstack/osInstance/deleteBatch",
           exportXlsUrl: "/openstack/osInstance/exportXls",
-          importExcelUrl: "openstack/osInstance/importExcel",
+          importExcelUrl: "/openstack/osInstance/importExcel",
           powerOnUrl: "/openstack/osInstance/powerOn",
           shutDownUrl: "/openstack/osInstance/shutDown",
           rebootByHARDUrl: "/openstack/osInstance/rebootByHARD",
@@ -235,26 +232,7 @@
         },
         dictOptions:{},
         superFieldList:[],
-        formData: {
-          areaLinkage1: '110105',
-          areaLinkage2: '140221',
-          sex: 1,
-          orgCodes: 'A02A01,A02A02',
-          departId: '57197590443c44f083d42ae24ef26a2c,a7d7e77e06c84325a40932163adcdaa6',
-          userIds: 'admin',
-          multiUser: 'admin,jeecg',
-          jCheckbox: 'spring,jeecgboot',
-          jCodeEditor: `function sayHi(word) {\n  alert(word)\n}\nsayHi('hello, world!')`,
-          jDate: '2019-5-10 15:33:06',
-          jEditor: '<h2 style="text-align: center;">富文本编辑器</h2> <p>这里是富文本编辑器。</p>',
-          jEllipsis: '这是一串很长很长的文字段落。这是一串很长很长的文字段落。这是一串很长很长的文字段落。这是一串很长很长的文字段落。',
-          jSlider: false,
-          jSelectMultiple: 'Integer,Boolean',
-          imgList:[],
-          fileList:[],
-          content: '',
-          cronExpression: '* * * * * ? *',
-        },
+        multiUser:'',
         // 选择用户查询条件配置
         selectUserQueryConfig: [
           {key: 'phone', label: '电话'},
@@ -274,16 +252,11 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'instanceName',text:'實例名稱',dictCode:''})
-        fieldList.push({type:'string',value:'options',text:'申請狀態',dictCode:''})
-        fieldList.push({type:'string',value:'status',text:'狀態',dictCode:''})
-        fieldList.push({type:'string',value:'represent',text:'描述',dictCode:''})
-        fieldList.push({type:'string',value:'imgId',text:'鏡像id',dictCode:''})
-        fieldList.push({type:'string',value:'isDelete',text:'刪除實例時是否刪除卷',dictCode:''})
-        fieldList.push({type:'string',value:'flavorId',text:'實例類型id',dictCode:''})
-        fieldList.push({type:'string',value:'runStatus',text:'運行狀態',dictCode:''})
-        fieldList.push({type:'string',value:'securityName',text:'安全組',dictCode:''})
-        fieldList.push({type:'string',value:'networkId',text:'網絡',dictCode:''})
+        fieldList.push({type:'string',value:'projectName',text:'項目名稱',dictCode:''})
+        fieldList.push({type:'string',value:'description',text:'描述',dictCode:''})
+        fieldList.push({type:'string',value:'projectId',text:'項目ID',dictCode:''})
+        fieldList.push({type:'string',value:'domainName',text:'域名',dictCode:''})
+        fieldList.push({type:'string',value:'enbled',text:'啓用',dictCode:''})
         this.superFieldList = fieldList
       },
       handleApply(){

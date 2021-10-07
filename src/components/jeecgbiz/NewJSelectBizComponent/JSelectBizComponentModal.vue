@@ -46,11 +46,12 @@
       <a-col :span="8">
         <a-card :title="'已选' + name" :bordered="false" :head-style="{padding:0}" :body-style="{padding:0}">
 
-          <a-table size="middle" :rowKey="rowKey" bordered v-bind="selectedTable">
+          <a-table size="middle" :rowKey="rowKey" bordered v-bind="selectedTable"
+                   :rowSelection="{selectedRowKeys : isAdminKeys, columnTitle:'管理員',onChange: onSelectChange1, type: multiple ? 'checkbox':'radio'}">
               <span slot="action" slot-scope="text, record, index">
                 <a @click="handleDeleteSelected(record, index)">删除</a>
-                <a-divider type="vertical" />
-                <a @click="handleDeleteSelected(record, index)">授权</a>
+<!--                <a-divider type="vertical" />-->
+<!--                <a @click="handleDeleteSelected(record, index)">授权</a>-->
               </span>
           </a-table>
 
@@ -61,7 +62,7 @@
 </template>
 
 <script>
-  import { getAction } from '@/api/manage'
+  import { httpAction,getAction } from '@/api/manage'
   import Ellipsis from '@/components/Ellipsis'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import { cloneObject, pushIfNotExist } from '@/utils/util'
@@ -140,9 +141,15 @@
         type: Number,
         default: 12
       },
+      projectData:{
+        type: Object,
+        default: ()=>{},
+        required: false
+      }
     },
     data() {
       return {
+        isAdminKeys:[],
         innerValue: [],
         // 已选择列表
         selectedTable: {
@@ -158,7 +165,10 @@
           dataSource: [],
         },
         renderEllipsis: (value) => (<ellipsis length={this.ellipsisLength}>{value}</ellipsis>),
-        url: { list: this.listUrl },
+        url: {
+          list: this.listUrl,
+          updateUserProject:"/openstack/osUserProject/updateUserProject"
+        },
         /* 分页参数 */
         ipagination: {
           current: 1,
@@ -196,6 +206,7 @@
         handler(val) {
           this.innerValue = cloneObject(val)
           this.selectedRowKeys = []
+          this.isAdminKeys = this.projectData.isAdminKeys;
           this.valueWatchHandler(val)
           this.queryOptionsByValue(val)
         }
@@ -305,9 +316,27 @@
 
       /** 完成选择 */
       handleOk() {
+        debugger;
         let value = this.selectedTable.dataSource.map(data => data[this.valueKey])
+        let ids = this.selectedTable.dataSource.map(data => data["id"])
+        this.projectData.projectUserIds = ids;
+        this.projectData.isAdminKeys = this.isAdminKeys;
         this.$emit('input', value)
-        this.close()
+        this.confirmLoading = true;
+        let that = this;
+        httpAction(this.url.updateUserProject,this.projectData,"put").then((res)=>{
+          if(res.success){
+            that.$message.success(res.message);
+            that.$emit('ok');
+          }else{
+            that.$message.warning(res.message);
+          }
+          that.isAdminKeys = [];
+          that.close()
+        }).finally(() => {
+          that.confirmLoading = false;
+        })
+        //this.close()
       },
       /** 删除已选择的 */
       handleDeleteSelected(record, index) {
@@ -340,6 +369,9 @@
             }
           }
         }
+      },
+      onSelectChange1(selectedRowKeys, selectionRows) {
+        this.isAdminKeys = selectedRowKeys;
       },
 
     }

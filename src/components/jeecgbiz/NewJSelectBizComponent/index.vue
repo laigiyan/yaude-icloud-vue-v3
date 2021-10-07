@@ -26,6 +26,7 @@
       v-model="selectValue"
       :visible.sync="visible"
       v-bind="modalProps"
+      :project-data="projectData"
       @options="handleOptions"
     />
   </a-row>
@@ -80,6 +81,11 @@
         type: String,
         default: '选择'
       },
+      projectData:{
+        type: Object,
+        default: ()=>{},
+        required: false
+      }
 
     },
     data() {
