@@ -3,11 +3,14 @@
     <j-form-container :disabled="formDisabled">
       <a-form-model  ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
-         <!-- <a-col :span="24">
+
+          <a-col :span="24" >
             <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
-              <a-input v-model="model.projectName" placeholder="请输入項目名稱"  :disabled=editable></a-input>
+              <a-select v-model="model.projectId" @change="getNetworkIdsNew" placeholder="请选择項目">
+                <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
+              </a-select>
             </a-form-model-item>
-          </a-col>-->
+          </a-col>
           <a-col :span="24">
             <a-form-model-item label="實例名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="instanceName">
               <a-input v-model="model.instanceName" placeholder="请输入實例名稱"  :disabled=editable></a-input>
@@ -129,6 +132,7 @@
           edit: "/os/osApply/edit",
           queryById: "/os/osApply/queryById",
           readData: "/os/osApply/readData",
+          getProject: "/os/osApply/getProject",
           getImg: "/os/osApply/getImg",
           getFlavor: "/os/osApply/getFlavor",
           getSecurity: "/os/osApply/getSecurity",
@@ -136,6 +140,7 @@
           adjust: "/os/osApply/adjust"
 
         },
+        projects:[],
         imgIds:[],
         flavorIds:[],
         securityNames:[],
@@ -156,10 +161,11 @@
      // this.getdata();
 
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
+      this.getProjects(this.modelDefault);
       this.getImgs(this.modelDefault);
       this.getFlavorIds(this.modelDefault);
       this.getSecurityNames(this.modelDefault);
-      this.getNetworkIds(this.modelDefault);
+      //this.getNetworkIds(this.modelDefault);
     },
     methods: {
       add () {
@@ -181,8 +187,12 @@
 
       },
       submitForm () {
-        //let times = this.model.startTime;
         const that = this;
+        this.projects.forEach((r)=>{
+          if(r.value==that.model.projectId){
+            that.model.projectName = r.text;
+          }
+        })
         // 触发表单验证
         this.$refs.form.validate(valid => {
           if (valid) {
@@ -211,6 +221,23 @@
         })
       },
 
+      getProjects(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getProject;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            debugger
+            result.forEach((r)=>{
+              this.projects.push({
+                value:r.projectId,
+                text:r.projectName,
+              })
+            })
+          }
+        })
+      },
       getImgs(record){
         this.model = Object.assign({}, record);
         let method = "post";
@@ -260,6 +287,23 @@
         })
       },
       getNetworkIds(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getNetwork;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.networkIds.push({
+                value:r.networkId,
+                text:r.networkName
+              })
+            })
+          }
+        })
+      },
+      getNetworkIdsNew(){
+        let record = this.model;
         this.model = Object.assign({}, record);
         let method = "post";
         let httpurl = this.url.getNetwork;
