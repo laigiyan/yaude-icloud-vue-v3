@@ -112,7 +112,7 @@
 <!--                <a @click="handleAddUserProject(record)">指定管理员</a>-->
 <!--              </a-menu-item>-->
               <a-menu-item>
-               <new-j-select-multi-user v-model="record.projectUserNames" :projectData="record" selectButtonText="管理成員" :query-config="selectUserQueryConfig"/>
+               <new-j-select-multi-user v-model="record.projectUserNames" :projectData="record" @ok="handleOK" selectButtonText="管理成員" :query-config="selectUserQueryConfig"/>
               </a-menu-item>
             </a-menu>
 <!--            <a-menu slot="overlay">-->
@@ -262,102 +262,6 @@
       handleApply(){
         this.$router.push({name: 'os-OsApplyList',params:{}})
       },
-      handlePowerOn(){
-        if (this.selectionRows.length != 1){
-          this.$message.error("請選擇一條記錄！")
-          return
-        }
-
-        let that = this;
-        this.$confirm({
-          title: '确定開啓'+this.selectionRows[0].instanceName+'吗?',
-          //content: 'When clicked the OK button, this dialog will be closed after 1 second',
-          onOk() {
-            that.powerOn();
-          },
-          onCancel() {},
-        });
-
-      },
-      powerOn(){
-        let that = this;
-        this.loading = true;
-        getAction(that.url.powerOnUrl, this.selectionRows[0]).then((res) => {
-          if (res.success) {
-            that.$message.success(res.message);
-            that.loadData();
-            that.selectionRows = [];
-            that.selectedRowKeys = [];
-          } else {
-            that.$message.warning(res.message);
-          }
-          this.loading = false;
-        });
-      },
-
-      handleShutDown(){
-        if (this.selectionRows.length != 1){
-          this.$message.error("請選擇一條記錄！")
-          return
-        }
-
-        let that = this;
-        this.$confirm({
-          title: '确定關閉'+this.selectionRows[0].instanceName+'吗?',
-          //content: 'When clicked the OK button, this dialog will be closed after 1 second',
-          onOk() {
-            that.shutDown();
-          },
-          onCancel() {},
-        });
-      },
-      shutDown(){
-        let that = this;
-        this.loading = true;
-        getAction(that.url.shutDownUrl, this.selectionRows[0]).then((res) => {
-          if (res.success) {
-            that.$message.success(res.message);
-            that.loadData();
-            that.selectionRows = [];
-            that.selectedRowKeys = [];
-          } else {
-            that.$message.warning(res.message);
-          }
-          this.loading = false;
-        });
-      },
-
-      handleReboot(){
-        if (this.selectionRows.length != 1){
-          this.$message.error("請選擇一條記錄！")
-          return
-        }
-
-        let that = this;
-        this.$confirm({
-          title: '确定重啓'+this.selectionRows[0].instanceName+'吗?',
-          //content: 'When clicked the OK button, this dialog will be closed after 1 second',
-          onOk() {
-            that.reboot(that.selectionRows[0],that.url.rebootByHARDUrl);
-          },
-          onCancel() {},
-        });
-      },
-      reboot(record,url){
-        let that = this;
-        this.loading = true;
-        getAction(url, record).then((res) => {
-          if (res.success) {
-            that.$message.success(res.message);
-            that.loadData();
-            that.selectionRows = [];
-            that.selectedRowKeys = [];
-          } else {
-            that.$message.warning(res.message);
-          }
-          this.loading = false;
-        });
-      },
       handleAddUserProject() {
         if (false ) {
           this.$message.error("请选择一个部门!")
@@ -365,6 +269,9 @@
           debugger
           this.$refs.selectUserProjectModal.visible = true;
         }
+      },
+      handleOK(){
+       this.loadData(1)
       },
       selectOK(data) {
         alert('ok')

@@ -206,7 +206,7 @@
         handler(val) {
           this.innerValue = cloneObject(val)
           this.selectedRowKeys = []
-          this.isAdminKeys = this.projectData.isAdminKeys;
+
           this.valueWatchHandler(val)
           this.queryOptionsByValue(val)
         }
@@ -248,7 +248,6 @@
     },
 
     methods: {
-
       /** 关闭弹窗 */
       close() {
         this.$emit('update:visible', false)
@@ -373,6 +372,9 @@
       onSelectChange1(selectedRowKeys, selectionRows) {
         this.isAdminKeys = selectedRowKeys;
       },
+      test(){
+        this.isAdminKeys = this.projectData.isAdminKeys;
+      }
 
     }
   }

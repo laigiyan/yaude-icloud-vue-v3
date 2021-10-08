@@ -19,15 +19,17 @@
     </a-col>
 
     <a-col v-if="buttons" class="right">
-      <a type="primary" icon="search" :disabled="disabled" @click="visible=true">{{selectButtonText}}</a>
+      <a type="primary" icon="search" :disabled="disabled" @click="showModal">{{selectButtonText}}</a>
     </a-col>
 
     <j-select-biz-component-modal
+      ref="bizModal"
       v-model="selectValue"
       :visible.sync="visible"
       v-bind="modalProps"
       :project-data="projectData"
       @options="handleOptions"
+      @ok="handleOk"
     />
   </a-row>
 </template>
@@ -146,6 +148,13 @@
           this.selectOpen = false
         })
       },
+      handleOk(){
+        this.$emit('ok');
+      },
+      showModal(){
+        this.visible=true
+        this.$refs.bizModal.test()
+      }
     }
   }
 </script>
