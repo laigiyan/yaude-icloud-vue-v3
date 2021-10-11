@@ -12,7 +12,7 @@
       </a-col>
       <a-col :span="12">
         <a-card title="網絡信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
-          <p>IP地址</p>
+          <p>IP地址: {{ serverDetail.ipAddress }}</p>
           <p></p>
           <p></p>
           <p></p>
@@ -21,8 +21,8 @@
       </a-col>
       <a-col :span="12">
         <a-card title="配置信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
-          <p>内存: {{ serverDetail.ram }}</p>
-          <p>磁盤: {{ serverDetail.disk }}</p>
+          <p>内存: {{ serverDetail.ramText }}</p>
+          <p>磁盤: {{ serverDetail.diskText }}</p>
           <p>CPU: {{ serverDetail.cpu }}</p>
           <p></p>
           <p></p>

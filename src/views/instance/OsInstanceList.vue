@@ -152,6 +152,8 @@
     </div>
 
     <os-instance-modal ref="modalForm" @ok="modalFormOk"></os-instance-modal>
+    <os-available-volume ref="volumeForm"  @ok="modalFormOk"></os-available-volume>
+    <os-in-use-volume ref="inUseVolumeForm" @ok="modalFormOk"></os-in-use-volume>
   </a-card>
 </template>
 
@@ -162,12 +164,16 @@
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import OsInstanceModal from './modules/OsInstanceModal'
   import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
+  import OsAvailableVolume from './modules/OsAvailableVolume'
+  import OsInUseVolume from './modules/OsInUseVolume'
 
   export default {
     name: 'OsInstanceList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      OsInstanceModal
+      OsAvailableVolume,
+      OsInstanceModal,
+      OsInUseVolume
     },
     data () {
       return {
@@ -458,6 +464,14 @@
           that.loading = false;
         });
       },
+      //鏈接卷
+      handleConnectVolume(record){
+        this.$refs.volumeForm.edit(record);
+      },
+      //分離卷
+      handleSeparateVolume(record){
+        this.$refs.inUseVolumeForm.edit(record);
+      }
     }
   }
 </script>

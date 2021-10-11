@@ -5,13 +5,8 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="實例名稱">
-              <a-input placeholder="请输入實例名稱" v-model="queryParam.instanceName"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="鏡像名稱">
-              <a-input placeholder="请输入鏡像名稱" v-model="queryParam.imgName"></a-input>
+            <a-form-item label="項目名稱">
+              <a-input placeholder="请输入項目名稱" v-model="queryParam.projectName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
