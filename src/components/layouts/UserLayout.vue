@@ -5,11 +5,11 @@
         <div class="header">
           <a href="/">
             <img src="~@/assets/logo.jpeg" class="logo" alt="logo">
-            <span class="title">Yaude HealthExam System</span>
+            <span class="title">Yaude ICloud System</span>
           </a>
         </div>
         <div class="desc">
-          致力打造行業先進的健檢系統
+          致力打造優秀的云管理平臺
         </div>
       </div>
 

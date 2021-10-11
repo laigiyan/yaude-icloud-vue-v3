@@ -21,7 +21,7 @@
     props: {
       title: {
         type: String,
-        default: 'Yaude-Boot Pro',
+        default: 'Yaude ICloud',
         required: false
       },
       showTitle: {
