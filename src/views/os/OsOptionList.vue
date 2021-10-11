@@ -4,26 +4,6 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="實例名稱">
-              <a-input placeholder="请输入實例名稱" v-model="queryParam.instanceName"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="鏡像">
-              <a-input placeholder="请输入鏡像" v-model="queryParam.imgName"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
-              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
-              <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
-                <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
-              </a>
-            </span>
-          </a-col>
         </a-row>
       </a-form>
     </div>
@@ -31,19 +11,20 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button @click="handleOption()" type="primary" icon="plus">审核</a-button>
-      <!--<a-button type="primary" icon="download" @click="handleExportXls('申請明細檔')">导出</a-button>
+     <!-- <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('審核意見細檔')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
-      </a-upload>
-      &lt;!&ndash; 高级查询区域 &ndash;&gt;
-      <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>
+      </a-upload>-->
+      <a-button @click="handleOption()" type="primary" icon="plus">审核</a-button>
+      <!-- 高级查询区域 -->
+     <!-- <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>-->
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
-      </a-dropdown>-->
+      </a-dropdown>
     </div>
 
     <!-- table区域-begin -->
@@ -89,13 +70,14 @@
 
         <span slot="action" slot-scope="text, record">
           <a @click="handleOption1(record)">审核</a>
+         <!-- <a @click="handleEdit(record)">编辑</a>
 
-        <!--  <a-divider type="vertical" />
+          <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a @click="handleDetail(record)">详情</a>
+                <a @click="handleDetails(record)">详情</a>
               </a-menu-item>
               <a-menu-item>
                 <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
@@ -110,6 +92,9 @@
     </div>
 
     <os-option-modal ref="modalForm" @ok="modalFormOk"></os-option-modal>
+    <os-apply-modal ref="applymodalForm" @ok="modalFormOk"></os-apply-modal>
+    <os-apply-floatip-modal ref="floatipmodalForm" @ok="modalFormOk"></os-apply-floatip-modal>
+    <os-apply-disk-modal ref="diskmodalForm" @ok="modalFormOk"></os-apply-disk-modal>
   </a-card>
 </template>
 
@@ -118,18 +103,24 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
+  import { httpAction, getAction } from '@/api/manage'
   import OsOptionModal from './modules/OsOptionModal'
-
+  import OsApplyModal from './modules/OsApplyModal'
+  import OsApplyFloatipModal from './modules/OsApplyFloatipModal'
+  import OsApplyDiskModal from './modules/OsApplyDiskModal'
 
   export default {
     name: 'OsOptionList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      OsOptionModal
+      OsOptionModal,
+      OsApplyModal,
+      OsApplyFloatipModal,
+      OsApplyDiskModal
     },
     data () {
       return {
-        description: '申請明細檔管理页面',
+        description: '審核意見細檔管理页面',
         // 表头
         columns: [
           {
@@ -143,9 +134,9 @@
             }
           },
           {
-            title:'實例名稱',
+            title:'申請表id',
             align:"center",
-            dataIndex: 'instanceName'
+            dataIndex: 'applyName'
           },
           {
             title:'申請类型',
@@ -153,44 +144,19 @@
             dataIndex: 'options_dictText'
           },
           {
-            title:'狀態',
+            title:'状态',
             align:"center",
             dataIndex: 'status_dictText'
           },
           {
-            title:'鏡像',
+            title:'审核类型',
             align:"center",
-            dataIndex: 'imgName'
+            dataIndex: 'applyType_dictText'
           },
           {
-            title:'實例類型',
+            title:'是否同意',
             align:"center",
-            dataIndex: 'flavorName'
-          },
-          {
-            title:'开始时间',
-            align:"center",
-            dataIndex: 'startTime'
-          },
-          {
-            title:'终止时间',
-            align:"center",
-            dataIndex: 'endTime'
-          },
-          {
-            title:'剩余天数',
-            align:"center",
-            dataIndex: 'sectionTime'
-          },
-          {
-            title:'所屬項目',
-            align:"center",
-            dataIndex: 'projectName'
-          },
-          {
-            title:'運行狀態',
-            align:"center",
-            dataIndex: 'runStatus'
+            dataIndex: 'optionsType_dictText'
           },
           {
             title: '操作',
@@ -202,20 +168,21 @@
           }
         ],
         url: {
-          list: "/os/osApply/optionlist",
-          delete: "/os/osApply/delete",
-          deleteBatch: "/os/osApply/deleteBatch",
-          exportXlsUrl: "/os/osApply/exportXls",
-          importExcelUrl: "os/osApply/importExcel",
-
+          list: "/os/osOption/list",
+          delete: "/os/osOption/delete",
+          deleteBatch: "/os/osOption/deleteBatch",
+          exportXlsUrl: "/os/osOption/exportXls",
+          importExcelUrl: "os/osOption/importExcel",
+          applys: "os/osApply/applys",
+          floatipapplys: "os/osApplyFloatip/floatipapplys",
+          diskapplys: "os/osApplyDisk/diskapplys",
         },
         dictOptions:{},
         superFieldList:[],
-        selectionRows:[],
       }
     },
     created() {
-    this.getSuperFieldList();
+      this.getSuperFieldList();
     },
     computed: {
       importExcelUrl: function(){
@@ -235,29 +202,69 @@
           this.handleOption1(params);
         }
       },
-      handleOption1(record){
-        var that = this;
-        let aa =record.status;
-        if(record.status!="0"){
-          this.$message.warning('已审核，请重新选择！');
-        }else{
-          this.$refs.modalForm.edit(record);
+      handleOption1:function(record){
+        this.model = Object.assign({}, record);
+        const result = "";
+        this.model.id = this.model.applyId;
+        this.model.showoption="true";
+        let that = this;
+        if(this.model.applyType==1){
+          let httpurl = this.url.applys;
+          getAction(httpurl,this.model).then(res=>{
+            if(res.success && res.result){
+              that.result = res.result[0];
+              that.result.showoption = "true";
+              that.$refs.applymodalForm.edit( this.result);
+              that.$refs.applymodalForm.title="审核";
+              //that.$refs.applymodalForm.disableSubmit = true;
+            }
+          })
+        }else if(this.model.applyType==2){
+          let httpurl = this.url.floatipapplys;
+          getAction(httpurl,this.model).then(res=>{
+            if(res.success && res.result){
+              that.result = res.result[0];
+              that.result.showoption = "true";
+              that.$refs.floatipmodalForm.edit( this.result);
+              that.$refs.floatipmodalForm.title="审核";
+              //that.$refs.applymodalForm.disableSubmit = true;
+            }
+          })
+        }else if(this.model.applyType==3){
+          let httpurl = this.url.diskapplys;
+          getAction(httpurl,this.model).then(res=>{
+            if(res.success && res.result){
+              that.result = res.result[0];
+              that.result.showoption = "true";
+              that.$refs.diskmodalForm.edit( this.result);
+              that.$refs.diskmodalForm.title="审核";
+              //that.$refs.applymodalForm.disableSubmit = true;
+            }
+          })
         }
+
+
+        /*if(this.model.applyType==1){
+          this.$refs.applymodalForm.edit( this.result);
+          debugger
+          this.$refs.applymodalForm.title="审核";
+          this.$refs.applymodalForm.disableSubmit = true;
+        }else if(this.model.applyType==2){
+          this.$refs.floatipmodalForm.edit(record);
+          this.$refs.floatipmodalForm.title="审核";
+          this.$refs.floatipmodalForm.disableSubmit = true;
+        }else if(this.model.applyType==3){
+          this.$refs.diskmodalForm.edit(record);
+          this.$refs.diskmodalForm.title="审核";
+          this.$refs.diskmodalForm.disableSubmit = true;
+        }*/
+
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'instanceName',text:'實例名稱',dictCode:''})
-        fieldList.push({type:'string',value:'options',text:'申請狀態',dictCode:''})
-        fieldList.push({type:'string',value:'status',text:'狀態',dictCode:''})
-        fieldList.push({type:'string',value:'represent',text:'描述',dictCode:''})
-        fieldList.push({type:'string',value:'imgId',text:'鏡像id',dictCode:''})
-        fieldList.push({type:'string',value:'isDelete',text:'刪除實例時是否刪除卷',dictCode:''})
-        fieldList.push({type:'string',value:'flavorId',text:'實例類型id',dictCode:''})
-        fieldList.push({type:'string',value:'runStatus',text:'運行狀態',dictCode:''})
-        fieldList.push({type:'string',value:'startTime',text:'起始日期',dictCode:''})
-        fieldList.push({type:'string',value:'endTime',text:'结束日期',dictCode:''})
-        fieldList.push({type:'string',value:'securityName',text:'安全組',dictCode:''})
-        fieldList.push({type:'string',value:'networkId',text:'網絡',dictCode:''})
+        fieldList.push({type:'string',value:'applyId',text:'申請表id',dictCode:''})
+        fieldList.push({type:'string',value:'optionsText',text:'審核意見',dictCode:''})
+        fieldList.push({type:'string',value:'optionsType',text:'是否同意',dictCode:''})
         this.superFieldList = fieldList
       }
     }

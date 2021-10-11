@@ -9,6 +9,10 @@
     @cancel="handleCancel"
     cancelText="关闭">
     <os-apply-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></os-apply-form>
+    <div v-show="showoption">
+      <a-button @click="handleAgree(record)" type="primary"  >同意</a-button>
+      <a-button @click="handlerefuse" type="primary" >拒绝</a-button>
+    </div>
   </j-modal>
 </template>
 
@@ -25,7 +29,8 @@
         title:'',
         width:800,
         visible: false,
-        disableSubmit: false
+        disableSubmit: false,
+        optionshow: false
       }
     },
     methods: {
@@ -37,9 +42,25 @@
       },
       edit (record) {
         this.visible=true
+        this.showoption=record.showoption;
+        debugger
         this.$nextTick(()=>{
           this.$refs.realForm.edit(record);
         })
+      },
+      handleAgree(){
+        this.visible=true
+        this.$nextTick(()=>{
+          this.$refs.realForm.agree();
+        })
+        this.close()
+      },
+      handlerefuse(){
+        this.visible=true
+        this.$nextTick(()=>{
+          this.$refs.realForm.refuse();
+        })
+        this.close()
       },
       close () {
         this.$emit('close');

@@ -8,21 +8,15 @@
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
     cancelText="关闭">
-
     <os-option-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></os-option-form>
-    <div>
-      <a-button @click="handleAgree" type="primary" >同意</a-button>
-      <a-button @click="handlerefuse" type="primary">拒绝</a-button>
-    </div>
   </j-modal>
-
 </template>
 
 <script>
 
   import OsOptionForm from './OsOptionForm'
   export default {
-    name: 'OsApplyModal',
+    name: 'OsOptionModal',
     components: {
       OsOptionForm
     },
@@ -46,21 +40,6 @@
         this.$nextTick(()=>{
           this.$refs.realForm.edit(record);
         })
-      },
-      handleAgree(){
-        this.visible=true
-        this.$nextTick(()=>{
-          this.$refs.realForm.agree();
-        })
-        this.close()
-      },
-      handlerefuse(){
-        debugger
-        this.visible=true
-        this.$nextTick(()=>{
-          this.$refs.realForm.refuse();
-        })
-        this.close()
       },
       close () {
         this.$emit('close');

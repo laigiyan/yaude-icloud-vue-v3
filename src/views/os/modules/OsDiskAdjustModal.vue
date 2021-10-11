@@ -12,12 +12,12 @@
       <a-row>
         <a-col :span="24">
           <a-form-model-item label="名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="diskName">
-            <a-input v-model="model.diskName" placeholder="请输入名称"  ></a-input>
+            <a-input v-model="model.diskName" placeholder="请输入名称"  :disabled="true"></a-input>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
-            <a-input v-model="model.represent" placeholder="请输入描述"  ></a-input>
+            <a-input v-model="model.represent" placeholder="请输入描述" :disabled="true" ></a-input>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
@@ -105,6 +105,7 @@
           size: this.model.size,
           type: this.model.type,
           source: this.model.source,
+          boostatus: "1",
           bootable: this.model.bootable,
         }
         httpAction(httpurl,formData,method).then((res)=>{

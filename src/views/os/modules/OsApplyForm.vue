@@ -5,8 +5,8 @@
         <a-row>
 
           <a-col :span="24" >
-            <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
-              <a-select v-model="model.projectId" @change="getNetworkIdsNew" placeholder="请选择項目">
+            <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
+              <a-select v-model="model.projectId" @change="getNetworkIdsNew" placeholder="请选择項目"  :disabled=editable>
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -69,6 +69,11 @@
               </a-select>
             </a-form-model-item>
           </a-col>
+          <a-col :span="24" v-show="showoption">
+            <a-form-model-item label="审核意见" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
+              <a-textarea v-model="model.optionsText" placeholder="请输入审核意见" ></a-textarea>
+            </a-form-model-item>
+          </a-col>
         </a-row>
       </a-form-model>
     </j-form-container>
@@ -92,6 +97,7 @@
         default: false,
         required: false
 
+
       }
     },
     data () {
@@ -108,6 +114,10 @@
         },
         confirmLoading: false,
         validatorRules: {
+
+          projectId: [
+            { required: true, message: '请选择项目!'},
+          ],
            instanceName: [
               { required: true, message: '请输入實例名稱!'},
            ],
@@ -117,6 +127,9 @@
            flavorId: [
               { required: true, message: '请输入實例類型id!'},
            ],
+          securityName: [
+            { required: true, message: '请选择安全组!'},
+          ],
             networkId: [
               { required: true, message: '请选择网络'},
             ],
@@ -137,7 +150,9 @@
           getFlavor: "/os/osApply/getFlavor",
           getSecurity: "/os/osApply/getSecurity",
           getNetwork: "/os/osApply/getNetwork",
-          adjust: "/os/osApply/adjust"
+          adjust: "/os/osApply/adjust",
+          agree: "/os/osOption/agree",
+          refuse: "/os/osOption/refuse"
 
         },
         projects:[],
@@ -147,7 +162,8 @@
         networkIds:[],
         dateFormat:'YYYY-MM-DD',
         editable: false,
-        justable: false
+        justable: false,
+        showoption: false
       }
     },
     computed: {
@@ -175,6 +191,7 @@
         debugger
         this.model = Object.assign({}, record);
         this.visible = true;
+        this.showoption = this.model.showoption;
         if(this.model.options=="1" || (this.model.options=="2" && this.model.status!=null) ){
           this.editable=true
           this.justable=true
@@ -219,6 +236,43 @@
           }
 
         })
+      },
+      //同意
+      agree(){
+        const that = this;
+        let method = "post";
+        this.model.applyType = "1";
+        let httpurl = this.url.agree;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            that.$message.success(res.message);
+            that.$emit('ok');
+            that.loadData();
+          }else{
+            that.$message.warning(res.message);
+          }
+        }).finally(() => {
+          that.confirmLoading = false;
+        })
+      },
+      //拒绝
+      refuse(){
+        const that = this;
+        this.model.applyType = "1";
+        let method = "post";
+        let httpurl = this.url.refuse;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            that.$message.success(res.message);
+            that.$emit('ok');
+            that.loadData();
+          }else{
+            that.$message.warning(res.message);
+          }
+        }).finally(() => {
+          that.confirmLoading = false;
+        })
+
       },
 
       getProjects(record){

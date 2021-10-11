@@ -116,6 +116,7 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
+  import { httpAction, getAction } from '@/api/manage'
   import OsApplyFloatipModal from './modules/OsApplyFloatipModal'
   import OsFloatipAdjustModal from './modules/OsFloatipAdjustModal'
 

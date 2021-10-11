@@ -10,6 +10,13 @@
     cancelText="关闭">
     <a-form ref="form" :model="model"  id="myForm1">
       <a-row>
+        <a-col :span="24" >
+          <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
+            <a-select v-model="model.projectName" @change="getNetworkIdsNew" placeholder="请选择項目"  :disabled="true">
+              <a-select-option v-for="project in projects":value="project.text"  >{{project.text}}</a-select-option>
+            </a-select>
+          </a-form-model-item>
+        </a-col>
         <a-col :span="24">
           <a-form-item label="實例名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="instanceName">
             <a-input v-model="model.instanceName" placeholder="请输入實例名稱" :disabled="true" ></a-input>
@@ -118,6 +125,7 @@
         },
 
         url: {
+          getProject: "/os/osApply/getProject",
           adjust: "/os/osApply/adjust",
           getImg: "/os/osApply/getImg",
           getFlavor: "/os/osApply/getFlavor",
@@ -125,6 +133,7 @@
           getNetwork: "/os/osApply/getNetwork"
 
         },
+        projects:[],
         imgIds:[],
         flavorIds:[],
         securityNames:[],
@@ -134,29 +143,31 @@
     created () {
       //备份model原始值
       // this.getdata();
-
+      this.getProjects(this.model);
       this.getImgs(this.model);
       this.getFlavorIds(this.model);
       this.getSecurityNames(this.model);
       this.getNetworkIds(this.model);
     },
     methods: {
-    /*  Change(item, newValue){
-        debugger
-        this.$set(item,item.value ,newValue);
-      },*/
-
       adjust (record) {
-
         this.form.resetFields();
         this.model = Object.assign({}, record);
         this.visible = true;
       },
       handleOk () {
+        let projectId = "";
         let that = this;
         let method = 'post';
         let httpurl=this.url.adjust;
+        that.projects.forEach((r)=>{
+          if(r.text==that.model.projectName){
+            that.projectId = r.value;
+          }
+        })
         let formData={
+          projectName: this.model.projectName,
+          projectId: this.projectId,
           instanceName: this.model.instanceName,
           options: "2",
           represent: this.model.represent,
@@ -169,6 +180,7 @@
           endTime: this.model.endTime,
           vmId: this.model.vmId
         }
+        debugger
         httpAction(httpurl,formData,method).then((res)=>{
           if(res.success){
             that.$message.success(res.message);
@@ -242,6 +254,39 @@
               this.networkIds.push({
                 value:r.networkId,
                 text:r.networkName
+              })
+            })
+          }
+        })
+      },
+      getNetworkIdsNew(){
+        let record = this.model;
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getNetwork;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.networkIds.push({
+                value:r.networkId,
+                text:r.networkName
+              })
+            })
+          }
+        })
+      },
+      getProjects(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getProject;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.projects.push({
+                value:r.projectId,
+                text:r.projectName,
               })
             })
           }

@@ -12,28 +12,28 @@
       <a-row>
         <a-col :span="24">
           <a-form-model-item label="网络名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkName">
-            <a-select v-model="model.networkName" @change="getSubnets"  placeholder="请选择网络名称" >
+            <a-select v-model="model.networkName" @change="getSubnets"  placeholder="请选择网络名称" :disabled="true">
               <a-select-option v-for="network in networks":value="network.text" >{{network.text}}</a-select-option>
             </a-select>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="子网名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="subnetName">
-            <a-select v-model="model.subnetName" @change="getFloatip" placeholder="请选择子网名称" >
+            <a-select v-model="model.subnetName" @change="getFloatip" placeholder="请选择子网名称" :disabled="true">
               <a-select-option v-for="subnet in subnets":value="subnet.text" >{{subnet.text}}</a-select-option>
             </a-select>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="浮动ip" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="floatIp">
-            <a-select v-model="model.floatIp" @change="getFloatip" placeholder="请选择子网名称" >
+            <a-select v-model="model.floatIp" @change="getFloatip" placeholder="请选择子网名称" :disabled="true">
               <a-select-option v-for="floatip in floatips":value="floatip.value" >{{floatip.value}}</a-select-option>
             </a-select>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
-            <a-input v-model="model.represent" placeholder="请输入描述"  ></a-input>
+            <a-input v-model="model.represent" placeholder="请输入描述" :disabled="true" ></a-input>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
