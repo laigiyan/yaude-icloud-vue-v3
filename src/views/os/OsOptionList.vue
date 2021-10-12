@@ -134,7 +134,7 @@
             }
           },
           {
-            title:'申請表id',
+            title:'名称',
             align:"center",
             dataIndex: 'applyName'
           },
@@ -205,15 +205,18 @@
       handleOption1:function(record){
         this.model = Object.assign({}, record);
         const result = "";
+        this.model.optionId = this.model.id;
         this.model.id = this.model.applyId;
         this.model.showoption="true";
         let that = this;
+        debugger;
         if(this.model.applyType==1){
           let httpurl = this.url.applys;
           getAction(httpurl,this.model).then(res=>{
             if(res.success && res.result){
               that.result = res.result[0];
               that.result.showoption = "true";
+              this.result.optionId = that.model.optionId;
               that.$refs.applymodalForm.edit( this.result);
               that.$refs.applymodalForm.title="审核";
               //that.$refs.applymodalForm.disableSubmit = true;
@@ -225,6 +228,7 @@
             if(res.success && res.result){
               that.result = res.result[0];
               that.result.showoption = "true";
+              this.result.optionId = that.model.optionId;
               that.$refs.floatipmodalForm.edit( this.result);
               that.$refs.floatipmodalForm.title="审核";
               //that.$refs.applymodalForm.disableSubmit = true;
@@ -236,6 +240,7 @@
             if(res.success && res.result){
               that.result = res.result[0];
               that.result.showoption = "true";
+              this.result.optionId = that.model.optionId;
               that.$refs.diskmodalForm.edit( this.result);
               that.$refs.diskmodalForm.title="审核";
               //that.$refs.applymodalForm.disableSubmit = true;

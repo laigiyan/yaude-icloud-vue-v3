@@ -14,19 +14,19 @@
           <a-col :span="24">
             <a-form-model-item label="子网名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="subnetName">
              <!-- <a-input v-model="model.subnetName" placeholder="请输入子网名称"  ></a-input>-->
-              <a-select v-model="model.subnetName" @change="getFloatip" placeholder="请选择子网名称" :disabled="editable">
+              <a-select v-model="model.subnetName" placeholder="请选择子网名称" :disabled="editable">
                 <a-select-option v-for="subnet in subnets":value="subnet.text" >{{subnet.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
-          <a-col :span="24">
+          <!--<a-col :span="24">
             <a-form-model-item label="浮动ip" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="floatIp">
-              <!--<a-input v-model="this.floatip" placeholder="请输入浮动ip"  ></a-input>-->
+              &lt;!&ndash;<a-input v-model="this.floatip" placeholder="请输入浮动ip"  ></a-input>&ndash;&gt;
               <a-select v-model="model.floatIp" @change="getFloatip" placeholder="请选择子网名称" :disabled="editable" >
                 <a-select-option v-for="floatip in floatips":value="floatip.value" >{{floatip.value}}</a-select-option>
               </a-select>
             </a-form-model-item>
-          </a-col>
+          </a-col>-->
           <a-col :span="24">
             <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
               <a-input v-model="model.represent" placeholder="请输入描述"  :disabled="editable"></a-input>
@@ -100,7 +100,7 @@
           queryById: "/os/osApplyFloatip/queryById",
           getNetwork: "/os/osApplyFloatip/getNetwork",
           getSubnets: "/os/osApplyFloatip/getSubnets",
-          getFloatip: "/os/osApplyFloatip/getFloatip",
+         // getFloatip: "/os/osApplyFloatip/getFloatip",
           agree: "/os/osOption/agree",
           refuse: "/os/osOption/refuse"
         },
@@ -244,7 +244,7 @@
           }
         })
       },
-      getFloatip(){
+     /* getFloatip(){
         let method = "post";
         let httpurl = this.url.getFloatip;
         httpAction(httpurl,this.model,method).then((res)=>{
@@ -259,7 +259,7 @@
             })
           }
         })
-      }
+      }*/
     }
   }
 </script>

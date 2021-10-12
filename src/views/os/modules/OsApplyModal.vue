@@ -4,9 +4,9 @@
     :width="width"
     :visible="visible"
     switchFullscreen
-    @ok="handleOk"
+
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
-    @cancel="handleCancel"
+
     cancelText="关闭">
     <os-apply-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></os-apply-form>
     <div v-show="showoption">
@@ -30,7 +30,7 @@
         width:800,
         visible: false,
         disableSubmit: false,
-        optionshow: false
+        showoption: false
       }
     },
     methods: {
