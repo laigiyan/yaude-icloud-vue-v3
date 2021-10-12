@@ -35,7 +35,24 @@
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="来源" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="source">
-            <j-dict-select-tag type="list" v-model="model.source" dictCode="disk_source" placeholder="请选择来源"  />
+            <j-dict-select-tag type="list" v-model="model.source" dictCode="disk_source" @change="getsource(model.source)" placeholder="请选择来源"  />
+          </a-form-model-item>
+        </a-col>
+        <a-col :span="24" v-show="showSource">
+          <a-form-model-item label="来源id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="sourceId">
+            <a-select v-model="model.sourceId"  placeholder="请选择" >
+              <a-select-option v-for="types in sourcetype":value="types.value" >{{types.text}}</a-select-option>
+            </a-select>
+          </a-form-model-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+            <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
+          </a-form-model-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-model-item label="合约日期止" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
+            <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
@@ -80,9 +97,14 @@
 
         url: {
           adjust: "/os/osApplyDisk/adjust",
-          getType: "/os/osApplyDisk/getType"
+          getType: "/os/osApplyDisk/getType",
+          getImg: "/os/osApplyDisk/getImg",
+          getVolume: "/os/osApplyDisk/getVolume",
+          getSnapshot: "/os/osApplyDisk/getSnapshot",
         },
-        types:[]
+        types:[],
+        sourcetype:[],
+        showSource: false
       }
     },
     created () {
@@ -120,6 +142,58 @@
           that.confirmLoading = false;
           that.close();
         })
+      },
+      //获取卷来源
+      getsource(source){
+        const that = this;
+        that.sourcetype = [];
+        that.showSource=false;
+        if(source=="1"){//镜像
+          that.showSource=true
+          let method = "post";
+          let httpurl = this.url.getImg;
+          httpAction(httpurl,this.model,method).then((res)=>{
+            if(res.success){
+              const result = res.result
+              result.forEach((r)=>{
+                this.sourcetype.push({
+                  value:r.imgId,
+                  text:r.imgName
+                })
+              })
+            }
+          })
+        }else if(source=="2"){//快照
+          that.showSource=true
+          let method = "post";
+          let httpurl = this.url.getSnapshot;
+          httpAction(httpurl,this.model,method).then((res)=>{
+            if(res.success){
+              const result = res.result
+              result.forEach((r)=>{
+                this.sourcetype.push({
+                  value:r.snapshotId,
+                  text:r.snapshotName
+                })
+              })
+            }
+          })
+        }else if(source=="3"){//卷
+          that.showSource=true
+          let method = "post";
+          let httpurl = this.url.getVolume;
+          httpAction(httpurl,this.model,method).then((res)=>{
+            if(res.success){
+              const result = res.result
+              result.forEach((r)=>{
+                this.sourcetype.push({
+                  value:r.volumeId,
+                  text:r.volumeName
+                })
+              })
+            }
+          })
+        }
       },
 
       getType(record){

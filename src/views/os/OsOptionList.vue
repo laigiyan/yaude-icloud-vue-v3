@@ -4,6 +4,21 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="类型">
+              <j-dict-select-tag type="list" v-model="queryParam.applyType" dictCode="apply_type" placeholder="请选择类型"/>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+              <a @click="handleToggleSearch" style="margin-left: 8px">
+                {{ toggleSearchStatus ? '收起' : '展开' }}
+                <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
+              </a>
+            </span>
+          </a-col>
         </a-row>
       </a-form>
     </div>
@@ -70,22 +85,6 @@
 
         <span slot="action" slot-scope="text, record">
           <a @click="handleOption1(record)">审核</a>
-         <!-- <a @click="handleEdit(record)">编辑</a>
-
-          <a-divider type="vertical" />
-          <a-dropdown>
-            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
-            <a-menu slot="overlay">
-              <a-menu-item>
-                <a @click="handleDetails(record)">详情</a>
-              </a-menu-item>
-              <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
-                </a-popconfirm>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>-->
         </span>
 
       </a-table>
@@ -209,7 +208,6 @@
         this.model.id = this.model.applyId;
         this.model.showoption="true";
         let that = this;
-        debugger;
         if(this.model.applyType==1){
           let httpurl = this.url.applys;
           getAction(httpurl,this.model).then(res=>{
@@ -219,7 +217,6 @@
               this.result.optionId = that.model.optionId;
               that.$refs.applymodalForm.edit( this.result);
               that.$refs.applymodalForm.title="审核";
-              //that.$refs.applymodalForm.disableSubmit = true;
             }
           })
         }else if(this.model.applyType==2){
@@ -231,7 +228,6 @@
               this.result.optionId = that.model.optionId;
               that.$refs.floatipmodalForm.edit( this.result);
               that.$refs.floatipmodalForm.title="审核";
-              //that.$refs.applymodalForm.disableSubmit = true;
             }
           })
         }else if(this.model.applyType==3){
@@ -243,26 +239,9 @@
               this.result.optionId = that.model.optionId;
               that.$refs.diskmodalForm.edit( this.result);
               that.$refs.diskmodalForm.title="审核";
-              //that.$refs.applymodalForm.disableSubmit = true;
             }
           })
         }
-
-
-        /*if(this.model.applyType==1){
-          this.$refs.applymodalForm.edit( this.result);
-          debugger
-          this.$refs.applymodalForm.title="审核";
-          this.$refs.applymodalForm.disableSubmit = true;
-        }else if(this.model.applyType==2){
-          this.$refs.floatipmodalForm.edit(record);
-          this.$refs.floatipmodalForm.title="审核";
-          this.$refs.floatipmodalForm.disableSubmit = true;
-        }else if(this.model.applyType==3){
-          this.$refs.diskmodalForm.edit(record);
-          this.$refs.diskmodalForm.title="审核";
-          this.$refs.diskmodalForm.disableSubmit = true;
-        }*/
 
       },
       getSuperFieldList(){

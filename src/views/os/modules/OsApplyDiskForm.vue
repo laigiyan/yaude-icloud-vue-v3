@@ -20,7 +20,6 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="类型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="type">
-             <!-- <a-input v-model="model.type" placeholder="请输入类型"  ></a-input>-->
               <a-select v-model="model.type"  placeholder="请选择类型" :disabled="justable">
                 <a-select-option v-for="type in types":value="type.value" >{{type.text}}</a-select-option>
               </a-select>
@@ -29,7 +28,24 @@
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="来源" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="source">
-              <j-dict-select-tag type="list" v-model="model.source" dictCode="disk_source" placeholder="请选择来源"  :disabled="justable"/>
+              <j-dict-select-tag type="list" v-model="model.source" dictCode="disk_source" placeholder="请选择来源" @change="getsource(model.source)" :disabled="justable"/>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24" v-show="showSource">
+            <a-form-model-item label="来源id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="sourceId">
+              <a-select v-model="model.sourceId"  placeholder="请选择" :disabled="justable">
+                <a-select-option v-for="types in sourcetype":value="types.value" >{{types.text}}</a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+              <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="合约日期止" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
+              <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -52,7 +68,6 @@
 
   import { httpAction, getAction } from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
-
   export default {
     name: 'OsApplyDiskForm',
     components: {
@@ -88,6 +103,12 @@
           type: [
             { required: true, message: '请选择类型!'},
           ],
+          startTime: [
+            { required: true, message: '请输入开始时间!'},
+          ],
+          endTime: [
+            { required: true, message: '请输入结束时间!'},
+          ]
 
         },
         url: {
@@ -96,12 +117,18 @@
           queryById: "/os/osApplyDisk/queryById",
           getType: "/os/osApplyDisk/getType",
           agree: "/os/osOption/agree",
-          refuse: "/os/osOption/refuse"
+          refuse: "/os/osOption/refuse",
+          getImg: "/os/osApplyDisk/getImg",
+          getVolume: "/os/osApplyDisk/getVolume",
+          getSnapshot: "/os/osApplyDisk/getSnapshot",
+
         },
         types:[],
+        sourcetype:[],
         editable: false,
         justable: false,
-        showoption: false
+        showoption: false,
+        showSource: false
       }
     },
     computed: {
@@ -158,6 +185,58 @@
           }
 
         })
+      },
+      //获取卷来源
+      getsource(source){
+        const that = this;
+        that.sourcetype = [];
+        if(source=="1"){//镜像
+          that.showSource=true
+          let method = "post";
+          let httpurl = this.url.getImg;
+          httpAction(httpurl,this.model,method).then((res)=>{
+            if(res.success){
+              const result = res.result
+              result.forEach((r)=>{
+                this.sourcetype.push({
+                  value:r.imgId,
+                  text:r.imgName
+                })
+              })
+            }
+          })
+
+        }else if(source=="2"){//快照
+          that.showSource=true
+          let method = "post";
+          let httpurl = this.url.getSnapshot;
+          httpAction(httpurl,this.model,method).then((res)=>{
+            if(res.success){
+              const result = res.result
+              result.forEach((r)=>{
+                this.sourcetype.push({
+                  value:r.snapshotId,
+                  text:r.snapshotName
+                })
+              })
+            }
+          })
+        }else if(source=="3"){//卷
+          that.showSource=true
+          let method = "post";
+          let httpurl = this.url.getVolume;
+          httpAction(httpurl,this.model,method).then((res)=>{
+            if(res.success){
+              const result = res.result
+              result.forEach((r)=>{
+                this.sourcetype.push({
+                  value:r.volumeId,
+                  text:r.volumeName
+                })
+              })
+            }
+          })
+        }
       },
       //同意
       agree(){
