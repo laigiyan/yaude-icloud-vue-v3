@@ -123,6 +123,9 @@
                 <a @click="handleRebootByHARD(record)">硬重啓實例</a>
               </a-menu-item>
               <a-menu-item>
+                <a @click="handleAddFloatingIP(record)">綁定浮動IP</a>
+              </a-menu-item>
+              <a-menu-item>
                 <a @click="handleConnectVolume(record)">連接卷</a>
               </a-menu-item>
               <a-menu-item>
@@ -154,6 +157,7 @@
     <os-instance-modal ref="modalForm" @ok="modalFormOk"></os-instance-modal>
     <os-available-volume ref="volumeForm"  @ok="modalFormOk"></os-available-volume>
     <os-in-use-volume ref="inUseVolumeForm" @ok="modalFormOk"></os-in-use-volume>
+    <os-floating-ip ref="floatingIpForm"  @ok="modalFormOk"></os-floating-ip>
   </a-card>
 </template>
 
@@ -166,6 +170,7 @@
   import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
   import OsAvailableVolume from './modules/OsAvailableVolume'
   import OsInUseVolume from './modules/OsInUseVolume'
+  import OsFloatingIp from './modules/OsFloatingIp'
 
   export default {
     name: 'OsInstanceList',
@@ -173,7 +178,8 @@
     components: {
       OsAvailableVolume,
       OsInstanceModal,
-      OsInUseVolume
+      OsInUseVolume,
+      OsFloatingIp
     },
     data () {
       return {
@@ -471,6 +477,9 @@
       //分離卷
       handleSeparateVolume(record){
         this.$refs.inUseVolumeForm.edit(record);
+      },
+      handleAddFloatingIP(record){
+        this.$refs.floatingIpForm.edit(record);
       }
     }
   }
