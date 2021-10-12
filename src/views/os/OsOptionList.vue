@@ -191,13 +191,17 @@
     methods: {
       initDictConfig(){
       },
+      modalFormOk(){
+        this.$nextTick(()=>{
+          this.loadData();
+        })
+      },
       handleOption(){
         if (this.selectedRowKeys.length <= 0) {
           this.$message.warning('请选择一条记录！');
           return false;
         }else{
           var params = this.selectionRows[0] ;
-
           this.handleOption1(params);
         }
       },
@@ -242,7 +246,6 @@
             }
           })
         }
-
       },
       getSuperFieldList(){
         let fieldList=[];

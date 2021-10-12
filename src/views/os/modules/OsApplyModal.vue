@@ -8,20 +8,24 @@
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
     cancelText="关闭">
+    <template slot="footer">
+      <a-button @click="handleAgree" type="primary" v-show="showoption" >同意</a-button>
+      <a-button @click="handlerefuse" type="primary" v-show="showoption">拒绝</a-button>
+      <a-button @click="handleOk" type="primary" v-show="!showoption">确定</a-button>
+      <a-button @click="handleCancel">关闭</a-button>
+    </template>
     <os-apply-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></os-apply-form>
-    <div v-show="showoption">
-      <a-button @click="handleAgree(record)" type="primary"  >同意</a-button>
-      <a-button @click="handlerefuse" type="primary" >拒绝</a-button>
-    </div>
   </j-modal>
 </template>
 
 <script>
 
   import OsApplyForm from './OsApplyForm'
+  import OsOptionList from '../OsOptionList'
   export default {
     name: 'OsApplyModal',
     components: {
+      OsOptionList,
       OsApplyForm
     },
     data () {
@@ -48,18 +52,20 @@
           this.$refs.realForm.edit(record);
         })
       },
-      handleAgree(){
+       handleAgree(){
         this.visible=true
-        this.$nextTick(()=>{
-          this.$refs.realForm.agree();
-        })
+        this.$refs.realForm.agree();
+         setTimeout(() => {
+           this.$emit('ok');
+         }, 500)
         this.close()
       },
       handlerefuse(){
         this.visible=true
-        this.$nextTick(()=>{
-          this.$refs.realForm.refuse();
-        })
+        this.$refs.realForm.refuse();
+        setTimeout(() => {
+          this.$emit('ok');
+        }, 500)
         this.close()
       },
       close () {
@@ -70,6 +76,7 @@
         this.$refs.realForm.submitForm();
       },
       submitCallback(){
+        alert(9)
         this.$emit('ok');
         this.visible = false;
       },

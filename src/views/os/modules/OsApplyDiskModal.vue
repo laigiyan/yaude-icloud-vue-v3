@@ -8,11 +8,13 @@
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
     cancelText="关闭">
+    <template slot="footer">
+      <a-button @click="handleAgree" type="primary" v-show="showoption" >同意</a-button>
+      <a-button @click="handlerefuse" type="primary" v-show="showoption">拒绝</a-button>
+      <a-button @click="handleOk" type="primary" v-show="!showoption">确定</a-button>
+      <a-button @click="handleCancel">关闭</a-button>
+    </template>
     <os-apply-disk-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></os-apply-disk-form>
-    <div v-show="showoption">
-      <a-button @click="handleAgree" type="primary"  >同意</a-button>
-      <a-button @click="handlerefuse" type="primary" >拒绝</a-button>
-    </div>
   </j-modal>
 </template>
 
@@ -49,17 +51,18 @@
       },
       handleAgree(){
         this.visible=true
-        this.$nextTick(()=>{
-          this.$refs.realForm.agree();
-        })
+        this.$refs.realForm.agree();
+        setTimeout(() => {
+          this.$emit('ok');
+        }, 500)
         this.close()
       },
       handlerefuse(){
-        debugger
         this.visible=true
-        this.$nextTick(()=>{
-          this.$refs.realForm.refuse();
-        })
+        this.$refs.realForm.refuse();
+        setTimeout(() => {
+          this.$emit('ok');
+        }, 500)
         this.close()
       },
       close () {

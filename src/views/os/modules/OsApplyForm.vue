@@ -139,6 +139,7 @@
             endTime: [
               { required: true, message: '请输入结束时间!'},
             ]
+
         },
         url: {
           add: "/os/osApply/add",
@@ -188,7 +189,6 @@
         this.edit(this.modelDefault);
       },
       edit (record) {
-        debugger
         this.model = Object.assign({}, record);
         this.visible = true;
         this.showoption = this.model.showoption;
@@ -199,9 +199,6 @@
           this.editable=true
           this.justable=false
         }
-
-
-
       },
       submitForm () {
         const that = this;
@@ -239,15 +236,13 @@
       },
       //同意
       agree(){
-        const that = this;
+        let that = this;
         let method = "post";
         this.model.applyType = "1";
         let httpurl = this.url.agree;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
             that.$message.success(res.message);
-            that.$emit('ok');
-            that.loadData();
           }else{
             that.$message.warning(res.message);
           }
