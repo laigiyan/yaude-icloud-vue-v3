@@ -111,6 +111,12 @@
 <!--                <a @click="handleAdjustResource(record)">調整資源</a>-->
 <!--              </a-menu-item>-->
               <a-menu-item>
+                <a @click="handleAddFloatingIP(record)">綁定浮動IP</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a @click="removeFloatingIP(record)">解除浮動IP的綁定</a>
+              </a-menu-item>
+              <a-menu-item>
                 <a @click="handleCreateSnapshot(record)">快照</a>
               </a-menu-item>
               <a-menu-item>
@@ -122,9 +128,7 @@
               <a-menu-item>
                 <a @click="handleRebootByHARD(record)">硬重啓實例</a>
               </a-menu-item>
-              <a-menu-item>
-                <a @click="handleAddFloatingIP(record)">綁定浮動IP</a>
-              </a-menu-item>
+
               <a-menu-item>
                 <a @click="handleConnectVolume(record)">連接卷</a>
               </a-menu-item>
@@ -479,6 +483,11 @@
         this.$refs.inUseVolumeForm.edit(record);
       },
       handleAddFloatingIP(record){
+        record.floatingIpStatus = "DOWN";
+        this.$refs.floatingIpForm.edit(record);
+      },
+      removeFloatingIP(record){
+        record.floatingIpStatus = "ACTIVE";
         this.$refs.floatingIpForm.edit(record);
       }
     }

@@ -17,7 +17,7 @@
         </a-form-model-item>
 
         <a-form-model-item label="説明"  hasFeedback>
-          <span>请为选中的实例选择要绑定的IP地址。</span>
+          <span>{{ explain }}</span>
         </a-form-model-item>
 
       </a-form-model>
@@ -56,9 +56,11 @@
         },
         url: {
           getFloatingIps:"/openstack/osInstance/getFloatingIps",
-          addFloatingIp:"/openstack/osInstance/addFloatingIp"
+          addFloatingIp:"/openstack/osInstance/addFloatingIp",
+          removeFloatingIP:"/openstack/osInstance/removeFloatingIP",
         },
-        floatingIps:[]
+        floatingIps:[],
+        explain:'请为选中的实例选择要绑定的IP地址。'
       }
     },
     created () {
@@ -69,6 +71,13 @@
         this.edit({});
       },
       edit (record) {
+        if(record.floatingIpStatus=='DOWN'){
+          this.title = "綁定浮動IP";
+          this.explain = '请为选中的实例选择要绑定的IP地址';
+        }else if(record.floatingIpStatus=='ACTIVE'){
+          this.title = "解除浮動IP的綁定";
+          this.explain = '选择从实例上解除关联的浮动 IP';
+        }
         this.getFloatingIps(record);
         this.model = Object.assign({}, record);
         this.visible = true;
@@ -84,7 +93,13 @@
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
-            getAction(this.url.addFloatingIp,this.model).then((res)=>{
+            let url = this.url.addFloatingIp;
+            if(this.model.floatingIpStatus=='DOWN'){
+              url = this.url.addFloatingIp;
+            }else if(this.model.floatingIpStatus=='ACTIVE'){
+              url = this.url.removeFloatingIP;
+            }
+            getAction(url,this.model).then((res)=>{
               if(res.success){
                 that.$message.success(res.message);
                 that.$emit('ok');
@@ -103,9 +118,9 @@
       },
       //获取浮动IP
       getFloatingIps(record){
+        this.floatingIps = [];
         getAction(this.url.getFloatingIps,record).then((res)=>{
           if(res.success){
-            this.floatingIps = [];
             res.result.forEach((r)=>{
               this.floatingIps.push({
                 value:r.floating_ip_address,
