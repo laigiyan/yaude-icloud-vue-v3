@@ -89,7 +89,7 @@
           </a-button>
         </template>
 
-        <span slot="instanceName" slot-scope="text, record">
+        <span slot="projectName" slot-scope="text, record">
           <a @click="handleRouter(record)">{{ text }}</a>
         </span>
 
@@ -285,6 +285,10 @@
         //     this.$message.warning(res.message);
         //   }
         // })
+      },
+      handleRouter(record){
+        console.log('handleRoute  '+record)
+        this.$router.push({name: 'project-ProjectSurvey',params:{projectId:record.projectId}})
       },
 
     }

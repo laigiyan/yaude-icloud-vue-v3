@@ -18,7 +18,7 @@
           </a-col>
         </a-row>
         <a-row>
-          <ProjectInstanceList ref="projectInstanceList" />
+          <ProjectInstanceList ref="projectInstanceList" :select-project-id="selectProjectId"/>
         </a-row>
 
       </a-tab-pane>
@@ -52,11 +52,14 @@
         url: {
           getProjectLimits:"/openstack/projectSurvey/getProjectLimits",
         },
+        selectProjectId:''
       }
     },
     created() {
+      let data = this.$route.params;
+      this.selectProjectId = data.projectId;
       setTimeout(() => {
-        this.loadProjectLimits({projectId:'04987b0c4ad54494a79f0c41a7fb6c02'})
+        this.loadProjectLimits({projectId:this.selectProjectId})
       }, 100)
     },
     methods: {

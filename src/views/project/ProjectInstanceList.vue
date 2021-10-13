@@ -93,6 +93,12 @@
     components: {
       moment
     },
+    props:{
+      selectProjectId:{
+        type: String,
+        default: ''
+      }
+    },
     data () {
       return {
         description: '申請明細檔管理页面',
@@ -196,7 +202,7 @@
           }
         }
         let params = this.getQueryParams();//查询条件
-        params.projectId = '04987b0c4ad54494a79f0c41a7fb6c02';
+        params.projectId = this.selectProjectId;
         this.loading = true;
         getAction(this.url.list, params).then((res) => {
           if (res.success) {
