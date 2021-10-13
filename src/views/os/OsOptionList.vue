@@ -219,7 +219,7 @@
               that.result = res.result[0];
               that.result.showoption = "true";
               this.result.optionId = that.model.optionId;
-              that.$refs.applymodalForm.edit( this.result);
+              that.$refs.applymodalForm.edit(this.result);
               that.$refs.applymodalForm.title="审核";
             }
           })
@@ -230,7 +230,7 @@
               that.result = res.result[0];
               that.result.showoption = "true";
               this.result.optionId = that.model.optionId;
-              that.$refs.floatipmodalForm.edit( this.result);
+              that.$refs.floatipmodalForm.edit(this.result);
               that.$refs.floatipmodalForm.title="审核";
             }
           })
@@ -241,7 +241,7 @@
               that.result = res.result[0];
               that.result.showoption = "true";
               this.result.optionId = that.model.optionId;
-              that.$refs.diskmodalForm.edit( this.result);
+              that.$refs.diskmodalForm.edit(this.result);
               that.$refs.diskmodalForm.title="审核";
             }
           })

@@ -130,7 +130,7 @@
           securityName: [
             { required: true, message: '请选择安全组!'},
           ],
-            networkId: [
+          networkId: [
               { required: true, message: '请选择网络'},
             ],
             startTime: [

@@ -180,7 +180,6 @@
           endTime: this.model.endTime,
           vmId: this.model.vmId
         }
-        debugger
         httpAction(httpurl,formData,method).then((res)=>{
           if(res.success){
             that.$message.success(res.message);

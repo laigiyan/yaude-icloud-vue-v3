@@ -259,6 +259,8 @@
         if (this.selectedRowKeys.length <= 0) {
           this.$message.warning('请选择一条记录！');
           return false;
+        }else if(params.status!="1"){
+          this.$message.warning('请先审核！');
         }else{
           this.$refs.adjustModal.adjust(params);
         }

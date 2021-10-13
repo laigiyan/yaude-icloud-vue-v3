@@ -178,6 +178,16 @@
             dataIndex: 'boostatus_dictText'
           },
           {
+            title:'开始时间',
+            align:"center",
+            dataIndex: 'startTime'
+          },
+          {
+            title:'终止时间',
+            align:"center",
+            dataIndex: 'endTime'
+          },
+          {
             title:'是否加密',
             align:"center",
             dataIndex: 'bootable_dictText'

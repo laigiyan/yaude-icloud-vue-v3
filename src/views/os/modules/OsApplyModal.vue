@@ -47,7 +47,6 @@
       edit (record) {
         this.visible=true
         this.showoption=record.showoption;
-        debugger
         this.$nextTick(()=>{
           this.$refs.realForm.edit(record);
         })
@@ -76,7 +75,6 @@
         this.$refs.realForm.submitForm();
       },
       submitCallback(){
-        alert(9)
         this.$emit('ok');
         this.visible = false;
       },
