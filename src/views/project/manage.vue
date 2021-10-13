@@ -186,11 +186,11 @@
             align:"center",
             dataIndex: 'domainName'
           },
-          {
+         /*{
             title:'成员',
             align:"center",
             dataIndex: 'projectUserNames'
-          },
+          },*/
           {
             title:'是否啓用',
             align:"center",
