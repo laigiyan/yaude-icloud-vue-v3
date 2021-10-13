@@ -30,10 +30,10 @@
 
     <!-- table区域-begin -->
     <div>
-      <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
+      <!--<div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
         <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
-      </div>
+      </div>-->
 
       <a-table
         ref="table"
@@ -84,11 +84,14 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
+  import moment from 'moment'
+  import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
 
   export default {
     name: 'OsInstanceList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
+      moment
     },
     data () {
       return {
@@ -108,47 +111,32 @@
           {
             title:'實例名稱',
             align:"center",
-            dataIndex: 'instanceName',
-            scopedSlots: { customRender: 'instanceName' }
+            dataIndex: 'name',
+            scopedSlots: { customRender: 'name' }
           },
           {
-            title:'狀態',
+            title:'VCPUs',
             align:"center",
-            dataIndex: 'status'
+            dataIndex: 'vcpus'
           },
           {
-            title:'鏡像名稱',
+            title:'Disk',
             align:"center",
-            dataIndex: 'imgName'
+            dataIndex: 'local_gb'
           },
           {
-            title:'實例類型',
+            title:'RAM',
             align:"center",
-            dataIndex: 'flavorName'
+            dataIndex: 'memory_mb'
           },
           {
-            title:'實例配置',
+            title:'开始时间',
             align:"center",
-            dataIndex: 'configureInfo'
-          },
-          {
-            title:'IP地址',
-            align:"center",
-            dataIndex: 'ipAddress'
-          },
-          {
-            title:'所屬項目',
-            align:"center",
-            dataIndex: 'projectName'
-          },
-          {
-            title:'運行時長',
-            align:"center",
-            dataIndex: 'runTime'
+            dataIndex: 'started_at'
           },
         ],
         url: {
-          list: "/openstack/osInstance/list",
+          list: "/openstack/projectSurvey/list",
           delete: "/openstack/osInstance/delete",
           deleteBatch: "/openstack/osInstance/deleteBatch",
           exportXlsUrl: "/openstack/osInstance/exportXls",
@@ -160,7 +148,12 @@
       }
     },
     created() {
-    this.getSuperFieldList();
+     /* this.queryParam.endTime = moment(today).format('YYYY-MM-DD');
+      let date = today.getDate();
+      date = date - 1;
+      this.queryParam.startTime = moment(new Date().setDate(date)).format('YYYY-MM-DD');*/
+
+      this.getSuperFieldList();
     },
     computed: {
       importExcelUrl: function(){
@@ -183,6 +176,46 @@
         fieldList.push({type:'string',value:'securityName',text:'安全組',dictCode:''})
         fieldList.push({type:'string',value:'networkId',text:'網絡',dictCode:''})
         this.superFieldList = fieldList
+      },
+      loadData(arg) {
+        if(!this.url.list){
+          this.$message.error("请设置url.list属性!")
+          return
+        }
+        //加载数据 若传入参数1则加载第一页的内容
+        if (arg === 1) {
+          this.ipagination.current = 1;
+        }
+        if(!(this.queryParam.startTime>''&&this.queryParam.endTime>'')){
+          let today = new Date();
+          let date = today.getDate();
+          date = date - 1;
+          this.queryParam = {
+            endTime: moment(today).format('YYYY-MM-DD'),
+            startTime:   moment(new Date().setDate(date)).format('YYYY-MM-DD')
+          }
+        }
+        let params = this.getQueryParams();//查询条件
+        params.projectId = '04987b0c4ad54494a79f0c41a7fb6c02';
+        this.loading = true;
+        getAction(this.url.list, params).then((res) => {
+          if (res.success) {
+            debugger;
+            //update-begin---author:zhangyafei    Date:20201118  for：适配不分页的数据列表------------
+            this.dataSource = res.result.records||res.result.server_usages;
+            if(res.result.total)
+            {
+              this.ipagination.total = res.result.total;
+            }else{
+              this.ipagination.total = 0;
+            }
+            //update-end---author:zhangyafei    Date:20201118  for：适配不分页的数据列表------------
+          }else{
+            this.$message.warning(res.message)
+          }
+        }).finally(() => {
+          this.loading = false
+        })
       },
 
     }
