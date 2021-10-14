@@ -193,6 +193,11 @@
             dataIndex: 'bootable_dictText'
           },
           {
+            title:'所屬項目',
+            align:"center",
+            dataIndex: 'projectName'
+          },
+          {
             title: '操作',
             dataIndex: 'action',
             align:"center",

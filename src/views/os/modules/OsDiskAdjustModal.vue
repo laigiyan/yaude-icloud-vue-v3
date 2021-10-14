@@ -108,13 +108,14 @@
       }
     },
     created () {
-      this.getType(this.model);
+
     },
     methods: {
       adjust (record) {
         this.form.resetFields();
         this.model = Object.assign({}, record);
         this.visible = true;
+        this.getType(this.model);
       },
       handleOk () {
         let that = this;

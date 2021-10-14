@@ -3,6 +3,13 @@
     <j-form-container :disabled="formDisabled">
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
+          <a-col :span="24" >
+            <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
+              <a-select v-model="model.projectId" @change="getAll" placeholder="请选择項目"  :disabled=editable>
+                <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
           <a-col :span="24">
             <a-form-model-item label="名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="diskName">
               <a-input v-model="model.diskName" placeholder="请输入名称" :disabled="editable" ></a-input>
@@ -108,6 +115,9 @@
           ],
           endTime: [
             { required: true, message: '请输入结束时间!'},
+          ],
+          projectId:[
+            { required: true, message: '请选择项目!'},
           ]
 
         },
@@ -121,9 +131,10 @@
           getImg: "/os/osApplyDisk/getImg",
           getVolume: "/os/osApplyDisk/getVolume",
           getSnapshot: "/os/osApplyDisk/getSnapshot",
-
+          getProject: "/os/osApply/getProject",
         },
         types:[],
+        projects:[],
         sourcetype:[],
         editable: false,
         justable: false,
@@ -139,7 +150,8 @@
     created () {
        //备份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
-      this.getType(this.modelDefault);
+     // this.getType(this.modelDefault);
+      this.getProjects(this.modelDefault);
     },
     methods: {
       add () {
@@ -149,6 +161,10 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.showoption = this.model.showoption;
+        this.getType();
+        if(this.model.source=="1" || this.model.source=="2" || this.model.source=="3"){
+          this.getsource(this.model.source);
+        }
         if(this.model.options=="1" || (this.model.options=="2" && this.model.status!=null) ){
           this.editable=true
           this.justable=true
@@ -159,6 +175,11 @@
       },
       submitForm () {
         const that = this;
+        this.projects.forEach((r)=>{
+          if(r.value==that.model.projectId){
+            that.model.projectName = r.text;
+          }
+        })
         // 触发表单验证
         this.$refs.form.validate(valid => {
           if (valid) {
@@ -186,10 +207,30 @@
 
         })
       },
+      getAll(){
+        this.getType();
+      },
+      getProjects(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getProject;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.projects.push({
+                value:r.projectId,
+                text:r.projectName,
+              })
+            })
+          }
+        })
+      },
       //获取卷来源
       getsource(source){
         const that = this;
         that.sourcetype = [];
+        that.showSource=false;
         if(source=="1"){//镜像
           that.showSource=true
           let method = "post";
@@ -272,7 +313,8 @@
           that.confirmLoading = false;
         })
       },
-      getType(record){
+      getType(){
+        let record = this.model;
         this.model = Object.assign({}, record);
         let method = "post";
         let httpurl = this.url.getType;
