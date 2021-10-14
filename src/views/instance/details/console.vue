@@ -58,8 +58,9 @@
           });
           //url = "http://192.168.2.208:6080/vnc_lite.html?path=%3Ftoken%3D8f0b2851-07c3-44d5-94a9-1bfb024c568a"
         }
-
-
+      },
+      openUrlNewWin(){
+        window.open(this.url);
       }
     }
   }

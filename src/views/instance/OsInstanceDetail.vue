@@ -7,7 +7,10 @@
       </a-tab-pane>
 
       <a-tab-pane tab="控制臺" key="2" forceRender>
-        <console :dataSource="dataSource"/>
+        <div class="ant-alert ant-alert-info" :style="{marginBottom:'10px'}" >
+          <a type="primary" @click="openUrlNewWin" >点击此处只显示控制台 </a><span> 要退出全屏模式，请点击浏览器的后退按键</span>
+        </div>
+        <console :dataSource="dataSource" ref="console"/>
       </a-tab-pane>
 
       <a-tab-pane tab="操作日志" key="3" forceRender>
@@ -48,6 +51,9 @@
         if(this.dataSource.selectKey){
           this.selectKey = this.dataSource.selectKey;
         }
+      },
+      openUrlNewWin(){
+        this.$refs.console.openUrlNewWin();
       }
 
     },

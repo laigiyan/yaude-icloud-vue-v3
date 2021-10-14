@@ -37,11 +37,11 @@
           <h4>此周期内的 RAM-小时数：</h4>
         </a-col>
         <a-col :span="2">
-          <h4>{{ showData.server_usages.length }}</h4>
+          <h4>{{ showData.server_usages }}</h4>
           <h4>{{ showData.ramText }}</h4>
-          <h4>{{ showData.total_vcpus_usage.toFixed(2) }}</h4>
-          <h4>{{ showData.total_local_gb_usage.toFixed(2) }}</h4>
-          <h4>{{ showData.total_memory_mb_usage.toFixed(2) }}</h4>
+          <h4>{{ showData.total_vcpus_usage }}</h4>
+          <h4>{{ showData.total_local_gb_usage }}</h4>
+          <h4>{{ showData.total_memory_mb_usage }}</h4>
         </a-col>
       </a-row>
     </div>
@@ -238,18 +238,34 @@
           if (res.success) {
             debugger;
             //update-begin---author:zhangyafei    Date:20201118  for：适配不分页的数据列表------------
-            this.showData = res.result.records||res.result;
             this.dataSource = res.result.records||res.result.server_usages;
             let ram = 0;
-            this.dataSource.forEach((r)=>{
-              if(r.state=='active')
-              ram = ram + r.memory_mb;
-            })
-            if(ram<1024){
-              this.showData.ramText = ram+"MB";
+            if(this.dataSource){
+              this.dataSource.forEach((r)=>{
+                if(r.state=='active')
+                  ram = ram + r.memory_mb;
+              })
+              if(ram<1024){
+                this.showData.ramText = ram+"MB";
+              }else{
+                this.showData.ramText = ram/1024 +"GB";
+              }
+
+              this.showData.server_usages = this.dataSource.length;
+              this.showData.total_vcpus_usage = res.result.total_vcpus_usage.toFixed(2)
+              this.showData.total_local_gb_usage = res.result.total_local_gb_usage.toFixed(2)
+              this.showData.total_memory_mb_usage = res.result.total_memory_mb_usage.toFixed(2)
+
             }else{
-              this.showData.ramText = ram/1024 +"GB";
+              this.showData ={
+                server_usages:'',
+                ramText:'',
+                total_vcpus_usage:'',
+                total_local_gb_usage:'',
+                total_memory_mb_usage:''
+              }
             }
+
 
             if(res.result.total)
             {
