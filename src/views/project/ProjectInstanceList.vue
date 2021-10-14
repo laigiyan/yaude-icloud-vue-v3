@@ -27,11 +27,29 @@
     </div>
     <!-- 查询区域-END -->
 
+    <div style="margin-bottom: 16px;">
+      <a-row :gutter="24">
+        <a-col :span="3" :style="{textAlign:'right'}">
+          <h4>运行中的实例：</h4>
+          <h4>启用的内存：</h4>
+          <h4>周期内VCPU-小时数：</h4>
+          <h4>周期内磁盘GB-小时数：</h4>
+          <h4>此周期内的 RAM-小时数：</h4>
+        </a-col>
+        <a-col :span="2">
+          <h4>{{ showData.server_usages.length }}</h4>
+          <h4>{{ showData.ramText }}</h4>
+          <h4>{{ showData.total_vcpus_usage.toFixed(2) }}</h4>
+          <h4>{{ showData.total_local_gb_usage.toFixed(2) }}</h4>
+          <h4>{{ showData.total_memory_mb_usage.toFixed(2) }}</h4>
+        </a-col>
+      </a-row>
+    </div>
 
     <!-- table区域-begin -->
     <div>
       <!--<div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+       <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>-->
 
@@ -128,12 +146,23 @@
           {
             title:'Disk',
             align:"center",
-            dataIndex: 'local_gb'
+            dataIndex: 'local_gb',
+            customRender:function (text) {
+              return text+"GB"
+            }
           },
           {
             title:'RAM',
             align:"center",
-            dataIndex: 'memory_mb'
+            dataIndex: 'memory_mb',
+            customRender:function (text) {
+              if(text<1024){
+                return text+"MB"
+              }else{
+                return text/1024+"GB"
+              }
+              return text+"MB"
+            }
           },
           {
             title:'开始时间',
@@ -151,6 +180,7 @@
         },
         dictOptions:{},
         superFieldList:[],
+        showData:{},
       }
     },
     created() {
@@ -208,7 +238,19 @@
           if (res.success) {
             debugger;
             //update-begin---author:zhangyafei    Date:20201118  for：适配不分页的数据列表------------
+            this.showData = res.result.records||res.result;
             this.dataSource = res.result.records||res.result.server_usages;
+            let ram = 0;
+            this.dataSource.forEach((r)=>{
+              if(r.state=='active')
+              ram = ram + r.memory_mb;
+            })
+            if(ram<1024){
+              this.showData.ramText = ram+"MB";
+            }else{
+              this.showData.ramText = ram/1024 +"GB";
+            }
+
             if(res.result.total)
             {
               this.ipagination.total = res.result.total;
