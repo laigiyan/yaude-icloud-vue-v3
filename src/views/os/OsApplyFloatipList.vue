@@ -171,10 +171,20 @@
           {
             title:'申请时间',
             align:"center",
-            dataIndex: 'startTime',
-            customRender:function (text) {
+            dataIndex: 'startTime'
+            /*customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
-            }
+            }*/
+          },
+          {
+            title:'终止时间',
+            align:"center",
+            dataIndex: 'endTime'
+          },
+          {
+            title:'所屬項目',
+            align:"center",
+            dataIndex: 'projectName'
           },
           {
             title:'映射vm_ip',

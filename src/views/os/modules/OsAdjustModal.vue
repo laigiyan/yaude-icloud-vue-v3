@@ -143,17 +143,21 @@
     created () {
       //备份model原始值
       // this.getdata();
-      this.getProjects(this.model);
-      this.getImgs(this.model);
-      this.getFlavorIds(this.model);
-      this.getSecurityNames(this.model);
-      this.getNetworkIds(this.model);
+
+
     },
     methods: {
       adjust (record) {
         this.form.resetFields();
         this.model = Object.assign({}, record);
         this.visible = true;
+        this.getFlavorIds(this.model);
+        this.getSecurityNames( this.model);
+        this.getProjects(this.model);
+        this.getImgs(this.model);
+        // this.getFlavorIds(this.model);
+        // this.getSecurityNames(this.model);
+        this.getNetworkIds(this.model);
       },
       handleOk () {
         let projectId = "";

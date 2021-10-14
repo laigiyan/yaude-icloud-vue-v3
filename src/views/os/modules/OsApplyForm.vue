@@ -6,7 +6,7 @@
 
           <a-col :span="24" >
             <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
-              <a-select v-model="model.projectId" @change="getNetworkIdsNew" placeholder="请选择項目"  :disabled=editable>
+              <a-select v-model="model.projectId" @change="getAll" placeholder="请选择項目"  :disabled=editable>
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -179,9 +179,9 @@
 
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
       this.getProjects(this.modelDefault);
-      this.getImgs(this.modelDefault);
-      this.getFlavorIds(this.modelDefault);
-      this.getSecurityNames(this.modelDefault);
+     // this.getImgs(this.modelDefault);
+      //this.getFlavorIds(this.modelDefault);
+      //this.getSecurityNames(this.modelDefault);
       //this.getNetworkIds(this.modelDefault);
     },
     methods: {
@@ -191,6 +191,7 @@
       edit (record) {
         this.model = Object.assign({}, record);
         this.visible = true;
+        this.getAll();
         this.showoption = this.model.showoption;
         if(this.model.options=="1" || (this.model.options=="2" && this.model.status!=null) ){
           this.editable=true
@@ -287,8 +288,17 @@
           }
         })
       },
-      getImgs(record){
+      getAll(){
+        this.getImgs();
+        this.getNetworkIdsNew();
+        this.getFlavorIds();
+        this.getSecurityNames();
+      },
+      getImgs(){
+        this.imgIds=[];
+        let record = this.model;
         this.model = Object.assign({}, record);
+        debugger
         let method = "post";
         let httpurl = this.url.getImg;
         httpAction(httpurl,this.model,method).then((res)=>{
@@ -303,7 +313,9 @@
           }
         })
       },
-      getFlavorIds(record){
+      getFlavorIds(){
+        this.flavorIds=[];
+        let record = this.model;
         this.model = Object.assign({}, record);
         let method = "post";
         let httpurl = this.url.getFlavor;
@@ -319,7 +331,9 @@
           }
         })
       },
-      getSecurityNames(record){
+      getSecurityNames(){
+        this.securityNames=[];
+        let record = this.model;
         this.model = Object.assign({}, record);
         let method = "post";
         let httpurl = this.url.getSecurity;
@@ -335,7 +349,7 @@
           }
         })
       },
-      getNetworkIds(record){
+      /*getNetworkIds(record){
         this.model = Object.assign({}, record);
         let method = "post";
         let httpurl = this.url.getNetwork;
@@ -350,8 +364,9 @@
             })
           }
         })
-      },
+      },*/
       getNetworkIdsNew(){
+        this.networkIds=[];
         let record = this.model;
         this.model = Object.assign({}, record);
         let method = "post";
