@@ -58,6 +58,7 @@
           getFloatingIps:"/openstack/osInstance/getFloatingIps",
           addFloatingIp:"/openstack/osInstance/addFloatingIp",
           removeFloatingIP:"/openstack/osInstance/removeFloatingIP",
+          getFloatingIpById:"/openstack/osInstance/getFloatingIpById",
         },
         floatingIps:[],
         explain:'请为选中的实例选择要绑定的IP地址。'
@@ -119,16 +120,29 @@
       //获取浮动IP
       getFloatingIps(record){
         this.floatingIps = [];
-        getAction(this.url.getFloatingIps,record).then((res)=>{
-          if(res.success){
-            res.result.forEach((r)=>{
-              this.floatingIps.push({
-                value:r.floating_ip_address,
-                text: r.floating_ip_address,
+
+        if(record.floatingIpStatus =='DOWN'){
+          getAction(this.url.getFloatingIps,record).then((res)=>{
+            if(res.success){
+              res.result.forEach((r)=>{
+                this.floatingIps.push({
+                  value:r.floating_ip_address,
+                  text: r.floating_ip_address,
+                })
               })
-            })
-          }
-        })
+            }
+          })
+        }else if(record.floatingIpStatus == 'ACTIVE'){
+          getAction(this.url.getFloatingIpById,record).then((res)=>{
+            if(res.success){
+              this.floatingIps.push({
+                value:res.result.floatingIp,
+                text: res.result.floatingIp
+              })
+            }
+          })
+        }
+
       },
     }
   }
