@@ -254,7 +254,11 @@
             }
           })
         }
-
+      },
+      modalFormOk(){
+        this.$nextTick(()=>{
+          this.loadData();
+        })
       },
       getSuperFieldList(){
         let fieldList=[];

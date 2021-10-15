@@ -112,7 +112,7 @@
     </div>
 
     <os-apply-modal ref="modalForm" @ok="modalFormOk"></os-apply-modal>
-    <os-adjust-modal ref="adjustModal"></os-adjust-modal>
+    <os-adjust-modal ref="adjustModal" @ok="modalFormOk"></os-adjust-modal>
   </a-card>
 </template>
 
@@ -264,6 +264,11 @@
         }else{
           this.$refs.adjustModal.adjust(params);
         }
+      },
+      modalFormOk(){
+        this.$nextTick(()=>{
+          this.loadData();
+        })
       },
       getSuperFieldList(){
         let fieldList=[];

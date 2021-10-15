@@ -239,6 +239,11 @@
           this.$refs.adjustModal.adjust(params);
         }
       },
+      modalFormOk(){
+        this.$nextTick(()=>{
+          this.loadData();
+        })
+      },
       handleSubmit(){
         var params = this.selectionRows[0] ;
         if (this.selectedRowKeys.length <= 0) {
@@ -260,8 +265,8 @@
             }
           })
         }
-
       },
+
       getSuperFieldList(){
         let fieldList=[];
         fieldList.push({type:'string',value:'diskName',text:'名称',dictCode:''})
