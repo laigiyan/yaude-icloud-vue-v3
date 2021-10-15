@@ -198,6 +198,7 @@
       },
 
       getType(record){
+        this.types=[];
         this.model = Object.assign({}, record);
         let method = "post";
         let httpurl = this.url.getType;

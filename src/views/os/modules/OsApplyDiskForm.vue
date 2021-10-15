@@ -161,7 +161,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.showoption = this.model.showoption;
-        this.getType();
+        this.getAll();
         if(this.model.source=="1" || this.model.source=="2" || this.model.source=="3"){
           this.getsource(this.model.source);
         }
@@ -315,6 +315,7 @@
       },
       getType(){
         let record = this.model;
+        this.types=[];
         this.model = Object.assign({}, record);
         let method = "post";
         let httpurl = this.url.getType;

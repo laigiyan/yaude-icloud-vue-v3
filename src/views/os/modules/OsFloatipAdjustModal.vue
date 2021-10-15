@@ -94,13 +94,14 @@
       }
     },
     created () {
-      this.getNetwork(this.model);
+
     },
     methods: {
       adjust (record) {
         this.form.resetFields();
         this.model = Object.assign({}, record);
         this.visible = true;
+        this.getNetwork(this.model);
       },
       handleOk () {
         let that = this;
@@ -130,13 +131,13 @@
         })
       },
       getNetwork(record){
+        this.networks=[];
         this.model = Object.assign({}, record);
         let method = "post";
         let httpurl = this.url.getNetwork;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
             const result = res.result
-            debugger
             result.forEach((r)=>{
               this.networks.push({
                 value:r.networkId,
@@ -148,6 +149,7 @@
       },
       getSubnets(){
         const that = this;
+        this.subnets=[];
         this.networks.forEach((r)=>{
           if(r.text==that.model.networkName){
             that.model.networkId = r.value;
@@ -158,7 +160,6 @@
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
             const result = res.result
-            debugger
             result.forEach((r)=>{
               this.subnets.push({
                 value:r.subnetId,
@@ -169,12 +170,12 @@
         })
       },
       getFloatip(){
+        this.floatips=[];
         let method = "post";
         let httpurl = this.url.getFloatip;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
             const result = res.result;
-            debugger
             result.forEach((r)=>{
               this.floatips.push({
                 value:r.floatIp,

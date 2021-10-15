@@ -158,6 +158,11 @@
             dataIndex: 'optionsType_dictText'
           },
           {
+            title:'申请人',
+            align:"center",
+            dataIndex: 'applyBy'
+          },
+          {
             title: '操作',
             dataIndex: 'action',
             align:"center",
