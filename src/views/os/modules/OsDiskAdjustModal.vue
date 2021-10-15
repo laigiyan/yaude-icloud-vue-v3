@@ -10,6 +10,13 @@
     cancelText="关闭">
     <a-form ref="form" :model="model" >
       <a-row>
+        <a-col :span="24" >
+          <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
+            <a-select v-model="model.projectName" placeholder="请选择項目"  :disabled="true">
+              <a-select-option v-for="project in projects":value="project.text"  >{{project.text}}</a-select-option>
+            </a-select>
+          </a-form-model-item>
+        </a-col>
         <a-col :span="24">
           <a-form-model-item label="名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="diskName">
             <a-input v-model="model.diskName" placeholder="请输入名称"  :disabled="true"></a-input>
@@ -101,7 +108,9 @@
           getImg: "/os/osApplyDisk/getImg",
           getVolume: "/os/osApplyDisk/getVolume",
           getSnapshot: "/os/osApplyDisk/getSnapshot",
+          getProject: "/os/osApply/getProject",
         },
+        projects:[],
         types:[],
         sourcetype:[],
         showSource: false
@@ -116,12 +125,21 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.getType(this.model);
+        this.getProjects(this.model);
       },
       handleOk () {
         let that = this;
+        let projectId = "";
         let method = 'post';
         let httpurl=this.url.adjust;
+        that.projects.forEach((r)=>{
+          if(r.text==that.model.projectName){
+            that.projectId = r.value;
+          }
+        })
         let formData={
+          projectName: this.model.projectName,
+          projectId: this.projectId,
           diskName: this.model.diskName,
           options: "2",
           represent: this.model.represent,
@@ -129,6 +147,8 @@
           type: this.model.type,
           source: this.model.source,
           boostatus: "1",
+          startTime: this.model.startTime,
+          endTime: this.model.endTime,
           bootable: this.model.bootable,
         }
         httpAction(httpurl,formData,method).then((res)=>{
@@ -195,7 +215,22 @@
           })
         }
       },
-
+      getProjects(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getProject;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.projects.push({
+                value:r.projectId,
+                text:r.projectName,
+              })
+            })
+          }
+        })
+      },
       getType(record){
         this.types=[];
         this.model = Object.assign({}, record);

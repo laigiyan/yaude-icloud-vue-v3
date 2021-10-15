@@ -10,6 +10,13 @@
     cancelText="关闭">
     <a-form ref="form" :model="model" >
       <a-row>
+        <a-col :span="24" >
+          <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
+            <a-select v-model="model.projectName"  placeholder="请选择項目"  :disabled="true">
+              <a-select-option v-for="project in projects":value="project.text"  >{{project.text}}</a-select-option>
+            </a-select>
+          </a-form-model-item>
+        </a-col>
         <a-col :span="24">
           <a-form-model-item label="网络名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkName">
             <a-select v-model="model.networkName" @change="getSubnets"  placeholder="请选择网络名称" :disabled="true">
@@ -37,8 +44,13 @@
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="申请时间" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
-            <j-date placeholder="请选择申请时间" v-model="model.startTime"  style="width: 100%" />
+          <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+            <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
+          </a-form-model-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-model-item label="合约日期止" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
+            <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
@@ -85,8 +97,10 @@
           adjust: "/os/osApplyFloatip/adjust",
           getNetwork: "/os/osApplyFloatip/getNetwork",
           getSubnets: "/os/osApplyFloatip/getSubnets",
-          getFloatip: "/os/osApplyFloatip/getFloatip"
+          getFloatip: "/os/osApplyFloatip/getFloatip",
+          getProject: "/os/osApply/getProject",
         },
+        projects:[],
         networks:[],
         subnets:[],
         floatips:[]
@@ -102,12 +116,25 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.getNetwork(this.model);
+        this.getProjects(this.model);
       },
       handleOk () {
         let that = this;
+        let projectId = "";
         let method = 'post';
         let httpurl=this.url.adjust;
+        that.projects.forEach((r)=>{
+          if(r.text==that.model.projectName){
+            that.projectId = r.value;
+          }
+        })
+        let a =that.projects;
+        let b = that.model.projectName;
+        let c = this.projectId;
+        debugger
         let formData={
+          projectName: this.model.projectName,
+          projectId: this.projectId,
           networkName: this.model.networkName,
           options: "2",
           subnetName: this.model.subnetName,
@@ -115,8 +142,10 @@
           floatIp: this.model.floatIp,
           represent: this.model.represent,
           startTime: this.model.startTime,
+          endTime: this.model.endTime,
           mapperIp: this.model.mapperIp
         }
+        debugger
         httpAction(httpurl,formData,method).then((res)=>{
           if(res.success){
             that.$message.success(res.message);
@@ -127,6 +156,22 @@
         }).finally(() => {
           that.confirmLoading = false;
           that.close();
+        })
+      },
+      getProjects(record){
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getProject;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.projects.push({
+                value:r.projectId,
+                text:r.projectName,
+              })
+            })
+          }
         })
       },
       getNetwork(record){
