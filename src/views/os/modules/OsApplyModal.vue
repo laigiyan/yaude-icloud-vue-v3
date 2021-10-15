@@ -21,11 +21,9 @@
 <script>
 
   import OsApplyForm from './OsApplyForm'
-  import OsOptionList from '../OsOptionList'
   export default {
     name: 'OsApplyModal',
     components: {
-      OsOptionList,
       OsApplyForm
     },
     data () {
