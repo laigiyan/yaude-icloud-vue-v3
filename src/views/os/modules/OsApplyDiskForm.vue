@@ -161,7 +161,9 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.showoption = this.model.showoption;
-        this.getAll();
+        if(this.model.id){
+          this.getAll();
+        }
         if(this.model.source=="1" || this.model.source=="2" || this.model.source=="3"){
           this.getsource(this.model.source);
         }

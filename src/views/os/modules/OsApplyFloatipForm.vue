@@ -158,7 +158,9 @@
       edit (record) {
         this.model = Object.assign({}, record);
         this.visible = true;
-        this.getNetwork();
+        if(this.model.id){
+          this.getNetwork();
+        }
         this.showoption = this.model.showoption;
         if(this.model.options=="1" || (this.model.options=="2" && this.model.status!=null) ){
           this.editable=true

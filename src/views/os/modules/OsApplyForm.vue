@@ -191,7 +191,10 @@
       edit (record) {
         this.model = Object.assign({}, record);
         this.visible = true;
-        this.getAll();
+        debugger
+        if(this.model.id){
+          this.getAll();
+        }
         this.showoption = this.model.showoption;
         if(this.model.options=="1" || (this.model.options=="2" && this.model.status!=null) ){
           this.editable=true
@@ -278,7 +281,6 @@
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
             const result = res.result
-            debugger
             result.forEach((r)=>{
               this.projects.push({
                 value:r.projectId,
