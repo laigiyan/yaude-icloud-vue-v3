@@ -198,7 +198,10 @@
       },
       modalFormOk(){
         this.$nextTick(()=>{
-          this.loadData();
+          setTimeout(() => {
+            this.loadData();
+          }, 2000)
+
         })
       },
       handleOption(){
