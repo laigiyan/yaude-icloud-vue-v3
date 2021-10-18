@@ -27,8 +27,8 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">申请</a-button>
-      <a-button @click="handleAdjust" type="primary" icon="plus">调整</a-button>
       <a-button @click="handleSubmit" type="primary" icon="plus">提交</a-button>
+      <a-button @click="handleAdjust" type="primary" icon="plus">调整</a-button>
     <!--  <a-button type="primary" icon="download" @click="handleExportXls('浮动ip申请明细档')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>

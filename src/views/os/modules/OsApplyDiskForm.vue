@@ -286,6 +286,7 @@
         const that = this;
         let method = "post";
         this.model.applyType = "3";
+        this.model.optionsType="1";
         let httpurl = this.url.agree;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
@@ -301,6 +302,7 @@
       refuse(){
         const that = this;
         this.model.applyType = "3";
+        this.model.optionsType="0";
         let method = "post";
         let httpurl = this.url.refuse;
         httpAction(httpurl,this.model,method).then((res)=>{

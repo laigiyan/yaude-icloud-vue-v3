@@ -187,7 +187,6 @@
       edit (record) {
         this.model = Object.assign({}, record);
         this.visible = true;
-        debugger
         if(this.model.id){
           this.getAll();
         }
@@ -230,8 +229,6 @@
               httpurl+=this.url.edit;
                method = 'put';
             }
-            let a = this.model;
-            debugger
             httpAction(httpurl,this.model,method).then((res)=>{
               if(res.success){
                 that.$message.success(res.message);
@@ -251,6 +248,7 @@
         let that = this;
         let method = "post";
         this.model.applyType = "1";
+        this.model.optionsType="1";
         let httpurl = this.url.agree;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
@@ -266,6 +264,7 @@
       refuse(){
         const that = this;
         this.model.applyType = "1";
+        this.model.optionsType="0";
         let method = "post";
         let httpurl = this.url.refuse;
         httpAction(httpurl,this.model,method).then((res)=>{
@@ -308,7 +307,6 @@
         this.imgIds=[];
         let record = this.model;
         this.model = Object.assign({}, record);
-        debugger
         let method = "post";
         let httpurl = this.url.getImg;
         httpAction(httpurl,this.model,method).then((res)=>{

@@ -180,6 +180,7 @@
           applys: "os/osApply/applys",
           floatipapplys: "os/osApplyFloatip/floatipapplys",
           diskapplys: "os/osApplyDisk/diskapplys",
+          getStatus: "/os/osOption/getStatus",
         },
         dictOptions:{},
         superFieldList:[],
@@ -197,12 +198,29 @@
       initDictConfig(){
       },
       modalFormOk(){
-        this.$nextTick(()=>{
-          setTimeout(() => {
+        let that = this;
+        let httpurl = this.url.getStatus;
+        let method = "post";
+        if(this.model.optionsType=="1"){
+          let formData = {
+            applyType: this.model.applyType,
+            applyId: this.model.applyId,
+            id: this.model.optionId
+          }
+          httpAction(httpurl,formData,method).then((res)=>{
+            if(res.success){
+              this.loadData();
+            }else{
+              that.$message.warning(res.message);
+            }
+          })
+        }else{
+          this.$nextTick(()=>{
             this.loadData();
-          }, 2000)
+          })
+        }
 
-        })
+
       },
       handleOption(){
         if (this.selectedRowKeys.length <= 0) {
