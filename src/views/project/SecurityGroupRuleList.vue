@@ -88,37 +88,17 @@
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
-<!--              <a-menu-item>-->
-              <!--                <a @click="handleAdjustResource(record)">調整資源</a>-->
-              <!--              </a-menu-item>-->
-              <!--              <a-menu-item>-->
-              <!--                <a @click="handleAddUserProject(record)">指定管理员</a>-->
-              <!--              </a-menu-item>-->
+
               <a-menu-item>
               </a-menu-item>
             </a-menu>
-            <!--            <a-menu slot="overlay">-->
-            <!--              <a-menu-item>-->
-            <!--                <a @click="handleDetail(record)">详情</a>-->
-            <!--              </a-menu-item>-->
-            <!--              <a-menu-item>-->
-            <!--                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">-->
-            <!--                  <a>删除</a>-->
-            <!--                </a-popconfirm>-->
-            <!--              </a-menu-item>-->
-            <!--            </a-menu>-->
+
 
           </a-dropdown>
         </span>
 
       </a-table>
     </div>
-
-    <a-tabs defaultActiveKey="1">
-      <a-tab-pane tab="安全組規則" key="1">
-        <security-group-rule-list ref="securityGroupRuleList"></security-group-rule-list>
-      </a-tab-pane>
-    </a-tabs>
 
     <security-group-modal ref="modalForm" @ok="modalFormOk"></security-group-modal>
   </a-card>
@@ -130,19 +110,17 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import SecurityGroupModal from './modules/SecurityGroupModal'
-  import SecurityGroupRuleList from './SecurityGroupRuleList'
   import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
 
   export default {
-    name: 'SecurityGroupList',
+    name: 'SecurityGroupRuleList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      SecurityGroupModal,
-      SecurityGroupRuleList
+      SecurityGroupModal
     },
     data () {
       return {
-        description: '申請明細檔管理页面',
+        description: '安全組規則細檔管理页面',
         // 表头
         columns: [
           {
@@ -156,14 +134,39 @@
             }
           },
           {
-            title:'安全组名稱',
+            title:'方向',
             align:"center",
-            dataIndex: 'name',
+            dataIndex: 'direction',
           },
           {
-            title:'安全组ID',
+            title:'網絡類型',
             align:"center",
-            dataIndex: 'securityGroupId'
+            dataIndex: 'ethertype',
+          },
+          {
+            title:'IP協議',
+            align:"center",
+            dataIndex: 'protocol'
+          },
+          {
+            title:'端口最小值',
+            align:"center",
+            dataIndex: 'portRangeMin',
+          },
+          {
+            title:'端口最大值',
+            align:"center",
+            dataIndex: 'portRangeMax',
+          },
+          {
+            title:'远程IP前缀',
+            align:"center",
+            dataIndex: 'remoteIpPrefix'
+          },
+          {
+            title:'安全組ID',
+            align:"center",
+            dataIndex: 'remoteGroupId'
           },
           {
             title:'描述',
@@ -180,8 +183,7 @@
           }
         ],
         url: {
-          list: "/openstack/securityGroup/list",
-          delete: "/openstack/osInstance/delete",
+          list: "/openstack/securityGroup/listRules",
 
         },
         dictOptions:{},
