@@ -179,10 +179,6 @@
 
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
       this.getProjects(this.modelDefault);
-     // this.getImgs(this.modelDefault);
-      //this.getFlavorIds(this.modelDefault);
-      //this.getSecurityNames(this.modelDefault);
-      //this.getNetworkIds(this.modelDefault);
     },
     methods: {
       add () {
@@ -211,6 +207,16 @@
             that.model.projectName = r.text;
           }
         })
+        this.imgIds.forEach((r)=>{
+          if(r.value==that.model.imgId){
+            that.model.imgName = r.text;
+          }
+        })
+        this.flavorIds.forEach((r)=>{
+          if(r.value==that.model.flavorId){
+            that.model.flavorName = r.text;
+          }
+        })
         // 触发表单验证
         this.$refs.form.validate(valid => {
           if (valid) {
@@ -224,6 +230,8 @@
               httpurl+=this.url.edit;
                method = 'put';
             }
+            let a = this.model;
+            debugger
             httpAction(httpurl,this.model,method).then((res)=>{
               if(res.success){
                 that.$message.success(res.message);
