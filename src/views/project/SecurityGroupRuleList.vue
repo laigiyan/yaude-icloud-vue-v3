@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false">
     <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
+    <!--<div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -13,15 +13,15 @@
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
-              <!--<a @click="handleToggleSearch" style="margin-left: 8px">
+              &lt;!&ndash;<a @click="handleToggleSearch" style="margin-left: 8px">
                 {{ toggleSearchStatus ? '收起' : '展开' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
-              </a>-->
+              </a>&ndash;&gt;
             </span>
           </a-col>
         </a-row>
       </a-form>
-    </div>
+    </div>-->
     <!-- 查询区域-END -->
 
     <!-- 操作按钮区域 -->
@@ -48,12 +48,12 @@
         size="middle"
         :scroll="{x:true}"
         bordered
-        rowKey="projectId"
+        rowKey="id"
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
         :loading="loading"
-        :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange,type:'radio'}"
+        :rowSelection="{selectedRowKeys: selectedRowKeys , onChange: onSelectChange}"
         class="j-table-force-nowrap"
         @change="handleTableChange">
 
@@ -85,16 +85,11 @@
           <!--<a @click="handleEdit(record)">编辑</a>
 
           <a-divider type="vertical" />-->
-          <a-dropdown>
-            <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
-            <a-menu slot="overlay">
-
-              <a-menu-item>
-              </a-menu-item>
-            </a-menu>
-
-
-          </a-dropdown>
+          <a-menu-item>
+                            <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+                              <a>删除</a>
+                            </a-popconfirm>
+                          </a-menu-item>
         </span>
 
       </a-table>
@@ -151,12 +146,7 @@
           {
             title:'端口最小值',
             align:"center",
-            dataIndex: 'portRangeMin',
-          },
-          {
-            title:'端口最大值',
-            align:"center",
-            dataIndex: 'portRangeMax',
+            dataIndex: 'portRange',
           },
           {
             title:'远程IP前缀',
@@ -168,11 +158,11 @@
             align:"center",
             dataIndex: 'remoteGroupId'
           },
-          {
+          /*{
             title:'描述',
             align:"center",
             dataIndex: 'description'
-          },
+          },*/
           {
             title: '操作',
             dataIndex: 'action',
@@ -215,16 +205,12 @@
         fieldList.push({type:'string',value:'enbled',text:'啓用',dictCode:''})
         this.superFieldList = fieldList
       },
-      handleApply(){
-        this.$router.push({name: 'os-OsApplyList',params:{}})
-      },
-      handleOK(){
+      getRuleMain(record){
+        this.queryParam.projectId = record.projectId;
+        this.queryParam.securityGroupId = record.securityGroupId;
+        this.queryParam.name = record.name;
         this.loadData(1)
-      },
-      selectOK(data) {
-        alert('ok')
-      },
-
+      }
     }
   }
 </script>

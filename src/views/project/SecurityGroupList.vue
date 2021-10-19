@@ -4,6 +4,13 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24" >
+            <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" >
+              <a-select v-model="queryParam.projectId"  placeholder="请选择項目" >
+                <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="安全組名稱">
               <a-input placeholder="请输入安全組名稱" v-model="queryParam.name"></a-input>
@@ -28,12 +35,12 @@
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
 
-      <a-dropdown v-if="selectedRowKeys.length > 0">
+      <!--<a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
-      </a-dropdown>
+      </a-dropdown>-->
     </div>
 
     <!-- table区域-begin -->
@@ -48,7 +55,7 @@
         size="middle"
         :scroll="{x:true}"
         bordered
-        rowKey="projectId"
+        rowKey="securityGroupId"
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
@@ -82,31 +89,19 @@
         </span>
 
         <span slot="action" slot-scope="text, record">
-          <!--<a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">编辑</a>
 
-          <a-divider type="vertical" />-->
+          <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
-<!--              <a-menu-item>-->
-              <!--                <a @click="handleAdjustResource(record)">調整資源</a>-->
-              <!--              </a-menu-item>-->
-              <!--              <a-menu-item>-->
-              <!--                <a @click="handleAddUserProject(record)">指定管理员</a>-->
-              <!--              </a-menu-item>-->
-              <a-menu-item>
-              </a-menu-item>
+                          <a-menu-item>
+                            <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record)">
+                              <a>删除</a>
+                            </a-popconfirm>
+                          </a-menu-item>
             </a-menu>
-            <!--            <a-menu slot="overlay">-->
-            <!--              <a-menu-item>-->
-            <!--                <a @click="handleDetail(record)">详情</a>-->
-            <!--              </a-menu-item>-->
-            <!--              <a-menu-item>-->
-            <!--                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">-->
-            <!--                  <a>删除</a>-->
-            <!--                </a-popconfirm>-->
-            <!--              </a-menu-item>-->
-            <!--            </a-menu>-->
+
 
           </a-dropdown>
         </span>
@@ -131,7 +126,7 @@
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import SecurityGroupModal from './modules/SecurityGroupModal'
   import SecurityGroupRuleList from './SecurityGroupRuleList'
-  import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
+  import { httpAction,deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
 
   export default {
     name: 'SecurityGroupList',
@@ -181,7 +176,8 @@
         ],
         url: {
           list: "/openstack/securityGroup/list",
-          delete: "/openstack/osInstance/delete",
+          delete: "/openstack/securityGroup/deleteSecurityGroup",
+          getProject: "/os/osApply/getProject",
 
         },
         dictOptions:{},
@@ -191,10 +187,12 @@
         selectUserQueryConfig: [
           {key: 'phone', label: '电话'},
         ],
+        projects:[],
       }
     },
     created() {
       this.getSuperFieldList();
+      this.getProjects();
     },
     computed: {
       importExcelUrl: function(){
@@ -213,14 +211,56 @@
         fieldList.push({type:'string',value:'enbled',text:'啓用',dictCode:''})
         this.superFieldList = fieldList
       },
-      handleApply(){
-        this.$router.push({name: 'os-OsApplyList',params:{}})
+      handleAdd: function () {
+        if(this.queryParam.projectId){
+          this.$refs.modalForm.add({projectId:this.queryParam.projectId});
+          this.$refs.modalForm.title = "新增";
+          this.$refs.modalForm.disableSubmit = false;
+        }else{
+          this.$message.error("請選擇一個項目！")
+        }
+
+      },
+      handleDelete: function (record) {
+        if(!this.url.delete){
+          this.$message.error("请设置url.delete属性!")
+          return
+        }
+        var that = this;
+        getAction(that.url.delete, record).then((res) => {
+          if (res.success) {
+            //重新计算分页问题
+            that.reCalculatePage(1)
+            that.$message.success(res.message);
+            that.loadData();
+          } else {
+            that.$message.warning(res.message);
+          }
+        });
       },
       handleOK(){
         this.loadData(1)
       },
-      selectOK(data) {
-        alert('ok')
+      getProjects(){
+        let method = "post";
+        debugger
+        let httpurl = this.url.getProject;
+        httpAction(httpurl, { },method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.projects.push({
+                value:r.projectId,
+                text:r.projectName,
+              })
+            })
+          }
+        })
+      },
+      onSelectChange(selectedRowKeys, selectionRows) {
+        this.selectedRowKeys = selectedRowKeys;
+        this.selectionRows = selectionRows;
+        this.$refs.securityGroupRuleList.getRuleMain(this.selectionRows[0]);
       },
 
     }

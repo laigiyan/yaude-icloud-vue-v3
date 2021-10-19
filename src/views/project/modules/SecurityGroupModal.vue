@@ -58,6 +58,7 @@
         },
         url: {
           add:"/openstack/securityGroup/createSecurityGroup",
+          edit:"/openstack/securityGroup/updateSecurityGroup",
         },
         inUseVolumes:[]
       }
@@ -66,8 +67,8 @@
 
     },
     methods: {
-      add () {
-        this.edit({});
+      add (record) {
+        this.edit(record);
       },
       edit (record) {
         this.model = Object.assign({}, record);
@@ -85,7 +86,13 @@
           if (valid) {
             that.confirmLoading = true;
             debugger
-            getAction(that.url.add,that.model).then((res)=>{
+            let httpurl = '';
+            if(!this.model.securityGroupId){
+              httpurl+=this.url.add;
+            }else{
+              httpurl+=this.url.edit;
+            }
+            getAction(httpurl,that.model).then((res)=>{
               if(res.success){
                 that.$message.success(res.message);
                 that.$emit('ok');
