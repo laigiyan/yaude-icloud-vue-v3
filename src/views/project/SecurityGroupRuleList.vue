@@ -1,28 +1,6 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
-    <!--<div class="table-page-search-wrapper">
-      <a-form layout="inline" @keyup.enter.native="searchQuery">
-        <a-row :gutter="24">
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="安全組名稱">
-              <a-input placeholder="请输入安全組名稱" v-model="queryParam.name"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
-              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
-              &lt;!&ndash;<a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
-                <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
-              </a>&ndash;&gt;
-            </span>
-          </a-col>
-        </a-row>
-      </a-form>
-    </div>-->
-    <!-- 查询区域-END -->
+
 
     <!-- 操作按钮区域 -->
     <div class="table-operator">
@@ -86,7 +64,7 @@
 
           <a-divider type="vertical" />-->
           <a-menu-item>
-                            <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+                            <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record)">
                               <a>删除</a>
                             </a-popconfirm>
                           </a-menu-item>
@@ -95,7 +73,7 @@
       </a-table>
     </div>
 
-    <security-group-modal ref="modalForm" @ok="modalFormOk"></security-group-modal>
+    <security-group-rule-modal ref="modalForm" @ok="modalFormOk"></security-group-rule-modal>
   </a-card>
 </template>
 
@@ -104,14 +82,14 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import SecurityGroupModal from './modules/SecurityGroupModal'
   import { deleteAction, getAction,downFile,getFileAccessHttpUrl } from '@/api/manage'
+  import SecurityGroupRuleModal from './modules/SecurityGroupRuleModal'
 
   export default {
     name: 'SecurityGroupRuleList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      SecurityGroupModal
+      SecurityGroupRuleModal
     },
     data () {
       return {
@@ -174,6 +152,7 @@
         ],
         url: {
           list: "/openstack/securityGroup/listRules",
+          delete: "/openstack/securityGroup/deleteSecurityGroupRule",
 
         },
         dictOptions:{},
@@ -210,7 +189,35 @@
         this.queryParam.securityGroupId = record.securityGroupId;
         this.queryParam.name = record.name;
         this.loadData(1)
-      }
+      },
+      handleAdd: function () {
+        if(this.queryParam.projectId&& this.queryParam.securityGroupId){
+          this.$refs.modalForm.add({projectId:this.queryParam.projectId,securityGroupId:this.queryParam.securityGroupId});
+          this.$refs.modalForm.title = "新增";
+          this.$refs.modalForm.disableSubmit = false;
+        }else{
+          this.$message.error("請選擇一个安全组！")
+        }
+
+      },
+      handleDelete: function (record) {
+        if(!this.url.delete){
+          this.$message.error("请设置url.delete属性!")
+          return
+        }
+        record.projectId = this.queryParam.projectId;
+        var that = this;
+        getAction(that.url.delete, record).then((res) => {
+          if (res.success) {
+            //重新计算分页问题
+            that.reCalculatePage(1)
+            that.$message.success(res.message);
+            that.loadData();
+          } else {
+            that.$message.warning(res.message);
+          }
+        });
+      },
     }
   }
 </script>

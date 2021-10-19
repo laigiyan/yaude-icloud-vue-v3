@@ -5,7 +5,7 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24" >
-            <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" >
+            <a-form-model-item label="項目名稱"  >
               <a-select v-model="queryParam.projectId"  placeholder="请选择項目" >
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
@@ -20,10 +20,6 @@
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
-              <!--<a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
-                <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
-              </a>-->
             </span>
           </a-col>
         </a-row>
@@ -45,10 +41,6 @@
 
     <!-- table区域-begin -->
     <div>
-      <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
-        <a style="margin-left: 24px" @click="onClearSelected">清空</a>
-      </div>
 
       <a-table
         ref="table"
