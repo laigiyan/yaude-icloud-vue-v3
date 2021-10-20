@@ -169,6 +169,12 @@
             dataIndex: 'hostIp'
           },
           {
+            title:'文件',
+            align:"center",
+            dataIndex: 'fileSlot',
+            scopedSlots: { customRender: 'fileSlot' }
+          },
+          {
             title: '操作',
             dataIndex: 'action',
             align:"center",
@@ -183,7 +189,7 @@
           deleteBatch: "/openstack/osUserProject/deleteBatch",
           exportXlsUrl: "/openstack/osUserProject/exportXls",
           importExcelUrl: "openstack/osUserProject/importExcel",
-          
+
         },
         dictOptions:{},
         superFieldList:[],

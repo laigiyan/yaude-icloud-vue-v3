@@ -1,7 +1,6 @@
 <template>
   <a-card :bordered="false">
 
-
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
@@ -31,7 +30,7 @@
         :dataSource="dataSource"
         :pagination="ipagination"
         :loading="loading"
-        :rowSelection="{selectedRowKeys: selectedRowKeys , onChange: onSelectChange}"
+        :rowSelection="{selectedRowKeys: selectedRowKeys , onChange: onSelectChange }"
         class="j-table-force-nowrap"
         @change="handleTableChange">
 
@@ -73,7 +72,7 @@
       </a-table>
     </div>
 
-    <security-group-rule-modal ref="modalForm" @ok="modalFormOk"></security-group-rule-modal>
+    <security-group-rule-modal ref="modalForm" :remote-group-ids="remoteGroupIds" @ok="modalFormOk"></security-group-rule-modal>
   </a-card>
 </template>
 
@@ -90,6 +89,14 @@
     mixins:[JeecgListMixin, mixinDevice],
     components: {
       SecurityGroupRuleModal
+    },
+    props: {
+      //表单禁用
+      remoteGroupIds: {
+        type: Array,
+        default: ()=>[],
+        required: false
+      }
     },
     data () {
       return {
@@ -114,7 +121,7 @@
           {
             title:'網絡類型',
             align:"center",
-            dataIndex: 'ethertype',
+            dataIndex: 'etherType',
           },
           {
             title:'IP協議',
@@ -132,15 +139,10 @@
             dataIndex: 'remoteIpPrefix'
           },
           {
-            title:'安全組ID',
+            title:'远程安全組ID',
             align:"center",
             dataIndex: 'remoteGroupId'
           },
-          /*{
-            title:'描述',
-            align:"center",
-            dataIndex: 'description'
-          },*/
           {
             title: '操作',
             dataIndex: 'action',
@@ -153,15 +155,11 @@
         url: {
           list: "/openstack/securityGroup/listRules",
           delete: "/openstack/securityGroup/deleteSecurityGroupRule",
+          deleteBatch: "/openstack/securityGroup/deleteBatchSecurityGroupRule",
 
         },
         dictOptions:{},
         superFieldList:[],
-        multiUser:'',
-        // 选择用户查询条件配置
-        selectUserQueryConfig: [
-          {key: 'phone', label: '电话'},
-        ],
       }
     },
     created() {
@@ -217,6 +215,42 @@
             that.$message.warning(res.message);
           }
         });
+      },
+      batchDel: function () {
+        if(!this.url.deleteBatch){
+          this.$message.error("请设置url.deleteBatch属性!")
+          return
+        }
+        if (this.selectedRowKeys.length <= 0) {
+          this.$message.warning('请选择一条记录！');
+          return;
+        } else {
+          var ids = "";
+          for (var a = 0; a < this.selectedRowKeys.length; a++) {
+            ids += this.selectedRowKeys[a] + ",";
+          }
+          var that = this;
+          this.$confirm({
+            title: "确认删除",
+            content: "是否删除选中数据?",
+            onOk: function () {
+              that.loading = true;
+              deleteAction(that.url.deleteBatch, {ids: ids,projectId: that.queryParam.projectId}).then((res) => {
+                if (res.success) {
+                  //重新计算分页问题
+                  that.reCalculatePage(that.selectedRowKeys.length)
+                  that.$message.success(res.message);
+                  that.loadData();
+                  that.onClearSelected();
+                } else {
+                  that.$message.warning(res.message);
+                }
+              }).finally(() => {
+                that.loading = false;
+              });
+            }
+          });
+        }
       },
     }
   }

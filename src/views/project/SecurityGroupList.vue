@@ -103,7 +103,7 @@
 
     <a-tabs defaultActiveKey="1">
       <a-tab-pane tab="安全組規則" key="1">
-        <security-group-rule-list ref="securityGroupRuleList"></security-group-rule-list>
+        <security-group-rule-list :remote-group-ids="remoteGroupIds" ref="securityGroupRuleList"></security-group-rule-list>
       </a-tab-pane>
     </a-tabs>
 
@@ -180,6 +180,7 @@
           {key: 'phone', label: '电话'},
         ],
         projects:[],
+        remoteGroupIds:[],
       }
     },
     created() {
@@ -252,6 +253,16 @@
       onSelectChange(selectedRowKeys, selectionRows) {
         this.selectedRowKeys = selectedRowKeys;
         this.selectionRows = selectionRows;
+        this.dataSource.forEach((r)=>{
+          let name = r.name;
+          if(r.securityGroupId == selectedRowKeys){
+            name = name +"(當前)";
+          }
+          this.remoteGroupIds.push({
+            value:r.securityGroupId,
+            text:name,
+          })
+        })
         this.$refs.securityGroupRuleList.getRuleMain(this.selectionRows[0]);
       },
 
