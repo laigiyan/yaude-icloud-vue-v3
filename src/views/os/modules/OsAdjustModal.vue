@@ -70,6 +70,14 @@
             </a-select>
           </a-form-item>
         </a-col>
+        <a-col :span="24">
+          <a-form-model-item label="秘钥" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keypairsId">
+            <a-select v-model="model.keypairsId"  placeholder="请选择秘钥" style="width: 60%" :disabled="true" >
+              <a-select-option v-for="key in keyNames":value="key.value" >{{key.text}}</a-select-option>
+            </a-select>
+            <a-button @click="downPrivateKey" type="primary">下载秘钥</a-button>
+          </a-form-model-item>
+        </a-col>
       </a-row>
     </a-form>
   </a-modal>
@@ -77,7 +85,7 @@
 
 <script>
 
-  import { httpAction, getAction } from '@/api/manage'
+  import { httpAction, getAction,downloadFile } from '@/api/manage'
   import pick from 'lodash.pick'
   import moment from 'moment'
   export default {
@@ -130,14 +138,17 @@
           getImg: "/os/osApply/getImg",
           getFlavor: "/os/osApply/getFlavor",
           getSecurity: "/os/osApply/getSecurity",
-          getNetwork: "/os/osApply/getNetwork"
+          getNetwork: "/os/osApply/getNetwork",
+          getKeyPairs: "/os/osApply/getKeyPairs",
+          getPrivateKey: "openstack/osKeyPairs/getPrivateKey",
 
         },
         projects:[],
         imgIds:[],
         flavorIds:[],
         securityNames:[],
-        networkIds:[]
+        networkIds:[],
+        keyNames:[]
       }
     },
     created () {
@@ -155,6 +166,7 @@
         this.getSecurityNames( this.model);
         this.getProjects(this.model);
         this.getImgs(this.model);
+        this.getPrivateKeys(this.model);
         // this.getFlavorIds(this.model);
         // this.getSecurityNames(this.model);
         this.getNetworkIds(this.model);
@@ -169,6 +181,17 @@
             that.projectId = r.value;
           }
         })
+        that.imgIds.forEach((r)=>{
+          if(r.value==that.model.imgId){
+            this.model.imgName= r.text;
+          }
+        })
+        that.flavorIds.forEach((r)=>{
+          if(r.value==that.model.flavorId){
+            this.model.flavorName= r.text;
+          }
+        })
+
         let formData={
           projectName: this.model.projectName,
           projectId: this.projectId,
@@ -176,14 +199,19 @@
           options: "2",
           represent: this.model.represent,
           imgId: this.model.imgId,
+          imgName: this.model.imgName,
           isDelete: this.model.isDelete,
           flavorId: this.model.flavorId,
+          flavorName: this.model.flavorName,
           securityName: this.model.securityName,
           networkId: this.model.networkId,
           startTime: this.model.startTime,
           endTime: this.model.endTime,
-          vmId: this.model.vmId
+          vmId: this.model.vmId,
+          keypairsId: this.model.keypairsId
         }
+        let a = this.model;
+        debugger
         httpAction(httpurl,formData,method).then((res)=>{
           if(res.success){
             that.$message.success(res.message);
@@ -293,6 +321,34 @@
             })
           }
         })
+      },
+      getPrivateKeys(record){
+        this.keyNames=[];
+        this.model = Object.assign({}, record);
+        let method = "post";
+        let httpurl = this.url.getKeyPairs;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.keyNames.push({
+                value:r.keypairsId,
+                text:r.keyName,
+                key:r.privateKey
+              })
+            })
+          }
+        })
+      },
+      downPrivateKey(){
+        this.keyNames.forEach((r)=>{
+          if(r.value==this.model.keypairsId){
+            this.model.keyName = r.text;
+            this.model.privateKey = r.key;
+          }
+        })
+        let keyName =  this.model.keyName;
+        downloadFile(this.url.getPrivateKey,keyName+'.pem',this.model);
       },
 
       close () {

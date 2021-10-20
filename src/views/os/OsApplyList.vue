@@ -256,6 +256,7 @@
       handleAdjust(){
         const that = this;
         var params = this.selectionRows[0] ;
+        debugger;
         if (this.selectedRowKeys.length <= 0) {
           this.$message.warning('请选择一条记录！');
           return false;

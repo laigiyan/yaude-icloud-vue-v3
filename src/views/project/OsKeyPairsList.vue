@@ -25,6 +25,7 @@
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+              <!--<a-button type="primary" @click=" downFile" icon="download" style="margin-left: 8px">下载</a-button>-->
               <a @click="handleToggleSearch" style="margin-left: 8px">
                 {{ toggleSearchStatus ? '收起' : '展开' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
@@ -105,7 +106,7 @@
                 <a @click="handleDetail(record)">详情</a>
               </a-menu-item>
                <a-menu-item>
-                <a @click="downPrivateKey(record)">下载私钥</a>
+                <a @click="downFile(record)">下载私钥</a>
               </a-menu-item>
               <a-menu-item>
                 <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
@@ -128,8 +129,11 @@
   import '@/assets/less/TableExpand.less'
   import { httpAction, getAction } from '@/api/manage'
   import { mixinDevice } from '@/utils/mixin'
-  import { JeecgListMixin } from '@/mixins/JeecgListMixin'
+  import { JeecgListMixin} from '@/mixins/JeecgListMixin'
   import OsKeyPairsModal from './modules/OsKeyPairsModal'
+  import { axios } from '@/utils/request'
+  import {getFileAccessHttpUrl} from '@/api/manage';
+  import { downloadFile } from '@/api/manage'
 
   export default {
     name: 'OsKeyPairsList',
@@ -200,20 +204,12 @@
     methods: {
       initDictConfig(){
       },
-      downPrivateKey(record){
+      downFile(record){
+        const that = this;
         this.model = Object.assign({}, record);
-        let a =this.model;
-        debugger;
-        let method = "post";
-        let httpurl = this.url.getPrivateKey;
-        httpAction(httpurl,this.model,method).then((res)=>{
-          if(res.success){
-            that.$message.success(res.message);
-            that.$emit('ok');
-          }else{
-            that.$message.warning(res.message);
-          }
-        })
+        let keyName = this.model.keyName;
+        debugger
+        downloadFile(this.url.getPrivateKey,keyName+'.pem',this.model)
       },
       getSuperFieldList(){
         let fieldList=[];

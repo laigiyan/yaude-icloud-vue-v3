@@ -69,6 +69,14 @@
               </a-select>
             </a-form-model-item>
           </a-col>
+          <a-col :span="24">
+            <a-form-model-item label="秘钥" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keypairsId">
+              <a-select v-model="model.keypairsId"  placeholder="请选择秘钥" style="width: 60%" :disabled=editable >
+                <a-select-option v-for="key in keyNames":value="key.value" >{{key.text}}</a-select-option>
+              </a-select>
+              <a-button @click="downPrivateKey" type="primary">下载秘钥</a-button>
+            </a-form-model-item>
+          </a-col>
           <a-col :span="24" v-show="showoption">
             <a-form-model-item label="审核意见" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
               <a-textarea v-model="model.optionsText" placeholder="请输入审核意见" ></a-textarea>
@@ -82,7 +90,7 @@
 
 <script>
 
-  import { httpAction, getAction } from '@/api/manage'
+  import { httpAction, getAction ,downloadFile} from '@/api/manage'
   import { validateDuplicateValue } from '@/utils/util'
   import  moment from "moment"
 
@@ -152,15 +160,19 @@
           getSecurity: "/os/osApply/getSecurity",
           getNetwork: "/os/osApply/getNetwork",
           adjust: "/os/osApply/adjust",
+          getKeyPairs: "/os/osApply/getKeyPairs",
           agree: "/os/osOption/agree",
-          refuse: "/os/osOption/refuse"
-
+          refuse: "/os/osOption/refuse",
+          getPrivateKey: "openstack/osKeyPairs/getPrivateKey",
         },
         projects:[],
         imgIds:[],
         flavorIds:[],
         securityNames:[],
         networkIds:[],
+        keyNames:[],
+        keyName:"",
+        privateKey:"",
         dateFormat:'YYYY-MM-DD',
         editable: false,
         justable: false,
@@ -216,6 +228,7 @@
             that.model.flavorName = r.text;
           }
         })
+
         // 触发表单验证
         this.$refs.form.validate(valid => {
           if (valid) {
@@ -302,6 +315,7 @@
         this.getNetworkIdsNew();
         this.getFlavorIds();
         this.getSecurityNames();
+        this.getPrivateKeys();
       },
       getImgs(){
         this.imgIds=[];
@@ -357,22 +371,6 @@
           }
         })
       },
-      /*getNetworkIds(record){
-        this.model = Object.assign({}, record);
-        let method = "post";
-        let httpurl = this.url.getNetwork;
-        httpAction(httpurl,this.model,method).then((res)=>{
-          if(res.success){
-            const result = res.result
-            result.forEach((r)=>{
-              this.networkIds.push({
-                value:r.networkId,
-                text:r.networkName
-              })
-            })
-          }
-        })
-      },*/
       getNetworkIdsNew(){
         this.networkIds=[];
         let record = this.model;
@@ -390,6 +388,33 @@
             })
           }
         })
+      },
+      getPrivateKeys(){
+        this.keyNames=[];
+        let method = "post";
+        let httpurl = this.url.getKeyPairs;
+        httpAction(httpurl,this.model,method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.keyNames.push({
+                value:r.keypairsId,
+                text:r.keyName,
+                key:r.privateKey
+              })
+            })
+          }
+        })
+      },
+      downPrivateKey(){
+        this.keyNames.forEach((r)=>{
+          if(r.value==this.model.keypairsId){
+            this.model.keyName = r.text;
+            this.model.privateKey = r.key;
+          }
+        })
+        let keyName =  this.model.keyName;
+        downloadFile(this.url.getPrivateKey,keyName+'.pem',this.model);
       },
     }
   }
