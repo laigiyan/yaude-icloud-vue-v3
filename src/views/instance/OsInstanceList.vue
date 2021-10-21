@@ -462,7 +462,7 @@
         }
         var that = this;
         this.loading = true;
-        deleteAction(that.url.delete, {id: record.id,project:that.record.projectId}).then((res) => {
+        deleteAction(that.url.delete, {id: record.id,projectId:record.projectId}).then((res) => {
           if (res.success) {
             //重新計算分頁問題
             that.reCalculatePage(1)
