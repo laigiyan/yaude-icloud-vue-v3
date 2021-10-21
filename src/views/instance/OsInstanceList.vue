@@ -136,7 +136,7 @@
                 <a @click="handleSeparateVolume(record)">分離卷</a>
               </a-menu-item>
               <a-menu-item>
-                  <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record)">
                   <a>刪除</a>
                    </a-popconfirm>
               </a-menu-item>
@@ -417,7 +417,7 @@
       },
       handleRouter(record){
         console.log('handleRoute  '+record)
-        this.$router.push({name: 'instance-OsInstanceDetail',params:{id:record.id}})
+        this.$router.push({name: 'instance-OsInstanceDetail',params:{id:record.id,projectId:record.projectId}})
       },
       handleShowConsole(){
         if (this.selectionRows.length != 1){
@@ -455,14 +455,14 @@
         });
 
       },
-      handleDelete: function (id) {
+      handleDelete: function (record) {
         if(!this.url.delete){
           this.$message.error("請設置url.delete屬性!")
           return
         }
         var that = this;
         this.loading = true;
-        deleteAction(that.url.delete, {id: id}).then((res) => {
+        deleteAction(that.url.delete, {id: record.id,project:that.record.projectId}).then((res) => {
           if (res.success) {
             //重新計算分頁問題
             that.reCalculatePage(1)

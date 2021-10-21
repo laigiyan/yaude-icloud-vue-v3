@@ -41,7 +41,7 @@
         this.id = id
         let that = this;
         if(instanceID){
-          getAction("/openstack/osInstance/getConsoleUrl", {instanceID:instanceID }).then((res) => {
+          getAction("/openstack/osInstance/getConsoleUrl", {instanceID:instanceID,projectId:that.dataSource.projectId }).then((res) => {
             if (res.success) {
               console.log(res.result)
               url =res.result;

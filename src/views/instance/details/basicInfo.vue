@@ -82,7 +82,7 @@
         }
         this.loading = true;
         var that = this;
-        getAction(this.url.list, { id:id }).then((res) => {
+        getAction(this.url.list, { id:id,projectId:this.dataSource.projectId }).then((res) => {
           debugger;
           if (res.success) {
             debugger;
