@@ -67,9 +67,9 @@
         validatorRules: {
         },
         url: {
-          add: "/system/sysTranslate/add",
-          edit: "/system/sysTranslate/edit",
-          queryById: "/system/sysTranslate/queryById"
+          add: "/sys/sysTranslate/add",
+          edit: "/sys/sysTranslate/edit",
+          queryById: "/sys/sysTranslate/queryById"
         }
       }
     },
@@ -106,6 +106,7 @@
               httpurl+=this.url.edit;
                method = 'put';
             }
+            debugger
             httpAction(httpurl,this.model,method).then((res)=>{
               if(res.success){
                 that.$message.success(res.message);
