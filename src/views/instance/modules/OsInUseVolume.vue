@@ -6,18 +6,18 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form"  :label-col="labelCol" :wrapper-col="wrapperCol"  :model="model" :rules="validatorRules">
         <a-form-model-item label="卷" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="inUseVolumeId" >
-          <a-select v-model="model.inUseVolumeId"  placeholder="请选择卷">
+          <a-select v-model="model.inUseVolumeId"  placeholder="請選擇卷">
             <a-select-option v-for="volume in inUseVolumes":value="volume.value"  >{{volume.text}}</a-select-option>
           </a-select>
 
         </a-form-model-item>
 
-        <a-form-model-item label="説明"  hasFeedback>
-          <span>从正在运行的实例上分离卷</span>
+        <a-form-model-item label="說明"  hasFeedback>
+          <span>從正在運行的實例上分離卷</span>
         </a-form-model-item>
 
       </a-form-model>
@@ -51,7 +51,7 @@
         form: this.$form.createForm(this),
         validatorRules:{
           inUseVolumeId: [
-            { required: true, message: '请选择卷!' },
+            { required: true, message: '請選擇卷!' },
           ],
         },
         url: {
@@ -80,7 +80,7 @@
       },
       handleOk () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -101,7 +101,7 @@
       handleCancel () {
         this.close()
       },
-      //获取可以连接的卷
+      //獲取可以連接的卷
       getInUseVolumes(record){
         getAction(this.url.getInUseVolumes,record).then((res)=>{
           if(res.success){

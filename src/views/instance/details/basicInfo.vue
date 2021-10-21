@@ -21,7 +21,7 @@
       </a-col>
       <a-col :span="12">
         <a-card title="配置信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
-          <p>内存: {{ serverDetail.ramText }}</p>
+          <p>內存: {{ serverDetail.ramText }}</p>
           <p>磁盤: {{ serverDetail.diskText }}</p>
           <p>CPU: {{ serverDetail.cpu }}</p>
           <p></p>
@@ -55,9 +55,9 @@
     },
     data () {
       return {
-        description: '实例基本信息',
+        description: '實例基本信息',
         serverDetail:{},
-        // 表头
+        // 表頭
         url: {
           list: "/openstack/osInstance/getServerDetailById",
 
@@ -77,7 +77,7 @@
     methods: {
       loadServerDetail(id) {
         if(!this.url.list){
-          this.$message.error("请设置url.list属性!")
+          this.$message.error("請設置url.list屬性!")
           return
         }
         this.loading = true;

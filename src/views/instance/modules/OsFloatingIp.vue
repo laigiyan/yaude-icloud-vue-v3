@@ -6,17 +6,17 @@
     :confirmLoading="confirmLoading"
     @ok="handleOk"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form"  :label-col="labelCol" :wrapper-col="wrapperCol"  :model="model" :rules="validatorRules">
         <a-form-model-item label="浮動IP" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="floatingIpId" >
-          <a-select v-model="model.floatingIpId"  placeholder="请选择浮動IP">
+          <a-select v-model="model.floatingIpId"  placeholder="請選擇浮動IP">
             <a-select-option v-for="fl in floatingIps":value="fl.value"  >{{fl.text}}</a-select-option>
           </a-select>
 
         </a-form-model-item>
 
-        <a-form-model-item label="説明"  hasFeedback>
+        <a-form-model-item label="說明"  hasFeedback>
           <span>{{ explain }}</span>
         </a-form-model-item>
 
@@ -61,7 +61,7 @@
           getFloatingIpById:"/openstack/osInstance/getFloatingIpById",
         },
         floatingIps:[],
-        explain:'请为选中的实例选择要绑定的IP地址。'
+        explain:'請為選中的實例選擇要綁定的IP地址。'
       }
     },
     created () {
@@ -74,10 +74,10 @@
       edit (record) {
         if(record.floatingIpStatus=='DOWN'){
           this.title = "綁定浮動IP";
-          this.explain = '请为选中的实例选择要绑定的IP地址';
+          this.explain = '請為選中的實例選擇要綁定的IP地址';
         }else if(record.floatingIpStatus=='ACTIVE'){
           this.title = "解除浮動IP的綁定";
-          this.explain = '选择从实例上解除关联的浮动 IP';
+          this.explain = '選擇從實例上解除關聯的浮動 IP';
         }
         this.getFloatingIps(record);
         this.model = Object.assign({}, record);
@@ -90,7 +90,7 @@
       },
       handleOk () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -117,7 +117,7 @@
       handleCancel () {
         this.close()
       },
-      //获取浮动IP
+      //獲取浮動IP
       getFloatingIps(record){
         this.floatingIps = [];
 

@@ -7,7 +7,7 @@
     @ok="handleOk"
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
     <os-instance-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></os-instance-form>
   </j-modal>
 </template>

@@ -1,25 +1,25 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="實例名稱">
-              <a-input placeholder="请输入實例名稱" v-model="queryParam.instanceName"></a-input>
+              <a-input placeholder="請輸入實例名稱" v-model="queryParam.instanceName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="鏡像名稱">
-              <a-input placeholder="请输入鏡像名稱" v-model="queryParam.imgName"></a-input>
+              <a-input placeholder="請輸入鏡像名稱" v-model="queryParam.imgName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
+                {{ toggleSearchStatus ? '收起' : '展開' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
               </a>
             </span>
@@ -27,38 +27,38 @@
         </a-row>
       </a-form>
     </div>
-    <!-- 查询区域-END -->
+    <!-- 查詢區域-END -->
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleApply" type="primary" icon="plus">申請</a-button>
       <a-button type="primary"  @click="handlePowerOn" >開機</a-button>
       <a-button type="primary"  @click="handleShutDown" >關機</a-button>
-      <a-button type="primary"  @click="handleReboot" >重啓</a-button>
+      <a-button type="primary"  @click="handleReboot" >重啟</a-button>
       <a-button type="primary"  @click="handleShowConsole" >控制臺</a-button>
       <a-button type="primary"  @click="searchQuery" >刷新</a-button>
 
 
 
 <!--      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>-->
-<!--      <a-button type="primary" icon="download" @click="handleExportXls('申請明細檔')">导出</a-button>-->
+<!--      <a-button type="primary" icon="download" @click="handleExportXls('申請明細檔')">導出</a-button>-->
 <!--      <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">-->
-<!--        <a-button type="primary" icon="import">导入</a-button>-->
+<!--        <a-button type="primary" icon="import">導入</a-button>-->
 <!--      </a-upload>-->
-      <!-- 高级查询区域 -->
+      <!-- 高級查詢區域 -->
 <!--      <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>-->
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
+          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>刪除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -80,11 +80,11 @@
           <div v-html="text"></div>
         </template>
         <template slot="imgSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无图片</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無圖片</span>
           <img v-else :src="getImgView(text)" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
         </template>
         <template slot="fileSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無文件</span>
           <a-button
             v-else
             :ghost="true"
@@ -92,7 +92,7 @@
             icon="download"
             size="small"
             @click="downloadFile(text)">
-            下载
+            下載
           </a-button>
         </template>
 
@@ -101,7 +101,7 @@
         </span>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
@@ -123,10 +123,10 @@
                 <a @click="handleShowConsole(record)">控制臺</a>
               </a-menu-item>
               <a-menu-item>
-                <a @click="handleRebootBySOFT(record)">軟重啓實例</a>
+                <a @click="handleRebootBySOFT(record)">軟重啟實例</a>
               </a-menu-item>
               <a-menu-item>
-                <a @click="handleRebootByHARD(record)">硬重啓實例</a>
+                <a @click="handleRebootByHARD(record)">硬重啟實例</a>
               </a-menu-item>
 
               <a-menu-item>
@@ -136,18 +136,18 @@
                 <a @click="handleSeparateVolume(record)">分離卷</a>
               </a-menu-item>
               <a-menu-item>
-                  <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                  <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                    </a-popconfirm>
               </a-menu-item>
             </a-menu>
 <!--            <a-menu slot="overlay">-->
 <!--              <a-menu-item>-->
-<!--                <a @click="handleDetail(record)">详情</a>-->
+<!--                <a @click="handleDetail(record)">詳情</a>-->
 <!--              </a-menu-item>-->
 <!--              <a-menu-item>-->
-<!--                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">-->
-<!--                  <a>删除</a>-->
+<!--                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">-->
+<!--                  <a>刪除</a>-->
 <!--                </a-popconfirm>-->
 <!--              </a-menu-item>-->
 <!--            </a-menu>-->
@@ -187,8 +187,8 @@
     },
     data () {
       return {
-        description: '申請明細檔管理页面',
-        // 表头
+        description: '申請明細檔管理頁面',
+        // 表頭
         columns: [
           {
             title: '#',
@@ -303,7 +303,7 @@
 
         let that = this;
         this.$confirm({
-          title: '确定開啓'+this.selectionRows[0].instanceName+'吗?',
+          title: '確定開啟'+this.selectionRows[0].instanceName+'嗎?',
           //content: 'When clicked the OK button, this dialog will be closed after 1 second',
           onOk() {
             that.powerOn();
@@ -336,7 +336,7 @@
 
         let that = this;
         this.$confirm({
-          title: '确定關閉'+this.selectionRows[0].instanceName+'吗?',
+          title: '確定關閉'+this.selectionRows[0].instanceName+'嗎?',
           //content: 'When clicked the OK button, this dialog will be closed after 1 second',
           onOk() {
             that.shutDown();
@@ -368,7 +368,7 @@
 
         let that = this;
         this.$confirm({
-          title: '确定重啓'+this.selectionRows[0].instanceName+'吗?',
+          title: '確定重啟'+this.selectionRows[0].instanceName+'嗎?',
           //content: 'When clicked the OK button, this dialog will be closed after 1 second',
           onOk() {
             that.reboot(that.selectionRows[0],that.url.rebootByHARDUrl);
@@ -391,11 +391,11 @@
           this.loading = false;
         });
       },
-      //軟重啓實例
+      //軟重啟實例
       handleRebootBySOFT(record){
         let that = this;
         this.$confirm({
-          title: '确定軟重啓'+record.instanceName+'吗?',
+          title: '確定軟重啟'+record.instanceName+'嗎?',
           //content: 'When clicked the OK button, this dialog will be closed after 1 second',
           onOk() {
             that.reboot(record,that.url.rebootBySOFTUrl);
@@ -403,11 +403,11 @@
           onCancel() {},
         });
       },
-      //硬重啓實例
+      //硬重啟實例
       handleRebootByHARD(record){
         let that = this;
         this.$confirm({
-          title: '确定硬重啓'+record.instanceName+'吗?',
+          title: '確定硬重啟'+record.instanceName+'嗎?',
           //content: 'When clicked the OK button, this dialog will be closed after 1 second',
           onOk() {
             that.reboot(record,that.url.rebootByHARDUrl);
@@ -430,7 +430,7 @@
       handleCreateSnapshot(record){
         let that = this;
         this.$confirm({
-          title: '确定'+record.instanceName+'創建快照吗?',
+          title: '確定'+record.instanceName+'創建快照嗎?',
           //content: 'When clicked the OK button, this dialog will be closed after 1 second',
           onOk() {
             that.createSnapshot(record);
@@ -457,14 +457,14 @@
       },
       handleDelete: function (id) {
         if(!this.url.delete){
-          this.$message.error("请设置url.delete属性!")
+          this.$message.error("請設置url.delete屬性!")
           return
         }
         var that = this;
         this.loading = true;
         deleteAction(that.url.delete, {id: id}).then((res) => {
           if (res.success) {
-            //重新计算分页问题
+            //重新計算分頁問題
             that.reCalculatePage(1)
             that.$message.success(res.message);
             that.loadData();
