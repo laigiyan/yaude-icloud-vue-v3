@@ -100,7 +100,7 @@
     },
     data () {
       return {
-        description: '安全組規則細檔管理頁面',
+        description: '安全群組規則細檔管理頁面',
         // 表頭
         columns: [
           {
@@ -119,27 +119,27 @@
             dataIndex: 'direction',
           },
           {
-            title:'網絡類型',
+            title:'網路協定類型',
             align:"center",
             dataIndex: 'etherType',
           },
           {
-            title:'IP協議',
+            title:'IP協定',
             align:"center",
             dataIndex: 'protocol'
           },
           {
-            title:'端口最小值',
+            title:'埠口範圍',
             align:"center",
             dataIndex: 'portRange',
           },
           {
-            title:'遠程IP前綴',
+            title:'遙控IP前綴',
             align:"center",
             dataIndex: 'remoteIpPrefix'
           },
           {
-            title:'遠程安全組ID',
+            title:'遙控安全群組',
             align:"center",
             dataIndex: 'remoteGroupId'
           },
@@ -175,9 +175,9 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'projectName',text:'項目名稱',dictCode:''})
+        fieldList.push({type:'string',value:'projectName',text:'專案名稱',dictCode:''})
         fieldList.push({type:'string',value:'description',text:'描述',dictCode:''})
-        fieldList.push({type:'string',value:'projectId',text:'項目ID',dictCode:''})
+        fieldList.push({type:'string',value:'projectId',text:'專案ID',dictCode:''})
         fieldList.push({type:'string',value:'domainName',text:'域名',dictCode:''})
         fieldList.push({type:'string',value:'enbled',text:'啟用',dictCode:''})
         this.superFieldList = fieldList
@@ -194,7 +194,7 @@
           this.$refs.modalForm.title = "新增";
           this.$refs.modalForm.disableSubmit = false;
         }else{
-          this.$message.error("請選擇一個安全組！")
+          this.$message.error("請選擇一個安全群組！")
         }
 
       },

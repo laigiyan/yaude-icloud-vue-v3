@@ -33,7 +33,7 @@
           <h4>運行中的實例：</h4>
           <h4>啟用的內存：</h4>
           <h4>週期內VCPU-小時數：</h4>
-          <h4>週期內磁盤GB-小時數：</h4>
+          <h4>週期內硬碟GB-小時數：</h4>
           <h4>此週期內的 RAM-小時數：</h4>
         </a-col>
         <a-col :span="2">
@@ -205,12 +205,12 @@
         fieldList.push({type:'string',value:'options',text:'申請狀態',dictCode:''})
         fieldList.push({type:'string',value:'status',text:'狀態',dictCode:''})
         fieldList.push({type:'string',value:'represent',text:'描述',dictCode:''})
-        fieldList.push({type:'string',value:'imgId',text:'鏡像id',dictCode:''})
+        fieldList.push({type:'string',value:'imgId',text:'映像檔id',dictCode:''})
         fieldList.push({type:'string',value:'isDelete',text:'刪除實例時是否刪除卷',dictCode:''})
-        fieldList.push({type:'string',value:'flavorId',text:'實例類型id',dictCode:''})
+        fieldList.push({type:'string',value:'flavorId',text:'虛擬硬體樣板id',dictCode:''})
         fieldList.push({type:'string',value:'runStatus',text:'運行狀態',dictCode:''})
-        fieldList.push({type:'string',value:'securityName',text:'安全組',dictCode:''})
-        fieldList.push({type:'string',value:'networkId',text:'網絡',dictCode:''})
+        fieldList.push({type:'string',value:'securityName',text:'安全群組',dictCode:''})
+        fieldList.push({type:'string',value:'networkId',text:'網路',dictCode:''})
         this.superFieldList = fieldList
       },
       loadData(arg) {

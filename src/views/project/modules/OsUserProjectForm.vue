@@ -9,8 +9,8 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="項目ID" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
-              <a-input v-model="model.projectId" placeholder="請輸入項目ID" disabled ></a-input>
+            <a-form-model-item label="專案ID" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
+              <a-input v-model="model.projectId" placeholder="請輸入專案ID" disabled ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -69,7 +69,7 @@
               { required: true, message: '請輸入用戶ID!'},
            ],
            projectId: [
-              { required: true, message: '請輸入項目ID!'},
+              { required: true, message: '請輸入專案ID!'},
            ],
         },
         url: {
@@ -122,7 +122,7 @@
               that.confirmLoading = false;
             })
           }
-         
+
         })
       },
     }

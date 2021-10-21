@@ -5,15 +5,15 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24" >
-            <a-form-model-item label="項目名稱"  >
-              <a-select v-model="queryParam.projectId"  placeholder="請選擇項目" >
+            <a-form-model-item label="專案名稱"  >
+              <a-select v-model="queryParam.projectId"  placeholder="請選擇專案" >
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="安全組名稱">
-              <a-input placeholder="請輸入安全組名稱" v-model="queryParam.name"></a-input>
+            <a-form-item label="安全群組名稱">
+              <a-input placeholder="請輸入安全群組名稱" v-model="queryParam.name"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -102,7 +102,7 @@
     </div>
 
     <a-tabs defaultActiveKey="1">
-      <a-tab-pane tab="安全組規則" key="1">
+      <a-tab-pane tab="安全群組規則" key="1">
         <security-group-rule-list :remote-group-ids="remoteGroupIds" ref="securityGroupRuleList"></security-group-rule-list>
       </a-tab-pane>
     </a-tabs>
@@ -143,12 +143,12 @@
             }
           },
           {
-            title:'安全組名稱',
+            title:'安全群組名稱',
             align:"center",
             dataIndex: 'name',
           },
           {
-            title:'安全組ID',
+            title:'安全群組ID',
             align:"center",
             dataIndex: 'securityGroupId'
           },
@@ -197,9 +197,9 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'projectName',text:'項目名稱',dictCode:''})
+        fieldList.push({type:'string',value:'projectName',text:'專案名稱',dictCode:''})
         fieldList.push({type:'string',value:'description',text:'描述',dictCode:''})
-        fieldList.push({type:'string',value:'projectId',text:'項目ID',dictCode:''})
+        fieldList.push({type:'string',value:'projectId',text:'專案ID',dictCode:''})
         fieldList.push({type:'string',value:'domainName',text:'域名',dictCode:''})
         fieldList.push({type:'string',value:'enbled',text:'啟用',dictCode:''})
         this.superFieldList = fieldList
@@ -210,7 +210,7 @@
           this.$refs.modalForm.title = "新增";
           this.$refs.modalForm.disableSubmit = false;
         }else{
-          this.$message.error("請選擇一個項目！")
+          this.$message.error("請選擇一個專案！")
         }
 
       },

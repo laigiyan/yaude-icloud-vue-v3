@@ -10,8 +10,8 @@
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="鏡像名稱">
-              <a-input placeholder="請輸入鏡像名稱" v-model="queryParam.imgName"></a-input>
+            <a-form-item label="映像檔名稱">
+              <a-input placeholder="請輸入映像檔名稱" v-model="queryParam.imgName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -212,12 +212,12 @@
             dataIndex: 'status'
           },
           {
-            title:'鏡像名稱',
+            title:'映像檔名稱',
             align:"center",
             dataIndex: 'imgName'
           },
           {
-            title:'實例類型',
+            title:'虛擬硬體樣板',
             align:"center",
             dataIndex: 'flavorName'
           },
@@ -227,12 +227,12 @@
             dataIndex: 'configureInfo'
           },
           {
-            title:'IP地址',
+            title:'IP 位址',
             align:"center",
             dataIndex: 'ipAddress'
           },
           {
-            title:'所屬項目',
+            title:'所屬專案',
             align:"center",
             dataIndex: 'projectName'
           },
@@ -284,12 +284,12 @@
         fieldList.push({type:'string',value:'options',text:'申請狀態',dictCode:''})
         fieldList.push({type:'string',value:'status',text:'狀態',dictCode:''})
         fieldList.push({type:'string',value:'represent',text:'描述',dictCode:''})
-        fieldList.push({type:'string',value:'imgId',text:'鏡像id',dictCode:''})
+        fieldList.push({type:'string',value:'imgId',text:'映像檔id',dictCode:''})
         fieldList.push({type:'string',value:'isDelete',text:'刪除實例時是否刪除卷',dictCode:''})
-        fieldList.push({type:'string',value:'flavorId',text:'實例類型id',dictCode:''})
+        fieldList.push({type:'string',value:'flavorId',text:'虛擬硬體樣板id',dictCode:''})
         fieldList.push({type:'string',value:'runStatus',text:'運行狀態',dictCode:''})
-        fieldList.push({type:'string',value:'securityName',text:'安全組',dictCode:''})
-        fieldList.push({type:'string',value:'networkId',text:'網絡',dictCode:''})
+        fieldList.push({type:'string',value:'securityName',text:'安全群組',dictCode:''})
+        fieldList.push({type:'string',value:'networkId',text:'網路',dictCode:''})
         this.superFieldList = fieldList
       },
       handleApply(){

@@ -5,8 +5,8 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="項目名稱">
-              <a-input placeholder="請輸入項目名稱" v-model="queryParam.projectName"></a-input>
+            <a-form-item label="專案名稱">
+              <a-input placeholder="請輸入專案名稱" v-model="queryParam.projectName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -167,7 +167,7 @@
             }
           },
           {
-            title:'項目名稱',
+            title:'專案名稱',
             align:"center",
             dataIndex: 'projectName',
             scopedSlots: { customRender: 'projectName' }
@@ -178,7 +178,7 @@
             dataIndex: 'description'
           },
           {
-            title:'項目ID',
+            title:'專案ID',
             align:"center",
             dataIndex: 'projectId'
           },
@@ -248,9 +248,9 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'projectName',text:'項目名稱',dictCode:''})
+        fieldList.push({type:'string',value:'projectName',text:'專案名稱',dictCode:''})
         fieldList.push({type:'string',value:'description',text:'描述',dictCode:''})
-        fieldList.push({type:'string',value:'projectId',text:'項目ID',dictCode:''})
+        fieldList.push({type:'string',value:'projectId',text:'專案ID',dictCode:''})
         fieldList.push({type:'string',value:'domainName',text:'域名',dictCode:''})
         fieldList.push({type:'string',value:'enbled',text:'啟用',dictCode:''})
         this.superFieldList = fieldList

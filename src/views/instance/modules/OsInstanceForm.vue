@@ -14,9 +14,9 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="鏡像" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
-<!--              <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="請選擇鏡像id" />-->
-              <a-select v-model="model.imgId"  placeholder="請選擇鏡像">
+            <a-form-model-item label="映像檔" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
+<!--              <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="請選擇映像檔id" />-->
+              <a-select v-model="model.imgId"  placeholder="請選擇映像檔">
                 <a-select-option v-for="imgs in imgIds":value="imgs.value">{{imgs.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -27,9 +27,9 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="實例類型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
-<!--              <j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="請選擇實例類型id" />-->
-              <a-select v-model="model.flavorId"  placeholder="請選擇實例類型">
+            <a-form-model-item label="虛擬硬體樣板" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
+<!--              <j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="請選擇虛擬硬體樣板id" />-->
+              <a-select v-model="model.flavorId"  placeholder="請選擇虛擬硬體樣板">
                 <a-select-option v-for="flavors in flavorIds":value="flavors.value">{{flavors.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -40,13 +40,13 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="安全組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
-              <j-dict-select-tag type="list" v-model="model.securityName"  placeholder="請選擇安全組" />
+            <a-form-model-item label="安全群組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
+              <j-dict-select-tag type="list" v-model="model.securityName"  placeholder="請選擇安全群組" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
-              <j-dict-select-tag type="list" v-model="model.networkId"  placeholder="請選擇網絡" />
+            <a-form-model-item label="網路" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
+              <j-dict-select-tag type="list" v-model="model.networkId"  placeholder="請選擇網路" />
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -90,10 +90,10 @@
               { required: true, message: '請輸入實例名稱!'},
            ],
            imgId: [
-              { required: true, message: '請輸入鏡像id!'},
+              { required: true, message: '請輸入映像檔id!'},
            ],
            flavorId: [
-              { required: true, message: '請輸入實例類型id!'},
+              { required: true, message: '請輸入虛擬硬體樣板id!'},
            ],
         },
         imgIds:[],

@@ -4,16 +4,16 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24" >
-            <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
-              <a-select v-model="model.projectId" @change="getAll" placeholder="請選擇項目"  :disabled=editable>
+            <a-form-model-item label="專案名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
+              <a-select v-model="model.projectId" @change="getAll" placeholder="請選擇專案"  :disabled=editable>
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="網絡名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkName">
-            <!--  <a-input v-model="model.networkName" placeholder="請輸入網絡名稱"  ></a-input>-->
-              <a-select v-model="model.networkName"   placeholder="請選擇網絡名稱" :disabled="editable">
+            <a-form-model-item label="網路名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkName">
+            <!--  <a-input v-model="model.networkName" placeholder="請輸入網路名稱"  ></a-input>-->
+              <a-select v-model="model.networkName"   placeholder="請選擇網路名稱" :disabled="editable">
                 <a-select-option v-for="network in networks":value="network.text" >{{network.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -102,7 +102,7 @@
         confirmLoading: false,
         validatorRules: {
           networkName: [
-            { required: true, message: '請選擇網絡名稱!'},
+            { required: true, message: '請選擇網路名稱!'},
           ],
           subnetName: [
             { required: true, message: '請選擇子網!'},
@@ -117,7 +117,7 @@
             { required: true, message: '請輸入結束時間!'},
           ],
           projectId:[
-            { required: true, message: '請選擇項目'},
+            { required: true, message: '請選擇專案'},
           ]
         },
         url: {

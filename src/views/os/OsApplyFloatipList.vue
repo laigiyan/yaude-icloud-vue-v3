@@ -5,8 +5,8 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="網絡名稱">
-              <a-input placeholder="請輸入網絡名稱" v-model="queryParam.networkName"></a-input>
+            <a-form-item label="網路名稱">
+              <a-input placeholder="請輸入網路名稱" v-model="queryParam.networkName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -143,7 +143,7 @@
             }
           },
           {
-            title:'網絡名稱',
+            title:'網路名稱',
             align:"center",
             dataIndex: 'networkName'
           },
@@ -182,7 +182,7 @@
             dataIndex: 'endTime'
           },
           {
-            title:'所屬項目',
+            title:'所屬專案',
             align:"center",
             dataIndex: 'projectName'
           },
@@ -262,7 +262,7 @@
       },
       getSuperFieldList(){
         let fieldList=[];
-        fieldList.push({type:'string',value:'networkName',text:'網絡名稱',dictCode:''})
+        fieldList.push({type:'string',value:'networkName',text:'網路名稱',dictCode:''})
         fieldList.push({type:'string',value:'subnetName',text:'子網名稱',dictCode:''})
         fieldList.push({type:'string',value:'floatIp',text:'浮動ip',dictCode:''})
         fieldList.push({type:'string',value:'options',text:'申請類型',dictCode:''})

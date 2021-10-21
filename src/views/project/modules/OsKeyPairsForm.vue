@@ -11,15 +11,15 @@
             </a-form-model-item>
           </a-col>-->
           <a-col :span="24" >
-            <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
-              <a-select v-model="model.projectId"  @change="getAll" placeholder="請選擇項目" >
+            <a-form-model-item label="專案名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
+              <a-select v-model="model.projectId"  @change="getAll" placeholder="請選擇專案" >
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="秘鑰名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keyName">
-              <a-input v-model="model.keyName" placeholder="請輸入秘鑰名稱"  :disabled="editKey"></a-input>
+            <a-form-model-item label="密鑰對名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keyName">
+              <a-input v-model="model.keyName" placeholder="請輸入密鑰對名稱"  :disabled="editKey"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" v-show="showKey">

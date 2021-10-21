@@ -29,7 +29,7 @@
       <a-button @click="handleAdd" type="primary" icon="plus">申請</a-button>
       <a-button @click="handleSubmit" type="primary" icon="plus">提交</a-button>
       <a-button @click="handleAdjust" type="primary" icon="plus">調整</a-button>
-     <!-- <a-button type="primary" icon="download" @click="handleExportXls('磁盤申請明細檔')">導出</a-button>
+     <!-- <a-button type="primary" icon="download" @click="handleExportXls('硬碟申請明細檔')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">導入</a-button>
       </a-upload>-->
@@ -129,7 +129,7 @@
     },
     data () {
       return {
-        description: '磁盤申請明細檔管理頁面',
+        description: '硬碟申請明細檔管理頁面',
         // 表頭
         columns: [
           {
@@ -193,7 +193,7 @@
             dataIndex: 'bootable_dictText'
           },
           {
-            title:'所屬項目',
+            title:'所屬專案',
             align:"center",
             dataIndex: 'projectName'
           },

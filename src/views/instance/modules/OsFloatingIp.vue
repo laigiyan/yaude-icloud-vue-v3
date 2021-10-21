@@ -61,7 +61,7 @@
           getFloatingIpById:"/openstack/osInstance/getFloatingIpById",
         },
         floatingIps:[],
-        explain:'請為選中的實例選擇要綁定的IP地址。'
+        explain:'請為選中的實例選擇要綁定的IP 位址。'
       }
     },
     created () {
@@ -74,7 +74,7 @@
       edit (record) {
         if(record.floatingIpStatus=='DOWN'){
           this.title = "綁定浮動IP";
-          this.explain = '請為選中的實例選擇要綁定的IP地址';
+          this.explain = '請為選中的實例選擇要綁定的IP 位址';
         }else if(record.floatingIpStatus=='ACTIVE'){
           this.title = "解除浮動IP的綁定";
           this.explain = '選擇從實例上解除關聯的浮動 IP';

@@ -11,8 +11,8 @@
     <a-form ref="form" :model="model"  id="myForm1">
       <a-row>
         <a-col :span="24" >
-          <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
-            <a-select v-model="model.projectName" @change="getNetworkIdsNew" placeholder="請選擇項目"  :disabled="true">
+          <a-form-model-item label="專案名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
+            <a-select v-model="model.projectName" @change="getNetworkIdsNew" placeholder="請選擇專案"  :disabled="true">
               <a-select-option v-for="project in projects":value="project.text"  >{{project.text}}</a-select-option>
             </a-select>
           </a-form-model-item>
@@ -28,8 +28,8 @@
           </a-form-item>
         </a-col>
         <a-col :span="24" >
-          <a-form-item label="鏡像" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
-            <a-select v-model="model.imgId"  placeholder="請選擇鏡像" :disabled="true">
+          <a-form-item label="映像檔" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
+            <a-select v-model="model.imgId"  placeholder="請選擇映像檔" :disabled="true">
               <a-select-option v-for="imgs in imgIds":value="imgs.value" >{{imgs.text}}</a-select-option>
             </a-select>
           </a-form-item>
@@ -40,8 +40,8 @@
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="實例類型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
-            <a-select v-model="model.flavorId"  placeholder="請選擇實例類型" >
+          <a-form-item label="虛擬硬體樣板" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
+            <a-select v-model="model.flavorId"  placeholder="請選擇虛擬硬體樣板" >
               <a-select-option v-for="flavors in flavorIds":value="flavors.value">{{flavors.text}}</a-select-option>
             </a-select>
           </a-form-item>
@@ -57,15 +57,15 @@
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="安全組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
-            <a-select  v-model="model.securityName" placeholder="請選擇安全組" >
+          <a-form-item label="安全群組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
+            <a-select  v-model="model.securityName" placeholder="請選擇安全群組" >
               <a-select-option v-for="securitys in securityNames":value="securitys.text" >{{securitys.text}}</a-select-option>
             </a-select>
           </a-form-item>
         </a-col>
         <a-col :span="24">
-          <a-form-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
-            <a-select  v-model="model.networkId" placeholder="請選擇網絡" :disabled="true">
+          <a-form-item label="網路" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
+            <a-select  v-model="model.networkId" placeholder="請選擇網路" :disabled="true">
               <a-select-option v-for="networks in networkIds":value="networks.value" >{{networks.text}}</a-select-option>
             </a-select>
           </a-form-item>
@@ -116,13 +116,13 @@
             { required: true, message: '請輸入實例名稱!'},
           ],
           imgId: [
-            { required: true, message: '請輸入鏡像id!'},
+            { required: true, message: '請輸入映像檔id!'},
           ],
           flavorId: [
-            { required: true, message: '請輸入實例類型id!'},
+            { required: true, message: '請輸入虛擬硬體樣板id!'},
           ],
           networkId: [
-            { required: true, message: '請選擇網絡'},
+            { required: true, message: '請選擇網路'},
           ],
           startTime: [
             { required: true, message: '請輸入開始時間!'},

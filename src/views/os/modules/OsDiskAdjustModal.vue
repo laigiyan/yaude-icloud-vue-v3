@@ -11,8 +11,8 @@
     <a-form ref="form" :model="model" >
       <a-row>
         <a-col :span="24" >
-          <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
-            <a-select v-model="model.projectName" placeholder="請選擇項目"  :disabled="true">
+          <a-form-model-item label="專案名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
+            <a-select v-model="model.projectName" placeholder="請選擇專案"  :disabled="true">
               <a-select-option v-for="project in projects":value="project.text"  >{{project.text}}</a-select-option>
             </a-select>
           </a-form-model-item>
@@ -168,7 +168,7 @@
         const that = this;
         that.sourcetype = [];
         that.showSource=false;
-        if(source=="1"){//鏡像
+        if(source=="1"){//映像檔
           that.showSource=true
           let method = "post";
           let httpurl = this.url.getImg;

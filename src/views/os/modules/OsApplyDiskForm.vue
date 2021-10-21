@@ -4,8 +4,8 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24" >
-            <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
-              <a-select v-model="model.projectId" @change="getAll" placeholder="請選擇項目"  :disabled=editable>
+            <a-form-model-item label="專案名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
+              <a-select v-model="model.projectId" @change="getAll" placeholder="請選擇專案"  :disabled=editable>
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -117,7 +117,7 @@
             { required: true, message: '請輸入結束時間!'},
           ],
           projectId:[
-            { required: true, message: '請選擇項目!'},
+            { required: true, message: '請選擇專案!'},
           ]
 
         },
@@ -233,7 +233,7 @@
         const that = this;
         that.sourcetype = [];
         that.showSource=false;
-        if(source=="1"){//鏡像
+        if(source=="1"){//映像檔
           that.showSource=true
           let method = "post";
           let httpurl = this.url.getImg;

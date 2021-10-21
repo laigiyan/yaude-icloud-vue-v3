@@ -73,7 +73,7 @@
         }
         return data
       },
-      // 加載項目概況數據
+      // 加載專案概況數據
       loadProjectLimits(record) {
         this.instanceUsage = [];
         this.vcpuUsage = [];

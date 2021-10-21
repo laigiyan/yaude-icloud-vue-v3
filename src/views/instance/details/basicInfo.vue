@@ -5,14 +5,14 @@
         <a-card title="實例信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
           <p>ID: {{ serverDetail.id }}</p>
           <p>實例名稱: {{ serverDetail.instanceName }}</p>
-          <p>項目名稱: {{ serverDetail.projectName }}</p>
+          <p>專案名稱: {{ serverDetail.projectName }}</p>
           <p>狀態: {{ serverDetail.status }}</p>
           <p></p>
         </a-card>
       </a-col>
       <a-col :span="12">
-        <a-card title="網絡信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
-          <p>IP地址: {{ serverDetail.ipAddress }}</p>
+        <a-card title="網路信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
+          <p>IP 位址: {{ serverDetail.ipAddress }}</p>
           <p></p>
           <p></p>
           <p></p>
@@ -22,14 +22,14 @@
       <a-col :span="12">
         <a-card title="配置信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
           <p>內存: {{ serverDetail.ramText }}</p>
-          <p>磁盤: {{ serverDetail.diskText }}</p>
+          <p>硬碟: {{ serverDetail.diskText }}</p>
           <p>CPU: {{ serverDetail.cpu }}</p>
           <p></p>
           <p></p>
         </a-card>
       </a-col>
       <a-col :span="12">
-        <a-card title="鏡像信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
+        <a-card title="映像檔信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
           <p>id: {{ serverDetail.imgId }}</p>
           <p>名稱: {{ serverDetail.imgName }}</p>
           <p></p>

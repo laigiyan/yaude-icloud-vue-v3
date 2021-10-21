@@ -32,7 +32,7 @@
     <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('用戶 項目關聯表')">導出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('用戶 專案關聯表')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">導入</a-button>
       </a-upload>
@@ -128,7 +128,7 @@
     },
     data () {
       return {
-        description: '用戶 項目關聯表管理頁面',
+        description: '用戶 專案關聯表管理頁面',
         // 表頭
         columns: [
           {
@@ -148,7 +148,7 @@
             dataIndex: 'userId'
           },
           {
-            title:'項目ID',
+            title:'專案ID',
             align:"center",
             sorter: true,
             dataIndex: 'projectId'
@@ -209,7 +209,7 @@
       getSuperFieldList(){
         let fieldList=[];
         fieldList.push({type:'string',value:'userId',text:'用戶ID',dictCode:''})
-        fieldList.push({type:'string',value:'projectId',text:'項目ID',dictCode:''})
+        fieldList.push({type:'string',value:'projectId',text:'專案ID',dictCode:''})
         fieldList.push({type:'string',value:'domainId',text:'域ID',dictCode:''})
         fieldList.push({type:'string',value:'domainName',text:'域名',dictCode:''})
         fieldList.push({type:'string',value:'hostIp',text:'openstack主機ip',dictCode:''})
