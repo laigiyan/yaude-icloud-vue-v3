@@ -161,15 +161,16 @@
             align:"center",
             dataIndex: 'keyName'
           },
-          {
-            title:'用户名称',
-            align:"center",
-            dataIndex: 'userName'
-          },
+
           {
             title:'项目名称',
             align:"center",
             dataIndex: 'projectName'
+          },
+          {
+            title:'指纹',
+            align:"center",
+            dataIndex: 'fingerprint'
           },
           {
             title: '操作',

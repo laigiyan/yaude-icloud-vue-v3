@@ -3,16 +3,16 @@
     <j-form-container :disabled="formDisabled">
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
-          <a-col :span="24">
+          <!--<a-col :span="24">
             <a-form-model-item label="用户名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="userId">
               <a-select v-model="model.userId" @change="getAll" placeholder="请选择用户" >
                 <a-select-option v-for="user in users":value="user.value"  >{{user.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
-          </a-col>
+          </a-col>-->
           <a-col :span="24" >
             <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
-              <a-select v-model="model.projectId"  placeholder="请选择項目" >
+              <a-select v-model="model.projectId"  @change="getAll" placeholder="请选择項目" >
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
@@ -78,9 +78,7 @@
           add: "/openstack/osKeyPairs/add",
           edit: "/openstack/osKeyPairs/edit",
           queryById: "/openstack/osKeyPairs/queryById",
-          getUser: "/openstack/osKeyPairs/getUser",
           getProject: "/openstack/osKeyPairs/getProject",
-          getKeyType: "/openstack/osKeyPairs/getKeyType",
         }
       }
     },
@@ -92,7 +90,7 @@
     created () {
        //备份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
-    this.getUser();
+    this.getProjects();
     },
     methods: {
       add () {
@@ -108,11 +106,6 @@
       },
       submitForm () {
         const that = this;
-        this.users.forEach((r)=>{
-          if(r.value==that.model.userId){
-            that.model.userName = r.text;
-          }
-        })
         this.projects.forEach((r)=>{
           if(r.value==that.model.projectId){
             that.model.projectName = r.text;
@@ -145,7 +138,7 @@
 
         })
       },
-      getAll(){
+    /*  getAll(){
         this.getProjects();
       },
       getUser(){
@@ -163,7 +156,7 @@
             })
           }
         })
-      },
+      },*/
       getProjects(){
         let method = "post";
         let httpurl = this.url.getProject;
