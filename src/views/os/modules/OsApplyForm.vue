@@ -70,11 +70,11 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="秘鑰" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keypairsId">
-              <a-select v-model="model.keypairsId"  placeholder="請選擇秘鑰" style="width: 60%" :disabled=editable >
+            <a-form-model-item label="密鑰" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keypairsId">
+              <a-select v-model="model.keypairsId"  placeholder="請選擇密鑰" style="width: 60%" :disabled=editable >
                 <a-select-option v-for="key in keyNames":value="key.value" >{{key.text}}</a-select-option>
               </a-select>
-              <a-button @click="downPrivateKey" type="primary">下載秘鑰</a-button>
+              <a-button @click="downPrivateKey" type="primary">下載密鑰</a-button>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" v-show="showoption">
