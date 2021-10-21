@@ -4,14 +4,14 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="num">
-              <a-input-number v-model="model.num" placeholder="请输入编号" style="width: 100%" />
+            <a-form-model-item label="編號" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="num">
+              <a-input-number v-model="model.num" placeholder="請輸入編號" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="文本" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="text">
-              <a-input v-model="model.text" placeholder="请输入文本"  ></a-input>
-              <a-button @click="handleTranslate"  type="primary" icon="">多语言</a-button>
+              <a-input v-model="model.text" placeholder="請輸入文本"  ></a-input>
+              <a-button @click="handleTranslate"  type="primary" icon="">多語言</a-button>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -34,7 +34,7 @@
       SysTranslateModal
     },
     props: {
-      //表单禁用
+      //表單禁用
       disabled: {
         type: Boolean,
         default: false,
@@ -56,7 +56,7 @@
         confirmLoading: false,
         validatorRules: {
            num: [
-              { required: true, message: '请输入编号!'},
+              { required: true, message: '請輸入編號!'},
            ],
         },
         url: {
@@ -72,7 +72,7 @@
       },
     },
     created () {
-       //备份model原始值
+       //備份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
     },
     methods: {
@@ -85,7 +85,7 @@
       },
       submitForm () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -121,11 +121,11 @@
         getAction("/system/sysTranslate/queryByParams", params).then((res) => {
           if (res.success) {
             this.$refs.modalForm.edit(res.result);
-            this.$refs.modalForm.title = "修改多语言配置";
+            this.$refs.modalForm.title = "修改多語言配置";
           }
           else {
             this.$refs.modalForm.edit(params);
-            this.$refs.modalForm.title = "新增多语言配置";
+            this.$refs.modalForm.title = "新增多語言配置";
           }
         })
       },
