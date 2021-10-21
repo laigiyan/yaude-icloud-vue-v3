@@ -4,28 +4,28 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="关联表名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="relateTable">
-              <a-input v-model="model.relateTable" placeholder="请输入关联表名称"  ></a-input>
+            <a-form-model-item label="關聯表名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="relateTable">
+              <a-input v-model="model.relateTable" placeholder="請輸入關聯表名稱"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="关联主键id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="relateId">
-              <a-input v-model="model.relateId" placeholder="请输入关联主键id"  ></a-input>
+            <a-form-model-item label="關聯主鍵id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="relateId">
+              <a-input v-model="model.relateId" placeholder="請輸入關聯主鍵id"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="中文" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="chinese">
-              <a-input v-model="model.chinese" placeholder="请输入中文"  ></a-input>
+              <a-input v-model="model.chinese" placeholder="請輸入中文"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="繁体中文" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="taiwan">
-              <a-input v-model="model.taiwan" placeholder="请输入繁体中文"  ></a-input>
+            <a-form-model-item label="繁體中文" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="taiwan">
+              <a-input v-model="model.taiwan" placeholder="請輸入繁體中文"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="英语" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="english">
-              <a-input v-model="model.english" placeholder="请输入英语"  ></a-input>
+            <a-form-model-item label="英語" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="english">
+              <a-input v-model="model.english" placeholder="請輸入英語"  ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -44,7 +44,7 @@
     components: {
     },
     props: {
-      //表单禁用
+      //表單禁用
       disabled: {
         type: Boolean,
         default: false,
@@ -79,7 +79,7 @@
       },
     },
     created () {
-       //备份model原始值
+       //備份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
     },
     methods: {
@@ -93,7 +93,7 @@
       },
       submitForm () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;

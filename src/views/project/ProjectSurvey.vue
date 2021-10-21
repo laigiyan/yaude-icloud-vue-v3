@@ -1,20 +1,20 @@
 <template>
   <a-card :bordered="false">
     <a-tabs defaultActiveKey="1">
-      <!-- 饼图 -->
-      <a-tab-pane tab="计算" key="1">
+      <!-- 餅圖 -->
+      <a-tab-pane tab="計算" key="1">
         <a-row :gutter="24">
           <a-col :span="4" >
-            <pie title="'饼图'" :dataSource="instanceUsage" :height="height" />
-            <h4 :style="{textAlign:'center'}">实例:   {{ instanceUsageText }}</h4>
+            <pie title="'餅圖'" :dataSource="instanceUsage" :height="height" />
+            <h4 :style="{textAlign:'center'}">實例:   {{ instanceUsageText }}</h4>
           </a-col>
           <a-col :span="4">
-            <pie title="饼图" :dataSource="vcpuUsage" :height="height"/>
+            <pie title="餅圖" :dataSource="vcpuUsage" :height="height"/>
             <h4 :style="{textAlign:'center'}">VCPU:   {{ vcpuUsageText }}</h4>
           </a-col>
           <a-col :span="4">
-            <pie title="饼图" :dataSource="ramUsage" :height="height"/>
-            <h4 :style="{textAlign:'center'}">内存:   {{ ramUsageText }}</h4>
+            <pie title="餅圖" :dataSource="ramUsage" :height="height"/>
+            <h4 :style="{textAlign:'center'}">內存:   {{ ramUsageText }}</h4>
           </a-col>
         </a-row>
         <a-row>

@@ -6,80 +6,80 @@
 
           <a-col :span="24" >
             <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
-              <a-select v-model="model.projectId" @change="getAll" placeholder="请选择項目"  :disabled=editable>
+              <a-select v-model="model.projectId" @change="getAll" placeholder="請選擇項目"  :disabled=editable>
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="實例名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="instanceName">
-              <a-input v-model="model.instanceName" placeholder="请输入實例名稱"  :disabled=editable></a-input>
+              <a-input v-model="model.instanceName" placeholder="請輸入實例名稱"  :disabled=editable></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
-              <a-input v-model="model.represent" placeholder="请输入描述"  :disabled=editable></a-input>
+              <a-input v-model="model.represent" placeholder="請輸入描述"  :disabled=editable></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" >
             <a-form-model-item label="鏡像" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
-             <!-- <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="请选择鏡像id" />-->
-              <a-select v-model="model.imgId"  placeholder="请选择鏡像" :disabled=editable>
+             <!-- <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="請選擇鏡像id" />-->
+              <a-select v-model="model.imgId"  placeholder="請選擇鏡像" :disabled=editable>
                 <a-select-option v-for="imgs in imgIds":value="imgs.value" >{{imgs.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="刪除實例時是否刪除卷" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="isDelete">
-              <j-dict-select-tag type="radioButton" v-model="model.isDelete" dictCode="is_delete" :disabled=editable placeholder="请选择刪除實例時是否刪除卷" />
+              <j-dict-select-tag type="radioButton" v-model="model.isDelete" dictCode="is_delete" :disabled=editable placeholder="請選擇刪除實例時是否刪除卷" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="實例類型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
-              <!--<j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />-->
-              <a-select v-model="model.flavorId"  placeholder="请选择實例類型" :disabled=justable>
+              <!--<j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="請選擇實例類型id" />-->
+              <a-select v-model="model.flavorId"  placeholder="請選擇實例類型" :disabled=justable>
                 <a-select-option v-for="flavors in flavorIds":value="flavors.value">{{flavors.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
-              <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
+            <a-form-model-item label="合約日期啟" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+              <j-date v-model="model.startTime" placeholder="請選擇開始時間" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
             <!--  <a-range-picker :default-value="[model.startTime, model.endTime]"  style="width: 100%"></a-range-picker>-->
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="合约日期迄" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
-              <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
+            <a-form-model-item label="合約日期迄" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
+              <j-date v-model="model.endTime" placeholder="請選擇終止時間" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="安全組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
-              <!--<j-dict-select-tag type="list" v-model="model.securityName" dictCode="" placeholder="请选择安全組" />-->
-              <a-select v-model="model.securityName"  placeholder="请选择安全組" :disabled=justable>
+              <!--<j-dict-select-tag type="list" v-model="model.securityName" dictCode="" placeholder="請選擇安全組" />-->
+              <a-select v-model="model.securityName"  placeholder="請選擇安全組" :disabled=justable>
                 <a-select-option v-for="securitys in securityNames":value="securitys.text" >{{securitys.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
-              <!--<j-dict-select-tag type="list" v-model="model.networkId" dictCode="" placeholder="请选择網絡" />-->
-              <a-select v-model="model.networkId"  placeholder="请选择網絡" :disabled=editable>
+              <!--<j-dict-select-tag type="list" v-model="model.networkId" dictCode="" placeholder="請選擇網絡" />-->
+              <a-select v-model="model.networkId"  placeholder="請選擇網絡" :disabled=editable>
                 <a-select-option v-for="networks in networkIds":value="networks.value" >{{networks.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="秘钥" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keypairsId">
-              <a-select v-model="model.keypairsId"  placeholder="请选择秘钥" style="width: 60%" :disabled=editable >
+            <a-form-model-item label="秘鑰" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keypairsId">
+              <a-select v-model="model.keypairsId"  placeholder="請選擇秘鑰" style="width: 60%" :disabled=editable >
                 <a-select-option v-for="key in keyNames":value="key.value" >{{key.text}}</a-select-option>
               </a-select>
-              <a-button @click="downPrivateKey" type="primary">下载秘钥</a-button>
+              <a-button @click="downPrivateKey" type="primary">下載秘鑰</a-button>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" v-show="showoption">
-            <a-form-model-item label="审核意见" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
-              <a-textarea v-model="model.optionsText" placeholder="请输入审核意见" ></a-textarea>
+            <a-form-model-item label="審核意見" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
+              <a-textarea v-model="model.optionsText" placeholder="請輸入審核意見" ></a-textarea>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -99,7 +99,7 @@
     components: {
     },
     props: {
-      //表单禁用
+      //表單禁用
       disabled: {
         type: Boolean,
         default: false,
@@ -124,28 +124,28 @@
         validatorRules: {
 
           projectId: [
-            { required: true, message: '请选择项目!'},
+            { required: true, message: '請選擇項目!'},
           ],
            instanceName: [
-              { required: true, message: '请输入實例名稱!'},
+              { required: true, message: '請輸入實例名稱!'},
            ],
            imgId: [
-              { required: true, message: '请输入鏡像id!'},
+              { required: true, message: '請輸入鏡像id!'},
            ],
            flavorId: [
-              { required: true, message: '请输入實例類型id!'},
+              { required: true, message: '請輸入實例類型id!'},
            ],
           securityName: [
-            { required: true, message: '请选择安全组!'},
+            { required: true, message: '請選擇安全組!'},
           ],
           networkId: [
-              { required: true, message: '请选择网络'},
+              { required: true, message: '請選擇網絡'},
             ],
             startTime: [
-              { required: true, message: '请输入开始时间!'},
+              { required: true, message: '請輸入開始時間!'},
             ],
             endTime: [
-              { required: true, message: '请输入结束时间!'},
+              { required: true, message: '請輸入結束時間!'},
             ]
 
         },
@@ -186,7 +186,7 @@
 
     },
     created () {
-       //备份model原始值
+       //備份model原始值
      // this.getdata();
 
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
@@ -229,7 +229,7 @@
           }
         })
 
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -273,7 +273,7 @@
           that.confirmLoading = false;
         })
       },
-      //拒绝
+      //拒絕
       refuse(){
         const that = this;
         this.model.applyType = "1";

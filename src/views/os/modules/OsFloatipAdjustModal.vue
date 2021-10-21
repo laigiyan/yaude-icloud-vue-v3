@@ -7,55 +7,55 @@
     @ok="handleOk"
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
     <a-form ref="form" :model="model" >
       <a-row>
         <a-col :span="24" >
           <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
-            <a-select v-model="model.projectName"  placeholder="请选择項目"  :disabled="true">
+            <a-select v-model="model.projectName"  placeholder="請選擇項目"  :disabled="true">
               <a-select-option v-for="project in projects":value="project.text"  >{{project.text}}</a-select-option>
             </a-select>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="网络名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkName">
-            <a-select v-model="model.networkName" @change="getSubnets"  placeholder="请选择网络名称" :disabled="true">
+          <a-form-model-item label="網絡名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkName">
+            <a-select v-model="model.networkName" @change="getSubnets"  placeholder="請選擇網絡名稱" :disabled="true">
               <a-select-option v-for="network in networks":value="network.text" >{{network.text}}</a-select-option>
             </a-select>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="子网名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="subnetName">
-            <a-select v-model="model.subnetName" @change="getFloatip" placeholder="请选择子网名称" :disabled="true">
+          <a-form-model-item label="子網名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="subnetName">
+            <a-select v-model="model.subnetName" @change="getFloatip" placeholder="請選擇子網名稱" :disabled="true">
               <a-select-option v-for="subnet in subnets":value="subnet.text" >{{subnet.text}}</a-select-option>
             </a-select>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="浮动ip" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="floatIp">
-            <a-select v-model="model.floatIp" @change="getFloatip" placeholder="请选择子网名称" :disabled="true">
+          <a-form-model-item label="浮動ip" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="floatIp">
+            <a-select v-model="model.floatIp" @change="getFloatip" placeholder="請選擇子網名稱" :disabled="true">
               <a-select-option v-for="floatip in floatips":value="floatip.value" >{{floatip.value}}</a-select-option>
             </a-select>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
-            <a-input v-model="model.represent" placeholder="请输入描述" :disabled="true" ></a-input>
+            <a-input v-model="model.represent" placeholder="請輸入描述" :disabled="true" ></a-input>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
-            <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
+          <a-form-model-item label="合約日期啟" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+            <j-date v-model="model.startTime" placeholder="請選擇開始時間" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="合约日期止" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
-            <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
+          <a-form-model-item label="合約日期止" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
+            <j-date v-model="model.endTime" placeholder="請選擇終止時間" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="映射vm_ip" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="mapperIp">
-            <a-input v-model="model.mapperIp" placeholder="请输入映射vm_ip"  ></a-input>
+            <a-input v-model="model.mapperIp" placeholder="請輸入映射vm_ip"  ></a-input>
           </a-form-model-item>
         </a-col>
       </a-row>

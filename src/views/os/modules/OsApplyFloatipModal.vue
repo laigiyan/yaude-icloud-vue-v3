@@ -7,12 +7,12 @@
     @ok="handleOk"
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
     <template slot="footer">
       <a-button @click="handleAgree" type="primary" v-show="showoption" :disabled=isExamine>同意</a-button>
-      <a-button @click="handlerefuse" type="primary" v-show="showoption" :disabled=isExamine>拒绝</a-button>
-      <a-button @click="handleOk" type="primary" v-show="!showoption">确定</a-button>
-      <a-button @click="handleCancel">关闭</a-button>
+      <a-button @click="handlerefuse" type="primary" v-show="showoption" :disabled=isExamine>拒絕</a-button>
+      <a-button @click="handleOk" type="primary" v-show="!showoption">確定</a-button>
+      <a-button @click="handleCancel">關閉</a-button>
     </template>
     <os-apply-floatip-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></os-apply-floatip-form>
   </j-modal>

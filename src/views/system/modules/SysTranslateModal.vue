@@ -7,7 +7,7 @@
     @ok="handleOk"
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
     <sys-translate-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></sys-translate-form>
   </j-modal>
 </template>

@@ -5,48 +5,48 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="實例名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="instanceName">
-              <a-input v-model="model.instanceName" placeholder="请输入實例名稱"  ></a-input>
+              <a-input v-model="model.instanceName" placeholder="請輸入實例名稱"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
-              <a-input v-model="model.represent" placeholder="请输入描述"  ></a-input>
+              <a-input v-model="model.represent" placeholder="請輸入描述"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="鏡像" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="imgId">
-<!--              <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="请选择鏡像id" />-->
-              <a-select v-model="model.imgId"  placeholder="请选择鏡像">
+<!--              <j-dict-select-tag type="list" v-model="model.imgId" dictCode="" placeholder="請選擇鏡像id" />-->
+              <a-select v-model="model.imgId"  placeholder="請選擇鏡像">
                 <a-select-option v-for="imgs in imgIds":value="imgs.value">{{imgs.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="刪除實例時是否刪除卷" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="isDelete">
-              <j-dict-select-tag type="radio" v-model="model.isDelete"  placeholder="请选择刪除實例時是否刪除卷" />
+              <j-dict-select-tag type="radio" v-model="model.isDelete"  placeholder="請選擇刪除實例時是否刪除卷" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="實例類型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="flavorId">
-<!--              <j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="请选择實例類型id" />-->
-              <a-select v-model="model.flavorId"  placeholder="请选择實例類型">
+<!--              <j-dict-select-tag type="list" v-model="model.flavorId" dictCode="" placeholder="請選擇實例類型id" />-->
+              <a-select v-model="model.flavorId"  placeholder="請選擇實例類型">
                 <a-select-option v-for="flavors in flavorIds":value="flavors.value">{{flavors.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="運行狀態" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="runStatus">
-              <a-input v-model="model.runStatus" placeholder="请输入運行狀態"  ></a-input>
+              <a-input v-model="model.runStatus" placeholder="請輸入運行狀態"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="安全組" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="securityName">
-              <j-dict-select-tag type="list" v-model="model.securityName"  placeholder="请选择安全組" />
+              <j-dict-select-tag type="list" v-model="model.securityName"  placeholder="請選擇安全組" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="網絡" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="networkId">
-              <j-dict-select-tag type="list" v-model="model.networkId"  placeholder="请选择網絡" />
+              <j-dict-select-tag type="list" v-model="model.networkId"  placeholder="請選擇網絡" />
             </a-form-model-item>
               <new-j-select-multi-user v-model="formData.multiUser" :query-config="selectUserQueryConfig"/>
           </a-col>
@@ -68,7 +68,7 @@
       NewJSelectMultiUser
     },
     props: {
-      //表单禁用
+      //表單禁用
       disabled: {
         type: Boolean,
         default: false,
@@ -90,13 +90,13 @@
         confirmLoading: false,
         validatorRules: {
            instanceName: [
-              { required: true, message: '请输入實例名稱!'},
+              { required: true, message: '請輸入實例名稱!'},
            ],
            imgId: [
-              { required: true, message: '请输入鏡像id!'},
+              { required: true, message: '請輸入鏡像id!'},
            ],
            flavorId: [
-              { required: true, message: '请输入實例類型id!'},
+              { required: true, message: '請輸入實例類型id!'},
            ],
         },
         imgIds:[],
@@ -119,8 +119,8 @@
           jCheckbox: 'spring,jeecgboot',
           jCodeEditor: `function sayHi(word) {\n  alert(word)\n}\nsayHi('hello, world!')`,
           jDate: '2019-5-10 15:33:06',
-          jEditor: '<h2 style="text-align: center;">富文本编辑器</h2> <p>这里是富文本编辑器。</p>',
-          jEllipsis: '这是一串很长很长的文字段落。这是一串很长很长的文字段落。这是一串很长很长的文字段落。这是一串很长很长的文字段落。',
+          jEditor: '<h2 style="text-align: center;">富文本編輯器</h2> <p>這裡是富文本編輯器。</p>',
+          jEllipsis: '這是一串很長很長的文字段落。這是一串很長很長的文字段落。這是一串很長很長的文字段落。這是一串很長很長的文字段落。',
           jSlider: false,
           jSelectMultiple: 'Integer,Boolean',
           imgList:[],
@@ -128,9 +128,9 @@
           content: '',
           cronExpression: '* * * * * ? *',
         },
-        // 选择用户查询条件配置
+        // 選擇用戶查詢條件配置
         selectUserQueryConfig: [
-          {key: 'phone', label: '电话'},
+          {key: 'phone', label: '電話'},
         ],
       }
     },
@@ -140,7 +140,7 @@
       },
     },
     created () {
-       //备份model原始值
+       //備份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
       this.getImgs(this.modelDefault);
       this.getFlavorIds(this.modelDefault);
@@ -189,7 +189,7 @@
       },
       submitForm () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;

@@ -5,64 +5,64 @@
         <a-row>
           <a-col :span="24" >
             <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
-              <a-select v-model="model.projectId" @change="getAll" placeholder="请选择項目"  :disabled=editable>
+              <a-select v-model="model.projectId" @change="getAll" placeholder="請選擇項目"  :disabled=editable>
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="diskName">
-              <a-input v-model="model.diskName" placeholder="请输入名称" :disabled="editable" ></a-input>
+            <a-form-model-item label="名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="diskName">
+              <a-input v-model="model.diskName" placeholder="請輸入名稱" :disabled="editable" ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
-              <a-input v-model="model.represent" placeholder="请输入描述"  :disabled="editable"></a-input>
+              <a-input v-model="model.represent" placeholder="請輸入描述"  :disabled="editable"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="大小" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="size">
-              <a-input v-model="model.size" placeholder="请输入大小"  :disabled="justable"></a-input>
+              <a-input v-model="model.size" placeholder="請輸入大小"  :disabled="justable"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="类型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="type">
-              <a-select v-model="model.type"  placeholder="请选择类型" :disabled="justable">
+            <a-form-model-item label="類型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="type">
+              <a-select v-model="model.type"  placeholder="請選擇類型" :disabled="justable">
                 <a-select-option v-for="type in types":value="type.value" >{{type.text}}</a-select-option>
               </a-select>
 
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="来源" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="source">
-              <j-dict-select-tag type="list" v-model="model.source" dictCode="disk_source" placeholder="请选择来源" @change="getsource(model.source)" :disabled="justable"/>
+            <a-form-model-item label="來源" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="source">
+              <j-dict-select-tag type="list" v-model="model.source" dictCode="disk_source" placeholder="請選擇來源" @change="getsource(model.source)" :disabled="justable"/>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" v-show="showSource">
-            <a-form-model-item label="来源id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="sourceId">
-              <a-select v-model="model.sourceId"  placeholder="请选择" :disabled="justable">
+            <a-form-model-item label="來源id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="sourceId">
+              <a-select v-model="model.sourceId"  placeholder="請選擇" :disabled="justable">
                 <a-select-option v-for="types in sourcetype":value="types.value" >{{types.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
-              <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
+            <a-form-model-item label="合約日期啟" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+              <j-date v-model="model.startTime" placeholder="請選擇開始時間" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="合约日期止" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
-              <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
+            <a-form-model-item label="合約日期止" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
+              <j-date v-model="model.endTime" placeholder="請選擇終止時間" date-format="YYYY-MM-DD" style="width: 60%" :disabled=justable></j-date>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="是否加密" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="bootable">
-              <j-dict-select-tag type="list" v-model="model.bootable" dictCode="bootable" placeholder="请选择是否加密" :disabled="justable"/>
+              <j-dict-select-tag type="list" v-model="model.bootable" dictCode="bootable" placeholder="請選擇是否加密" :disabled="justable"/>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" v-show="showoption">
-            <a-form-model-item label="审核意见" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
-              <a-textarea v-model="model.optionsText" placeholder="请输入审核意见" ></a-textarea>
+            <a-form-model-item label="審核意見" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
+              <a-textarea v-model="model.optionsText" placeholder="請輸入審核意見" ></a-textarea>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -80,7 +80,7 @@
     components: {
     },
     props: {
-      //表单禁用
+      //表單禁用
       disabled: {
         type: Boolean,
         default: false,
@@ -102,22 +102,22 @@
         confirmLoading: false,
         validatorRules: {
           diskName: [
-            { required: true, message: '请输入名称!'},
+            { required: true, message: '請輸入名稱!'},
           ],
           size: [
-            { required: true, message: '请规定大小!'},
+            { required: true, message: '請規定大小!'},
           ],
           type: [
-            { required: true, message: '请选择类型!'},
+            { required: true, message: '請選擇類型!'},
           ],
           startTime: [
-            { required: true, message: '请输入开始时间!'},
+            { required: true, message: '請輸入開始時間!'},
           ],
           endTime: [
-            { required: true, message: '请输入结束时间!'},
+            { required: true, message: '請輸入結束時間!'},
           ],
           projectId:[
-            { required: true, message: '请选择项目!'},
+            { required: true, message: '請選擇項目!'},
           ]
 
         },
@@ -148,7 +148,7 @@
       },
     },
     created () {
-       //备份model原始值
+       //備份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
      // this.getType(this.modelDefault);
       this.getProjects(this.modelDefault);
@@ -182,7 +182,7 @@
             that.model.projectName = r.text;
           }
         })
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;
@@ -228,12 +228,12 @@
           }
         })
       },
-      //获取卷来源
+      //獲取捲來源
       getsource(source){
         const that = this;
         that.sourcetype = [];
         that.showSource=false;
-        if(source=="1"){//镜像
+        if(source=="1"){//鏡像
           that.showSource=true
           let method = "post";
           let httpurl = this.url.getImg;
@@ -298,7 +298,7 @@
           that.confirmLoading = false;
         })
       },
-      //拒绝
+      //拒絕
       refuse(){
         const that = this;
         this.model.applyType = "3";

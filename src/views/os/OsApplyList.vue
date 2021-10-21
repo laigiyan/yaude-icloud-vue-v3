@@ -1,25 +1,25 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="實例名稱">
-              <a-input placeholder="请输入實例名稱" v-model="queryParam.instanceName"></a-input>
+              <a-input placeholder="請輸入實例名稱" v-model="queryParam.instanceName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="鏡像">
-              <a-input placeholder="请输入鏡像" v-model="queryParam.imgName"></a-input>
+              <a-input placeholder="請輸入鏡像" v-model="queryParam.imgName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
+                {{ toggleSearchStatus ? '收起' : '展開' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
               </a>
             </span>
@@ -27,31 +27,31 @@
         </a-row>
       </a-form>
     </div>
-    <!-- 查询区域-END -->
+    <!-- 查詢區域-END -->
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
-      <a-button @click="handleAdd" type="primary" icon="plus">申请</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus">申請</a-button>
       <a-button @click="handleSubmit" type="primary" icon="plus">提交</a-button>
-      <a-button @click="handleAdjust" type="primary" icon="plus">调整</a-button>
-      <!--<a-button type="primary" icon="download" @click="handleExportXls('申請明細檔')">导出</a-button>
+      <a-button @click="handleAdjust" type="primary" icon="plus">調整</a-button>
+      <!--<a-button type="primary" icon="download" @click="handleExportXls('申請明細檔')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>-->
-      <!-- 高级查询区域 -->
+      <!-- 高級查詢區域 -->
      <!-- <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>-->
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
+          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>刪除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -73,11 +73,11 @@
           <div v-html="text"></div>
         </template>
         <template slot="imgSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无图片</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無圖片</span>
           <img v-else :src="getImgView(text)" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
         </template>
         <template slot="fileSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無文件</span>
           <a-button
             v-else
             :ghost="true"
@@ -85,23 +85,23 @@
             icon="download"
             size="small"
             @click="downloadFile(text)">
-            下载
+            下載
           </a-button>
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
               <a-menu-item>
-                <a @click="handleDetail(record)">详情</a>
+                <a @click="handleDetail(record)">詳情</a>
               </a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a>删除</a>
+                <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record.id)">
+                  <a>刪除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -135,8 +135,8 @@
     },
     data () {
       return {
-        description: '申請明細檔管理页面',
-        // 表头
+        description: '申請明細檔管理頁面',
+        // 表頭
         columns: [
           {
             title: '#',
@@ -154,7 +154,7 @@
             dataIndex: 'instanceName'
           },
           {
-            title:'申請类型',
+            title:'申請類型',
             align:"center",
             dataIndex: 'options_dictText'
           },
@@ -174,17 +174,17 @@
             dataIndex: 'flavorName'
           },
           {
-            title:'开始时间',
+            title:'開始時間',
             align:"center",
             dataIndex: 'startTime'
           },
           {
-            title:'终止时间',
+            title:'終止時間',
             align:"center",
             dataIndex: 'endTime'
           },
           {
-            title:'剩余天数',
+            title:'剩餘天數',
             align:"center",
             dataIndex: 'sectionTime'
           },
@@ -233,10 +233,10 @@
       handleSubmit(){
         var params = this.selectionRows[0] ;
         if (this.selectedRowKeys.length <= 0) {
-          this.$message.warning('请选择一条记录！');
+          this.$message.warning('請選擇一條記錄！');
           return false;
         }else if(params.status!=null){
-          this.$message.warning('该记录已申请！');
+          this.$message.warning('該記錄已申請！');
         }else{
           const that = this;
           let method = "put";
@@ -258,10 +258,10 @@
         var params = this.selectionRows[0] ;
         debugger;
         if (this.selectedRowKeys.length <= 0) {
-          this.$message.warning('请选择一条记录！');
+          this.$message.warning('請選擇一條記錄！');
           return false;
         }else if(params.status!="1"){
-          this.$message.warning('请先审核！');
+          this.$message.warning('請先審核！');
         }else{
           this.$refs.adjustModal.adjust(params);
         }
@@ -281,8 +281,8 @@
         fieldList.push({type:'string',value:'isDelete',text:'刪除實例時是否刪除卷',dictCode:''})
         fieldList.push({type:'string',value:'flavorId',text:'實例類型id',dictCode:''})
         fieldList.push({type:'string',value:'runStatus',text:'運行狀態',dictCode:''})
-        fieldList.push({type:'date',value:'startTime',text:'开始时间'})
-        fieldList.push({type:'date',value:'endTime',text:'结束时间'})
+        fieldList.push({type:'date',value:'startTime',text:'開始時間'})
+        fieldList.push({type:'date',value:'endTime',text:'結束時間'})
         fieldList.push({type:'string',value:'securityName',text:'安全組',dictCode:''})
         fieldList.push({type:'string',value:'networkId',text:'網絡',dictCode:''})
         this.superFieldList = fieldList

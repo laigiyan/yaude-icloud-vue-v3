@@ -7,64 +7,64 @@
     @ok="handleOk"
     :okButtonProps="{ class:{'jee-hidden': disableSubmit} }"
     @cancel="handleCancel"
-    cancelText="关闭">
+    cancelText="關閉">
     <a-form ref="form" :model="model" >
       <a-row>
         <a-col :span="24" >
           <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectName">
-            <a-select v-model="model.projectName" placeholder="请选择項目"  :disabled="true">
+            <a-select v-model="model.projectName" placeholder="請選擇項目"  :disabled="true">
               <a-select-option v-for="project in projects":value="project.text"  >{{project.text}}</a-select-option>
             </a-select>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="diskName">
-            <a-input v-model="model.diskName" placeholder="请输入名称"  :disabled="true"></a-input>
+          <a-form-model-item label="名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="diskName">
+            <a-input v-model="model.diskName" placeholder="請輸入名稱"  :disabled="true"></a-input>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="represent">
-            <a-input v-model="model.represent" placeholder="请输入描述" :disabled="true" ></a-input>
+            <a-input v-model="model.represent" placeholder="請輸入描述" :disabled="true" ></a-input>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="大小" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="size">
-            <a-input v-model="model.size" placeholder="请输入大小"  ></a-input>
+            <a-input v-model="model.size" placeholder="請輸入大小"  ></a-input>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="类型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="type">
-            <a-select v-model="model.type"  placeholder="请选择类型" >
+          <a-form-model-item label="類型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="type">
+            <a-select v-model="model.type"  placeholder="請選擇類型" >
               <a-select-option v-for="type in types":value="type.value" >{{type.text}}</a-select-option>
             </a-select>
 
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="来源" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="source">
-            <j-dict-select-tag type="list" v-model="model.source" dictCode="disk_source" @change="getsource(model.source)" placeholder="请选择来源"  />
+          <a-form-model-item label="來源" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="source">
+            <j-dict-select-tag type="list" v-model="model.source" dictCode="disk_source" @change="getsource(model.source)" placeholder="請選擇來源"  />
           </a-form-model-item>
         </a-col>
         <a-col :span="24" v-show="showSource">
-          <a-form-model-item label="来源id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="sourceId">
-            <a-select v-model="model.sourceId"  placeholder="请选择" >
+          <a-form-model-item label="來源id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="sourceId">
+            <a-select v-model="model.sourceId"  placeholder="請選擇" >
               <a-select-option v-for="types in sourcetype":value="types.value" >{{types.text}}</a-select-option>
             </a-select>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="合约日期启" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
-            <j-date v-model="model.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
+          <a-form-model-item label="合約日期啟" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="startTime">
+            <j-date v-model="model.startTime" placeholder="請選擇開始時間" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
-          <a-form-model-item label="合约日期止" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
-            <j-date v-model="model.endTime" placeholder="请选择终止时间" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
+          <a-form-model-item label="合約日期止" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="endTime">
+            <j-date v-model="model.endTime" placeholder="請選擇終止時間" date-format="YYYY-MM-DD" style="width: 60%" ></j-date>
           </a-form-model-item>
         </a-col>
         <a-col :span="24">
           <a-form-model-item label="是否加密" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="bootable">
-            <j-dict-select-tag type="list" v-model="model.bootable" dictCode="bootable" placeholder="请选择是否加密" />
+            <j-dict-select-tag type="list" v-model="model.bootable" dictCode="bootable" placeholder="請選擇是否加密" />
           </a-form-model-item>
         </a-col>
       </a-row>
@@ -163,12 +163,12 @@
           that.close();
         })
       },
-      //获取卷来源
+      //獲取捲來源
       getsource(source){
         const that = this;
         that.sourcetype = [];
         that.showSource=false;
-        if(source=="1"){//镜像
+        if(source=="1"){//鏡像
           that.showSource=true
           let method = "post";
           let httpurl = this.url.getImg;

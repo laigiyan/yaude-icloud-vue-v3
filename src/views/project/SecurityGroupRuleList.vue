@@ -1,22 +1,22 @@
 <template>
   <a-card :bordered="false">
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
 
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
+          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>刪除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -38,11 +38,11 @@
           <div v-html="text"></div>
         </template>
         <template slot="imgSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无图片</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無圖片</span>
           <img v-else :src="getImgView(text)" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
         </template>
         <template slot="fileSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無文件</span>
           <a-button
             v-else
             :ghost="true"
@@ -50,7 +50,7 @@
             icon="download"
             size="small"
             @click="downloadFile(text)">
-            下载
+            下載
           </a-button>
         </template>
 
@@ -59,12 +59,12 @@
         </span>
 
         <span slot="action" slot-scope="text, record">
-          <!--<a @click="handleEdit(record)">编辑</a>
+          <!--<a @click="handleEdit(record)">編輯</a>
 
           <a-divider type="vertical" />-->
           <a-menu-item>
-                            <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record)">
-                              <a>删除</a>
+                            <a-popconfirm title="確定刪除嗎?" @confirm="() => handleDelete(record)">
+                              <a>刪除</a>
                             </a-popconfirm>
                           </a-menu-item>
         </span>
@@ -91,7 +91,7 @@
       SecurityGroupRuleModal
     },
     props: {
-      //表单禁用
+      //表單禁用
       remoteGroupIds: {
         type: Array,
         default: ()=>[],
@@ -100,8 +100,8 @@
     },
     data () {
       return {
-        description: '安全組規則細檔管理页面',
-        // 表头
+        description: '安全組規則細檔管理頁面',
+        // 表頭
         columns: [
           {
             title: '#',
@@ -134,12 +134,12 @@
             dataIndex: 'portRange',
           },
           {
-            title:'远程IP前缀',
+            title:'遠程IP前綴',
             align:"center",
             dataIndex: 'remoteIpPrefix'
           },
           {
-            title:'远程安全組ID',
+            title:'遠程安全組ID',
             align:"center",
             dataIndex: 'remoteGroupId'
           },
@@ -179,7 +179,7 @@
         fieldList.push({type:'string',value:'description',text:'描述',dictCode:''})
         fieldList.push({type:'string',value:'projectId',text:'項目ID',dictCode:''})
         fieldList.push({type:'string',value:'domainName',text:'域名',dictCode:''})
-        fieldList.push({type:'string',value:'enbled',text:'啓用',dictCode:''})
+        fieldList.push({type:'string',value:'enbled',text:'啟用',dictCode:''})
         this.superFieldList = fieldList
       },
       getRuleMain(record){
@@ -194,20 +194,20 @@
           this.$refs.modalForm.title = "新增";
           this.$refs.modalForm.disableSubmit = false;
         }else{
-          this.$message.error("請選擇一个安全组！")
+          this.$message.error("請選擇一個安全組！")
         }
 
       },
       handleDelete: function (record) {
         if(!this.url.delete){
-          this.$message.error("请设置url.delete属性!")
+          this.$message.error("請設置url.delete屬性!")
           return
         }
         record.projectId = this.queryParam.projectId;
         var that = this;
         getAction(that.url.delete, record).then((res) => {
           if (res.success) {
-            //重新计算分页问题
+            //重新計算分頁問題
             that.reCalculatePage(1)
             that.$message.success(res.message);
             that.loadData();
@@ -218,11 +218,11 @@
       },
       batchDel: function () {
         if(!this.url.deleteBatch){
-          this.$message.error("请设置url.deleteBatch属性!")
+          this.$message.error("請設置url.deleteBatch屬性!")
           return
         }
         if (this.selectedRowKeys.length <= 0) {
-          this.$message.warning('请选择一条记录！');
+          this.$message.warning('請選擇一條記錄！');
           return;
         } else {
           var ids = "";
@@ -231,13 +231,13 @@
           }
           var that = this;
           this.$confirm({
-            title: "确认删除",
-            content: "是否删除选中数据?",
+            title: "確認刪除",
+            content: "是否刪除選中數據?",
             onOk: function () {
               that.loading = true;
               deleteAction(that.url.deleteBatch, {ids: ids,projectId: that.queryParam.projectId}).then((res) => {
                 if (res.success) {
-                  //重新计算分页问题
+                  //重新計算分頁問題
                   that.reCalculatePage(that.selectedRowKeys.length)
                   that.$message.success(res.message);
                   that.loadData();

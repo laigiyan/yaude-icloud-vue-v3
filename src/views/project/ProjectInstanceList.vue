@@ -2,39 +2,39 @@
   <a-card :bordered="false">
     <h2>使用情況摘要</h2>
     <h2> </h2>
-    <h4>选择一段时间来查询其用量：</h4>
-    <!-- 查询区域 -->
+    <h4>選擇一段時間來查詢其用量：</h4>
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :span="3" >
             <a-form-item label="">
-              <j-date v-model="queryParam.startTime" placeholder="请选择开始时间" date-format="YYYY-MM-DD"  ></j-date>
+              <j-date v-model="queryParam.startTime" placeholder="請選擇開始時間" date-format="YYYY-MM-DD"  ></j-date>
             </a-form-item>
           </a-col>
           <a-col :span="3">
             <a-form-item label="到">
-              <j-date v-model="queryParam.endTime" placeholder="请选择結束时间" date-format="YYYY-MM-DD"  ></j-date>
+              <j-date v-model="queryParam.endTime" placeholder="請選擇結束時間" date-format="YYYY-MM-DD"  ></j-date>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
             </span>
           </a-col>
         </a-row>
       </a-form>
     </div>
-    <!-- 查询区域-END -->
+    <!-- 查詢區域-END -->
 
     <div style="margin-bottom: 16px;">
       <a-row :gutter="24">
         <a-col :span="3" :style="{textAlign:'right'}">
-          <h4>运行中的实例：</h4>
-          <h4>启用的内存：</h4>
-          <h4>周期内VCPU-小时数：</h4>
-          <h4>周期内磁盘GB-小时数：</h4>
-          <h4>此周期内的 RAM-小时数：</h4>
+          <h4>運行中的實例：</h4>
+          <h4>啟用的內存：</h4>
+          <h4>週期內VCPU-小時數：</h4>
+          <h4>週期內磁盤GB-小時數：</h4>
+          <h4>此週期內的 RAM-小時數：</h4>
         </a-col>
         <a-col :span="2">
           <h4>{{ showData.server_usages }}</h4>
@@ -46,10 +46,10 @@
       </a-row>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <!--<div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-       <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+       <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>-->
 
@@ -70,11 +70,11 @@
           <div v-html="text"></div>
         </template>
         <template slot="imgSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无图片</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無圖片</span>
           <img v-else :src="getImgView(text)" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
         </template>
         <template slot="fileSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無文件</span>
           <a-button
             v-else
             :ghost="true"
@@ -82,7 +82,7 @@
             icon="download"
             size="small"
             @click="downloadFile(text)">
-            下载
+            下載
           </a-button>
         </template>
 
@@ -119,8 +119,8 @@
     },
     data () {
       return {
-        description: '申請明細檔管理页面',
-        // 表头
+        description: '申請明細檔管理頁面',
+        // 表頭
         columns: [
           {
             title: '#',
@@ -165,7 +165,7 @@
             }
           },
           {
-            title:'开始时间',
+            title:'開始時間',
             align:"center",
             dataIndex: 'started_at'
           },
@@ -215,10 +215,10 @@
       },
       loadData(arg) {
         if(!this.url.list){
-          this.$message.error("请设置url.list属性!")
+          this.$message.error("請設置url.list屬性!")
           return
         }
-        //加载数据 若传入参数1则加载第一页的内容
+        //加載數據 若傳入參數1則加載第一頁的內容
         if (arg === 1) {
           this.ipagination.current = 1;
         }
@@ -231,13 +231,13 @@
             startTime:   moment(new Date().setDate(date)).format('YYYY-MM-DD')
           }
         }
-        let params = this.getQueryParams();//查询条件
+        let params = this.getQueryParams();//查詢條件
         params.projectId = this.selectProjectId;
         this.loading = true;
         getAction(this.url.list, params).then((res) => {
           if (res.success) {
             debugger;
-            //update-begin---author:zhangyafei    Date:20201118  for：适配不分页的数据列表------------
+            //update-begin---author:zhangyafei    Date:20201118  for：適配不分頁的數據列表------------
             this.dataSource = res.result.records||res.result.server_usages;
             let ram = 0;
             if(this.dataSource){
@@ -273,7 +273,7 @@
             }else{
               this.ipagination.total = 0;
             }
-            //update-end---author:zhangyafei    Date:20201118  for：适配不分页的数据列表------------
+            //update-end---author:zhangyafei    Date:20201118  for：適配不分頁的數據列表------------
           }else{
             this.$message.warning(res.message)
           }

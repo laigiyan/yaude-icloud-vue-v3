@@ -4,32 +4,32 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <!--<a-col :span="24">
-            <a-form-model-item label="用户名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="userId">
-              <a-select v-model="model.userId" @change="getAll" placeholder="请选择用户" >
+            <a-form-model-item label="用戶名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="userId">
+              <a-select v-model="model.userId" @change="getAll" placeholder="請選擇用戶" >
                 <a-select-option v-for="user in users":value="user.value"  >{{user.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>-->
           <a-col :span="24" >
             <a-form-model-item label="項目名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
-              <a-select v-model="model.projectId"  @change="getAll" placeholder="请选择項目" >
+              <a-select v-model="model.projectId"  @change="getAll" placeholder="請選擇項目" >
                 <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="秘钥名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keyName">
-              <a-input v-model="model.keyName" placeholder="请输入秘钥名称"  :disabled="editKey"></a-input>
+            <a-form-model-item label="秘鑰名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keyName">
+              <a-input v-model="model.keyName" placeholder="請輸入秘鑰名稱"  :disabled="editKey"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" v-show="showKey">
-            <a-form-model-item label="指纹" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="fingerprint">
-              <a-textarea v-model="model.fingerprint" placeholder="请输入指纹" :disabled="editKey"></a-textarea>
+            <a-form-model-item label="指紋" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="fingerprint">
+              <a-textarea v-model="model.fingerprint" placeholder="請輸入指紋" :disabled="editKey"></a-textarea>
             </a-form-model-item>
           </a-col>
           <a-col :span="24" v-show="showKey">
-            <a-form-model-item label="公钥" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="publicKey">
-              <a-textarea v-model="model.publicKey" placeholder="请输入公钥" :disabled="editKey"></a-textarea>
+            <a-form-model-item label="公鑰" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="publicKey">
+              <a-textarea v-model="model.publicKey" placeholder="請輸入公鑰" :disabled="editKey"></a-textarea>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -48,7 +48,7 @@
     components: {
     },
     props: {
-      //表单禁用
+      //表單禁用
       disabled: {
         type: Boolean,
         default: false,
@@ -88,7 +88,7 @@
       },
     },
     created () {
-       //备份model原始值
+       //備份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
     this.getProjects();
     },
@@ -111,7 +111,7 @@
             that.model.projectName = r.text;
           }
         })
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;

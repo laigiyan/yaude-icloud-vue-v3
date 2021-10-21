@@ -5,18 +5,18 @@
         <a-row>
          <!-- <a-col :span="24">
             <a-form-model-item label="申請表id" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="applyId">
-              <a-input v-model="model.applyId" placeholder="请输入申請表id"  ></a-input>
+              <a-input v-model="model.applyId" placeholder="請輸入申請表id"  ></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
             <a-form-model-item label="審核意見" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText">
-              <a-input v-model="model.optionsText" placeholder="请输入審核意見"  ></a-input>
+              <a-input v-model="model.optionsText" placeholder="請輸入審核意見"  ></a-input>
             </a-form-model-item>
           </a-col>-->
           <os-apply-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></os-apply-form>
           <a-col :span="24">
             <a-form-model-item label="是否同意" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsType">
-              <a-input v-model="model.optionsType" placeholder="请输入是否同意"  ></a-input>
+              <a-input v-model="model.optionsType" placeholder="請輸入是否同意"  ></a-input>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -35,7 +35,7 @@
     components: {
     },
     props: {
-      //表单禁用
+      //表單禁用
       disabled: {
         type: Boolean,
         default: false,
@@ -57,7 +57,7 @@
         confirmLoading: false,
         validatorRules: {
           applyId: [
-            { required: true, message: '请输入申請表id!'},
+            { required: true, message: '請輸入申請表id!'},
           ],
         },
         url: {
@@ -73,7 +73,7 @@
       },
     },
     created () {
-      //备份model原始值
+      //備份model原始值
       this.modelDefault = JSON.parse(JSON.stringify(this.model));
     },
     methods: {
@@ -86,7 +86,7 @@
       },
       submitForm () {
         const that = this;
-        // 触发表单验证
+        // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
             that.confirmLoading = true;

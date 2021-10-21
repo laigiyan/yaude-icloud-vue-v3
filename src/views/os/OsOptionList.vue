@@ -1,20 +1,20 @@
 <template>
   <a-card :bordered="false">
-    <!-- 查询区域 -->
+    <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="类型">
-              <j-dict-select-tag type="list" v-model="queryParam.applyType" dictCode="apply_type" placeholder="请选择类型"/>
+            <a-form-item label="類型">
+              <j-dict-select-tag type="list" v-model="queryParam.applyType" dictCode="apply_type" placeholder="請選擇類型"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
-              <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
               <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
               <a @click="handleToggleSearch" style="margin-left: 8px">
-                {{ toggleSearchStatus ? '收起' : '展开' }}
+                {{ toggleSearchStatus ? '收起' : '展開' }}
                 <a-icon :type="toggleSearchStatus ? 'up' : 'down'"/>
               </a>
             </span>
@@ -22,30 +22,30 @@
         </a-row>
       </a-form>
     </div>
-    <!-- 查询区域-END -->
+    <!-- 查詢區域-END -->
 
-    <!-- 操作按钮区域 -->
+    <!-- 操作按鈕區域 -->
     <div class="table-operator">
      <!-- <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('審核意見細檔')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('審核意見細檔')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" icon="import">导入</a-button>
+        <a-button type="primary" icon="import">導入</a-button>
       </a-upload>-->
-      <a-button @click="handleOption()" type="primary" icon="plus">审核</a-button>
-      <!-- 高级查询区域 -->
+      <a-button @click="handleOption()" type="primary" icon="plus">審核</a-button>
+      <!-- 高級查詢區域 -->
      <!-- <j-super-query :fieldList="superFieldList" ref="superQueryModal" @handleSuperQuery="handleSuperQuery"></j-super-query>-->
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
-          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
+          <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>刪除</a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
-    <!-- table区域-begin -->
+    <!-- table區域-begin -->
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
-        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已选择 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项
+        <i class="anticon anticon-info-circle ant-alert-icon"></i> 已選擇 <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>項
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -67,11 +67,11 @@
           <div v-html="text"></div>
         </template>
         <template slot="imgSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无图片</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無圖片</span>
           <img v-else :src="getImgView(text)" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
         </template>
         <template slot="fileSlot" slot-scope="text">
-          <span v-if="!text" style="font-size: 12px;font-style: italic;">无文件</span>
+          <span v-if="!text" style="font-size: 12px;font-style: italic;">無文件</span>
           <a-button
             v-else
             :ghost="true"
@@ -79,12 +79,12 @@
             icon="download"
             size="small"
             @click="downloadFile(text)">
-            下载
+            下載
           </a-button>
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleOption1(record)">审核</a>
+          <a @click="handleOption1(record)">審核</a>
         </span>
 
       </a-table>
@@ -119,8 +119,8 @@
     },
     data () {
       return {
-        description: '審核意見細檔管理页面',
-        // 表头
+        description: '審核意見細檔管理頁面',
+        // 表頭
         columns: [
           {
             title: '#',
@@ -133,22 +133,22 @@
             }
           },
           {
-            title:'名称',
+            title:'名稱',
             align:"center",
             dataIndex: 'applyName'
           },
           {
-            title:'申請类型',
+            title:'申請類型',
             align:"center",
             dataIndex: 'options_dictText'
           },
           {
-            title:'状态',
+            title:'狀態',
             align:"center",
             dataIndex: 'status_dictText'
           },
           {
-            title:'审核类型',
+            title:'審核類型',
             align:"center",
             dataIndex: 'applyType_dictText'
           },
@@ -158,7 +158,7 @@
             dataIndex: 'optionsType_dictText'
           },
           {
-            title:'申请人',
+            title:'申請人',
             align:"center",
             dataIndex: 'applyBy'
           },
@@ -224,7 +224,7 @@
       },
       handleOption(){
         if (this.selectedRowKeys.length <= 0) {
-          this.$message.warning('请选择一条记录！');
+          this.$message.warning('請選擇一條記錄！');
           return false;
         }else{
           var params = this.selectionRows[0] ;
@@ -246,7 +246,7 @@
               that.result.showoption = "true";
               this.result.optionId = that.model.optionId;
               that.$refs.applymodalForm.edit(this.result);
-              that.$refs.applymodalForm.title="审核";
+              that.$refs.applymodalForm.title="審核";
             }
           })
         }else if(this.model.applyType==2){
@@ -257,7 +257,7 @@
               that.result.showoption = "true";
               this.result.optionId = that.model.optionId;
               that.$refs.floatipmodalForm.edit(this.result);
-              that.$refs.floatipmodalForm.title="审核";
+              that.$refs.floatipmodalForm.title="審核";
             }
           })
         }else if(this.model.applyType==3){
@@ -268,7 +268,7 @@
               that.result.showoption = "true";
               this.result.optionId = that.model.optionId;
               that.$refs.diskmodalForm.edit(this.result);
-              that.$refs.diskmodalForm.title="审核";
+              that.$refs.diskmodalForm.title="審核";
             }
           })
         }
