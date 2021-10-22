@@ -17,7 +17,7 @@
         :type="collapsed ? 'menu-unfold' : 'menu-fold'"
         @click="toggle"/>
 
-      <span v-if="device === 'desktop'">歡迎進入 Yaude-ICloud 云管理平臺</span>
+      <span v-if="device === 'desktop'">歡迎進入 Yaude-ICloud 雲管理平臺</span>
       <span v-else>Yaude-Boot</span>
 
       <user-menu :theme="theme"/>

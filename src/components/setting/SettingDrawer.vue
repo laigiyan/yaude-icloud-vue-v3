@@ -11,26 +11,26 @@
       <div class="setting-drawer-index-content">
 
 
-        <!-- 增加下拉选择框 -->
+        <!-- 增加下拉選擇框 -->
         <a-list-item>
           <a-list-item-meta>
-            <div slot="title">语言设置</div>
+            <div slot="title">語言設置</div>
           </a-list-item-meta>
           <a-select size="small" style="width: 80px;" :defaultValue="$t('langValue')" @change="handleLanguageChange">
             <a-select-option value="zh-CN">中文</a-select-option>
-            <a-select-option value="zh-TW">繁体中文</a-select-option>
+            <a-select-option value="zh-TW">繁體中文</a-select-option>
             <a-select-option value="en-US">English</a-select-option>
           </a-select>
         </a-list-item>
 
 
         <div :style="{ marginBottom: '24px' }">
-          <h3 class="setting-drawer-index-title">整体风格设置{{ $t('langValue') }}</h3>
+          <h3 class="setting-drawer-index-title">整體風格設置{{ $t('langValue') }}</h3>
 
           <div class="setting-drawer-index-blockChecbox">
             <a-tooltip>
               <template slot="title">
-                暗色菜单风格
+                暗色菜單風格
               </template>
               <div class="setting-drawer-index-item" @click="handleMenuTheme('dark')">
                 <img src="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" alt="dark">
@@ -42,7 +42,7 @@
 
             <a-tooltip>
               <template slot="title">
-                亮色菜单风格
+                亮色菜單風格
               </template>
               <div class="setting-drawer-index-item" @click="handleMenuTheme('light')">
                 <img src="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" alt="light">
@@ -55,7 +55,7 @@
         </div>
 
         <div :style="{ marginBottom: '24px' }">
-          <h3 class="setting-drawer-index-title">主题色</h3>
+          <h3 class="setting-drawer-index-title">主題色</h3>
 
           <div style="height: 20px">
             <a-tooltip class="setting-drawer-theme-color-colorBlock" v-for="(item, index) in colorList" :key="index">
@@ -72,12 +72,12 @@
         <a-divider />
 
         <div :style="{ marginBottom: '24px' }">
-          <h3 class="setting-drawer-index-title">导航模式</h3>
+          <h3 class="setting-drawer-index-title">導航模式</h3>
 
           <div class="setting-drawer-index-blockChecbox">
             <a-tooltip>
               <template slot="title">
-                侧边栏导航
+                側邊欄導航
               </template>
               <div class="setting-drawer-index-item" @click="handleLayout('sidemenu')">
                 <img src="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" alt="sidemenu">
@@ -89,7 +89,7 @@
 
             <a-tooltip>
               <template slot="title">
-                顶部栏导航
+                頂部欄導航
               </template>
               <div class="setting-drawer-index-item" @click="handleLayout('topmenu')">
                 <img src="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" alt="topmenu">
@@ -104,7 +104,7 @@
               <a-list-item>
                 <a-tooltip slot="actions">
                   <template slot="title">
-                    该设定仅 [顶部栏导航] 时有效
+                    該設定僅 [頂部欄導航] 時有效
                   </template>
                   <a-select size="small" style="width: 80px;" :defaultValue="contentWidth" @change="handleContentWidthChange">
                     <a-select-option value="Fixed">固定</a-select-option>
@@ -112,7 +112,7 @@
                   </a-select>
                 </a-tooltip>
                 <a-list-item-meta>
-                  <div slot="title">内容区域宽度</div>
+                  <div slot="title">內容區域寬度</div>
                 </a-list-item-meta>
               </a-list-item>
               <a-list-item>
@@ -124,13 +124,13 @@
               <a-list-item>
                 <a-switch slot="actions" size="small" :disabled="!fixedHeader" :defaultChecked="autoHideHeader" @change="handleFixedHeaderHidden" />
                 <a-list-item-meta>
-                  <div slot="title" :style="{ textDecoration: !fixedHeader ? 'line-through' : 'unset' }">下滑时隐藏 Header</div>
+                  <div slot="title" :style="{ textDecoration: !fixedHeader ? 'line-through' : 'unset' }">下滑時隱藏 Header</div>
                 </a-list-item-meta>
               </a-list-item>
               <a-list-item>
                 <a-switch slot="actions" size="small" :disabled="(layoutMode === 'topmenu')" :checked="dataFixSiderbar" @change="handleFixSiderbar" />
                 <a-list-item-meta>
-                  <div slot="title" :style="{ textDecoration: layoutMode === 'topmenu' ? 'line-through' : 'unset' }">固定侧边菜单</div>
+                  <div slot="title" :style="{ textDecoration: layoutMode === 'topmenu' ? 'line-through' : 'unset' }">固定側邊菜單</div>
                 </a-list-item-meta>
               </a-list-item>
             </a-list>
@@ -139,7 +139,7 @@
         <a-divider />
 
         <div :style="{ marginBottom: '24px' }">
-          <h3 class="setting-drawer-index-title">其他设置</h3>
+          <h3 class="setting-drawer-index-title">其他設置</h3>
           <div>
             <a-list :split="false">
               <a-list-item>
@@ -151,7 +151,7 @@
               <a-list-item>
                 <a-switch slot="actions" size="small" :defaultChecked="multipage" @change="onMultipageWeak" />
                 <a-list-item-meta>
-                  <div slot="title">多页签模式</div>
+                  <div slot="title">多頁簽模式</div>
                 </a-list-item-meta>
               </a-list-item>
             </a-list>
@@ -161,7 +161,7 @@
         <div :style="{ marginBottom: '24px' }">
           <a-alert type="warning">
             <span slot="message">
-              配置栏只在开发环境用于预览，生产环境不会展现，请手动修改配置文件
+              配置欄只在開發環境用於預覽，生產環境不會展現，請手動修改配置文件
               <a href="https://github.com/sendya/ant-design-pro-vue/blob/master/src/defaultSettings.js" target="_blank">src/defaultSettings.js</a>
             </span>
           </a-alert>
@@ -198,7 +198,7 @@
     }
     },
     mounted () {
-      // 当主题色不是默认色时，才进行主题编译
+      // 當主題色不是默認色時，才進行主題編譯
       if (this.primaryColor !== config.primaryColor) {
         updateTheme(this.primaryColor)
       }
@@ -231,9 +231,9 @@
       },
       handleLayout (mode) {
         this.$store.dispatch('ToggleLayoutMode', mode)
-        // 因为顶部菜单不能固定左侧菜单栏，所以强制关闭
+        // 因為頂部菜單不能固定左側菜單欄，所以強制關閉
         this.handleFixSiderbar(false)
-        // 触发窗口resize事件
+        // 觸發窗口resize事件
         triggerWindowResizeEvent()
       },
       handleContentWidthChange (type) {
@@ -258,11 +258,11 @@
         this.dataFixSiderbar = fixed
         this.$store.dispatch('ToggleFixSiderbar', fixed)
       },
-      //script  中的  methods 里增加 handleLanguageChange 切换语言的事件
+      //script  中的  methods 裡增加 handleLanguageChange 切換語言的事件
       handleLanguageChange(lang){
-        //this.$i18n.locale = lang; //改变当前语言  动态无感 切换，，但是有部分内容 不生效，估计我
-        this.$ls.set("language", lang);//将lang 语言存在localStorage里，
-        //本来想做成，页面不刷新语言自动切换，但是效果不理想，有的内容切换不成功，于是就 做刷新页面操作，这里只缓存语言
+        //this.$i18n.locale = lang; //改變當前語言  動態無感 切換，，但是有部分內容 不生效，估計我
+        this.$ls.set("language", lang);//將lang 語言存在localStorage裡，
+        //本來想做成，頁面不刷新語言自動切換，但是效果不理想，有的內容切換不成功，於是就 做刷新頁面操作，這裡只緩存語言
         window.location.reload()
       }
     },
