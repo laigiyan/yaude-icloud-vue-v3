@@ -3,7 +3,7 @@
 
     <!-- 查詢區域 -->
     <div class="table-page-search-wrapper">
-      <a-form layout="inline" @keyup.enter.native="searchQuery">
+      <a-form layout="inline"  @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
 
           <a-col :md="6" :sm="12">
@@ -65,7 +65,7 @@
 
     <!-- 操作按鈕區域 -->
     <div class="table-operator" style="border-top: 5px">
-      <a-button @click="handleAdd" type="primary" icon="plus" >添加用戶</a-button>
+      <a-button @click="handleAdd" v-has="'user:add'" type="primary" icon="plus" >添加用戶</a-button>
       <a-button type="primary" icon="download" @click="handleExportXls('用戶信息')">導出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">導入</a-button>
@@ -121,7 +121,8 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)" >編輯</a>
+
+          <a @click="handleEdit(record)" v-has="'user:edit'">編輯</a>
 
           <a-divider type="vertical" />
 

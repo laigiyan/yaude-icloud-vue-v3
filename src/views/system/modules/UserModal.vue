@@ -30,7 +30,7 @@
           <a-form-model-item label="登錄密碼" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="password" >
             <a-input type="password" placeholder="請輸入登錄密碼" v-model="model.password" />
           </a-form-model-item>
-  
+
           <a-form-model-item label="確認密碼" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="confirmpassword" >
             <a-input type="password" @blur="handleConfirmBlur" placeholder="請重新輸入登錄密碼" v-model="model.confirmpassword"/>
           </a-form-model-item>
@@ -91,7 +91,7 @@
           <j-image-upload class="avatar-uploader" text="上傳" v-model="model.avatar" ></j-image-upload>
         </a-form-model-item>
 
-        <a-form-model-item label="生日" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-model-item label="生日" :labelCol="labelCol" :wrapperCol="wrapperCol" >
           <a-date-picker
             style="width: 100%"
             placeholder="請選擇生日"
@@ -99,9 +99,9 @@
             :format="dateFormat"
             :getCalendarContainer="node => node.parentNode"/>
         </a-form-model-item>
-     
-        <a-form-model-item label="性別" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-select  v-model="model.sex"  placeholder="請選擇性別" :getPopupContainer= "(target) => target.parentNode">
+
+        <a-form-model-item label="性別" :labelCol="labelCol" :wrapperCol="wrapperCol" v-has="'user:sex'">
+          <a-select  v-model="model.sex"  placeholder="請選擇性別" :getPopupContainer= "(target) => target.parentNode" >
             <a-select-option :value="1">男</a-select-option>
             <a-select-option :value="2">女</a-select-option>
           </a-select>
@@ -112,7 +112,7 @@
         </a-form-model-item>
 
         <a-form-model-item label="手機號碼" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="phone">
-          <a-input placeholder="請輸入手機號碼" v-model="model.phone" />
+          <a-input placeholder="請輸入手機號碼" v-model="model.phone"  :disabled="isDisabledAuth('user:form:phone')"/>
         </a-form-model-item>
 
         <a-form-model-item label="座機" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="telephone">
@@ -144,9 +144,12 @@
   import { addUser,editUser,queryUserRole,queryall } from '@/api/api'
   import { disabledAuthFilter } from "@/utils/authFilter"
   import { duplicateCheck } from '@/api/api'
+  import {DisabledAuthFilterMixin} from '@/mixins/DisabledAuthFilterMixin'
+
 
   export default {
     name: "UserModal",
+    mixins: [DisabledAuthFilterMixin],
     components: {
     },
     data () {
@@ -168,7 +171,7 @@
           confirmpassword: [{required: true, message: '請重新輸入登錄密碼!',},
                             { validator: this.compareToFirstPassword,}],
           realname:[{ required: true, message: '請輸入用戶名稱!' }],
-          phone: [{required: true, message: '請輸入手機號!'}, {validator: this.validatePhone}],
+         // phone: [{required: true, message: '請輸入手機號!'}, {validator: this.validatePhone}],
           email: [{validator: this.validateEmail}],
           roles:{},
           workNo:[ { required: true, message: '請輸入工號' },
