@@ -57,7 +57,7 @@
         this.visible=true
         this.$refs.realForm.agree();
          setTimeout(() => {
-           this.$emit('ok');
+           this.$emit('agree');
          }, 500)
         this.close()
       },
@@ -65,7 +65,7 @@
         this.visible=true
         this.$refs.realForm.refuse();
         setTimeout(() => {
-          this.$emit('ok');
+          this.$emit('refuse');
         }, 500)
         this.close()
       },

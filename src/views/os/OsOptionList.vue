@@ -90,10 +90,10 @@
       </a-table>
     </div>
 
-    <os-option-modal ref="modalForm" @ok="modalFormOk"></os-option-modal>
-    <os-apply-modal ref="applymodalForm" @ok="modalFormOk"></os-apply-modal>
-    <os-apply-floatip-modal ref="floatipmodalForm" @ok="modalFormOk"></os-apply-floatip-modal>
-    <os-apply-disk-modal ref="diskmodalForm" @ok="modalFormOk"></os-apply-disk-modal>
+    <os-option-modal ref="modalForm" @ok="modalFormOk()" ></os-option-modal>
+    <os-apply-modal ref="applymodalForm" @agree="modalFormAgree()" @refuse="modalFormRefuse()"></os-apply-modal>
+    <os-apply-floatip-modal ref="floatipmodalForm"@agree="modalFormAgree()" @refuse="modalFormRefuse()"></os-apply-floatip-modal>
+    <os-apply-disk-modal ref="diskmodalForm" @agree="modalFormAgree()" @refuse="modalFormRefuse()"></os-apply-disk-modal>
   </a-card>
 </template>
 
@@ -184,6 +184,7 @@
         },
         dictOptions:{},
         superFieldList:[],
+        optionType:"",
       }
     },
     created() {
@@ -197,11 +198,10 @@
     methods: {
       initDictConfig(){
       },
-      modalFormOk(){
+      modalFormAgree(){
         let that = this;
         let httpurl = this.url.getStatus;
         let method = "post";
-        if(this.model.optionsType=="1"){
           let formData = {
             applyType: this.model.applyType,
             applyId: this.model.applyId,
@@ -214,13 +214,11 @@
               that.$message.warning(res.message);
             }
           })
-        }else{
-          this.$nextTick(()=>{
-            this.loadData();
-          })
-        }
-
-
+        },
+      modalFormRefuse(){
+        this.$nextTick(()=>{
+          this.loadData();
+        })
       },
       handleOption(){
         if (this.selectedRowKeys.length <= 0) {
@@ -258,6 +256,7 @@
               this.result.optionId = that.model.optionId;
               that.$refs.floatipmodalForm.edit(this.result);
               that.$refs.floatipmodalForm.title="審核";
+              debugger
             }
           })
         }else if(this.model.applyType==3){
