@@ -97,6 +97,7 @@
             placeholder="請選擇生日"
             v-model="model.birthday"
             :format="dateFormat"
+            :disabled="isDisabledAuth('user:form:birthday')"
             :getCalendarContainer="node => node.parentNode"/>
         </a-form-model-item>
 
