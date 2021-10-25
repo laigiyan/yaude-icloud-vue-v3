@@ -143,7 +143,7 @@
           relateId:this.model.id,
           chinese:this.model.roleName
         }
-        getAction("/system/sysTranslate/queryByParams", params).then((res) => {
+        getAction("/sys/sysTranslate/queryByParams", params).then((res) => {
           debugger;
           if (res.success) {
             this.$refs.modalForm.edit(res.result);
