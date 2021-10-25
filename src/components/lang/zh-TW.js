@@ -4,7 +4,7 @@ export default {
   lang: '繁体中文',
   age:'年龄',
   sex:'性别',
-  welcome:'欢迎您',
+  welcome:'歡迎您',
   sexText:{
     typeDict:{
       '1': '女',

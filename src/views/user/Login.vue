@@ -7,7 +7,7 @@
           size="large"
           v-decorator="['username',validatorRules.username,{ validator: this.handleUsernameOrEmail }]"
           type="text"
-          placeholder="请输入帐户名 / admin">
+          placeholder="請輸入帳戶名 / admin">
           <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
         </a-input>
       </a-form-item>
@@ -18,7 +18,7 @@
           size="large"
           type="password"
           autocomplete="false"
-          placeholder="密码 / 123456">
+          placeholder="密碼 / 123456">
           <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
         </a-input>
       </a-form-item>
@@ -31,7 +31,7 @@
               size="large"
               type="text"
               @change="inputCodeChange"
-              placeholder="请输入验证码">
+              placeholder="請輸入驗證碼">
               <a-icon slot="prefix" type="smile" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
           </a-form-item>
@@ -52,7 +52,7 @@
           class="login-button"
           :loading="loginBtn"
           @click.stop.prevent="handleSubmit"
-          :disabled="loginBtn">确定
+          :disabled="loginBtn">確定
         </a-button>
       </a-form-item>
     </a-form>
@@ -105,11 +105,11 @@
           smsSendBtn: false,
         },
         validatorRules:{
-          username:{rules: [{ required: true, message: '请输入用户名!'},{validator: this.handleUsernameOrEmail}]},
-          password:{rules: [{ required: true, message: '请输入密码!',validator: 'click'}]},
+          username:{rules: [{ required: true, message: '請輸入用戶名!'},{validator: this.handleUsernameOrEmail}]},
+          password:{rules: [{ required: true, message: '請輸入密碼!',validator: 'click'}]},
           mobile:{rules: [{validator:this.validateMobile}]},
-          captcha:{rule: [{ required: true, message: '请输入验证码!'}]},
-          inputCode:{rules: [{ required: true, message: '请输入验证码!'}]}
+          captcha:{rule: [{ required: true, message: '請輸入驗證碼!'}]},
+          inputCode:{rules: [{ required: true, message: '請輸入驗證碼!'}]}
         },
         verifiedCode:"",
         inputCodeContent:"",
@@ -126,9 +126,9 @@
       Vue.ls.remove(ACCESS_TOKEN)
       this.getRouterData();
       this.handleChangeCheckCode();
-      // update-begin- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
+      // update-begin- --- author:scott ------ date:20190805 ---- for:密碼加密邏輯暫時註釋掉，有點問題
       //this.getEncrypte();
-      // update-end- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
+      // update-end- --- author:scott ------ date:20190805 ---- for:密碼加密邏輯暫時註釋掉，有點問題
     },
     methods: {
       ...mapActions(['Login', 'Logout', 'PhoneLogin']),
@@ -150,20 +150,20 @@
         let that = this
         let loginParams = {};
         that.loginBtn = true;
-        // 使用账户密码登录
+        // 使用賬戶密碼登錄
         if (that.customActiveKey === 'tab1') {
           that.form.validateFields([ 'username', 'password','inputCode', 'rememberMe' ], { force: true }, (err, values) => {
             if (!err) {
               loginParams.username = values.username
-              // update-begin- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
+              // update-begin- --- author:scott ------ date:20190805 ---- for:密碼加密邏輯暫時註釋掉，有點問題
               //loginParams.password = md5(values.password)
               //loginParams.password = encryption(values.password,that.encryptedString.key,that.encryptedString.iv)
               loginParams.password = values.password
               loginParams.remember_me = values.rememberMe
-              // update-begin- --- author:scott ------ date:20190805 ---- for:密码加密逻辑暂时注释掉，有点问题
+              // update-begin- --- author:scott ------ date:20190805 ---- for:密碼加密邏輯暫時註釋掉，有點問題
               loginParams.captcha = that.message
               loginParams.checkKey = that.currdatetime
-              console.log("登录参数",loginParams)
+              console.log("登錄參數",loginParams)
               that.Login(loginParams).then((res) => {
                 this.$refs.loginSelect.show(res.result)
               }).catch((err) => {
@@ -175,7 +175,7 @@
               that.loginBtn = false;
             }
           })
-          // 使用手机号登录
+          // 使用手機號登錄
         } else {
           that.form.validateFields([ 'mobile', 'captcha', 'rememberMe' ], { force: true }, (err, values) => {
             if (!err) {
@@ -198,7 +198,7 @@
         let that = this;
         this.form.validateFields([ 'mobile' ], { force: true },(err,values) => {
             if(!values.mobile){
-              that.cmsFailed("请输入手机号");
+              that.cmsFailed("請輸入手機號");
             }else if (!err) {
               this.state.smsSendBtn = true;
               let interval = window.setInterval(() => {
@@ -209,7 +209,7 @@
                 }
               }, 1000);
 
-              const hide = this.$message.loading('验证码发送中..', 0);
+              const hide = this.$message.loading('驗證碼發送中..', 0);
               let smsParams = {};
               smsParams.mobile=values.mobile;
               smsParams.smsmode="0";
@@ -267,24 +267,24 @@
       },
       loginSuccess () {
         this.$router.push({ path: "/dashboard/analysis" }).catch(()=>{
-          console.log('登录跳转首页出错,这个错误从哪里来的')
+          console.log('登錄跳轉首頁出錯,這個錯誤從哪裡來的')
         })
         this.$notification.success({
-          message: '欢迎',
-          description: `${timeFix()}，欢迎回来`,
+          message: '歡迎',
+          description: `${timeFix()}，歡迎回來`,
         });
       },
       cmsFailed(err){
         this.$notification[ 'error' ]({
-          message: "登录失败",
+          message: "登錄失敗",
           description:err,
           duration: 4,
         });
       },
       requestFailed (err) {
         this.$notification[ 'error' ]({
-          message: '登录失败',
-          description: ((err.response || {}).data || {}).message || err.message || "请求出现错误，请稍后再试",
+          message: '登錄失敗',
+          description: ((err.response || {}).data || {}).message || err.message || "請求出現錯誤，請稍後再試",
           duration: 4,
         });
         this.loginBtn = false;
@@ -293,7 +293,7 @@
         if (!value || new RegExp(/^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/).test(value)){
           callback();
         }else{
-          callback("您的手机号码格式不正确!");
+          callback("您的手機號碼格式不正確!");
         }
 
       },
@@ -301,7 +301,7 @@
         if(!value || this.verifiedCode==this.inputCodeContent){
           callback();
         }else{
-          callback("您输入的验证码不正确!");
+          callback("您輸入的驗證碼不正確!");
         }
       },
       generateCode(value){
@@ -322,7 +322,7 @@
           }
         })
       },
-      //获取密码加密规则
+      //獲取密碼加密規則
       getEncrypte(){
         var encryptedString = Vue.ls.get(ENCRYPTED_STRING);
         if(encryptedString == null){
