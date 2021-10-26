@@ -1,5 +1,26 @@
 <template>
   <a-card :bordered="false">
+    <!-- 查詢區域 -->
+    <div class="table-page-search-wrapper">
+      <a-form layout="inline" >
+        <a-row :gutter="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24" >
+            <a-form-model-item label="專案名稱"  >
+              <a-select v-model="queryParam.projectId"  @change="getUrl(barType,{})" placeholder="請選擇專案" >
+                <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
+          <!--<a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+              <a-button type="primary" @click="searchQuery" icon="search">查詢</a-button>
+              <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
+            </span>
+          </a-col>-->
+        </a-row>
+      </a-form>
+    </div>
+    <!-- 查詢區域-END -->
     <a-tabs defaultActiveKey="1" @change="callback">
       <a-tab-pane tab="柱狀圖" key="1">
         <a-row>
@@ -96,7 +117,7 @@
   import ACol from 'ant-design-vue/es/grid/Col'
   import BarMultid from '@/components/chart/BarMultid'
   import LineChartMultid from '../../components/chart/LineChartMultid'
-  import { getAction } from '@/api/manage'
+  import { httpAction,getAction } from '@/api/manage'
 
   export default {
     name: 'OsResourceUsageChart',
@@ -146,18 +167,47 @@
         // 統計圖類型
         tabStatus:"bar",
         url: {
-          getYearCountInfo: "/mock/api/report/getYearCountInfo",
-          getMonthCountInfo:"/mock/api/report/getMonthCountInfo",
+          getProject: "/os/osApply/getProject",
+          getYearCountInfo: "/openstack/osResourceUsage/getYearCountInfo",
+          getMonthCountInfo:"/openstack/osResourceUsage/getMonthCountInfo",
           getDateCountInfo:"/openstack/osResourceUsage/getDateCountInfo",
         },
+        projects:[],
       }
     },
     created() {
-      let url = this.url.getDateCountInfo;
-      this.loadDate(url,'date',{});
+      this.loadProjects()
+      /*let url = this.url.getDateCountInfo;
+      this.loadDate(url,'date',{});*/
     },
     methods: {
+      loadProjects(){
+        let method = "post";
+        let httpurl = this.url.getProject;
+        let that = this;
+        httpAction(httpurl, { },method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.projects.push({
+                value:r.projectId,
+                text:r.projectName,
+              })
+            })
+            if(result.length>0){
+              let url = that.url.getDateCountInfo
+              that.loadDate(url,'date',{})
+            }
+          }
+        })
+      },
       loadDate(url,type,param) {
+        if(!this.queryParam.projectId){
+          this.queryParam = {
+            projectId : this.projects[0].value
+          }
+        }
+        param.projectId = this.queryParam.projectId;
         getAction(url,param,'get').then((res) => {
           if (res.success) {
             this.countSource = [];
@@ -171,6 +221,9 @@
 
             //折綫數據集
             this.lineCpuSource = [];
+            this.lineDiskSource = [];
+            this.lineRamSource = [];
+            this.lineMultidDataSource = [];
 
             if(type === 'year'){
               this.getYearCountSource(res.result);
@@ -188,33 +241,119 @@
         })
       },
       getYearCountSource(data){
-        for (let i = 0; i < data.length; i++) {
-          if(this.tabStatus === "bar"){
-            this.countSource.push({
-              x: `${data[i].year}年`,
-              y: data[i].yearcount
+        if(this.tabStatus === "bar") {
+          let cpuMap = { type: 'vcpu' }
+          let diskMap = { type: 'disk' }
+          let ramMap = { type: 'ram' }
+
+          data.forEach((r) => {
+            cpuMap[r.years] = r.totalVcpusUsage;
+            diskMap[r.years] = r.totalLocalGbUsage;
+            ramMap[r.years] = (r.totalMemoryMbUsage / 1024).toFixed(1);
+            this.fields.push(r.years);
+            this.cpuSource.push({
+              x: r.years,
+              y: r.totalVcpusUsage
             })
-          }else{
-            this.countSource.push({
-              item: `${data[i].year}年`,
-              count:data[i].yearcount
+
+            this.diskSource.push({
+              x: r.years,
+              y: r.totalLocalGbUsage
             })
-          }
+
+            this.ramSource.push({
+              x: r.years,
+              y: (r.totalMemoryMbUsage / 1024).toFixed(1)
+            })
+          })
+
+          this.barMultidDataSource.push(cpuMap)
+          this.barMultidDataSource.push(diskMap)
+          this.barMultidDataSource.push(ramMap)
+        }else if(this.tabStatus === "line") {
+
+          data.forEach((r) => {
+
+            this.lineMultidDataSource.push({
+              type:r.years,
+              vcpu:r.totalVcpusUsage,
+              disk:r.totalLocalGbUsage,
+              ram:(r.totalMemoryMbUsage / 1024).toFixed(1)
+            });
+
+            this.lineCpuSource.push({
+              type:r.years,
+              vcpu:r.totalVcpusUsage
+            });
+
+            this.lineDiskSource.push({
+              type:r.years,
+              disk:r.totalLocalGbUsage
+            });
+
+            this.lineRamSource.push({
+              type:r.years,
+              ram:(r.totalMemoryMbUsage / 1024).toFixed(1)
+            });
+          })
         }
       },
       getMonthCountSource(data){
-        for (let i = 0; i < data.length; i++) {
-          if(this.tabStatus === "bar"){
-            this.countSource.push({
-              x: data[i].month,
-              y: data[i].monthcount
+        if(this.tabStatus === "bar") {
+          let cpuMap = { type: 'vcpu' }
+          let diskMap = { type: 'disk' }
+          let ramMap = { type: 'ram' }
+
+          data.forEach((r) => {
+            cpuMap[r.mon] = r.totalVcpusUsage;
+            diskMap[r.mon] = r.totalLocalGbUsage;
+            ramMap[r.mon] = (r.totalMemoryMbUsage / 1024).toFixed(1);
+            this.fields.push(r.mon);
+            this.cpuSource.push({
+              x: r.mon,
+              y: r.totalVcpusUsage
             })
-          }else{
-            this.countSource.push({
-              item: data[i].month,
-              count:data[i].monthcount
+
+            this.diskSource.push({
+              x: r.mon,
+              y: r.totalLocalGbUsage
             })
-          }
+
+            this.ramSource.push({
+              x: r.mon,
+              y: (r.totalMemoryMbUsage / 1024).toFixed(1)
+            })
+          })
+
+          this.barMultidDataSource.push(cpuMap)
+          this.barMultidDataSource.push(diskMap)
+          this.barMultidDataSource.push(ramMap)
+        }else if(this.tabStatus === "line") {
+
+          data.forEach((r) => {
+
+            this.lineMultidDataSource.push({
+              type:r.mon,
+              vcpu:r.totalVcpusUsage,
+              disk:r.totalLocalGbUsage,
+              ram:(r.totalMemoryMbUsage / 1024).toFixed(1)
+            });
+
+            this.lineCpuSource.push({
+              type:r.mon,
+              vcpu:r.totalVcpusUsage
+            });
+
+            this.lineDiskSource.push({
+              type:r.mon,
+              disk:r.totalLocalGbUsage
+            });
+
+            this.lineRamSource.push({
+              type:r.mon,
+              ram:(r.totalMemoryMbUsage / 1024).toFixed(1)
+            });
+          })
         }
       },
       getDateCountSource(data){
@@ -272,9 +411,7 @@
               type:r.usageDate,
               ram:(r.totalMemoryMbUsage / 1024).toFixed(1)
             });
-
           })
-
         }
       },
       // 選擇統計圖類別
@@ -296,8 +433,8 @@
           this.pieType = e.target.value;
           this.queryDatepie();
         }else if(this.tabStatus === "line"){
-          this.pieType = e.target.value;
-          this.queryDateline();
+          this.barType = e.target.value;
+          this.queryDatebar();
         }else{
           this.barType = e.target.value;
           this.queryDatebar();
