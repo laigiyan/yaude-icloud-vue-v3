@@ -6,7 +6,7 @@
           <a-col :span="24" >
             <a-form-model-item label="專案名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="projectId">
               <a-select v-model="model.projectId" @change="getAll" placeholder="請選擇專案"  :disabled=editable>
-                <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
+                <a-select-option v-for="project in projects" :value="project.value"  >{{project.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
@@ -210,11 +210,13 @@
         })
       },
       getAll(){
+        debugger
         this.getType();
       },
       getProjects(record){
         this.model = Object.assign({}, record);
         let method = "post";
+        debugger
         let httpurl = this.url.getProject;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){

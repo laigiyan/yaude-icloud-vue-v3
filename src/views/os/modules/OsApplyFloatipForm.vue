@@ -19,10 +19,10 @@
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="子網名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="subnetName">
+            <a-form-model-item label="子網名稱" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="subnetId">
              <!-- <a-input v-model="model.subnetName" placeholder="請輸入子網名稱"  ></a-input>-->
-              <a-select v-model="model.subnetName" placeholder="請選擇子網名稱" @click.native="getSubnets" :disabled="editable">
-                <a-select-option v-for="subnet in subnets":value="subnet.text" >{{subnet.text}}</a-select-option>
+              <a-select v-model="model.subnetId" placeholder="請選擇子網名稱" @click.native="getSubnets" :disabled="editable">
+                <a-select-option v-for="subnet in subnets":value="subnet.value" >{{subnet.text}}</a-select-option>
               </a-select>
             </a-form-model-item>
           </a-col>
@@ -104,7 +104,7 @@
           networkName: [
             { required: true, message: '請選擇網路名稱!'},
           ],
-          subnetName: [
+          subnetId: [
             { required: true, message: '請選擇子網!'},
           ],
           floatIp: [
@@ -177,7 +177,11 @@
             that.model.projectName = r.text;
           }
         })
-
+        this.subnets.forEach((r)=>{
+          if(r.value==that.model.subnetId){
+            that.model.subnetName = r.text;
+          }
+        })
         // 觸發表單驗證
         this.$refs.form.validate(valid => {
           if (valid) {
@@ -208,6 +212,11 @@
       //同意
       agree(){
         const that = this;
+        this.networks.forEach((r)=>{
+          if(r.text==that.model.networkName){
+            this.model.floatNetworkId = r.value;
+          }
+        })
         let method = "post";
         this.model.applyType = "2";
         this.model.optionsType="1";
