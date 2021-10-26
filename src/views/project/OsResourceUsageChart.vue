@@ -32,6 +32,15 @@
             </a-radio-group>
           </a-col>
           <a-col :span="14">
+            <a-form v-if="barType === 'date' && true" layout="inline" style="margin-top: -4px">
+              <a-form-item label="截止時間">
+                <j-date  v-model = "endDate"  placeholder="請選擇截止時間" date-format="YYYY-MM-DD" ></j-date>
+              </a-form-item>
+              <a-button style="margin-top: 2px" type="primary" icon="search" @click="queryByEndDate">查詢</a-button>
+            </a-form>
+          </a-col>
+
+          <a-col :span="14">
             <a-form v-if="barType === 'month' && true" layout="inline" style="margin-top: -4px">
               <a-form-item label="月份區間">
                 <a-range-picker
@@ -173,6 +182,7 @@
           getDateCountInfo:"/openstack/osResourceUsage/getDateCountInfo",
         },
         projects:[],
+        endDate:''
       }
     },
     created() {
@@ -438,6 +448,14 @@
         }else{
           this.barType = e.target.value;
           this.queryDatebar();
+        }
+      },
+      queryByEndDate(){
+        debugger;
+        if(this.endDate>''){
+          this.getUrl(this.barType,{endTime:this.endDate});
+        }else{
+          this.getUrl(this.barType,{});
         }
       },
       // 按月份查詢
