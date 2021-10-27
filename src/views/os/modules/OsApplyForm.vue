@@ -228,6 +228,11 @@
             that.model.flavorName = r.text;
           }
         })
+        this.networkIds.forEach((r)=>{
+          if(r.value==that.model.networkId){
+            that.model.networkName = r.text;
+          }
+        })
 
         // 觸發表單驗證
         this.$refs.form.validate(valid => {
