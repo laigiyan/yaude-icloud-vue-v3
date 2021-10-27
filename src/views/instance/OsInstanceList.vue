@@ -425,7 +425,7 @@
           return
         }
         //let that = this;
-        this.$router.push({name: 'instance-OsInstanceDetail',params:{id:this.selectionRows[0].id,selectKey:'2'}})
+        this.$router.push({name: 'instance-OsInstanceDetail',params:{id:this.selectionRows[0].id,projectId:this.selectionRows[0].projectId,selectKey:'2'}})
       },
       handleCreateSnapshot(record){
         let that = this;
