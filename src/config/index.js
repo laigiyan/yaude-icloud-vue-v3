@@ -4,10 +4,9 @@ import Vue from 'vue'
 Vue.prototype.API_BASE_URL = process.env.VUE_APP_API_BASE_URL
 window._CONFIG['domianURL'] = Vue.prototype.API_BASE_URL
 //单点登录地址
+window._CONFIG['grafanaURL'] = process.env.VUE_APP_GRAFANA_BASE_URL
 window._CONFIG['casPrefixUrl'] = process.env.VUE_APP_CAS_BASE_URL
 window._CONFIG['onlinePreviewDomainURL'] =  process.env.VUE_APP_ONLINE_BASE_URL
 window._CONFIG['staticDomainURL'] = Vue.prototype.API_BASE_URL + '/sys/common/static'
 window._CONFIG['pdfDomainURL'] = Vue.prototype.API_BASE_URL+ '/sys/common/pdf/pdfPreviewIframe'
 
-//單實例監控URL
-window._CONFIG['monitoringInstanceURl'] = 'https://192.168.2.8/grafana/d/PVW6vU7Wz/instance'
