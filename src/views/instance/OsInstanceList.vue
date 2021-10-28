@@ -111,6 +111,9 @@
 <!--                <a @click="handleAdjustResource(record)">調整資源</a>-->
 <!--              </a-menu-item>-->
               <a-menu-item>
+                <a @click="handleShowMonitorById(record)">监控</a>
+              </a-menu-item>
+              <a-menu-item>
                 <a @click="handleAddFloatingIP(record)">綁定浮動IP</a>
               </a-menu-item>
               <a-menu-item>
@@ -418,6 +421,11 @@
       handleRouter(record){
         console.log('handleRoute  '+record)
         this.$router.push({name: 'instance-OsInstanceDetail',params:{id:record.id,projectId:record.projectId}})
+      },
+      //單實例監控
+      handleShowMonitorById(record){
+        //let that = this;
+        this.$router.push({name: 'monitoring-InstanceById',params:{id:record.id,projectName:record.projectName,instanceName:record.instanceName}})
       },
       handleShowConsole(){
         if (this.selectionRows.length != 1){
