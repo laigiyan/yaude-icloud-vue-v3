@@ -9,6 +9,13 @@
               <j-date placeholder="请选择统计时间" v-model="queryParam.usageDate"></j-date>
             </a-form-item>
           </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24" >
+            <a-form-model-item label="專案名稱"  >
+              <a-select v-model="queryParam.projectId"  placeholder="請選擇專案" >
+                <a-select-option v-for="project in projects":value="project.value"  >{{project.text}}</a-select-option>
+              </a-select>
+            </a-form-model-item>
+          </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
@@ -114,6 +121,9 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import OsResourceUsageModal from './modules/OsResourceUsageModal'
+  import { httpAction,getAction } from '@/api/manage'
+
+  let showProjects = [];
 
   export default {
     name: 'OsResourceUsageList',
@@ -122,6 +132,17 @@
       OsResourceUsageModal
     },
     data () {
+
+      //根據ID顯示名稱
+      function toNamebyId(text) {
+        let res = "";
+        showProjects.forEach((r)=>{
+          if(r.value == text){
+            res =  r.text;
+          }
+        })
+        return res;
+      }
       return {
         description: '资源用量表管理页面',
         // 表头
@@ -143,6 +164,14 @@
             sorter: true,
             customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
+            }
+          },
+          {
+            title:'專案名稱',
+            align:"center",
+            dataIndex: 'projectId',
+            customRender:function (text) {
+              return toNamebyId(text)
             }
           },
           {
@@ -180,6 +209,7 @@
           }
         ],
         url: {
+          getProject: "/os/osApply/getProject",
           list: "/openstack/osResourceUsage/list",
           delete: "/openstack/osResourceUsage/delete",
           deleteBatch: "/openstack/osResourceUsage/deleteBatch",
@@ -189,10 +219,12 @@
         },
         dictOptions:{},
         superFieldList:[],
+        projects:[],
       }
     },
     created() {
-    this.getSuperFieldList();
+      this.loadProjects();
+      this.getSuperFieldList();
     },
     computed: {
       importExcelUrl: function(){
@@ -200,6 +232,27 @@
       },
     },
     methods: {
+      loadProjects(){
+        let method = "post";
+        let httpurl = this.url.getProject;
+        let that = this;
+        httpAction(httpurl, { },method).then((res)=>{
+          if(res.success){
+            const result = res.result
+            result.forEach((r)=>{
+              this.projects.push({
+                value:r.projectId,
+                text:r.projectName,
+              })
+            })
+            showProjects = this.projects;
+            if(result.length>0){
+              let url = that.url.getDateCountInfo
+              that.loadDate(url,'date',{})
+            }
+          }
+        })
+      },
       initDictConfig(){
       },
       getSuperFieldList(){
@@ -211,6 +264,9 @@
         fieldList.push({type:'BigDecimal',value:'totalMemoryMbUsage',text:'周期内的 RAM-小时数',dictCode:''})
         fieldList.push({type:'string',value:'totalHours',text:'总运行时长',dictCode:''})
         this.superFieldList = fieldList
+      },
+      toNamebyId(value){
+
       }
     }
   }
