@@ -210,13 +210,11 @@
         })
       },
       getAll(){
-        debugger
         this.getType();
       },
       getProjects(record){
         this.model = Object.assign({}, record);
         let method = "post";
-        debugger
         let httpurl = this.url.getProject;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){

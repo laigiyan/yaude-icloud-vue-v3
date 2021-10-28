@@ -91,9 +91,9 @@
     </div>
 
     <os-option-modal ref="modalForm" @ok="modalFormOk()" ></os-option-modal>
-    <os-apply-modal ref="applymodalForm" @agree="modalFormAgree()" @refuse="modalFormRefuse()"></os-apply-modal>
-    <os-apply-floatip-modal ref="floatipmodalForm"@agree="modalFormAgree()" @refuse="modalFormRefuse()"></os-apply-floatip-modal>
-    <os-apply-disk-modal ref="diskmodalForm" @agree="modalFormAgree()" @refuse="modalFormRefuse()"></os-apply-disk-modal>
+    <os-apply-modal ref="applymodalForm" @agree="(projectId)=>modalFormAgree(projectId)" @refuse="modalFormRefuse()"></os-apply-modal>
+    <os-apply-floatip-modal ref="floatipmodalForm"@agree="(projectId)=>modalFormAgree(projectId)" @refuse="modalFormRefuse()"></os-apply-floatip-modal>
+    <os-apply-disk-modal ref="diskmodalForm" @agree="(projectId)=>modalFormAgree(projectId)" @refuse="modalFormRefuse()"></os-apply-disk-modal>
   </a-card>
 </template>
 
@@ -198,14 +198,16 @@
     methods: {
       initDictConfig(){
       },
-      modalFormAgree(){
+      modalFormAgree(projectId){
         let that = this;
         let httpurl = this.url.getStatus;
         let method = "post";
           let formData = {
             applyType: this.model.applyType,
             applyId: this.model.applyId,
-            id: this.model.optionId
+            id: this.model.optionId,
+            options: this.model.options,
+            projectId: projectId
           }
           httpAction(httpurl,formData,method).then((res)=>{
             if(res.success){
@@ -216,9 +218,9 @@
           })
         },
       modalFormRefuse(){
-        this.$nextTick(()=>{
+        setTimeout(() => {
           this.loadData();
-        })
+        }, 1000)
       },
       handleOption(){
         if (this.selectedRowKeys.length <= 0) {
@@ -236,7 +238,7 @@
         this.model.id = this.model.applyId;
         this.model.showoption="true";
         let that = this;
-        if(this.model.applyType==1){
+        if(this.model.applyType==1){//vm
           let httpurl = this.url.applys;
           getAction(httpurl,this.model).then(res=>{
             if(res.success && res.result){
@@ -247,7 +249,7 @@
               that.$refs.applymodalForm.title="審核";
             }
           })
-        }else if(this.model.applyType==2){
+        }else if(this.model.applyType==2){//ip
           let httpurl = this.url.floatipapplys;
           getAction(httpurl,this.model).then(res=>{
             if(res.success && res.result){
@@ -256,10 +258,9 @@
               this.result.optionId = that.model.optionId;
               that.$refs.floatipmodalForm.edit(this.result);
               that.$refs.floatipmodalForm.title="審核";
-              debugger
             }
           })
-        }else if(this.model.applyType==3){
+        }else if(this.model.applyType==3){//磁盘
           let httpurl = this.url.diskapplys;
           getAction(httpurl,this.model).then(res=>{
             if(res.success && res.result){

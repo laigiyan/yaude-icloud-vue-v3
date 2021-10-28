@@ -210,8 +210,6 @@
           vmId: this.model.vmId,
           keypairsId: this.model.keypairsId
         }
-        let a = this.model;
-        debugger
         httpAction(httpurl,formData,method).then((res)=>{
           if(res.success){
             that.$message.success(res.message);

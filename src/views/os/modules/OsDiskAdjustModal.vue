@@ -141,6 +141,7 @@
           projectName: this.model.projectName,
           projectId: this.projectId,
           diskName: this.model.diskName,
+          diskId: this.model.diskId,
           options: "2",
           represent: this.model.represent,
           size: this.model.size,

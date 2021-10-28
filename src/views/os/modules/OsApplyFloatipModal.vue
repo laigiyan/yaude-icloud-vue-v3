@@ -55,9 +55,10 @@
       },
       handleAgree(){
         this.visible=true
+        let projectId = this.$refs.realForm.model.projectId;
         this.$refs.realForm.agree();
         setTimeout(() => {
-          this.$emit('agree');
+          this.$emit('agree',projectId);
         }, 500)
         this.close()
       },

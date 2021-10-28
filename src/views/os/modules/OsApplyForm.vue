@@ -267,6 +267,7 @@
         let method = "post";
         this.model.applyType = "1";
         this.model.optionsType="1";
+        let a  =  this.model;
         let httpurl = this.url.agree;
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
@@ -288,8 +289,8 @@
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.success){
             that.$message.success(res.message);
-            that.$emit('ok');
-            that.loadData();
+            /*that.$emit('ok');
+            that.loadData();*/
           }else{
             that.$message.warning(res.message);
           }
