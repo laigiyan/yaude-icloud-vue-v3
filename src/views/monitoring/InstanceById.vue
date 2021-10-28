@@ -37,7 +37,7 @@
     methods: {
       goUrl () {
         let params = this.$route.params;
-        this.url = window._CONFIG['monitoringInstanceURl'] +"?refresh=5m&orgId=1&var-TID=&var-TENANT="+params.projectName+"&var-HOSTNAME="+params.instanceName+"&var-UUID="+params.id;
+        this.url = window._CONFIG['grafanaURL']+"?refresh=5m&orgId=1&var-TID=&var-TENANT="+params.projectName+"&var-HOSTNAME="+params.instanceName+"&var-UUID="+params.id;
 
       },
       openUrlNewWin(){
