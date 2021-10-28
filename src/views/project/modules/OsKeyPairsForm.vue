@@ -69,6 +69,12 @@
         },
         confirmLoading: false,
         validatorRules: {
+          projectId: [
+            { required: true, message: '請選著項目名稱!'},
+          ],
+          keyName: [
+            { required: true, message: '請輸入秘鑰名稱!'},
+          ],
         },
         users:[],
         projects:[],
