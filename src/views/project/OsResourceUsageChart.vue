@@ -62,18 +62,18 @@
         </a-row>
         <a-row>
           <a-col :span="8">
-            <bar class="statistic" title="周期内CPU-小時數" :dataSource="cpuSource" :color="['item','red']" :height="200" :style="{width:'80%'}"/>
+            <bar class="statistic" title="週期內CPU-小時數" :dataSource="cpuSource" :color="['item','red']" :height="200" :style="{width:'80%'}"/>
           </a-col>
           <a-col :span="8">
-            <bar class="statistic" title="周期内硬碟GB-小時數" :dataSource="diskSource" :height="200" :style="{width:'80%'}"/>
+            <bar class="statistic" title="週期內硬碟GB-小時數" :dataSource="diskSource" :height="200" :style="{width:'80%'}"/>
           </a-col>
           <a-col :span="8">
-            <bar class="statistic" title="周期内RAM-小時數" :dataSource="ramSource" :height="200" :style="{width:'80%'}"/>
+            <bar class="statistic" title="週期內RAM-小時數" :dataSource="ramSource" :height="200" :style="{width:'80%'}"/>
           </a-col>
         </a-row>
       </a-tab-pane>
 
-      <a-tab-pane tab="折綫圖" key="2">
+      <a-tab-pane tab="折線圖" key="2">
         <a-row>
           <a-col :span="10">
             <a-radio-group :value="barType" @change="statisticst">
@@ -99,18 +99,18 @@
         </a-row>
         <a-row>
           <a-col :span="24">
-            <line-chart-multid  class="statistic" title="多行折綫圖" :height="300" :fields="linefields" :dataSource="lineMultidDataSource"/>
+            <line-chart-multid  class="statistic" title="多行折線圖" :height="300" :fields="linefields" :dataSource="lineMultidDataSource"/>
           </a-col>
         </a-row>
         <a-row>
           <a-col :span="8">
-            <line-chart-multid class="statistic" title="周期内CPU-小時數" :dataSource="lineCpuSource" :fields="lineCpufields" :height="256" />
+            <line-chart-multid class="statistic" title="週期內CPU-小時數" :dataSource="lineCpuSource" :fields="lineCpufields" :height="256" />
           </a-col>
           <a-col :span="8">
-            <line-chart-multid class="statistic" title="周期内硬碟GB-小時數" :dataSource="lineDiskSource" :fields="lineDiskfields" :height="256" />
+            <line-chart-multid class="statistic" title="週期內硬碟GB-小時數" :dataSource="lineDiskSource" :fields="lineDiskfields" :height="256" />
           </a-col>
           <a-col :span="8">
-            <line-chart-multid class="statistic" title="周期内RAM-小時數" :dataSource="lineRamSource" :fields="lineRamfields" :height="256" />
+            <line-chart-multid class="statistic" title="週期內RAM-小時數" :dataSource="lineRamSource" :fields="lineRamfields" :height="256" />
           </a-col>
         </a-row>
       </a-tab-pane>
@@ -229,7 +229,7 @@
             this.fields = [];
             this.barMultidDataSource = [];
 
-            //折綫數據集
+            //折線數據集
             this.lineCpuSource = [];
             this.lineDiskSource = [];
             this.lineRamSource = [];
