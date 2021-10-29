@@ -205,6 +205,7 @@
           flavorName: this.model.flavorName,
           securityName: this.model.securityName,
           networkId: this.model.networkId,
+          networkName: this.model.networkName,
           startTime: this.model.startTime,
           endTime: this.model.endTime,
           vmId: this.model.vmId,
