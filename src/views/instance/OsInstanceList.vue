@@ -123,7 +123,7 @@
                 <a @click="handleCreateSnapshot(record)">快照</a>
               </a-menu-item>
               <a-menu-item>
-                <a @click="handleShowConsole(record)">控制臺</a>
+                <a @click="handleShowConsoleRecord(record)">控制臺</a>
               </a-menu-item>
               <a-menu-item>
                 <a @click="handleRebootBySOFT(record)">軟重啟實例</a>
@@ -434,6 +434,9 @@
         }
         //let that = this;
         this.$router.push({name: 'instance-OsInstanceDetail',params:{id:this.selectionRows[0].id,projectId:this.selectionRows[0].projectId,selectKey:'2'}})
+      },
+      handleShowConsoleRecord(record){
+        this.$router.push({name: 'instance-OsInstanceDetail',params:{id:record.id,projectId:record.projectId,selectKey:'2'}})
       },
       handleCreateSnapshot(record){
         let that = this;
