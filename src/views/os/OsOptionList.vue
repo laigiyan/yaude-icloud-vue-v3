@@ -211,7 +211,9 @@
           }
           httpAction(httpurl,formData,method).then((res)=>{
             if(res.success){
-              this.loadData();
+              setTimeout(() => {
+                this.loadData();
+              }, 500)
             }else{
               that.$message.warning(res.message);
             }
