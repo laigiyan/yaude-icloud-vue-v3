@@ -122,6 +122,7 @@
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import SysLicenseModal from './modules/SysLicenseModal'
   import { httpAction, getAction } from '@/api/manage'
+  import { downloadFile } from '@/api/manage'
 
   export default {
     name: 'SysLicenseList',
@@ -153,11 +154,6 @@
             title:'密钥别称',
             align:"center",
             dataIndex: 'privateAlias'
-          },
-          {
-            title:'密钥密码',
-            align:"center",
-            dataIndex: 'keyPass'
           },
           {
             title:'证书生效时间',
@@ -196,7 +192,7 @@
           exportXlsUrl: "/licensePackage/sysLicense/exportXls",
           importExcelUrl: "licensePackage/sysLicense/importExcel",
           generateLicense: "/license/generateLicense",
-
+          downloadCertificate: "licensePackage/sysLicense/downloadCertificate",
         },
         dictOptions:{},
         superFieldList:[],
@@ -213,10 +209,18 @@
     methods: {
       initDictConfig(){
       },
+      //认证
       generate(record){
         const that = this;
         this.model = Object.assign({}, record);
+        //自定义需要校验的License参数
+        let macdate = this.model.macAddress.split(",");
+        let ipdate = this.model.ipAddress.split(",");
         let formData= {
+          ipAddress: ipdate,
+          macAddress: macdate,
+          cpuSerial: this.model.cpuSerial,
+          mainBoardSerial: this.model.mainBoardSerial,
           oldIpAddress: this.model.oldIpAddress
         };
         this.model.licenseCheckModel = formData;
@@ -225,11 +229,18 @@
         httpAction(httpurl,this.model,method).then((res)=>{
           if(res.result=="ok"){
             that.$message.success("認證成功！")
-            that.$emit('ok');
+            //that.$emit('ok');
+            this.downCertificate(this.model);
           }else{
             that.$message.warning(res.message);
           }
         })
+      },
+      //下载认证
+      downCertificate(record){
+        let name = record.subject+"_license.lic";
+        let formData = record;
+        downloadFile(this.url.downloadCertificate,name,formData);
       },
       getSuperFieldList(){
         let fieldList=[];
