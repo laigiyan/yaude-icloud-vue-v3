@@ -151,11 +151,6 @@
             dataIndex: 'subject'
           },
           {
-            title:'密钥别称',
-            align:"center",
-            dataIndex: 'privateAlias'
-          },
-          {
             title:'证书生效时间',
             align:"center",
             dataIndex: 'issuedTime',

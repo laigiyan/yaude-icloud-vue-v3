@@ -13,7 +13,7 @@
               <a-input v-model="model.privateAlias" placeholder="请输入密钥别称"  ></a-input>
             </a-form-model-item>
           </a-col>-->
-          <a-col :span="24">
+        <!--  <a-col :span="24">
             <a-form-model-item label="密钥密码" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="keyPass">
               <a-input v-model="model.keyPass" placeholder="请输入密钥密码"  ></a-input>
             </a-form-model-item>
@@ -22,7 +22,7 @@
             <a-form-model-item label="访问秘钥库的密码" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="storePass">
               <a-input v-model="model.storePass" placeholder="请输入访问秘钥库的密码"  ></a-input>
             </a-form-model-item>
-          </a-col>
+          </a-col>-->
           <!--<a-col :span="24">
             <a-form-model-item label="证书生成路径" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="licensePath">
               <a-input v-model="model.licensePath" placeholder="请输入证书生成路径"  ></a-input>
