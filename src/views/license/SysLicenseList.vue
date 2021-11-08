@@ -241,9 +241,6 @@
         let fieldList=[];
         fieldList.push({type:'string',value:'subject',text:'证书名称',dictCode:''})
         fieldList.push({type:'string',value:'privateAlias',text:'密钥别称',dictCode:''})
-        fieldList.push({type:'string',value:'keyPass',text:'密钥密码',dictCode:''})
-        fieldList.push({type:'string',value:'storePass',text:'访问秘钥库的密码',dictCode:''})
-        fieldList.push({type:'string',value:'licensePath',text:'证书生成路径',dictCode:''})
         fieldList.push({type:'string',value:'privateKeysStorePath',text:'密钥库存储路径',dictCode:''})
         fieldList.push({type:'date',value:'issuedTime',text:'证书生效时间'})
         fieldList.push({type:'date',value:'expiryTime',text:'证书失效时间'})
