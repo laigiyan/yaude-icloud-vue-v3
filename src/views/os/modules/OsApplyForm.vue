@@ -132,6 +132,9 @@
            imgId: [
               { required: true, message: '請輸入映像檔id!'},
            ],
+          isDelete:[
+            { required: true, message: '請選擇是否刪除卷!'},
+          ],
            flavorId: [
               { required: true, message: '請輸入虛擬硬體樣板id!'},
            ],
