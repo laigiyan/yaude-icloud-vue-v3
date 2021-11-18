@@ -2,7 +2,9 @@ import { getAction, deleteAction, putAction, postAction, httpAction } from '@/ap
 import Vue from 'vue'
 import {UI_CACHE_DB_DICT_DATA,UI_CACHE_TRANSLATE_DATA } from "@/store/mutation-types"
 import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
+import zhTW from 'ant-design-vue/lib/locale-provider/zh_TW'
 import enUS from 'ant-design-vue/lib/locale-provider/en_US'
+
 
 //角色管理
 const addRole = (params)=>postAction("/sys/role/add",params);
