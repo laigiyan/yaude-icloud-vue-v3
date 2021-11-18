@@ -100,13 +100,13 @@
         if (!this.multipage) {
           this.linkList = [newRoute.fullPath]
           this.pageList = [Object.assign({},newRoute)]
-        // update-begin-author:taoyan date:20200211 for: TASK #3368 【路由緩存】首頁的緩存設置有問題，需要根據後台的路由配置來實現是否緩存
+        // update-begin-author:taoyan date:20200211 for: TASK #3368 【路由緩存】首頁的緩存設置有問題，需要根據後臺的路由配置來實現是否緩存
         } else if(indexKey==newRoute.fullPath) {
           //首頁時 判斷是否緩存 沒有緩存 刷新之
           if (newRoute.meta.keepAlive === false) {
             this.routeReload()
           }
-        // update-end-author:taoyan date:20200211 for: TASK #3368 【路由緩存】首頁的緩存設置有問題，需要根據後台的路由配置來實現是否緩存
+        // update-end-author:taoyan date:20200211 for: TASK #3368 【路由緩存】首頁的緩存設置有問題，需要根據後臺的路由配置來實現是否緩存
         }else if (this.linkList.indexOf(newRoute.fullPath) < 0) {
           this.linkList.push(newRoute.fullPath)
           this.pageList.push(Object.assign({},newRoute))
@@ -182,7 +182,7 @@
         this.$nextTick(() => {
           //update-begin-author:taoyan date: 20201211 for:【新版】online報錯 JT-100
          setTimeout(()=>{
-           //省市區組件裡面給window綁定了個resize事件 導致切換頁面的時候觸發了他的resize，但是切換頁面，省市區組件還沒被銷毀前就觸發了該事件，導致控制台報錯，加個延遲
+           //省市區組件裡面給window綁定了個resize事件 導致切換頁面的時候觸發了他的resize，但是切換頁面，省市區組件還沒被銷毀前就觸發了該事件，導致控制臺報錯，加個延遲
            triggerWindowResizeEvent()
          },20)
           //update-end-author:taoyan date: 20201211 for:【新版】online報錯 JT-100

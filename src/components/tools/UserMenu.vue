@@ -144,7 +144,7 @@
     },
     computed: {
       ...mapState({
-        // 後台菜單
+        // 後臺菜單
         permissionMenuList: state => state.user.permissionList
 
       })

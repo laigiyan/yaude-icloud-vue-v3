@@ -1,8 +1,8 @@
 <template>
   <div class="components-input-demo-presuffix">
     <!---->
-    <a-input @click="openModal" placeholder="请点击选择部门" v-model="textVals" readOnly :disabled="disabled">
-      <a-icon slot="prefix" type="cluster" title="部门选择控件"/>
+    <a-input @click="openModal" placeholder="請點擊選擇部門" v-model="textVals" readOnly :disabled="disabled">
+      <a-icon slot="prefix" type="cluster" title="部門選擇控件"/>
       <a-icon v-if="storeVals" slot="suffix" type="close-circle" @click="handleEmpty" title="清空"/>
     </a-input>
 
@@ -53,7 +53,7 @@
         required: false,
         default: false
       },
-      // 自定义返回字段，默认返回 id
+      // 自定義返回字段，默認返回 id
       customReturnField: {
         type: String,
         default: ''
@@ -63,13 +63,13 @@
         default: false,
         required: false
       },
-      // 存储字段 [key field]
+      // 存儲字段 [key field]
       store: {
         type: String,
         default: 'id',
         required: false
       },
-      // 显示字段 [label field]
+      // 顯示字段 [label field]
       text: {
         type: String,
         default: 'departName',
@@ -114,7 +114,7 @@
       initComp(textVals){
         this.textVals = textVals
       },
-      //返回选中的部门信息
+      //返回選中的部門信息
       backDeparInfo(){
         if(this.backDepart===true){
           if(this.departIds && this.departIds.length>0){

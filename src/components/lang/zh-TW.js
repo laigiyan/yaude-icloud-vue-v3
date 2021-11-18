@@ -1,9 +1,9 @@
 // zh-CN.js
 export default {
   langValue: 'zh-TW',
-  lang: '繁体中文',
-  age:'年龄',
-  sex:'性别',
+  lang: '中文',
+  age:'年齡',
+  sex:'性別',
   welcome:'歡迎您',
   sexText:{
     typeDict:{
@@ -14,8 +14,8 @@ export default {
   },
   announcement: {
     typeDict:{
-      '22': '系统公告',
-      '28': '维护公告',
+      '22': '系統公告',
+      '28': '維護公告',
     }
   }
 }

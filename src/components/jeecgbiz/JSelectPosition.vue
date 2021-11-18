@@ -12,7 +12,7 @@
     data() {
       return {
         settings: {
-          name: '职务',
+          name: '職務',
           displayKey: 'name',
           returnKeys: ['id', 'code'],
           listUrl: '/sys/position/list',

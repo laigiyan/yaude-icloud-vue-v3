@@ -8,7 +8,7 @@
   </a-radio-group>
 
   <a-select v-else-if="tagType=='select'" :getPopupContainer = "getPopupContainer" :placeholder="placeholder" :disabled="disabled" :value="getValueSting" @change="handleInput">
-    <a-select-option :value="undefined">请选择</a-select-option>
+    <a-select-option :value="undefined">請選擇</a-select-option>
     <a-select-option v-for="(item, key) in dictOptions" :key="key" :value="item.value">
       <span style="display: inline-block;width: 100%" :title=" item.text || item.label ">
         {{ item.text || item.label }}
@@ -54,26 +54,26 @@
       }else{
         this.tagType = this.type
       }
-      //获取字典数据
+      //獲取字典數據
       // this.initDictData();
     },
     computed: {
       getValueSting(){
-        // update-begin author:wangshuai date:20200601 for: 不显示placeholder的文字 ------
-        // 当有null或“” placeholder不显示
+        // update-begin author:wangshuai date:20200601 for: 不顯示placeholder的文字 ------
+        // 當有null或“” placeholder不顯示
         return this.value != null ? this.value.toString() : undefined;
-        // update-end author:wangshuai date:20200601 for: 不显示placeholder的文字 ------
+        // update-end author:wangshuai date:20200601 for: 不顯示placeholder的文字 ------
       },
     },
     methods: {
       initDictData() {
-        //优先从缓存中读取字典配置
+        //優先從緩存中讀取字典配置
         if(getDictItemsFromCache(this.dictCode)){
           this.dictOptions = getDictItemsFromCache(this.dictCode);
           return
         }
 
-        //根据字典Code, 初始化字典数组
+        //根據字典Code, 初始化字典數組
         ajaxGetDictItems(this.dictCode, null).then((res) => {
           if (res.success) {
 //                console.log(res.result);

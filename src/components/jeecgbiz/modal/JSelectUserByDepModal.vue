@@ -8,12 +8,12 @@
     @ok="handleSubmit"
     @cancel="close"
     style="top:50px"
-    cancelText="关闭"
+    cancelText="關閉"
   >
     <a-row :gutter="10" style="background-color: #ececec; padding: 10px; margin: -10px">
       <a-col :md="6" :sm="24">
         <a-card :bordered="false">
-          <!--组织机构-->
+          <!--組織機構-->
           <a-directory-tree
             selectable
             :selectedKeys="selectedDepIds"
@@ -28,15 +28,15 @@
       </a-col>
       <a-col :md="18" :sm="24">
         <a-card :bordered="false">
-          用户账号:
+          用戶賬號:
           <a-input-search
             :style="{width:'150px',marginBottom:'15px'}"
-            placeholder="请输入账号"
+            placeholder="請輸入賬號"
             v-model="queryParam.username"
             @search="onSearch"
           ></a-input-search>
           <a-button @click="searchReset(1)" style="margin-left: 20px" icon="redo">重置</a-button>
-          <!--用户列表-->
+          <!--用戶列表-->
           <a-table
             ref="table"
             :scroll="scrollTrigger"
@@ -71,17 +71,17 @@
         },
         columns: [
           {
-            title: '用户账号',
+            title: '用戶賬號',
             align: 'center',
             dataIndex: 'username'
           },
           {
-            title: '用户姓名',
+            title: '用戶姓名',
             align: 'center',
             dataIndex: 'realname'
           },
           {
-            title: '性别',
+            title: '性別',
             align: 'center',
             dataIndex: 'sex',
             customRender: function (text) {
@@ -95,12 +95,12 @@
             }
           },
           {
-            title: '手机',
+            title: '手機',
             align: 'center',
             dataIndex: 'phone'
           },
           {
-            title: '部门',
+            title: '部門',
             align: 'center',
             dataIndex: 'orgCodeTxt'
           }
@@ -111,13 +111,13 @@
         selectedRowKeys: [],
         selectUserRows: [],
         selectUserIds: [],
-        title: '根据部门选择用户',
+        title: '根據部門選擇用戶',
         ipagination: {
           current: 1,
           pageSize: 10,
           pageSizeOptions: ['10', '20', '30'],
           showTotal: (total, range) => {
-            return range[0] + '-' + range[1] + ' 共' + total + '条'
+            return range[0] + '-' + range[1] + ' 共' + total + '條'
           },
           showQuickJumper: true,
           showSizeChanger: true,
@@ -136,7 +136,7 @@
       }
     },
     computed: {
-      // 计算属性的 getter
+      // 計算屬性的 getter
       getType: function () {
         return this.multi == true ? 'checkbox' : 'radio';
       }
@@ -150,14 +150,14 @@
       },
     },
     created() {
-      // 该方法触发屏幕自适应
+      // 該方法觸發屏幕自適應
       this.resetScreenSize();
       this.loadData()
     },
     methods: {
       initUserNames() {
         if (this.userIds) {
-          // 这里最后加一个 , 的原因是因为无论如何都要使用 in 查询，防止后台进行了模糊匹配，导致查询结果不准确
+          // 這里最后加一個 , 的原因是因為無論如何都要使用 in 查詢，防止后臺進行了模糊匹配，導致查詢結果不準確
           let values = this.userIds.split(',') + ','
           let param = {[this.store]: values}
           getAction('/sys/user/getMultiUser', param).then((list)=>{
@@ -176,9 +176,9 @@
           })
 
         } else {
-          // JSelectUserByDep组件bug issues/I16634
+          // JSelectUserByDep組件bug issues/I16634
           this.$emit('initComp', '')
-          // 前端用户选择单选无法置空的问题 #2610
+          // 前端用戶選擇單選無法置空的問題 #2610
           this.selectedRowKeys = []
         }
       },
@@ -186,7 +186,7 @@
         if (arg === 1) {
           this.ipagination.current = 1;
         }
-        let params = this.getQueryParams()//查询条件
+        let params = this.getQueryParams()//查詢條件
         this.loading = true
         getAction('/sys/user/queryUserComponentData', params).then(res=>{
           if (res.success) {
@@ -197,7 +197,7 @@
           this.loading = false
         })
       },
-      // 触发屏幕自适应
+      // 觸發屏幕自適應
       resetScreenSize() {
         let screenWidth = document.body.clientWidth;
         if (screenWidth < 500) {
@@ -243,7 +243,7 @@
         this.visible = false;
       },
       handleTableChange(pagination, filters, sorter) {
-        //TODO 筛选
+        //TODO 篩選
         if (Object.keys(sorter).length > 0) {
           this.isorter.column = sorter.field;
           this.isorter.order = 'ascend' === sorter.order ? 'asc' : 'desc';
@@ -258,7 +258,7 @@
         that.searchReset(0)
         that.close();
       },
-      //获取选择用户信息
+      //獲取選擇用戶信息
       getSelectUserRows() {
         this.selectUserRows = []
         for (let row of this.selectionRows) {
@@ -268,7 +268,7 @@
         }
         this.selectUserIds = this.selectUserRows.map(row => row.username).join(',')
       },
-      // 点击树节点,筛选出对应的用户
+      // 點擊樹節點,篩選出對應的用戶
       onDepSelect(selectedDepIds) {
         if (selectedDepIds[0] != null) {
           if (this.selectedDepIds[0] !== selectedDepIds[0]) {
@@ -284,7 +284,7 @@
       onSearch() {
         this.loadData(1);
       },
-      // 根据选择的id来查询用户信息
+      // 根據選擇的id來查詢用戶信息
       initQueryUserByDepId(selectedDepIds) {
         this.loading = true
         return queryUserByDepId({id: selectedDepIds.toString()}).then((res) => {
@@ -300,7 +300,7 @@
         queryDepartTreeList().then((res) => {
           if (res.success) {
             this.departTree = res.result;
-            // 默认展开父节点
+            // 默認展開父節點
             this.expandedKeys = this.departTree.map(item => item.id)
           }
         })

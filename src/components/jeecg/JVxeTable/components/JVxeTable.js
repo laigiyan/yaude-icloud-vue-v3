@@ -31,7 +31,7 @@ export default {
       type: Array,
       required: true
     },
-    // 数据源
+    // 數據源
     dataSource: {
       type: Array,
       required: true
@@ -41,26 +41,26 @@ export default {
       required: false,
       default: ''
     },
-    // 是否显示工具栏
+    // 是否顯示工具欄
     toolbar: PropTypes.bool.def(false),
-    // 工具栏配置
+    // 工具欄配置
     toolbarConfig: PropTypes.object.def(() => ({
-      // prefix 前缀；suffix 后缀；
+      // prefix 前綴；suffix 后綴；
       slots: ['prefix', 'suffix'],
-      // add 新增按钮；remove 删除按钮；clearSelection 清空选择按钮；collapse 展开收起
+      // add 新增按鈕；remove 刪除按鈕；clearSelection 清空選擇按鈕；collapse 展開收起
       btns: ['add', 'remove', 'clearSelection'],
     })),
-    // 是否显示行号
+    // 是否顯示行號
     rowNumber: PropTypes.bool.def(false),
-    // 是否可选择行
+    // 是否可選擇行
     rowSelection: PropTypes.bool.def(false),
-    // 选择行类型
+    // 選擇行類型
     rowSelectionType: PropTypes.oneOf(['checkbox', 'radio']).def('checkbox'),
-    // 是否可展开行
+    // 是否可展開行
     rowExpand: PropTypes.bool.def(false),
-    // 展开行配置
+    // 展開行配置
     expandConfig: PropTypes.object.def(() => ({})),
-    // 页面是否在加载中
+    // 頁面是否在加載中
     loading: PropTypes.bool.def(false),
     height: PropTypes.instanceOf([Number, String]).def('auto'),
     // 最大高度
@@ -68,67 +68,67 @@ export default {
       type: Number,
       default: () => null,
     },
-    // 要禁用的行 TODO 未实现
+    // 要禁用的行 TODO 未實現
     disabledRows: PropTypes.object.def(() => ({})),
-    // 是否禁用全部组件
+    // 是否禁用全部組件
     disabled: PropTypes.bool.def(false),
-    // 是否可拖拽排序 TODO 仅实现上下排序，未实现拖拽排序（可能无法实现或较为困难）
+    // 是否可拖拽排序 TODO 僅實現上下排序，未實現拖拽排序（可能無法實現或較為困難）
     dragSort: PropTypes.bool.def(false),
     // 排序字段保存的Key
     dragSortKey: PropTypes.string.def('orderNum'),
-    // 大小，可选值有：medium（中）、small（小）、mini（微）、tiny（非常小）
+    // 大小，可選值有：medium（中）、small（小）、mini（微）、tiny（非常小）
     size: PropTypes.oneOf(['medium', 'small', 'mini', 'tiny']).def('medium'),
-    // 是否显示边框线
+    // 是否顯示邊框線
     bordered: PropTypes.bool.def(false),
-    // 分页器参数，设置了即可显示分页器
+    // 分頁器參數，設置了即可顯示分頁器
     pagination: PropTypes.object.def(() => ({})),
-    // 点击行时是否显示子表单
+    // 點擊行時是否顯示子表單
     clickRowShowSubForm: PropTypes.bool.def(false),
-    // 点击行时是否显示主表单
+    // 點擊行時是否顯示主表單
     clickRowShowMainForm: PropTypes.bool.def(false),
-    // 是否点击选中行，优先级最低
+    // 是否點擊選中行，優先級最低
     clickSelectRow: PropTypes.bool.def(false),
-    // 是否开启 reload 数据效果
+    // 是否開啟 reload 數據效果
     reloadEffect: PropTypes.bool.def(false),
-    // 校验规则
+    // 校驗規則
     editRules: PropTypes.object.def(() => ({})),
-    // 是否异步删除行，如果你要实现异步删除，那么需要把这个选项开启，
-    // 在remove事件里调用confirmRemove方法才会真正删除（除非删除的全是新增的行）
+    // 是否異步刪除行，如果你要實現異步刪除，那么需要把這個選項開啟，
+    // 在remove事件里調用confirmRemove方法才會真正刪除（除非刪除的全是新增的行）
     asyncRemove: PropTypes.bool.def(false),
-    // 是否一直显示组件，如果为false则只有点击的时候才出现组件
-    // 注：该参数不能动态修改；如果行、列字段多的情况下，会根据机器性能造成不同程度的卡顿。
+    // 是否一直顯示組件，如果為false則只有點擊的時候才出現組件
+    // 注：該參數不能動態修改；如果行、列字段多的情況下，會根據機器性能造成不同程度的卡頓。
     alwaysEdit: PropTypes.bool.def(false),
   },
   data() {
     return {
       isJVXETable: true,
-      // caseId，表格唯一标识
+      // caseId，表格唯一標識
       caseId: `_j-vxe-${randomString(8)}_`,
-      // 内置columns
+      // 內置columns
       _innerColumns: [],
-      // 内置 EditRules
+      // 內置 EditRules
       _innerEditRules: [],
-      // 记录滚动条位置
+      // 記錄滾動條位置
       scroll: {top: 0, left: 0},
-      // 当前是否正在滚动
+      // 當前是否正在滾動
       scrolling: false,
-      // vxe 默认配置
+      // vxe 默認配置
       defaultVxeProps: {
         'row-id': this.rowKey,
         // 高亮hover的行
         'highlight-hover-row': true,
-        // 溢出隐藏并显示tooltip
+        // 溢出隱藏并顯示tooltip
         'show-overflow': true,
-        // 表头溢出隐藏并显示tooltip
+        // 表頭溢出隱藏并顯示tooltip
         'show-header-overflow': true,
         'show-footer-overflow': true,
-        // 可编辑配置
+        // 可編輯配置
         'edit-config': {trigger: 'click', mode: 'cell', showStatus: true},
         'expand-config': {
           iconClose: 'ant-table-row-expand-icon ant-table-row-collapsed',
           iconOpen: 'ant-table-row-expand-icon ant-table-row-expanded'
         },
-        // 虚拟滚动配置，y轴大于30条数据时启用虚拟滚动
+        // 虛擬滾動配置，y軸大于30條數據時啟用虛擬滾動
         // 'scroll-y': {
         //   gt: 30
         // },
@@ -138,25 +138,25 @@ export default {
         'radio-config': {highlight: true},
         'checkbox-config': {highlight: true},
       },
-      // 绑定左侧选择框
+      // 綁定左側選擇框
       selectedRows: [],
-      // 绑定左侧选择框已选择的id
+      // 綁定左側選擇框已選擇的id
       selectedRowIds: [],
-      // 统计列配置
+      // 統計列配置
       statistics: {
         has: false,
         sum: [],
         average: [],
       },
-      // 允许执行刷新特效的行ID
+      // 允許執行刷新特效的行ID
       reloadEffectRowKeysMap: {},
-      //配置了但是没有授权的按钮和列 集合
+      //配置了但是沒有授權的按鈕和列 集合
       excludeCode:[]
     }
   },
   computed: {
 
-    // vxe 最终 columns
+    // vxe 最終 columns
     vxeColumns() {
       this._innerColumns.forEach(column => {
         let renderOptions = {
@@ -171,7 +171,7 @@ export default {
         if (column.$type === JVXETypes.rowDragSort) {
           renderOptions.dragSortKey = this.dragSortKey
         }
-        // slot 组件特殊处理
+        // slot 組件特殊處理
         if (column.$type === JVXETypes.slot) {
           if (this.$scopedSlots.hasOwnProperty(column.slotName)) {
             renderOptions.slot = this.$scopedSlots[column.slotName]
@@ -184,15 +184,15 @@ export default {
         if (column.cellRender) {
           Object.assign(column.cellRender, renderOptions)
         }
-        // update--begin--autor:lvdandan-----date:20201019------for:LOWCOD-882 【新行编辑】列表上带按钮的遮挡问题
+        // update--begin--autor:lvdandan-----date:20201019------for:LOWCOD-882 【新行編輯】列表上帶按鈕的遮擋問題
         if (column.$type === JVXETypes.file || column.$type === JVXETypes.image) {
           if (column.width && column.width.endsWith('px')) {
             column.width = Number.parseInt(column.width.substr(0,column.width.length-2))+Number.parseInt(1)+'px';
           }
         }
-        // update--begin--autor:lvdandan-----date:20201019------for:LOWCOD-882 【新行编辑】列表上带按钮的遮挡问题
+        // update--begin--autor:lvdandan-----date:20201019------for:LOWCOD-882 【新行編輯】列表上帶按鈕的遮擋問題
 
-        // update--begin--autor:lvdandan-----date:20201211------for:JT-118 【online】 日期、时间控件长度较小
+        // update--begin--autor:lvdandan-----date:20201211------for:JT-118 【online】 日期、時間控件長度較小
         if (column.$type === JVXETypes.datetime || column.$type === JVXETypes.userSelect || column.$type === JVXETypes.departSelect) {
           let width = column.width && column.width.endsWith('px')?Number.parseInt(column.width.substr(0,column.width.length-2)):0;
           if(width <= 190){
@@ -205,15 +205,15 @@ export default {
             column.width = '135px'
           }
         }
-        // update--end--autor:lvdandan-----date:20201211------for:JT-118 【online】 日期、时间控件长度较小
+        // update--end--autor:lvdandan-----date:20201211------for:JT-118 【online】 日期、時間控件長度較小
       })
       return this._innerColumns
     },
-    // vxe 最终 editRules
+    // vxe 最終 editRules
     vxeEditRules() {
       return Object.assign({}, this.editRules, this._innerEditRules)
     },
-    // vxe 最终 props
+    // vxe 最終 props
     vxeProps() {
       let expandConfig = Object.assign({}, this.defaultVxeProps['expand-config'], this.expandConfig)
 
@@ -232,9 +232,9 @@ export default {
         // footerSpanMethod: this.handleFooterSpanMethod,
       })
     },
-    // vxe 最终 events
+    // vxe 最終 events
     vxeEvents() {
-      // 内置事件
+      // 內置事件
       let events = {
         'scroll': this.handleVxeScroll,
         'cell-click': this.handleCellClick,
@@ -244,7 +244,7 @@ export default {
         'checkbox-all': this.handleVxeCheckboxAll,
         'checkbox-change': this.handleVxeCheckboxChange,
       }
-      // 用户传递的事件，进行合并操作
+      // 用戶傳遞的事件，進行合并操作
       Object.keys(this.$listeners).forEach(key => {
         let listen = this.$listeners[key]
         if (events.hasOwnProperty(key)) {
@@ -258,16 +258,16 @@ export default {
       })
       return events
     },
-    // 组件监听事件
+    // 組件監聽事件
     cellListeners() {
       return {
         trigger: (name, event) => this.trigger(name, event),
         valueChange: event => this.trigger('valueChange', event),
-        /** 当前行向上移一位 */
+        /** 當前行向上移一位 */
         rowMoveUp: rowIndex => this.rowResort(rowIndex, rowIndex - 1),
-        /** 当前行向下移一位 */
+        /** 當前行向下移一位 */
         rowMoveDown: rowIndex => this.rowResort(rowIndex, rowIndex + 1),
-        /** 在当前行下面插入一行 */
+        /** 在當前行下面插入一行 */
         rowInsertDown: rowIndex => this.insertRows({}, rowIndex + 1),
       }
     },
@@ -278,9 +278,9 @@ export default {
       immediate: true,
       async handler() {
         let vxe = await getRefPromise(this, 'vxe')
-        // 阻断vue监听大数据，提高性能
+        // 阻斷vue監聽大數據，提高性能
 
-        // 开启了排序就自动计算排序值
+        // 開啟了排序就自動計算排序值
         if (this.dragSort) {
           this.dataSource.forEach((data, idx) => {
             this.$set(data, this.dragSortKey, idx + 1)
@@ -295,11 +295,11 @@ export default {
         // let disabledRowIds = (this.disabledRowIds || [])
         // // 解析disabledRows
         // Object.keys(this.disabledRows).forEach(disabledColKey => {
-        //   // 判断是否有该属性
+        //   // 判斷是否有該屬性
         //   if (data.hasOwnProperty(disabledColKey)) {
         //     if (disabled !== true) {
         //       let temp = this.disabledRows[disabledColKey]
-        //       // 禁用规则可以是一个数组
+        //       // 禁用規則可以是一個數組
         //       if (Array.isArray(temp)) {
         //         disabled = temp.includes(data[disabledColKey])
         //       } else {
@@ -316,7 +316,7 @@ export default {
     columns: {
       immediate: true,
       handler(columns) {
-        //获取不需要显示列
+        //獲取不需要顯示列
         this.loadExcludeCode()
         let _innerColumns = []
         let _innerEditRules = {}
@@ -327,7 +327,7 @@ export default {
           this.statistics.sum = []
           this.statistics.average = []
 
-          // 处理成vxe可识别的columns
+          // 處理成vxe可識別的columns
           columns.forEach(column => {
             if(this.excludeCode.indexOf(column.key)>=0){
               return false
@@ -347,12 +347,12 @@ export default {
               dragSortColumn = col
             } else {
               col.field = col.key
-              // 防止和vxeTable自带的type起冲突
+              // 防止和vxeTable自帶的type起沖突
               col.$type = col.type
               delete col.type
               let renderName = 'cellRender', renderOptions = {name: JVXETypes._prefix + type}
               if (type) {
-                // hidden 是特殊的组件
+                // hidden 是特殊的組件
                 if (type === JVXETypes.hidden) {
                   col.visible = false
                 } else if (enhanced.switches.editRender) {
@@ -363,11 +363,11 @@ export default {
                 renderOptions.name = JVXETypes._prefix + JVXETypes.normal
               }
               col[renderName] = renderOptions
-              // 处理字典
+              // 處理字典
               if (col.dictCode) {
                 this._loadDictConcatToOptions(col)
               }
-              // 处理校验
+              // 處理校驗
               if (col.validateRules) {
                 let rules = []
                 if (Array.isArray(col.validateRules)) {
@@ -376,7 +376,7 @@ export default {
                       message: replaceProps(col, rule.message)
                     }
                     if (rule.unique || rule.pattern === 'only') {
-                      // 唯一校验器
+                      // 唯一校驗器
                       rule.validator = uniqueValidator.bind(this)
                     } else if (rule.pattern) {
                       // 非空
@@ -384,7 +384,7 @@ export default {
                         rule.required = true
                         delete rule.pattern
                       } else {
-                        // 兼容Online表单的特殊规则
+                        // 兼容Online表單的特殊規則
                         for (let foo of fooPatterns) {
                           if (foo.value === rule.pattern) {
                             rule.pattern = foo.pattern
@@ -393,7 +393,7 @@ export default {
                         }
                       }
                     } else if (typeof rule.handler === 'function') {
-                      // 自定义函数校验
+                      // 自定義函數校驗
                       rule.validator = handlerConvertToValidator.bind(this)
                     }
                     rules.push(Object.assign({}, rule, replace))
@@ -401,7 +401,7 @@ export default {
                 }
                 _innerEditRules[col.key] = rules
               }
-              // 处理统计列
+              // 處理統計列
               // sum = 求和、average = 平均值
               if (Array.isArray(col.statistics)) {
                 this.statistics.has = true
@@ -416,7 +416,7 @@ export default {
             }
           })
         }
-        // 判断是否开启了序号
+        // 判斷是否開啟了序號
         if (rowNumber) {
           let col = {type: 'seq', title: '#', width: 60, fixed: 'left', align: 'center'}
           if (seqColumn) {
@@ -424,7 +424,7 @@ export default {
           }
           _innerColumns.unshift(col)
         }
-        // 判断是否开启了可选择行
+        // 判斷是否開啟了可選擇行
         if (rowSelection) {
           let width = 40
           if (this.statistics.has && !rowExpand && !dragSort) {
@@ -441,7 +441,7 @@ export default {
           }
           _innerColumns.unshift(col)
         }
-        // 是否可展开行
+        // 是否可展開行
         if (rowExpand) {
           let width = 40
           if (this.statistics.has && !dragSort) {
@@ -453,7 +453,7 @@ export default {
           }
           _innerColumns.unshift(col)
         }
-        // 是否可拖动排序
+        // 是否可拖動排序
         if (dragSort) {
           let width = 40
           if (this.statistics.has) {
@@ -479,25 +479,25 @@ export default {
   methods: {
 
     /**
-     * 自动判断父级是否是 <a-tabs/> 组件，然后添加事件监听，自动重置表格
+     * 自動判斷父級是否是 <a-tabs/> 組件，然后添加事件監聽，自動重置表格
      */
     handleTabsChange() {
-      // 获取父级
+      // 獲取父級
       const tabs = getVmParentByName(this, 'ATabs')
       const tabPane = getVmParentByName(this, 'ATabPane')
       if (tabs && tabPane) {
-        // 用户自定义的 key
+        // 用戶自定義的 key
         const currentKey = tabPane.$vnode.key
-        // 添加 activeKey 监听
+        // 添加 activeKey 監聽
         const unwatch = tabs.$children[0].$watch('$data._activeKey', async (key) => {
-          // 切换到自己时重新计算
+          // 切換到自己時重新計算
           if (currentKey === key) {
             await this.$nextTick()
             await this.refreshScroll()
             await this.recalculate()
           }
         })
-        // 当前实例销毁时取消监听
+        // 當前實例銷毀時取消監聽
         this.$on('beforeDestroy', () => unwatch())
       }
     },
@@ -505,7 +505,7 @@ export default {
     handleVxeScroll(event) {
       let {$refs, scroll} = this
 
-      // 记录滚动条的位置
+      // 記錄滾動條的位置
       scroll.top = event.scrollTop
       scroll.left = event.scrollLeft
 
@@ -513,23 +513,23 @@ export default {
       this.scrolling = true
       this.closeScrolling()
     },
-    // 当手动勾选单选时触发的事件
+    // 當手動勾選單選時觸發的事件
     handleVxeRadioChange(event) {
       let row = event.$table.getRadioRecord()
       this.selectedRows = row ? [row] : []
       this.handleSelectChange('radio', this.selectedRows, event)
     },
-    // 当手动勾选全选时触发的事件
+    // 當手動勾選全選時觸發的事件
     handleVxeCheckboxAll(event) {
       this.selectedRows = event.$table.getCheckboxRecords()
       this.handleSelectChange('checkbox-all', this.selectedRows, event)
     },
-    // 当手动勾选并且值发生改变时触发的事件
+    // 當手動勾選并且值發生改變時觸發的事件
     handleVxeCheckboxChange(event) {
       this.selectedRows = event.$table.getCheckboxRecords()
       this.handleSelectChange('checkbox', this.selectedRows, event)
     },
-    // 行选择change事件
+    // 行選擇change事件
     handleSelectChange(type, selectedRows, $event) {
       let action
       if (type === 'radio') {
@@ -551,20 +551,20 @@ export default {
       })
     },
 
-    // 点击单元格时触发的事件
+    // 點擊單元格時觸發的事件
     handleCellClick(event) {
       let {row, column, $event, $table} = event
       let {$refs} = this
 
-      // 点击了可编辑的
+      // 點擊了可編輯的
       if (column.editRender) {
         $refs.subPopover ? $refs.subPopover.close() : null
         return
       }
 
-      // 显示详细信息
+      // 顯示詳細信息
       if (column.own.showDetails) {
-        // 两个如果同时存在的话会出现死循环
+        // 兩個如果同時存在的話會出現死循環
         $refs.subPopover ? $refs.subPopover.close() : null
         $refs.detailsModal ? $refs.detailsModal.open(event) : null
       } else if ($refs.subPopover) {
@@ -572,15 +572,15 @@ export default {
       } else if (this.clickSelectRow) {
         let className = $event.target.className || ''
         className = typeof className === 'string' ? className : className.toString()
-        // 点击的是expand，不做处理
+        // 點擊的是expand，不做處理
         if (className.includes('vxe-table--expand-btn')) {
           return
         }
-        // 点击的是checkbox，不做处理
+        // 點擊的是checkbox，不做處理
         if (className.includes('vxe-checkbox--icon') || className.includes('vxe-cell--checkbox')) {
           return
         }
-        // 点击的是radio，不做处理
+        // 點擊的是radio，不做處理
         if (className.includes('vxe-radio--icon') || className.includes('vxe-cell--radio')) {
           return
         }
@@ -594,19 +594,19 @@ export default {
       }
     },
 
-    // 单元格编辑状态下被关闭时会触发该事件
+    // 單元格編輯狀態下被關閉時會觸發該事件
     handleEditClosed({column}) {
-      // 执行增强
+      // 執行增強
       getEnhancedMixins(column.own.$type, 'aopEvents').editClosed.apply(this, arguments)
     },
 
-    // 单元格被激活编辑时会触发该事件
+    // 單元格被激活編輯時會觸發該事件
     handleEditActived({column}) {
-      // 执行增强
+      // 執行增強
       getEnhancedMixins(column.own.$type, 'aopEvents').editActived.apply(this, arguments)
     },
 
-    /** 表尾数据处理方法，用于显示统计信息 */
+    /** 表尾數據處理方法，用于顯示統計信息 */
     handleFooterMethod({columns, data}) {
       const {statistics} = this
       let footers = []
@@ -614,7 +614,7 @@ export default {
         if (statistics.sum.length > 0) {
           footers.push(this.getFooterStatisticsMap({
             columns: columns,
-            title: '合计',
+            title: '合計',
             checks: statistics.sum,
             method: (column) => XEUtils.sum(data, column.property)
           }))
@@ -643,33 +643,33 @@ export default {
       })
     },
 
-    /** 表尾单元格合并方法 */
+    /** 表尾單元格合并方法 */
     handleFooterSpanMethod(event) {
       if (event.columnIndex === 0) {
         return {colspan: 2}
       }
     },
 
-    /*--- 外部可调用接口方法 ---*/
+    /*--- 外部可調用接口方法 ---*/
 
     /**
-     * 重置滚动条Top位置
-     * @param top 新top位置，留空则滚动到上次记录的位置，用于解决切换tab选项卡时导致白屏以及自动将滚动条滚动到顶部的问题
+     * 重置滾動條Top位置
+     * @param top 新top位置，留空則滾動到上次記錄的位置，用于解決切換tab選項卡時導致白屏以及自動將滾動條滾動到頂部的問題
      */
     resetScrollTop(top) {
       this.scrollTo(null, (top == null || top === '') ? this.scroll.top : top)
     },
 
     /**
-     * 加载新数据，和 loadData 不同的是，用该方法加载的数据都是相当于点新增按钮新增的数据。
-     * 适用于不是数据库里查出来的没有id的临时数据
+     * 加載新數據，和 loadData 不同的是，用該方法加載的數據都是相當于點新增按鈕新增的數據。
+     * 適用于不是數據庫里查出來的沒有id的臨時數據
      * @param dataSource
      */
     async loadNewData(dataSource) {
       if (Array.isArray(dataSource)) {
         let {xTable} = this.$refs.vxe.$refs
         // issues/2784
-        // 先清空所有数据
+        // 先清空所有數據
         xTable.loadData([])
         // 再新增
         return xTable.insertAt(dataSource)
@@ -677,21 +677,21 @@ export default {
       return []
     },
 
-    // 校验table，失败返回errMap，成功返回null
+    // 校驗table，失敗返回errMap，成功返回null
     async validateTable() {
       const errMap = await this.validate().catch(errMap => errMap)
       return errMap ? errMap : null
     },
-    // 完整校验
+    // 完整校驗
     async fullValidateTable() {
       const errMap = await this.fullValidate().catch(errMap => errMap)
       return errMap ? errMap : null
     },
 
-    /** 设置某行某列的值 */
+    /** 設置某行某列的值 */
     setValues(values) {
       if (!Array.isArray(values)) {
-        console.warn(`JVxeTable.setValues：必须传递数组`)
+        console.warn(`JVxeTable.setValues：必須傳遞數組`)
         return
       }
       values.forEach((item, idx) => {
@@ -707,7 +707,7 @@ export default {
             let newValue = record[colKey]
             if (newValue !== oldValue) {
               this.$set(row, colKey, newValue)
-              // 触发 valueChange 事件
+              // 觸發 valueChange 事件
               this.trigger('valueChange', {
                 type: column.own.$type,
                 value: newValue,
@@ -718,29 +718,29 @@ export default {
               })
             }
           } else {
-            console.warn(`JVxeTable.setValues：没有找到key为"${colKey}"的列`)
+            console.warn(`JVxeTable.setValues：沒有找到key為"${colKey}"的列`)
           }
         })
       })
     },
 
-    /** 获取所有的数据，包括values、deleteIds */
+    /** 獲取所有的數據，包括values、deleteIds */
     getAll() {
       return {
         tableData: this.getTableData(),
         deleteData: this.getDeleteData()
       }
     },
-    /** 获取表格表单里的值 */
+    /** 獲取表格表單里的值 */
     getValues(callback, rowIds) {
       let tableData = this.getTableData({rowIds: rowIds})
       callback('', tableData)
     },
-    /** 获取表格数据 */
+    /** 獲取表格數據 */
     getTableData(options = {}) {
       let {rowIds} = options
       let tableData
-      // 仅查询指定id的行
+      // 僅查詢指定id的行
       if (Array.isArray(rowIds) && rowIds.length > 0) {
         tableData = []
         rowIds.forEach(rowId => {
@@ -750,36 +750,36 @@ export default {
           }
         })
       } else {
-        // 查询所有行
+        // 查詢所有行
         tableData = this.$refs.vxe.getTableData().fullData
       }
       return this.filterNewRows(tableData, false)
     },
-    /** 仅获取新增的数据 */
+    /** 僅獲取新增的數據 */
     getNewData() {
       let newData = cloneObject(this.$refs.vxe.getInsertRecords())
       newData.forEach(row => delete row.id)
       return newData
     },
-    /** 仅获取新增的数据,带有id */
+    /** 僅獲取新增的數據,帶有id */
     getNewDataWithId() {
       let newData = cloneObject(this.$refs.vxe.getInsertRecords())
       return newData
     },
-    /** 根据ID获取行，新增的行也能查出来 */
+    /** 根據ID獲取行，新增的行也能查出來 */
     getIfRowById(id) {
       let row = this.getRowById(id), isNew = false
       if (!row) {
         row = this.getNewRowById(id)
         if (!row) {
-          console.warn(`JVxeTable.getIfRowById：没有找到id为"${id}"的行`)
+          console.warn(`JVxeTable.getIfRowById：沒有找到id為"${id}"的行`)
           return {row: null}
         }
         isNew = true
       }
       return {row, isNew}
     },
-    /** 通过临时ID获取新增的行 */
+    /** 通過臨時ID獲取新增的行 */
     getNewRowById(id) {
       let records = this.getInsertRecords()
       for (let record of records) {
@@ -789,7 +789,7 @@ export default {
       }
       return null
     },
-    /** 仅获取被删除的数据（新增又被删除的数据不会被获取到） */
+    /** 僅獲取被刪除的數據（新增又被刪除的數據不會被獲取到） */
     getDeleteData() {
       return cloneObject(this.$refs.vxe.getRemoveRecords())
     },
@@ -807,21 +807,21 @@ export default {
      * 添加一行或多行
      *
      * @param rows
-     * @param index 添加下标，数字，必填
+     * @param index 添加下標，數字，必填
      * @return
      */
     async insertRows(rows, index) {
       if (typeof index !== 'number' || index < 0) {
-        console.warn(`【JVXETable】insertRows：index必须传递数字，且大于-1`)
+        console.warn(`【JVXETable】insertRows：index必須傳遞數字，且大于-1`)
         return
       }
       return this._addOrInsert(rows, index, 'inserted')
     },
     /**
-     * 添加一行或多行临时数据，不会填充默认值，传什么就添加进去什么
+     * 添加一行或多行臨時數據，不會填充默認值，傳什么就添加進去什么
      * @param rows
-     * @param options 选项
-     * @param options.setActive 是否激活最后一行的编辑模式
+     * @param options 選項
+     * @param options.setActive 是否激活最后一行的編輯模式
      */
     async pushRows(rows = {}, options = {}) {
       let {xTable} = this.$refs.vxe.$refs
@@ -832,14 +832,14 @@ export default {
       // 插入行
       let result = await xTable.insertAt(rows, index)
       if (setActive) {
-        // 激活最后一行的编辑模式
+        // 激活最后一行的編輯模式
         xTable.setActiveRow(result.rows[result.rows.length - 1])
       }
       await this._recalcSortNumber()
       return result
     },
 
-    /** 清空选择行 */
+    /** 清空選擇行 */
     clearSelection() {
       let event = {$table: this.$refs.vxe, target: this}
       if (this.rowSelectionType === JVXETypes.rowRadio) {
@@ -851,14 +851,14 @@ export default {
       }
     },
 
-    /** 删除一行或多行数据 */
+    /** 刪除一行或多行數據 */
     async removeRows(rows) {
       const res = await this._remove(rows)
       await this._recalcSortNumber()
       return res
     },
 
-    /** 根据id删除一行或多行 */
+    /** 根據id刪除一行或多行 */
     removeRowsById(rowId) {
       let rowIds
       if (Array.isArray(rowId)) {
@@ -885,49 +885,49 @@ export default {
       return this.$refs.vxe.getColumnByField.apply(this.$refs.vxe, arguments)
     },
 
-    /* --- 辅助方法 ---*/
+    /* --- 輔助方法 ---*/
 
-    // 触发事件
+    // 觸發事件
     trigger(name, event = {}) {
       event.$target = this
       event.$table = this.$refs.vxe
-      //online增强参数兼容
+      //online增強參數兼容
       event.target = this
       this.$emit(name, event)
     },
 
-    /** 加载数据字典并合并到 options */
+    /** 加載數據字典并合并到 options */
     _loadDictConcatToOptions(column) {
       initDictOptions(column.dictCode).then((res) => {
         if (res.success) {
           let newOptions = (column.options || [])// .concat(res.result)
           res.result.forEach(item => {
-            // 过滤重复数据
+            // 過濾重復數據
             for (let option of newOptions) if (option.value === item.value) return
             newOptions.push(item)
           })
           this.$set(column, 'options', newOptions)
         } else {
-          console.group(`JVxeTable 查询字典(${column.dictCode})发生异常`)
+          console.group(`JVxeTable 查詢字典(${column.dictCode})發生異常`)
           console.warn(res.message)
           console.groupEnd()
         }
       })
     },
-    //options自定义赋值 刷新
+    //options自定義賦值 刷新
     virtualRefresh(){
       this.scrolling = true
       this.closeScrolling()
     },
-    // 设置 this.scrolling 防抖模式
+    // 設置 this.scrolling 防抖模式
     closeScrolling: simpleDebounce(function () {
       this.scrolling = false
     }, 100),
 
     /**
-     * 过滤添加的行
-     * @param rows 要筛选的行数据
-     * @param remove true = 删除新增，false=只删除id
+     * 過濾添加的行
+     * @param rows 要篩選的行數據
+     * @param remove true = 刪除新增，false=只刪除id
      * @param handler function
      */
     filterNewRows(rows, remove = true, handler) {
@@ -948,7 +948,7 @@ export default {
       return records
     },
 
-    // 删除选中的数据
+    // 刪除選中的數據
     async removeSelection() {
       let res = await this._remove(this.selectedRows)
       this.clearSelection()
@@ -957,10 +957,10 @@ export default {
     },
 
     /**
-     * 【删除指定行数据】（重写vxeTable的内部方法，添加了从keepSource中删除）
-     * 如果传 row 则删除一行
-     * 如果传 rows 则删除多行
-     * 如果为空则删除所有
+     * 【刪除指定行數據】（重寫vxeTable的內部方法，添加了從keepSource中刪除）
+     * 如果傳 row 則刪除一行
+     * 如果傳 rows 則刪除多行
+     * 如果為空則刪除所有
      */
     _remove(rows) {
       const xTable = this.$refs.vxe.$refs.xTable
@@ -978,17 +978,17 @@ export default {
       } else if (!XEUtils.isArray(rows)) {
         rows = [rows]
       }
-      // 如果是新增，则保存记录
+      // 如果是新增，則保存記錄
       rows.forEach(row => {
         if (!isInsertByRow(row)) {
           removeList.push(row)
         }
       })
-      // 如果绑定了多选属性，则更新状态
+      // 如果綁定了多選屬性，則更新狀態
       if (!property) {
         XEUtils.remove(selection, row => rows.indexOf(row) > -1)
       }
-      // 从数据源中移除
+      // 從數據源中移除
       if (tableFullData === rows) {
         rows = rest = tableFullData.slice(0)
         tableFullData.length = 0
@@ -997,17 +997,17 @@ export default {
         rest = XEUtils.remove(tableFullData, row => rows.indexOf(row) > -1)
         XEUtils.remove(nowData, row => rows.indexOf(row) > -1)
       }
-      // 【从keepSource中删除】
+      // 【從keepSource中刪除】
       if (xTable.keepSource) {
         let rowIdSet = new Set(rows.map(row => row.id))
         XEUtils.remove(tableSourceData, row => rowIdSet.has(row.id))
       }
 
-      // 如果当前行被激活编辑，则清除激活状态
+      // 如果當前行被激活編輯，則清除激活狀態
       if (actived.row && rows.indexOf(actived.row) > -1) {
         xTable.clearActived()
       }
-      // 从新增中移除已删除的数据
+      // 從新增中移除已刪除的數據
       XEUtils.remove(insertList, row => rows.indexOf(row) > -1)
       xTable.handleTableData()
       xTable.updateFooter()
@@ -1027,9 +1027,9 @@ export default {
       const xTable = this.$refs.vxe.$refs.xTable
       window.xTable = xTable
       const sort = (array) => {
-        // 存储旧数据，并删除旧项目
+        // 存儲舊數據，并刪除舊項目
         let row = array.splice(oldIndex, 1)[0]
-        // 向新项目里添加旧数据
+        // 向新項目里添加舊數據
         array.splice(newIndex, 0, row)
       }
       sort(xTable.tableFullData)
@@ -1040,7 +1040,7 @@ export default {
       await this._recalcSortNumber()
     },
 
-    /** 重新计算排序字段的数值 */
+    /** 重新計算排序字段的數值 */
     async _recalcSortNumber() {
       const xTable = this.$refs.vxe.$refs.xTable
       if (this.dragSort) {
@@ -1058,12 +1058,12 @@ export default {
       } else {
         records = [rows]
       }
-      // 遍历添加默认值
+      // 遍歷添加默認值
       records.forEach(record => this._createRow(record))
       let result = await this.pushRows(records, {index: index, setActive: true})
-      // 遍历插入的行
-      // update--begin--autor:lvdandan-----date:20201117------for:LOWCOD-987 【新行编辑】js增强附表内置方法调用问题 #1819
-      // online js增强时以传过来值为准，不再赋默认值
+      // 遍歷插入的行
+      // update--begin--autor:lvdandan-----date:20201117------for:LOWCOD-987 【新行編輯】js增強附表內置方法調用問題 #1819
+      // online js增強時以傳過來值為準，不再賦默認值
       if (isOnlJs != true) {
         for (let i = 0; i < result.rows.length; i++) {
           let row = result.rows[i]
@@ -1074,17 +1074,17 @@ export default {
           })
         }
       }
-      // update--end--autor:lvdandan-----date:20201117------for:LOWCOD-987 【新行编辑】js增强附表内置方法调用问题 #1819
+      // update--end--autor:lvdandan-----date:20201117------for:LOWCOD-987 【新行編輯】js增強附表內置方法調用問題 #1819
       return result
     },
-    // 创建新行，自动添加默认值
+    // 創建新行，自動添加默認值
     _createRow(record = {}) {
       let {xTable} = this.$refs.vxe.$refs
-      // 添加默认值
+      // 添加默認值
       xTable.tableFullColumn.forEach(column => {
         let col = column.own
         if (col.key && (record[col.key] == null || record[col.key] === '')) {
-          // 设置默认值
+          // 設置默認值
           let createValue = getEnhancedMixins(col.$type || col.type, 'createValue')
           record[col.key] = createValue({row: record, column, $table: xTable})
         }
@@ -1092,7 +1092,7 @@ export default {
       return record
     },
 
-    /*--- 渲染函数 ---*/
+    /*--- 渲染函數 ---*/
 
     // 渲染 vxe
     renderVxeGrid(h) {
@@ -1101,11 +1101,11 @@ export default {
         class: ['j-vxe-table'],
         props: this.vxeProps,
         on: this.vxeEvents,
-        // 作用域插槽的格式为
+        // 作用域插槽的格式為
         scopedSlots: this.$scopedSlots,
       })
     },
-    // 渲染工具栏
+    // 渲染工具欄
     renderToolbar(h) {
       if (this.toolbar) {
         return h('j-vxe-toolbar', {
@@ -1125,15 +1125,15 @@ export default {
               $table: this.$refs.vxe,
               target: this,
             }),
-            // 删除事件
+            // 刪除事件
             remove: () => {
               let $table = this.$refs.vxe
               let deleteRows = this.filterNewRows(this.selectedRows)
-              // 触发删除事件
+              // 觸發刪除事件
               if (deleteRows.length > 0) {
                 let removeEvent = {deleteRows, $table, target: this}
                 if (this.asyncRemove) {
-                  // 确认删除，只有调用这个方法才会真删除
+                  // 確認刪除，只有調用這個方法才會真刪除
                   removeEvent.confirmRemove = () => this.removeSelection()
                 } else {
                   this.removeSelection()
@@ -1143,7 +1143,7 @@ export default {
                 this.removeSelection()
               }
             },
-            // 清除选择事件
+            // 清除選擇事件
             clearSelection: this.clearSelection
           },
           scopedSlots: {
@@ -1161,7 +1161,7 @@ export default {
       }
       return null
     },
-    // 渲染点击时弹出的子表
+    // 渲染點擊時彈出的子表
     renderSubPopover(h) {
       if (this.clickRowShowSubForm && this.$scopedSlots.subForm) {
         return h('j-vxe-sub-popover', {
@@ -1173,7 +1173,7 @@ export default {
       }
       return null
     },
-    // 渲染点击时弹出的详细信息
+    // 渲染點擊時彈出的詳細信息
     renderDetailsModal(h) {
       if (this.clickRowShowMainForm && this.$scopedSlots.mainForm) {
         return h('j-vxe-details-modal', {
@@ -1185,7 +1185,7 @@ export default {
         })
       }
     },
-    // 渲染分页器
+    // 渲染分頁器
     renderPagination(h) {
       if (this.pagination && Object.keys(this.pagination).length > 0) {
         return h('j-vxe-pagination', {
@@ -1231,23 +1231,23 @@ export default {
   }
 }
 
-// 兼容 online 的规则
+// 兼容 online 的規則
 const fooPatterns = [
   {title: '非空', value: '*', pattern: /^.+$/},
-  {title: '6到16位数字', value: 'n6-16', pattern: /^\d{6,16}$/},
+  {title: '6到16位數字', value: 'n6-16', pattern: /^\d{6,16}$/},
   {title: '6到16位任意字符', value: '*6-16', pattern: /^.{6,16}$/},
   {title: '6到18位字母', value: 's6-18', pattern: /^[a-z|A-Z]{6,18}$/},
-  {title: '网址', value: 'url', pattern: /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/},
-  {title: '电子邮件', value: 'e', pattern: /^([\w]+\.*)([\w]+)@[\w]+\.\w{3}(\.\w{2}|)$/},
-  {title: '手机号码', value: 'm', pattern: /^1[3456789]\d{9}$/},
-  {title: '邮政编码', value: 'p', pattern: /^[1-9]\d{5}$/},
+  {title: '網址', value: 'url', pattern: /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/},
+  {title: '電子郵件', value: 'e', pattern: /^([\w]+\.*)([\w]+)@[\w]+\.\w{3}(\.\w{2}|)$/},
+  {title: '手機號碼', value: 'm', pattern: /^1[3456789]\d{9}$/},
+  {title: '郵政編碼', value: 'p', pattern: /^[1-9]\d{5}$/},
   {title: '字母', value: 's', pattern: /^[A-Z|a-z]+$/},
-  {title: '数字', value: 'n', pattern: /^-?\d+(\.?\d+|\d?)$/},
-  {title: '整数', value: 'z', pattern: /^-?\d+$/},
-  {title: '金额', value: 'money', pattern: /^(([1-9][0-9]*)|([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2}))$/},
+  {title: '數字', value: 'n', pattern: /^-?\d+(\.?\d+|\d?)$/},
+  {title: '整數', value: 'z', pattern: /^-?\d+$/},
+  {title: '金額', value: 'money', pattern: /^(([1-9][0-9]*)|([0]\.\d{0,2}|[1-9][0-9]*\.\d{0,2}))$/},
 ]
 
-/** 旧版handler转为新版Validator */
+/** 舊版handler轉為新版Validator */
 function handlerConvertToValidator(event) {
   const {column, rule} = event
   return new Promise((resolve, reject) => {
@@ -1267,7 +1267,7 @@ function handlerConvertToValidator(event) {
   })
 }
 
-/** 唯一校验器 */
+/** 唯一校驗器 */
 function uniqueValidator(event) {
   const {cellValue, column, rule} = event
   let tableData = this.getTableData()

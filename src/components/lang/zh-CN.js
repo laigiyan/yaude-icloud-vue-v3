@@ -2,9 +2,9 @@
 export default {
   langValue: 'zh-CN',
   lang: '中文',
-  age:'年龄',
-  sex:'性别',
-  welcome:'欢迎您',
+  age:'年齡',
+  sex:'性別',
+  welcome:'歡迎您',
   sexText:{
     typeDict:{
       '1': '女',
@@ -14,8 +14,8 @@ export default {
   },
   announcement: {
     typeDict:{
-      '22': '系统公告',
-      '28': '维护公告',
+      '22': '系統公告',
+      '28': '維護公告',
     }
   }
 }

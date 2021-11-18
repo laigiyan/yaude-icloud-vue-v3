@@ -2,10 +2,10 @@
   <div class="logo">
     <router-link :to="routerLinkTo">
 
-      <!-- update-begin- author:sunjianlei --- date:20190814 --- for: logo颜色根据主题颜色变化 -->
+      <!-- update-begin- author:sunjianlei --- date:20190814 --- for: logo顏色根據主題顏色變化 -->
       <img v-if="navTheme === 'dark'" src="~@/assets/logo-white.png" alt="logo">
       <img v-else src="~@/assets/logo1.png" alt="logo">
-      <!-- update-begin- author:sunjianlei --- date:20190814 --- for: logo颜色根据主题颜色变化 -->
+      <!-- update-begin- author:sunjianlei --- date:20190814 --- for: logo顏色根據主題顏色變化 -->
 
       <h1 v-if="showTitle">{{ title }}</h1>
     </router-link>
@@ -29,7 +29,7 @@
         default: true,
         required: false
       },
-      // 点击Logo跳转地址
+      // 點擊Logo跳轉地址
       routerLinkTo: {
         type: Object,
         default: () => ({name: 'dashboard'}),
@@ -38,7 +38,7 @@
   }
 </script>
 <style lang="less" scoped>
-  /*缩小首页布 局顶部的高度*/
+  /*縮小首頁布 局頂部的高度*/
   @height: 59px;
 
   .sider {

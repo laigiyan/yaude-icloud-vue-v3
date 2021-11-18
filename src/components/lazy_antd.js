@@ -1,5 +1,5 @@
 /**
- * 按需加载antd组件
+ * 按需加載antd組件
  */
 import Vue from 'vue'
 

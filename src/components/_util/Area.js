@@ -1,9 +1,9 @@
 /**
- * 省市区
+ * 省市區
  */
 export default class Area {
   /**
-   * 构造器
+   * 構造器
    * @param express
    */
   constructor(pcaa) {
