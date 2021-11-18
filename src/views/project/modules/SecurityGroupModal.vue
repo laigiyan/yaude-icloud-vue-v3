@@ -14,7 +14,7 @@
           <a-input v-model="model.name" placeholder="請輸入安全群組名稱" ></a-input>
         </a-form-model-item>
 
-        <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol"  >
+        <a-form-model-item label="描述" :labelCol="labelCol" :wrapperCol="wrapperCol"   prop="description">
           <a-textarea v-model="model.description" placeholder="請輸入描述" ></a-textarea>
         </a-form-model-item>
 
@@ -54,6 +54,9 @@
         validatorRules:{
           name: [
             { required: true, message: '請輸入安全群組名稱!' },
+          ],
+          description: [
+            { required: true, message: '請輸入安全群組描述!' },
           ],
         },
         url: {
