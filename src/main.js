@@ -85,7 +85,7 @@ const messages = {
 }
 
 const i18n = new VueI18n({
-  locale: Vue.ls.get("language", "zh-CN"),
+  locale: Vue.ls.get("language", "zh-TW"),
   messages
 })
 

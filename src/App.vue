@@ -8,6 +8,7 @@
 <script>
   import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
   import enUS from 'ant-design-vue/lib/locale-provider/en_US'
+  import zhTW from 'ant-design-vue/lib/locale-provider/zh_TW'
   import enquireScreen from '@/utils/device'
 
   export default {
@@ -42,6 +43,8 @@
         this.locale =  zhCN
       } else if(language == 'en-US'){
         this.locale = enUS
+      } else if(language == 'zh-TW'){
+        this.locale = zhTW
       }
     }
   }
