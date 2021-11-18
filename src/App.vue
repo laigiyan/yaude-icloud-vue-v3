@@ -14,7 +14,7 @@
   export default {
     data () {
       return {
-        locale: zhCN,
+        locale: zhTW,
       }
     },
     created () {
