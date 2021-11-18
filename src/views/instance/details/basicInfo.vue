@@ -21,7 +21,7 @@
       </a-col>
       <a-col :span="12">
         <a-card title="配置信息" :bordered="false" :style="{ marginBottom: '24px',minHeight:'250px' }">
-          <p>內存: {{ serverDetail.ramText }}</p>
+          <p>記憶體: {{ serverDetail.ramText }}</p>
           <p>硬碟: {{ serverDetail.diskText }}</p>
           <p>CPU: {{ serverDetail.cpu }}</p>
           <p></p>
