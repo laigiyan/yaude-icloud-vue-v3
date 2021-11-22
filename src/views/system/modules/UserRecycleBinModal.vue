@@ -89,7 +89,7 @@
         dataSource: [],
         columns: [
           { title: '#', align: 'center', key: 'rowIndex', width: 80, customRender: (t, r, i) => i + 1 },
-          { title: '賬號', align: 'center', dataIndex: 'username' },
+          { title: '帳號', align: 'center', dataIndex: 'username' },
           { title: '姓名', align: 'center', dataIndex: 'realname', },
           { title: '頭像', align: 'center', dataIndex: 'avatar', scopedSlots: { customRender: 'avatarslot' } },
           { title: '部門', align: 'center', dataIndex: 'orgCode' },

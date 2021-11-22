@@ -135,9 +135,9 @@
       //this.menus = this.mainRouters.find((item) => item.path === '/').children;
       this.menus = this.permissionMenuList
       
-      //--update-begin----author:liusq---date:20210223------for:關于測邊菜單遮擋內容問題詳細說明 #2255
+      //--update-begin----author:liusq---date:20210223------for:關於測邊菜單遮擋內容問題詳細說明 #2255
       this.collapsed=!this.sidebarOpened;
-      //--update-begin----author:liusq---date:20210223------for:關于測邊菜單遮擋內容問題詳細說明 #2255
+      //--update-begin----author:liusq---date:20210223------for:關於測邊菜單遮擋內容問題詳細說明 #2255
   
       // 根據后臺配置菜單，重新排序加載路由信息
       //console.log('----加載菜單邏輯----')

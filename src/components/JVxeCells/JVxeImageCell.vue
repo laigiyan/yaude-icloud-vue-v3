@@ -137,13 +137,13 @@
 
       // 點擊更多按鈕
       handleMoreOperation(originColumn) {
-        //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用于控制上傳文件
+        //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用於控制上傳文件
         if (originColumn.number) {
           this.number = originColumn.number
         } else {
           this.number = 0
         }
-        //update-end-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用于控制上傳文件
+        //update-end-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用於控制上傳文件
         if(originColumn && originColumn.fieldExtendJson){
           let json = JSON.parse(originColumn.fieldExtendJson);
           this.number = json.uploadnum?json.uploadnum:0;

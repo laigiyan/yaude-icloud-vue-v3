@@ -100,7 +100,7 @@
             <a-row :gutter="24">
 
               <a-col :md="12" :sm="12">
-                <a-form-item label="用戶賬號">
+                <a-form-item label="用戶帳號">
                   <a-input placeholder="" v-model="queryParam2.username"></a-input>
                 </a-form-item>
               </a-col>
@@ -275,7 +275,7 @@
             }
           ],
         columns2: [{
-          title: '用戶賬號',
+          title: '用戶帳號',
           align: 'center',
           dataIndex: 'username',
           width: 120

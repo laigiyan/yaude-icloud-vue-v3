@@ -55,7 +55,7 @@ const common = {
   /** 公共方法 */
   methods: {
 
-    // 根據 value 查詢數據，用于回顯
+    // 根據 value 查詢數據，用於回顯
     async loadDataByValue(value) {
       if (this.isAsync) {
         if (this.innerSelectValue !== value) {

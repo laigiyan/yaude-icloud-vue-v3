@@ -12,8 +12,8 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
 
-        <a-form-item label="用戶賬號" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input placeholder="請輸入用戶賬號" v-decorator="[ 'username', {}]" :readOnly="true"/>
+        <a-form-item label="用戶帳號" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="請輸入用戶帳號" v-decorator="[ 'username', {}]" :readOnly="true"/>
         </a-form-item>
 
         <a-form-item label="登錄密碼" :labelCol="labelCol" :wrapperCol="wrapperCol" hasFeedback >

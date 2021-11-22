@@ -79,7 +79,7 @@
         this.handleBlurCommon(value)
       },
 
-      /** 用于搜索下拉框中的內容 */
+      /** 用於搜索下拉框中的內容 */
       handleSelectFilterOption(input, option) {
         let {allowSearch, allowInput} = this.originColumn
         if (allowSearch === true || allowInput === true) {
@@ -90,7 +90,7 @@
         return true
       },
 
-      /** select 搜索時的事件，用于動態添加options */
+      /** select 搜索時的事件，用於動態添加options */
       handleSearchSelect(value) {
         let {allowSearch, allowInput, options} = this.originColumn
 

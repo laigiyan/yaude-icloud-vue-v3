@@ -16,8 +16,8 @@
           <a-row :gutter="24">
 
             <a-col :span="10">
-              <a-form-item label="用戶賬號">
-                <a-input placeholder="請輸入用戶賬號" v-model="queryParam.username"></a-input>
+              <a-form-item label="用戶帳號">
+                <a-input placeholder="請輸入用戶帳號" v-model="queryParam.username"></a-input>
               </a-form-item>
             </a-col>
             <a-col :span="8">
@@ -81,7 +81,7 @@
             }
           },
           {
-            title: '用戶賬號',
+            title: '用戶帳號',
             align: "center",
             width: 100,
             dataIndex: 'username'
@@ -113,7 +113,7 @@
         ],
         columns2: [
           {
-            title: '用戶賬號',
+            title: '用戶帳號',
             align: "center",
             dataIndex: 'username',
 

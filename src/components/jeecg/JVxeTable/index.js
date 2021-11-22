@@ -16,10 +16,10 @@ import JVxeDragSortCell from './components/cells/JVxeDragSortCell'
 import JVxeDepartSelectCell from './components/cells/JVxeDepartSelectCell'
 import JVxeUserSelectCell from './components/cells/JVxeUserSelectCell'
 
-//update--begin--autor:lvdandan-----date:20201216------for：JVxeTable--JVXETypes 【online】代碼結構調整，便于online打包
+//update--begin--autor:lvdandan-----date:20201216------for：JVxeTable--JVXETypes 【online】代碼結構調整，便於online打包
 // 組件類型
 export const JVXETypes = jvxeTypes.JVXETypes
-//update--end--autor:lvdandan-----date:20201216------for：JVxeTable--JVXETypes 【online】代碼結構調整，便于online打包
+//update--end--autor:lvdandan-----date:20201216------for：JVxeTable--JVXETypes 【online】代碼結構調整，便於online打包
 
 // 注冊自定義組件
 export const AllCells = {

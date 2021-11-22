@@ -264,7 +264,7 @@ import Pie from '@/components/chart/Pie'
 
 ```json
 [
-    // 所有的 percent 相加等于 100
+    // 所有的 percent 相加等於 100
     { "item": "一月", "percent": 40 },
     { "item": "二月", "percent": 21 },
     { "item": "三月", "percent": 17 },

@@ -6,10 +6,10 @@
           <head-info title="我的待辦" content="8個任務" :bordered="true"/>
         </a-col>
         <a-col :sm="8" :xs="24">
-          <head-info title="本周任務平均處理時間" content="32分鐘" :bordered="true"/>
+          <head-info title="本週任務平均處理時間" content="32分鐘" :bordered="true"/>
         </a-col>
         <a-col :sm="8" :xs="24">
-          <head-info title="本周完成任務數" content="24個"/>
+          <head-info title="本週完成任務數" content="24個"/>
         </a-col>
       </a-row>
     </a-card>
@@ -108,7 +108,7 @@
     title: 'Ant Design Pro',
     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png',
     description: '城鎮中有那麼多的酒館，她卻偏偏走進了我的酒館',
-    owner: '周星星',
+    owner: '週星星',
     startAt: '2018-07-26 22:44',
     progress: {
       value: 30

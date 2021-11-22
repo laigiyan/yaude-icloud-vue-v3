@@ -63,7 +63,7 @@
         required:false,
         default:"上傳"
       },
-      /*這個屬性用于控制文件上傳的業務路徑*/
+      /*這個屬性用於控制文件上傳的業務路徑*/
       bizPath:{
         type:String,
         required:false,
@@ -83,13 +83,13 @@
         required:false,
         default: false
       },
-      //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 新增number屬性，用于判斷上傳數量
+      //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 新增number屬性，用於判斷上傳數量
       number:{
         type:Number,
         required:false,
         default:0
       }
-      //update-end-author:wangshuai date:20201021 for:LOWCOD-969 新增number屬性，用于判斷上傳數量
+      //update-end-author:wangshuai date:20201021 for:LOWCOD-969 新增number屬性，用於判斷上傳數量
     },
     watch:{
       value: {
@@ -145,11 +145,11 @@
       handleChange(info) {
         this.picUrl = false;
         let fileList = info.fileList
-        //update-begin-author:wangshuai date:20201022 for:LOWCOD-969 判斷number是否大于0和是否多選，返回選定的元素。
+        //update-begin-author:wangshuai date:20201022 for:LOWCOD-969 判斷number是否大於0和是否多選，返回選定的元素。
         if(this.number>0 && this.isMultiple){
           fileList = fileList.slice(-this.number);
         }
-        //update-end-author:wangshuai date:20201022 for:LOWCOD-969 判斷number是否大于0和是否多選，返回選定的元素。
+        //update-end-author:wangshuai date:20201022 for:LOWCOD-969 判斷number是否大於0和是否多選，返回選定的元素。
         if(info.file.status==='done'){
           if(info.file.response.success){
             this.picUrl = true;

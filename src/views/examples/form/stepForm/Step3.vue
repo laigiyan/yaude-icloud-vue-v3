@@ -1,14 +1,14 @@
 <template>
   <div>
     <a-form style="margin: 40px auto 0;">
-      <result title="操作成功" :is-success="true" description="預計兩小時內到賬">
+      <result title="操作成功" :is-success="true" description="預計兩小時內到帳">
         <div class="information">
           <a-row>
-            <a-col :sm="8" :xs="24">付款賬戶：</a-col>
+            <a-col :sm="8" :xs="24">付款帳戶：</a-col>
             <a-col :sm="16" :xs="24">ant-design@alipay.com</a-col>
           </a-row>
           <a-row>
-            <a-col :sm="8" :xs="24">收款賬戶：</a-col>
+            <a-col :sm="8" :xs="24">收款帳戶：</a-col>
             <a-col :sm="16" :xs="24">test@example.com</a-col>
           </a-row>
           <a-row>
@@ -16,13 +16,13 @@
             <a-col :sm="16" :xs="24">輝夜</a-col>
           </a-row>
           <a-row>
-            <a-col :sm="8" :xs="24">轉賬金額：</a-col>
+            <a-col :sm="8" :xs="24">轉帳金額：</a-col>
             <a-col :sm="16" :xs="24"><span class="money">500</span> 元</a-col>
           </a-row>
         </div>
         <div slot="action">
           <a-button type="primary" @click="finish">再轉一筆</a-button>
-          <a-button style="margin-left: 8px" @click="toOrderList">查看賬單</a-button>
+          <a-button style="margin-left: 8px" @click="toOrderList">查看帳單</a-button>
         </div>
       </result>
     </a-form>

@@ -4,7 +4,7 @@
 ####3.chart包:存放各種圖表相關的組件,條形圖柱形圖折線圖等等 具體用法參考首頁
 ####4.countDown包:一個倒計時組件，用法參考home頁,簡單描述,該組件有3個屬性,
 target(時間/毫秒數)必填，
-format(function,該方法接收一個毫秒數的參數,用于格式化顯示當前倒計時時間)非必填,
+format(function,該方法接收一個毫秒數的參數,用於格式化顯示當前倒計時時間)非必填,
 onEnd倒計時結束觸發函數
 ![輸入圖片說明](https://static.oschina.net/uploads/img/201904/12182046_mwqJ.png "在這里輸入圖片標題")
 ####5.dict包：數據字典專用，用法參考文件夾下readme文件
@@ -15,10 +15,10 @@ onEnd倒計時結束觸發函數
 ####10.menun包：菜單組件，倆個，一個折疊菜單一個正常顯示的菜單
 ####11.NumberInfo:數字信息顯示組件 如下圖
 ![輸入圖片說明](https://static.oschina.net/uploads/img/201904/12185858_uvJ5.png "在這里輸入圖片標題")
-####12.online包：該包下封裝了online表單的相關組件,用于展示表單各種控件,驗證表單等等,相關用法參考readme
+####12.online包：該包下封裝了online表單的相關組件,用於展示表單各種控件,驗證表單等等,相關用法參考readme
 ####13.setting包：該包下封裝了首頁風格切換等功能如下圖
 ![輸入圖片說明](https://static.oschina.net/uploads/img/201904/12190520_jySG.png "在這里輸入圖片標題")
-####14.table包：一個二次封裝的table組件,用于展示列表，參考readme
+####14.table包：一個二次封裝的table組件,用於展示列表，參考readme
 ####15.tools包：
 Breadcrumb.vue：面包屑二次封裝,支持路由跳轉
 DetailList.vue：詳情展示用法參考src\views\profile\advanced\Advanced.vue(效果如下圖)

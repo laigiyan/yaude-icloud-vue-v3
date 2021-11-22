@@ -1,4 +1,4 @@
-<template>
+  <template>
   <a-card :bordered="false">
 
     <!-- 左側面板 -->

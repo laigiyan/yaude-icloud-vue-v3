@@ -5,8 +5,8 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :md="6" :sm="12">
-            <a-form-item label="賬號">
-              <a-input placeholder="請輸入賬號查詢" v-model="queryParam.username"></a-input>
+            <a-form-item label="帳號">
+              <a-input placeholder="請輸入帳號查詢" v-model="queryParam.username"></a-input>
             </a-form-item>
           </a-col>
           <a-col :md="6" :sm="8">
@@ -82,7 +82,7 @@
         // 表頭
         columns: [
           {
-            title:'用戶賬號',
+            title:'用戶帳號',
             align:"center",
             dataIndex: 'username'
           },{

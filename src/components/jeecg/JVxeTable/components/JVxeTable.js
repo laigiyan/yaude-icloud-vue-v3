@@ -128,7 +128,7 @@ export default {
           iconClose: 'ant-table-row-expand-icon ant-table-row-collapsed',
           iconOpen: 'ant-table-row-expand-icon ant-table-row-expanded'
         },
-        // 虛擬滾動配置，y軸大于30條數據時啟用虛擬滾動
+        // 虛擬滾動配置，y軸大於30條數據時啟用虛擬滾動
         // 'scroll-y': {
         //   gt: 30
         // },
@@ -606,7 +606,7 @@ export default {
       getEnhancedMixins(column.own.$type, 'aopEvents').editActived.apply(this, arguments)
     },
 
-    /** 表尾數據處理方法，用于顯示統計信息 */
+    /** 表尾數據處理方法，用於顯示統計信息 */
     handleFooterMethod({columns, data}) {
       const {statistics} = this
       let footers = []
@@ -654,15 +654,15 @@ export default {
 
     /**
      * 重置滾動條Top位置
-     * @param top 新top位置，留空則滾動到上次記錄的位置，用于解決切換tab選項卡時導致白屏以及自動將滾動條滾動到頂部的問題
+     * @param top 新top位置，留空則滾動到上次記錄的位置，用於解決切換tab選項卡時導致白屏以及自動將滾動條滾動到頂部的問題
      */
     resetScrollTop(top) {
       this.scrollTo(null, (top == null || top === '') ? this.scroll.top : top)
     },
 
     /**
-     * 加載新數據，和 loadData 不同的是，用該方法加載的數據都是相當于點新增按鈕新增的數據。
-     * 適用于不是數據庫里查出來的沒有id的臨時數據
+     * 加載新數據，和 loadData 不同的是，用該方法加載的數據都是相當於點新增按鈕新增的數據。
+     * 適用於不是數據庫里查出來的沒有id的臨時數據
      * @param dataSource
      */
     async loadNewData(dataSource) {
@@ -812,7 +812,7 @@ export default {
      */
     async insertRows(rows, index) {
       if (typeof index !== 'number' || index < 0) {
-        console.warn(`【JVXETable】insertRows：index必須傳遞數字，且大于-1`)
+        console.warn(`【JVXETable】insertRows：index必須傳遞數字，且大於-1`)
         return
       }
       return this._addOrInsert(rows, index, 'inserted')

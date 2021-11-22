@@ -54,7 +54,7 @@
   export default {
     name: 'JCodeEditor',
     props: {
-      // 外部傳入的內容，用于實現雙向綁定
+      // 外部傳入的內容，用於實現雙向綁定
       value: {
         type: String,
         default: ''
@@ -330,7 +330,7 @@
           let currentLabel = mode.label.toLowerCase()
           let currentValue = mode.value.toLowerCase()
 
-          // 由于真實值可能不規范，例如 java 的真實值是 x-java ，所以講 value 和 label 同時和傳入語法進行比較
+          // 由於真實值可能不規范，例如 java 的真實值是 x-java ，所以講 value 和 label 同時和傳入語法進行比較
           return currentLabel === currentLanguage || currentValue === currentLanguage
         })
       },

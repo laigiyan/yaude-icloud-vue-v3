@@ -29,7 +29,7 @@
         url: { list: '/sys/user/list' },
         columns: [
           { title: '姓名', align: 'center', width: '25%', widthRight: '70%', dataIndex: 'realname' },
-          { title: '賬號', align: 'center', width: '25%', dataIndex: 'username' },
+          { title: '帳號', align: 'center', width: '25%', dataIndex: 'username' },
           { title: '電話', align: 'center', width: '20%', dataIndex: 'phone' },
           { title: '出生日期', align: 'center', width: '20%', dataIndex: 'birthday' }
         ],
@@ -39,7 +39,7 @@
           width: 1200,
           displayKey: 'realname',
           returnKeys: ['id', 'username'],
-          queryParamText: '賬號',
+          queryParamText: '帳號',
         },
         // 多條件查詢配置
         queryConfigDefault: [

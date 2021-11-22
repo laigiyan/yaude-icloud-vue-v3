@@ -3,7 +3,7 @@
     <a-radio-group v-model="type">
       <div class="item">
         <a-radio value="TYPE_NOT_SET" class="choice" :disabled="disableChoice">不設置</a-radio>
-        <span class="tip-info">日和周只能設置其中之一</span>
+        <span class="tip-info">日和週只能設置其中之一</span>
       </div>
       <div class="item">
         <a-radio value="TYPE_EVERY" class="choice" :disabled="disableChoice">每日</a-radio>

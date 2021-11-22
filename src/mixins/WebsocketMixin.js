@@ -7,14 +7,14 @@ export const WebsocketMixin = {
     this.initWebSocket();
   },
   destroyed: function () {
-    // 离开页面生命周期函数
+    // 离开页面生命週期函数
     this.websocketOnclose();
   },
   methods:{
     initWebSocket: function () {
       let token = Vue.ls.get(ACCESS_TOKEN)
       console.log("------------WebSocket连接成功");
-      // WebSocket与普通的请求所用协议有所不同，ws等同于http，wss等同于https
+      // WebSocket与普通的请求所用协议有所不同，ws等同於http，wss等同於https
       var userId = store.getters.userInfo.id;
       if(!this.socketUrl.startsWith('/')){
         this.socketUrl = '/' + this.socketUrl

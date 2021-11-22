@@ -30,7 +30,7 @@
               </a-select>
             </a-row>
             <a-row>
-              <a-radio value="4">周期從
+              <a-radio value="4">週期從
                 <a-input-number size="small" v-model="result.second.rangeStart" :min="1" :max="59"></a-input-number>
                 到
                 <a-input-number size="small" v-model="result.second.rangeEnd" :min="0" :max="59"></a-input-number>
@@ -61,7 +61,7 @@
                 </a-select>
               </a-row>
               <a-row>
-                <a-radio value="4">周期從
+                <a-radio value="4">週期從
                   <a-input-number size="small" v-model="result.minute.rangeStart" :min="1" :max="60"></a-input-number>
                   到
                   <a-input-number size="small" v-model="result.minute.rangeEnd" :min="0" :max="59"></a-input-number>
@@ -93,7 +93,7 @@
                 </a-select>
               </a-row>
               <a-row>
-                <a-radio value="4">周期從
+                <a-radio value="4">週期從
                   <a-input-number size="small" v-model="result.hour.rangeStart" :min="0" :max="23"></a-input-number>
                   到
                   <a-input-number size="small" v-model="result.hour.rangeEnd" :min="0" :max="23"></a-input-number>
@@ -113,7 +113,7 @@
               <a-row>
                 <a-radio value="2">每隔
                   <a-input-number size="small" v-model="result.week.incrementIncrement" :min="1" :max="7"></a-input-number>
-                  周執行 從
+                  週執行 從
                   <a-select size="small" v-model="result.week.incrementStart">
                     <a-select-option v-for="(val,index) in Array(7)" :key="index" :value="index+1">{{ weekDays[index] }}</a-select-option>
                   </a-select>
@@ -161,7 +161,7 @@
                 </a-radio>
               </a-row>
               <a-row>
-                <a-radio value="10">最近的工作日（周一至周五）至本月
+                <a-radio value="10">最近的工作日（週一至週五）至本月
                   <a-input-number size="small" v-model="result.day.cronDaysNearestWeekday" :min="1" :max="31"></a-input-number>
                   日
                 </a-radio>

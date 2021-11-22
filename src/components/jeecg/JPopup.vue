@@ -93,7 +93,7 @@
         required: false,
         default: ','
       },
-      /** 分組ID，用于將多個popup的請求合并到一起，不傳不分組 */
+      /** 分組ID，用於將多個popup的請求合并到一起，不傳不分組 */
       groupId: String
 
     },
@@ -173,11 +173,11 @@
             let tempDestArr = []
             for(let rw of rows){
               let val = rw[orgFieldsArr[i]]
-              // update--begin--autor:liusq-----date:20210713------for：處理val等于0的情況issues/I3ZL4T------
+              // update--begin--autor:liusq-----date:20210713------for：處理val等於0的情況issues/I3ZL4T------
               if(typeof val=='undefined'|| val==null || val.toString()==""){
                 val = ""
               }
-              // update--end--autor:liusq-----date:20210713------for：處理val等于0的情況issues/I3ZL4T------
+              // update--end--autor:liusq-----date:20210713------for：處理val等於0的情況issues/I3ZL4T------
               tempDestArr.push(val)
             }
             res[destFieldsArr[i]] = tempDestArr.join(",")

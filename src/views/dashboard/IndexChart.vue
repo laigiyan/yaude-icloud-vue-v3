@@ -8,7 +8,7 @@
           </a-tooltip>
           <div>
             <trend flag="up" style="margin-right: 16px;">
-              <span slot="term">周同比</span>
+              <span slot="term">週同比</span>
               12%
             </trend>
             <trend flag="down">
@@ -51,7 +51,7 @@
           </div>
           <template slot="footer">
             <trend flag="down" style="margin-right: 16px;">
-              <span slot="term">同周比</span>
+              <span slot="term">同週比</span>
               12%
             </trend>
             <trend flag="up">
@@ -69,7 +69,7 @@
           <div class="extra-wrapper" slot="tabBarExtraContent">
             <div class="extra-item">
               <a>今日</a>
-              <a>本周</a>
+              <a>本週</a>
               <a>本月</a>
               <a>本年</a>
             </div>
@@ -101,7 +101,7 @@
 
     <a-row>
       <a-col :span="24">
-        <a-card :loading="loading" :bordered="false" title="最近一周访问量统计" :style="{ marginTop: '24px' }">
+        <a-card :loading="loading" :bordered="false" title="最近一週访问量统计" :style="{ marginTop: '24px' }">
           <a-row>
             <a-col :span="6">
               <head-info title="今日IP" :content="loginfo.todayIp"></head-info>

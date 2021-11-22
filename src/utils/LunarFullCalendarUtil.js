@@ -11,9 +11,9 @@ import { getRefPromise } from '@/utils/JEditableTableUtil'
 /* 日历的视图类型 */
 const calendarViewType = {
   month: 'month', // 月视图
-  basicWeek: 'basicWeek',  // 基础周视图
+  basicWeek: 'basicWeek',  // 基础週视图
   basicDay: 'basicDay',//  基础天视图
-  agendaWeek: 'agendaWeek', // 议程周视图
+  agendaWeek: 'agendaWeek', // 议程週视图
   agendaDay: 'agendaDay', // 议程天视图
 }
 
@@ -27,7 +27,7 @@ const defaultSettings = {
   buttonText: {
     today: '今天',
     month: '月',
-    week: '周',
+    week: '週',
     day: '日'
   },
   // 头部排列方式
@@ -40,7 +40,7 @@ const defaultSettings = {
   eventLimitClick: 'day',
   // 隐藏超出的事件
   eventLimit: true,
-  // 设置每周开始日期为周日
+  // 设置每週开始日期为週日
   firstDay: 0,
   // 默认显示视图
   defaultView,
@@ -52,7 +52,7 @@ const defaultSettings = {
   allDayText: '全天',
   // 时区默认本地的
   timezone: 'local',
-  // 周视图和日视同的左侧时间显示
+  // 週视图和日视同的左侧时间显示
   slotLabelFormat: 'HH:mm',
   // 设置第二天阈值
   nextDayThreshold: '00:00:00',

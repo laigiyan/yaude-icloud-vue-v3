@@ -10,12 +10,12 @@
         </div>
         <div style="margin-bottom: 16px">
           <a-icon type="close-circle-o" style="color: #f5222d; margin-right: 8px"/>
-          您的賬戶已被凍結
+          您的帳戶已被凍結
           <a style="margin-left: 16px">立即解凍 <a-icon type="right" /></a>
         </div>
         <div>
           <a-icon type="close-circle-o" style="color: #f5222d; margin-right: 8px"/>
-          您的賬戶還不具備申請資格
+          您的帳戶還不具備申請資格
           <a style="margin-left: 16px">立即升級 <a-icon type="right" /></a>
         </div>
       </div>

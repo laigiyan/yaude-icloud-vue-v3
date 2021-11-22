@@ -240,7 +240,7 @@ export function addOnlineBtAuth2Storage(pre, authList){
 
 
 /**
- * 额外增加方法【用于行编辑组件】
+ * 额外增加方法【用於行编辑组件】
  * date: 2020-04-05
  * author: scott
  * @param pre

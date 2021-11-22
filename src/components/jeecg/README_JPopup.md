@@ -9,7 +9,7 @@
 | destFields      |string   | | 回調對象的屬性,多個以逗號隔開,其順序和orgFields一一對應 |
 | field      |string   | | v-model模式專用,表示從destFields中選擇一個屬性的值返回給當前組件 |
 | triggerChange      |Boolean   | | v-decorator模式下需設置成true |
-| callback(事件)      |function   | | 回調事件,v-decorator模式下用到,用于設置form控件的值 |
+| callback(事件)      |function   | | 回調事件,v-decorator模式下用到,用於設置form控件的值 |
 
 使用示例
 ----

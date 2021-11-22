@@ -174,7 +174,7 @@ export default {
     event: 'change'
   },
   /**
-   * 【自定義增強】用于實現一些增強事件
+   * 【自定義增強】用於實現一些增強事件
    * 【注】這里只是定義接口，具體功能需要到各個組件內實現（也有部分功能實現）
    * 【注】該屬性不是Vue官方屬性，是JVxeTable組件自定義的
    *      所以方法內的 this 指向并不是當前組件，而是方法自身，
@@ -186,7 +186,7 @@ export default {
       // 自動聚焦的 class 類名
       autofocus: '',
     },
-    // 事件攔截器（用于兼容）
+    // 事件攔截器（用於兼容）
     interceptor: {
       // 已實現：event.clearActived
       // 說明：比如點擊了某個組件的彈出層面板之后，此時被激活單元格不應該被自動關閉，通過返回 false 可以阻止默認的行為。
@@ -194,7 +194,7 @@ export default {
         return true
       },
       // 自定義：event.clearActived.className
-      // 說明：比原生的多了一個參數：className，用于判斷點擊的元素的樣式名（遞歸到頂層）
+      // 說明：比原生的多了一個參數：className，用於判斷點擊的元素的樣式名（遞歸到頂層）
       ['event.clearActived.className'](params, event, target) {
         return true
       },

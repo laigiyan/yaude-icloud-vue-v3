@@ -53,7 +53,7 @@
           <div class="extra-wrapper" slot="tabBarExtraContent">
             <div class="extra-item">
               <a>今日</a>
-              <a>本周</a>
+              <a>本週</a>
               <a>本月</a>
               <a>本年</a>
             </div>
@@ -247,7 +247,7 @@
     {reBizCode:"4",type:"转移登记",acceptBy:'赵楼',acceptDate:"2019-11-22",curNode:"部门审核",flowRate:80},
     {reBizCode:"5",type:"转移登记",acceptBy:'钱就',acceptDate:"2019-12-12",curNode:"任务分派",flowRate:90},
     {reBizCode:"6",type:"转移登记",acceptBy:'孙吧',acceptDate:"2019-03-06",curNode:"任务处理",flowRate:10},
-    {reBizCode:"7",type:"抵押登记",acceptBy:'周大',acceptDate:"2019-04-13",curNode:"任务分派",flowRate:100},
+    {reBizCode:"7",type:"抵押登记",acceptBy:'週大',acceptDate:"2019-04-13",curNode:"任务分派",flowRate:100},
     {reBizCode:"8",type:"抵押登记",acceptBy:'吴二',acceptDate:"2019-05-09",curNode:"任务上报",flowRate:50},
     {reBizCode:"9",type:"抵押登记",acceptBy:'郑爽',acceptDate:"2019-07-12",curNode:"任务处理",flowRate:63},
     {reBizCode:"20",type:"抵押登记",acceptBy:'林有',acceptDate:"2019-12-12",curNode:"任务打回",flowRate:59},
@@ -283,7 +283,7 @@
     {reBizCode:"A004",type:"转移登记",acceptBy:'赵二',acceptDate:"2019-11-22",curNode:"部门审核",flowRate:10},
     {reBizCode:"A005",type:"转移登记",acceptBy:'钱大',acceptDate:"2019-12-12",curNode:"任务签收",flowRate:8},
     {reBizCode:"A006",type:"转移登记",acceptBy:'孙就',acceptDate:"2019-03-06",curNode:"任务处理",flowRate:10},
-    {reBizCode:"A007",type:"抵押登记",acceptBy:'周晕',acceptDate:"2019-04-13",curNode:"部门审核",flowRate:24},
+    {reBizCode:"A007",type:"抵押登记",acceptBy:'週晕',acceptDate:"2019-04-13",curNode:"部门审核",flowRate:24},
     {reBizCode:"A008",type:"抵押登记",acceptBy:'吴有',acceptDate:"2019-05-09",curNode:"部门审核",flowRate:30},
     {reBizCode:"A009",type:"抵押登记",acceptBy:'郑武',acceptDate:"2019-07-12",curNode:"任务分派",flowRate:1},
     {reBizCode:"A0010",type:"抵押登记",acceptBy:'林爽',acceptDate:"2019-12-12",curNode:"部门审核",flowRate:16},

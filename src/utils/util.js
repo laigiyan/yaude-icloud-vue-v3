@@ -287,7 +287,7 @@ export function cssExpand(css, id) {
 }
 
 
-/** 用于js增强事件，运行JS代码，可以传参 */
+/** 用於js增强事件，运行JS代码，可以传参 */
 // options 所需参数：
 //    参数名         类型            说明
 //    vm             VueComponent    vue实例
@@ -410,12 +410,12 @@ export function pushIfNotExist(array, value, key) {
 }
 
 /**
- * 可用于判断是否成功
+ * 可用於判断是否成功
  * @type {symbol}
  */
 export const succeedSymbol = Symbol()
 /**
- * 可用于判断是否失败
+ * 可用於判断是否失败
  * @type {symbol}
  */
 export const failedSymbol = Symbol()

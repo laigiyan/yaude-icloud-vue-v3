@@ -37,7 +37,7 @@
         tableLoading: true,
         // 定时器ID
         timer: null,
-        // 定时器周期
+        // 定时器週期
         millisec: 3000,
         // Key 实时数量
         key: {

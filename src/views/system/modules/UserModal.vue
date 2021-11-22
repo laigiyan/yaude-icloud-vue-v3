@@ -22,8 +22,8 @@
     <a-spin :spinning="confirmLoading">
       <a-form-model ref="form" :model="model" :rules="validatorRules">
 
-        <a-form-model-item label="用戶賬號" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="username">
-          <a-input placeholder="請輸入用戶賬號" v-model="model.username" :readOnly="!!model.id"/>
+        <a-form-model-item label="用戶帳號" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="username">
+          <a-input placeholder="請輸入用戶帳號" v-model="model.username" :readOnly="!!model.id"/>
         </a-form-model-item>
 
         <template v-if="!model.id">
@@ -165,7 +165,7 @@
         disableSubmit:false,
         dateFormat:"YYYY-MM-DD",
         validatorRules:{
-          username:[{required: true, message: '請輸入用戶賬號!'},
+          username:[{required: true, message: '請輸入用戶帳號!'},
                     {validator: this.validateUsername,}],
           password: [{required: true,pattern:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>?,./]).{8,}$/,message: '密碼由8位數字、大小寫字母和特殊符號組成!'},
                      {validator: this.validateToNextPassword,trigger: 'change'}],

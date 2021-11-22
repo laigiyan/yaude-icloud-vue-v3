@@ -13,7 +13,7 @@
           <a-tab-pane :tab="msg1Title" key="1">
             <!--<a-list>
               <a-list-item>
-                <a-list-item-meta title="你收到了 14 份新周報" description="一年前">
+                <a-list-item-meta title="你收到了 14 份新週報" description="一年前">
                   <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"/>
                 </a-list-item-meta>
               </a-list-item>
@@ -123,7 +123,7 @@
       this.initWebSocket();
      // this.heartCheckFun();
     },
-    destroyed: function () { // 離開頁面生命周期函數
+    destroyed: function () { // 離開頁面生命週期函數
       this.websocketOnclose();
     },
     methods: {
@@ -197,7 +197,7 @@
       },
 
       initWebSocket: function () {
-        // WebSocket與普通的請求所用協議有所不同，ws等同于http，wss等同于https
+        // WebSocket與普通的請求所用協議有所不同，ws等同於http，wss等同於https
         var userId = store.getters.userInfo.id;
         var url = window._CONFIG['domianURL'].replace("https://","wss://").replace("http://","ws://")+"/websocket/"+userId;
         //console.log(url);

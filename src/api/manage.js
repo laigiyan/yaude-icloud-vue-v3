@@ -115,7 +115,7 @@ export function saveService(parameter) {
 }
 
 /**
- * 下载文件 用于excel导出
+ * 下载文件 用於excel导出
  * @param url
  * @param parameter
  * @returns {*}
@@ -159,7 +159,7 @@ export function downloadFile(url, fileName, parameter) {
 }
 
 /**
- * 文件上传 用于富文本上传图片
+ * 文件上传 用於富文本上传图片
  * @param url
  * @param parameter
  * @returns {*}

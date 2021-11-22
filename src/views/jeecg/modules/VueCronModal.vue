@@ -113,7 +113,7 @@
               <a-row>
                 <a-radio value="2">每隔
                   <a-input-number size="small" v-model="result.week.incrementIncrement" :min="1" :max="7"></a-input-number>
-                  周執行 從
+                  週執行 從
                   <a-select size="small" v-model="result.week.incrementStart">
                     <a-select-option v-for="(val,index) in Array(7)" :key="index" :value="index+1">{{ weekDays[index] }}</a-select-option>
                   </a-select>

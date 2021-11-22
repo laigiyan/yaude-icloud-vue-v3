@@ -7,9 +7,9 @@
         <a-row :gutter="24">
 
           <a-col :md="6" :sm="12">
-            <a-form-item label="賬號">
-              <!--<a-input placeholder="請輸入賬號查詢" v-model="queryParam.username"></a-input>-->
-              <j-input placeholder="輸入賬號模糊查詢" v-model="queryParam.username"></j-input>
+            <a-form-item label="帳號">
+              <!--<a-input placeholder="請輸入帳號查詢" v-model="queryParam.username"></a-input>-->
+              <j-input placeholder="輸入帳號模糊查詢" v-model="queryParam.username"></j-input>
             </a-form-item>
           </a-col>
 
@@ -223,7 +223,7 @@
             }
           },*/
           {
-            title: '用戶賬號',
+            title: '用戶帳號',
             align: "center",
             dataIndex: 'username',
             width: 120,
@@ -290,7 +290,7 @@
 
         ],
         superQueryFieldList: [
-          { type: 'input', value: 'username', text: '用戶賬號', },
+          { type: 'input', value: 'username', text: '用戶帳號', },
           { type: 'input', value: 'realname', text: '用戶姓名', },
           { type: 'select', value: 'sex', dbType: 'int', text: '性別', dictCode: 'sex' },
         ],
@@ -328,7 +328,7 @@
             }
           });
           if (isAdmin) {
-            that.$message.warning('管理員賬號不允許此操作,請重新選擇！');
+            that.$message.warning('管理員帳號不允許此操作,請重新選擇！');
             return;
           }
           that.selectedRowKeys.forEach(function (val) {
@@ -336,7 +336,7 @@
           });
           that.$confirm({
             title: "確認操作",
-            content: "是否" + (status == 1 ? "解凍" : "凍結") + "選中賬號?",
+            content: "是否" + (status == 1 ? "解凍" : "凍結") + "選中帳號?",
             onOk: function () {
               frozenBatch({ids: ids, status: status}).then((res) => {
                 if (res.success) {
@@ -364,7 +364,7 @@
         let that = this;
         //TODO 後台校驗管理員角色
         if ('admin' == username) {
-          that.$message.warning('管理員賬號不允許此操作！');
+          that.$message.warning('管理員帳號不允許此操作！');
           return;
         }
         frozenBatch({ids: id, status: status}).then((res) => {

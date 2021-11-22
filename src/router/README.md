@@ -49,7 +49,7 @@
 
 | 参数                | 说明                                                         | 类型    | 默认值 |
 | ------------------- | ------------------------------------------------------------ | ------- | ------ |
-| title               | 路由标题, 用于显示面包屑, 页面标题 *推荐设置                 | string  | -      |
+| title               | 路由标题, 用於显示面包屑, 页面标题 *推荐设置                 | string  | -      |
 | icon                | 路由在 menu 上显示的图标                                     | string  | -      |
 | keepAlive           | 缓存该路由                                                   | boolean | false  |
 | hiddenHeaderContent | *特殊 隐藏 [PageHeader](https://github.com/sendya/ant-design-pro-vue/blob/master/src/components/layout/PageHeader.vue#L14) 组件中的页面带的 面包屑和页面标题栏 | boolean | false  |

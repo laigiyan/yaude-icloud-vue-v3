@@ -70,7 +70,7 @@ export default {
       this.$refs.form.validate((ok, err) => {
         if (ok) {
           let event = {value: this.model.input, target: this}
-          // 異步方法優先級高于同步方法
+          // 異步方法優先級高於同步方法
           if (typeof this.callback.onOkAsync === 'function') {
             this.callback.onOkAsync(event)
           } else if (typeof this.callback.onOk === 'function') {

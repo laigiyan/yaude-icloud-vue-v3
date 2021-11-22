@@ -59,7 +59,7 @@ export const JeecgThirdLoginMixin = {
             that.doThirdLogin(token)
           }
         } else if (typeof token === 'object') {
-          //對像類型 說明需要提示是否綁定現有賬號
+          //對像類型 說明需要提示是否綁定現有帳號
           if (token['isObj'] === true) {
             that.thirdConfirmShow = true
             that.thirdLoginInfo = { ...token }
@@ -86,17 +86,17 @@ export const JeecgThirdLoginMixin = {
         })
       }
     },
-    // 綁定已有賬號 需要輸入密碼
+    // 綁定已有帳號 需要輸入密碼
     thirdLoginUserBind() {
       this.thirdLoginPassword = ''
       this.thirdLoginUser = this.thirdLoginInfo.uuid
       this.thirdConfirmShow = false
       this.thirdPasswordShow = true
     },
-    //創建新賬號
+    //創建新帳號
     thirdLoginUserCreate() {
       this.thirdCreateUserLoding = true
-      // 賬號名後面添加兩位隨機數
+      // 帳號名後面添加兩位隨機數
       this.thirdLoginInfo['suffix'] = parseInt(Math.random() * 98 + 1)
       //this.thirdLoginInfo.operateCode = 123 //測試校驗失敗
       postAction('/sys/third/user/create', this.thirdLoginInfo).then(res => {

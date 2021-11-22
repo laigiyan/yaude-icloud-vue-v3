@@ -1,8 +1,8 @@
 <template>
   <a-card :bordered="false">
     <a-steps class="steps" :current="currentTab">
-      <a-step title="填寫轉賬信息" />
-      <a-step title="確認轉賬信息" />
+      <a-step title="填寫轉帳信息" />
+      <a-step title="確認轉帳信息" />
       <a-step title="完成" />
     </a-steps>
     <div class="content">

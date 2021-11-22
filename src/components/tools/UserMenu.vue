@@ -47,7 +47,7 @@
        <!-- <a-menu-item key="1">
           <router-link :to="{ name: 'account-settings-base' }">
             <a-icon type="setting"/>
-            <span>賬戶設置</span>
+            <span>帳戶設置</span>
           </router-link>
         </a-menu-item>-->
         <a-menu-item key="3"  @click="systemSetting">

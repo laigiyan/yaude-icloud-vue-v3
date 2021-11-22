@@ -213,7 +213,7 @@
           {
             key: 'op3',
             type: '部門初審',
-            name: '周毛毛',
+            name: '週毛毛',
             status: 'agree',
             updatedAt: '2017-10-03  19:23:12',
             remark: '-'
@@ -247,7 +247,7 @@
           {
             key: 'op3',
             type: '部門初審',
-            name: '周毛毛',
+            name: '週毛毛',
             status: 'agree',
             updatedAt: '2017-10-03  19:23:12',
             remark: '-'
@@ -273,7 +273,7 @@
           {
             key: 'op3',
             type: '部門初審',
-            name: '周毛毛',
+            name: '週毛毛',
             status: 'agree',
             updatedAt: '2017-10-03  19:23:12',
             remark: '-'

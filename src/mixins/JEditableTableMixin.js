@@ -57,7 +57,7 @@ export const JEditableTableMixin = {
         let rowNum = this.addDefaultRowNum
         if (typeof rowNum !== 'number') {
           rowNum = 1
-          console.warn('由于你没有在 data 中定义 addDefaultRowNum 或 addDefaultRowNum 不是数字，所以默认添加一条空数据，如果不想默认添加空数据，请将定义 addDefaultRowNum 为 0')
+          console.warn('由於你没有在 data 中定义 addDefaultRowNum 或 addDefaultRowNum 不是数字，所以默认添加一条空数据，如果不想默认添加空数据，请将定义 addDefaultRowNum 为 0')
         }
         this.eachAllTable((item) => {
           item.add(rowNum)

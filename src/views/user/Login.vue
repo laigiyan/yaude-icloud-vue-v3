@@ -150,7 +150,7 @@
         let that = this
         let loginParams = {};
         that.loginBtn = true;
-        // 使用賬戶密碼登錄
+        // 使用帳戶密碼登錄
         if (that.customActiveKey === 'tab1') {
           that.form.validateFields([ 'username', 'password','inputCode', 'rememberMe' ], { force: true }, (err, values) => {
             if (!err) {

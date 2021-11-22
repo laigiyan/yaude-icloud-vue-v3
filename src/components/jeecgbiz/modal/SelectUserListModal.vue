@@ -39,7 +39,7 @@
         },
         columns: [
           {
-            title: '用戶賬號',
+            title: '用戶帳號',
             align: "center",
             dataIndex: 'username',
             fixed: 'left',

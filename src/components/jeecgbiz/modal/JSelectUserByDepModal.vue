@@ -28,10 +28,10 @@
       </a-col>
       <a-col :md="18" :sm="24">
         <a-card :bordered="false">
-          用戶賬號:
+          用戶帳號:
           <a-input-search
             :style="{width:'150px',marginBottom:'15px'}"
-            placeholder="請輸入賬號"
+            placeholder="請輸入帳號"
             v-model="queryParam.username"
             @search="onSearch"
           ></a-input-search>
@@ -71,7 +71,7 @@
         },
         columns: [
           {
-            title: '用戶賬號',
+            title: '用戶帳號',
             align: 'center',
             dataIndex: 'username'
           },

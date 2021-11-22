@@ -816,7 +816,7 @@
         isFirst: true,
         // 當前實例是否是行編輯
         isJEditableTable: true,
-        // caseId，用于防止有多個實例的時候會沖突
+        // caseId，用於防止有多個實例的時候會沖突
         caseId: `_jet-${randomString(6)}-`,
         // 臨時ID標識，凡是以該標識結尾的ID都是臨時ID，不添加到數據庫中
         tempId: `_tid-${randomString(6)}`,
@@ -882,7 +882,7 @@
         destroyCleanGroupRequest: false,
         // 當前正在編輯的行的id
         currentEditRows: {},
-        // 上次push數據的事件，用于判斷是否點擊過快
+        // 上次push數據的事件，用於判斷是否點擊過快
         lastPushTimeMap: new Map(),
         number:0,
         //不顯示的按鈕編碼
@@ -1551,7 +1551,7 @@
         let inputValues = cloneObject(this.inputValues)
         let tooltips = Object.assign({}, this.tooltips)
         let notPassedIds = cloneObject(this.notPassedIds)
-        // 用于存儲合并后的值
+        // 用於存儲合并后的值
         let values = []
         // 遍歷inputValues來獲取每行的值
         for (let value of inputValues) {
@@ -2143,14 +2143,14 @@
       clearSelection() {
         this.selectedRowIds = []
       },
-      /** 用于搜索下拉框中的內容 */
+      /** 用於搜索下拉框中的內容 */
       handleSelectFilterOption(input, option, column) {
         if (column.allowSearch === true || column.allowInput === true) {
           return option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
         }
         return true
       },
-      /** select 搜索時的事件，用于動態添加options */
+      /** select 搜索時的事件，用於動態添加options */
       handleSearchSelect(value, id, row, col) {
         if (col.allowSearch !== true && col.allowInput === true) {
           // 是否找到了對應的項，找不到則添加這一項
@@ -2210,7 +2210,7 @@
 
         let { oldIndex, newIndex, item: { dataset: { idx: dataIdx } } } = event
 
-        // 由于動態顯示隱藏行導致index有誤差，需要算出真實的index
+        // 由於動態顯示隱藏行導致index有誤差，需要算出真實的index
         let diff = Number.parseInt(dataIdx) - oldIndex
         oldIndex += diff
         newIndex += diff
@@ -2414,13 +2414,13 @@
         this.elemValueChange(column.type, row, column, value)
       },
       handleMoreOperation(id,flag,column){
-        //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用于控制上傳文件
+        //update-begin-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用於控制上傳文件
         if(column.number){
           this.number = column.number;
         }else{
           this.number = 0;
         }
-        //update-end-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用于控制上傳文件
+        //update-end-author:wangshuai date:20201021 for:LOWCOD-969 判斷傳過來的字段是否存在number，用於控制上傳文件
         if(column && column.fieldExtendJson){
           let json = JSON.parse(column.fieldExtendJson);
           this.number = json.uploadnum?json.uploadnum:0;
@@ -2587,7 +2587,7 @@
 
       /* --- common function end --- */
 
-      /* --- 以下是輔助方法，多用于動態構造頁面中的數據 --- */
+      /* --- 以下是輔助方法，多用於動態構造頁面中的數據 --- */
 
       /** 輔助方法：打印日志 */
       log() {
@@ -2885,7 +2885,7 @@
 
       /* ---- 事件監聽 ---- */
 
-      // 鼠標彈起事件，用于清空輸入狀態
+      // 鼠標彈起事件，用於清空輸入狀態
       handleMouseup(event) {
         if (this.alwaysEdit || Object.keys(this.currentEditRows).length === 0) {
           return

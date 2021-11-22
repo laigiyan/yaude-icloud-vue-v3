@@ -18,7 +18,7 @@
           <a-tab-pane tab="月" key="month">
             <month-ui v-model="month" :disabled="disabled"></month-ui>
           </a-tab-pane>
-          <a-tab-pane tab="周" key="week">
+          <a-tab-pane tab="週" key="week">
             <week-ui v-model="week" :day="day" :disabled="disabled"></week-ui>
           </a-tab-pane>
           <a-tab-pane tab="年" key="year" v-if="!hideYear && !hideSecond">
@@ -47,7 +47,7 @@
               <a-input addon-before="月" v-model="inputValues.month" @blur="onInputBlur"/>
             </a-col>
             <a-col :span="8" style="margin-bottom: 8px;">
-              <a-input addon-before="周" v-model="inputValues.week" @blur="onInputBlur"/>
+              <a-input addon-before="週" v-model="inputValues.week" @blur="onInputBlur"/>
             </a-col>
             <a-col :span="8" style="margin-bottom: 8px;">
               <a-input addon-before="年" v-model="inputValues.year" @blur="onInputBlur"/>

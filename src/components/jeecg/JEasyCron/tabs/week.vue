@@ -3,7 +3,7 @@
     <a-radio-group v-model="type">
       <div class="item">
         <a-radio value="TYPE_NOT_SET" class="choice" :disabled="disableChoice">不設置</a-radio>
-        <span class="tip-info">日和周只能設置其中之一</span>
+        <span class="tip-info">日和週只能設置其中之一</span>
       </div>
       <div class="item">
         <a-radio value="TYPE_RANGE" class="choice" :disabled="disableChoice">區間</a-radio>
@@ -51,14 +51,14 @@ import mixin from './mixin'
 import { replaceWeekName, WEEK_MAP_EN } from './const.js'
 
 const WEEK_MAP = {
-  '周一': 1,
-  '周二': 2,
-  '周三': 3,
-  '周四': 4,
-  '周五': 5,
-  '周六': 6,
-  // 按照國人習慣，將周日放到每周的最后一天
-  '周日': 7,
+  '週一': 1,
+  '週二': 2,
+  '週三': 3,
+  '週四': 4,
+  '週五': 5,
+  '週六': 6,
+  // 按照國人習慣，將週日放到每週的最后一天
+  '週日': 7,
 }
 
 export default {
@@ -101,7 +101,7 @@ export default {
   },
   created() {
     this.DEFAULT_VALUE = '*'
-    // 0,7表示周日 1表示周一
+    // 0,7表示週日 1表示週一
     this.minValue = 1
     this.maxValue = 7
     this.valueRange.start = 1

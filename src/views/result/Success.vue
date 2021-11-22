@@ -40,7 +40,7 @@
             <template slot="description">
               <div style="fontSize: 12px; color: rgba(0, 0, 0, 0.45); position: relative; left: 42px;" slot="description" >
                 <div style="margin: 8px 0 4px">
-                  周毛毛
+                  週毛毛
                   <a-icon style="margin-left: 8px; color: #00A0E9" type="dingding-o" />
                 </div>
                 <div><a href="">催一下</a></div>

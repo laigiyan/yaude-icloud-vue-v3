@@ -92,7 +92,7 @@
         required:false,
         default:FILE_TYPE_ALL
       },
-      /*這個屬性用于控制文件上傳的業務路徑*/
+      /*這個屬性用於控制文件上傳的業務路徑*/
       bizPath:{
         type:String,
         required:false,

@@ -177,7 +177,7 @@ this.$refs.superQueryModal.show();
     </div>
   </template>
 ```
-3.定義toggleScreen事件,用于切換modal寬度
+3.定義toggleScreen事件,用於切換modal寬度
 ```vue
   toggleScreen(){
       if(this.modaltoggleFlag){
@@ -290,7 +290,7 @@ export default {
 ## 參數配置
 | 參數           | 類型   | 必填 |說明|
 |--------------|---------|----|---------|
-| options      |array   |?| checkbox需要配置的項，是個數組，數組中每個對象包含兩個屬性:label(用于顯示)和value(用于存儲) |
+| options      |array   |?| checkbox需要配置的項，是個數組，數組中每個對象包含兩個屬性:label(用於顯示)和value(用於存儲) |
 
 使用示例
 ----
@@ -379,7 +379,7 @@ export default {
 
 # JFormContainer 使用文檔
   
-###### 說明: 暫用于表單禁用
+###### 說明: 暫用於表單禁用
 
 使用示例
 ----
@@ -394,7 +394,7 @@ export default {
 
 # JImportModal 使用文檔
   
-###### 說明: 用于列表頁面導入excel功能
+###### 說明: 用於列表頁面導入excel功能
 
 使用示例
 ----

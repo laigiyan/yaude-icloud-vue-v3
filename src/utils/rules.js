@@ -96,11 +96,11 @@ export const rules = {
   }
 }
 /**
- * @description 排序值验证，排序值不可以大于255
+ * @description 排序值验证，排序值不可以大於255
  */
 export const validateOrder = function(rule, value, callback) {
   if (parseInt(value) > 255) {
-    return callback(new Error('排序值不可以大于255'))
+    return callback(new Error('排序值不可以大於255'))
   } else {
     callback()
   }

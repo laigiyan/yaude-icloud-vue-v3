@@ -1,4 +1,4 @@
-// 主要用于日和星期的互斥使用
+// 主要用於日和星期的互斥使用
 const TYPE_NOT_SET = 'TYPE_NOT_SET'
 const TYPE_EVERY = 'TYPE_EVERY'
 const TYPE_RANGE = 'TYPE_RANGE'
@@ -38,7 +38,7 @@ export default {
       TYPE_WORK,
       TYPE_LAST,
       TYPE_SPECIFY,
-      // 對于不同的類型，所定義的值也有所不同
+      // 對於不同的類型，所定義的值也有所不同
       valueRange: {
         start: 0,
         end: 0
@@ -100,7 +100,7 @@ export default {
       }
       return result.length > 0 ? result.join('') : this.DEFAULT_VALUE
     },
-    // 指定值范圍區間，介于最小值和最大值之間
+    // 指定值范圍區間，介於最小值和最大值之間
     specifyRange() {
       let range = []
       for (let i = this.minValue; i <= this.maxValue; i++) {

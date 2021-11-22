@@ -2,7 +2,7 @@ import store from '@/store/'
 import { randomUUID } from '@/utils/util'
 // vxe socket
 const vs = {
-  // 頁面唯一 id，用于標識同一用戶，不同頁面的websocket
+  // 頁面唯一 id，用於標識同一用戶，不同頁面的websocket
   pageId: randomUUID(),
   // webSocket 對象
   ws: null,

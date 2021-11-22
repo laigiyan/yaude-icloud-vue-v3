@@ -111,7 +111,7 @@
       /**
        * 自動判斷父級是否是 <a-tabs/> 組件，然后添加事件監聽，自動觸發reload()
        *
-       * 由于 tabs 組件切換會導致 tinymce 無法輸入，
+       * 由於 tabs 組件切換會導致 tinymce 無法輸入，
        * 只有重新加載才能使用（無論是vue版的還是jQuery版tinymce都有這個通病）
        */
       initATabsChangeAutoReload() {

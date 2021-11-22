@@ -87,16 +87,16 @@
 
               <a-col :md="4" :xs="24" style="margin-bottom: 12px;">
                 <a-select placeholder="匹配規則" :value="item.rule" :getPopupContainer="node=>node.parentNode" @change="handleRuleChange(item,$event)">
-                  <a-select-option value="eq">等于</a-select-option>
+                  <a-select-option value="eq">等於</a-select-option>
                   <a-select-option value="like">包含</a-select-option>
                   <a-select-option value="right_like">以..開始</a-select-option>
                   <a-select-option value="left_like">以..結尾</a-select-option>
                   <a-select-option value="in">在...中</a-select-option>
-                  <a-select-option value="ne">不等于</a-select-option>
-                  <a-select-option value="gt">大于</a-select-option>
-                  <a-select-option value="ge">大于等于</a-select-option>
-                  <a-select-option value="lt">小于</a-select-option>
-                  <a-select-option value="le">小于等于</a-select-option>
+                  <a-select-option value="ne">不等於</a-select-option>
+                  <a-select-option value="gt">大於</a-select-option>
+                  <a-select-option value="ge">大於等於</a-select-option>
+                  <a-select-option value="lt">小於</a-select-option>
+                  <a-select-option value="le">小於等於</a-select-option>
                 </a-select>
               </a-col>
 
