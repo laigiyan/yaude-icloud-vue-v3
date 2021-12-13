@@ -44,6 +44,7 @@
         })
       },
       edit (record) {
+        debugger
         this.visible=true
         if(record.status=="1" || record.status=="2"){
           this.isExamine=true;
@@ -60,7 +61,7 @@
         setTimeout(() => {
           this.$emit('agree',projectId);
         }, 500)
-        this.close()
+       // this.close()
       },
       handlerefuse(){
         this.visible=true
@@ -68,7 +69,7 @@
         setTimeout(() => {
           this.$emit('refuse');
         }, 500)
-        this.close()
+       // this.close()
       },
       close () {
         this.$emit('close');

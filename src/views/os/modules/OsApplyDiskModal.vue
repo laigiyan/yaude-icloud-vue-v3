@@ -60,7 +60,7 @@
         setTimeout(() => {
           this.$emit('agree',projectId);
         }, 500)
-        this.close()
+       // this.close()
       },
       handlerefuse(){
         this.visible=true
@@ -68,7 +68,7 @@
         setTimeout(() => {
           this.$emit('refuse');
         }, 500)
-        this.close()
+        //this.close()
       },
       close () {
         this.$emit('close');

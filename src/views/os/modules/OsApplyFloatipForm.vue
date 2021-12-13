@@ -59,7 +59,7 @@
               <a-input v-model="model.mapperIp" placeholder="請輸入映射vm_ip"  :disabled="justable"></a-input>
             </a-form-model-item>
           </a-col>
-          <a-col :span="24" v-show="showoption">
+          <a-col :span="24" v-if="showoption">
             <a-form-model-item label="審核意見" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
               <a-textarea v-model="model.optionsText" placeholder="請輸入審核意見" ></a-textarea>
             </a-form-model-item>
@@ -118,6 +118,9 @@
           ],
           projectId:[
             { required: true, message: '請選擇專案'},
+          ],
+          optionsText: [
+            { required: true, message: '請輸入審核意見!'},
           ]
         },
         url: {
@@ -212,44 +215,54 @@
       //同意
       agree(){
         const that = this;
-        this.networks.forEach((r)=>{
-          if(r.text==that.model.networkName){
-            this.model.floatNetworkId = r.value;
+        // 觸發表單驗證
+        this.$refs.form.validate(valid => {
+          if (valid) {
+            this.networks.forEach((r) => {
+              if (r.text == that.model.networkName) {
+                this.model.floatNetworkId = r.value;
+              }
+            })
+            let method = "post";
+            this.model.applyType = "2";
+            this.model.optionsType = "1";
+            let httpurl = this.url.agree;
+            httpAction(httpurl, this.model, method).then((res) => {
+              if (res.success) {
+                that.$message.success(res.message);
+                that.$emit('ok');
+              } else {
+                that.$message.warning(res.message);
+              }
+            }).finally(() => {
+              that.confirmLoading = false;
+            })
           }
-        })
-        let method = "post";
-        this.model.applyType = "2";
-        this.model.optionsType="1";
-        let httpurl = this.url.agree;
-        httpAction(httpurl,this.model,method).then((res)=>{
-          if(res.success){
-            that.$message.success(res.message);
-          }else{
-            that.$message.warning(res.message);
-          }
-        }).finally(() => {
-          that.confirmLoading = false;
-        })
+        });
       },
       //拒絕
       refuse(){
         const that = this;
-        this.model.applyType = "2";
-        this.model.optionsType="0";
-        let method = "post";
-        let httpurl = this.url.refuse;
-        httpAction(httpurl,this.model,method).then((res)=>{
-          if(res.success){
-            that.$message.success(res.message);
-            that.$emit('ok');
-            that.loadData();
-          }else{
-            that.$message.warning(res.message);
+        // 觸發表單驗證
+        this.$refs.form.validate(valid => {
+          if (valid) {
+            this.model.applyType = "2";
+            this.model.optionsType = "0";
+            let method = "post";
+            let httpurl = this.url.refuse;
+            httpAction(httpurl, this.model, method).then((res) => {
+              if (res.success) {
+                that.$message.success(res.message);
+                that.$emit('ok');
+                that.loadData();
+              } else {
+                that.$message.warning(res.message);
+              }
+            }).finally(() => {
+              that.confirmLoading = false;
+            })
           }
-        }).finally(() => {
-          that.confirmLoading = false;
-        })
-
+        });
       },
       getProjects(record){
         this.model = Object.assign({}, record);

@@ -14,7 +14,7 @@
       <a-button @click="handleOk" type="primary" v-show="!showoption">確定</a-button>
       <a-button @click="handleCancel">關閉</a-button>
     </template>
-    <os-apply-form ref="realForm" @ok="submitCallback" :disabled="disableSubmit"></os-apply-form>
+    <os-apply-form ref="realForm" @ok="submitCallback"  :disabled="disableSubmit"></os-apply-form>
   </j-modal>
 </template>
 
@@ -60,15 +60,16 @@
          setTimeout(() => {
            this.$emit('agree',projectId);
          }, 500)
-        this.close()
+       // this.close()
       },
       handlerefuse(){
         this.visible=true
         this.$refs.realForm.refuse();
+        debugger
         setTimeout(() => {
           this.$emit('refuse');
         }, 500)
-        this.close()
+       // this.close()
       },
       close () {
         this.$emit('close');

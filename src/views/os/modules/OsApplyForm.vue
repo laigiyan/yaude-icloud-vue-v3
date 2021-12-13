@@ -77,8 +77,8 @@
               <a-button @click="downPrivateKey" type="primary">下載密鑰</a-button>
             </a-form-model-item>
           </a-col>
-          <a-col :span="24" v-show="showoption">
-            <a-form-model-item label="審核意見" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
+          <a-col :span="24" v-if="showoption">
+            <a-form-model-item  label="審核意見" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="optionsText" >
               <a-textarea v-model="model.optionsText" placeholder="請輸入審核意見" ></a-textarea>
             </a-form-model-item>
           </a-col>
@@ -144,12 +144,15 @@
           networkId: [
               { required: true, message: '請選擇網路'},
             ],
-            startTime: [
-              { required: true, message: '請輸入開始時間!'},
-            ],
-            endTime: [
-              { required: true, message: '請輸入結束時間!'},
-            ]
+          startTime: [
+            { required: true, message: '請輸入開始時間!'},
+          ],
+          endTime: [
+            { required: true, message: '請輸入結束時間!'},
+          ],
+          optionsText: [
+            { required: true, message: '請輸入審核意見!'},
+          ]
 
         },
         url: {
@@ -239,6 +242,7 @@
 
         // 觸發表單驗證
         this.$refs.form.validate(valid => {
+          debugger
           if (valid) {
             that.confirmLoading = true;
             let httpurl = '';
@@ -267,39 +271,52 @@
       //同意
       agree(){
         let that = this;
-        let method = "post";
-        this.model.applyType = "1";
-        this.model.optionsType="1";
-        let a  =  this.model;
-        let httpurl = this.url.agree;
-        httpAction(httpurl,this.model,method).then((res)=>{
-          if(res.success){
-            that.$message.success(res.message);
-          }else{
-            that.$message.warning(res.message);
+        // 觸發表單驗證
+        this.$refs.form.validate(valid => {
+          if (valid) {
+            let method = "post";
+            this.model.applyType = "1";
+            this.model.optionsType = "1";
+            let a = this.model;
+            let httpurl = this.url.agree;
+            httpAction(httpurl, this.model, method).then((res) => {
+              if (res.success) {
+                that.$message.success(res.message);
+                that.$emit('ok');
+              } else {
+                that.$message.warning(res.message);
+              }
+            }).finally(() => {
+              that.confirmLoading = false;
+            })
           }
-        }).finally(() => {
-          that.confirmLoading = false;
-        })
+        });
       },
       //拒絕
       refuse(){
         const that = this;
-        this.model.applyType = "1";
-        this.model.optionsType="0";
-        let method = "post";
-        let httpurl = this.url.refuse;
-        httpAction(httpurl,this.model,method).then((res)=>{
-          if(res.success){
-            that.$message.success(res.message);
-            /*that.$emit('ok');
-            that.loadData();*/
-          }else{
-            that.$message.warning(res.message);
+        // 觸發表單驗證
+        this.$refs.form.validate(valid => {
+          if (valid) {
+            that.confirmLoading = true;
+            this.model.applyType = "1";
+            this.model.optionsType="0";
+            let method = "post";
+            let httpurl = this.url.refuse;
+            httpAction(httpurl,this.model,method).then((res)=>{
+              if(res.success){
+                that.$message.success(res.message);
+                that.$emit('ok');
+              }else{
+                that.$message.warning(res.message);
+              }
+            }).finally(() => {
+              that.confirmLoading = false;
+            })
           }
-        }).finally(() => {
-          that.confirmLoading = false;
-        })
+        });
+
+
 
       },
 
