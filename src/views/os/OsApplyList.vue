@@ -230,6 +230,17 @@
     methods: {
       initDictConfig(){
       },
+      searchReset() {//重置
+        this.queryParam = {}
+        this.selectedRowKeys = [];//清空已勾选的
+        this.selectionRows = [];
+        this.loadData();
+      },
+      searchQuery() {//查询
+        this.selectedRowKeys = [];//清空已勾选的
+        this.selectionRows = [];
+        this.loadData();
+      },
       handleSubmit(){
         var params = this.selectionRows[0] ;
         if (this.selectedRowKeys.length <= 0) {
@@ -254,6 +265,7 @@
 
       },
       handleAdjust(){
+        debugger
         const that = this;
         var params = this.selectionRows[0] ;
         debugger;

@@ -229,12 +229,25 @@
     methods: {
       initDictConfig(){
       },
+      searchReset() {//重置
+        this.queryParam = {}
+        this.selectedRowKeys = [];//清空已勾选的
+        this.selectionRows = [];
+        this.loadData();
+      },
+      searchQuery() {//查询
+        this.selectedRowKeys = [];//清空已勾选的
+        this.selectionRows = [];
+        this.loadData();
+      },
       handleAdjust(){
         const that = this;
         var params = this.selectionRows[0] ;
         if (this.selectedRowKeys.length <= 0) {
           this.$message.warning('請選擇一條記錄！');
           return false;
+        }else if(params.status!="1"){
+          this.$message.warning('請先審核！');
         }else{
           this.$refs.adjustModal.adjust(params);
         }
