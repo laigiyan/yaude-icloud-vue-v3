@@ -193,6 +193,8 @@
   import UserRecycleBinModal from './modules/UserRecycleBinModal'
   import JSuperQuery from '@/components/jeecg/JSuperQuery'
   import JThirdAppButton from '@/components/jeecgbiz/thirdApp/JThirdAppButton'
+  import { colAuthFilter } from "@/utils/authFilter"
+
 
   export default {
     name: "UserList",
@@ -303,6 +305,12 @@
           importExcelUrl: "sys/user/importExcel",
         },
       }
+    },
+    created() {
+      this.disableMixinCreated=true;
+      this.columns = colAuthFilter(this.columns,'user:');
+      this.loadData();
+      this.initDictConfig();
     },
     computed: {
       importExcelUrl: function(){
