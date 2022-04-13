@@ -2,12 +2,12 @@
     <div>
       <a-form-model ref="form" :model="model" :rules="validatorRules">
         <a-form-model-item required prop="username">
-          <a-input v-model="model.username" size="large" placeholder="请输入帐户名 / admin">
+          <a-input v-model="model.username" size="large" placeholder="請輸入帳戶名 / admin">
             <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
           </a-input>
         </a-form-model-item>
         <a-form-model-item required prop="password">
-          <a-input v-model="model.password" size="large" type="password" autocomplete="false" placeholder="请输入密码 / 123456">
+          <a-input v-model="model.password" size="large" type="password" autocomplete="false" placeholder="請輸入密碼 / 123456">
             <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
           </a-input>
         </a-form-model-item>
@@ -15,7 +15,7 @@
         <a-row :gutter="0">
           <a-col :span="16">
             <a-form-model-item required prop="inputCode">
-              <a-input v-model="model.inputCode" size="large" type="text" placeholder="请输入验证码">
+              <a-input v-model="model.inputCode" size="large" type="text" placeholder="請輸入驗證碼">
                 <a-icon slot="prefix" type="smile" :style="{ color: 'rgba(0,0,0,.25)' }"/>
               </a-input>
             </a-form-model-item>
@@ -49,14 +49,14 @@
         },
         validatorRules:{
           username: [
-            { required: true, message: '请输入用户名!' },
+            { required: true, message: '請輸入用戶名!' },
             { validator: this.handleUsernameOrEmail }
           ],
           password: [{
-            required: true, message: '请输入密码!', validator: 'click'
+            required: true, message: '請輸入密碼!', validator: 'click'
           }],
           inputCode: [{
-            required: true, message: '请输入验证码!'
+            required: true, message: '請輸入驗證碼!'
           }]
         }
 
@@ -67,7 +67,7 @@
     },
     methods:{
       ...mapActions(['Login']),
-      /**刷新验证码*/
+      /**刷新驗證碼*/
       handleChangeCheckCode(){
         this.currdatetime = new Date().getTime();
         this.model.inputCode = ''
@@ -83,7 +83,7 @@
           this.requestCodeSuccess=false
         })
       },
-      // 判断登录类型
+      // 判斷登錄類型
       handleUsernameOrEmail (rule, value, callback) {
         const regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
         if (regex.test(value)) {
@@ -94,7 +94,7 @@
         callback()
       },
       /**
-       * 验证字段
+       * 驗證字段
        * @param arr
        * @param callback
        */
@@ -121,7 +121,7 @@
       acceptUsername(username){
         this.model['username'] = username
       },
-      //账号密码登录
+      //賬號密碼登錄
       handleLogin(rememberMe){
         this.validateFields([ 'username', 'password', 'inputCode' ], (err)=>{
           if(!err){
@@ -132,7 +132,7 @@
               checkKey: this.currdatetime,
               remember_me: rememberMe,
             }
-            console.log("登录参数", loginParams)
+            console.log("登錄參數", loginParams)
             this.Login(loginParams).then((res) => {
               this.$emit('success', res.result)
             }).catch((err) => {

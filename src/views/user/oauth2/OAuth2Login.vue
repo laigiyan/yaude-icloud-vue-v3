@@ -114,7 +114,7 @@ export default {
       this.sysOAuth2Login('dingtalk')
     },
 
-    /** 後台構造oauth2登錄地址 */
+    /** 後臺構造oauth2登錄地址 */
     sysOAuth2Login(source) {
       let url = `${window._CONFIG['domianURL']}/sys/thirdLogin/oauth2/${source}/login`
       url += `?state=${encodeURIComponent(window.location.origin)}`

@@ -8,7 +8,7 @@
           size="large"
           type="text"
           autocomplete="false"
-          placeholder="请输入用户账号或手机号">
+          placeholder="請輸入用戶賬號或手機號">
           <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
         </a-input>
       </a-form-item>
@@ -20,7 +20,7 @@
               size="large"
               type="text"
               @change="inputCodeChange"
-              placeholder="请输入验证码">
+              placeholder="請輸入驗證碼">
               <a-icon slot="prefix" v-if=" inputCodeContent==verifiedCode " type="smile"
                       :style="{ color: 'rgba(0,0,0,.25)' }"/>
               <a-icon slot="prefix" v-else type="frown" :style="{ color: 'rgba(0,0,0,.25)' }"/>
@@ -33,7 +33,7 @@
         </a-col>
       </a-row>
       <a-form-item :wrapperCol="{span: 19, offset: 5}">
-        <router-link style="float: left;line-height: 40px;" :to="{ name: 'login' }">使用已有账户登录</router-link>
+        <router-link style="float: left;line-height: 40px;" :to="{ name: 'login' }">使用已有賬戶登錄</router-link>
         <a-button type="primary" @click="nextStep">下一步</a-button>
       </a-form-item>
     </a-form>
@@ -54,7 +54,7 @@
         verifiedCode: "",
         validatorRules: {
           username: {rules: [{required: false}, {validator: this.validateInputUsername}]},
-          inputCode: {rules: [{required: true, message: '请输入验证码!'}]},
+          inputCode: {rules: [{required: true, message: '請輸入驗證碼!'}]},
         },
         randCodeImage:'',
         requestCodeSuccess:true,
@@ -145,17 +145,17 @@
         console.log(value);
         var reg = /^[0-9]+.?[0-9]*/;
         if (!value) {
-          callback("请输入用户名和手机号！");
+          callback("請輸入用戶名和手機號！");
         }
 
-        //判断用户输入账号还是手机号码
+        //判斷用戶輸入賬號還是手機號碼
         if (reg.test(value)) {
           var params = {
             phone: value,
           };
           checkOnlyUser(params).then((res) => {
             if (res.success) {
-              callback("用户名不存在!")
+              callback("用戶名不存在!")
             } else {
               callback()
             }
@@ -166,7 +166,7 @@
           };
           checkOnlyUser(params).then((res) => {
             if (res.success) {
-              callback("用户名不存在!")
+              callback("用戶名不存在!")
             } else {
               callback()
             }
