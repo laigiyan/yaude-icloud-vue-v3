@@ -244,7 +244,6 @@
       },
       handleChangeCheckCode(){
         var that = this;
-        debugger
         this.currdatetime = new Date().getTime();
         getAction(`/sys/randomImage/${this.currdatetime}`).then(res=>{
           if(res.success){
