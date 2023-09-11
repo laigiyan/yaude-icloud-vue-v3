@@ -27,6 +27,10 @@ RUN echo "server {  \
 
 ADD dist/ /var/www/html/
 
-USER root
+# 创建一个非特权用户
+RUN useradd -r -u 1001 mynginxuser
+
+# 将 Nginx 用户切换为新创建的用户
+USER mynginxuser
 
 EXPOSE 8080
