@@ -26,7 +26,6 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 ADD dist/ /var/www/html/
-RUN  chmod u+s /usr/local/nginx/sbin/nginx
 
 RUN  chown root.root nginx
 RUN  chmod 755 nginx
