@@ -1,6 +1,7 @@
 FROM nginx
 MAINTAINER buhuaqiang@163.com
 VOLUME /tmp
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ENV LANG en_US.UTF-8
 RUN echo "server {  \
                       listen       8080; \
