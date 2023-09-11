@@ -26,11 +26,7 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 ADD dist/ /var/www/html/
-RUN mkdir -p /var/cache/nginx/client_temp
-RUN mkdir -p /var/cache/nginx/proxy_temp
-RUN mkdir -p /var/cache/nginx/fastcgi_temp
-RUN mkdir -p /var/cache/nginx/uwsgi_temp
-RUN mkdir -p /var/cache/nginx/scgi_temp
-RUN chown 777 -R /var/cache/nginx
-RUN chown 777 -R /etc/nginx
+
+USER root
+
 EXPOSE 8080
