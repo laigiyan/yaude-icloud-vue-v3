@@ -27,9 +27,4 @@ RUN echo "server {  \
 
 ADD dist/ /var/www/html/
 
-RUN  chown root.root nginx
-RUN  chmod 755 nginx
-RUN  chmod u+s nginx
-
 EXPOSE 8080
-EXPOSE 443
