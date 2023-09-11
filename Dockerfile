@@ -26,11 +26,11 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 ADD dist/ /var/www/html/
-RUN sudo chmod u+s /usr/local/nginx/sbin/nginx
+RUN  chmod u+s /usr/local/nginx/sbin/nginx
 
-RUN sudo chown root.root nginx
-RUN sudo chmod 755 nginx
-RUN sudo chmod u+s nginx
+RUN  chown root.root nginx
+RUN  chmod 755 nginx
+RUN  chmod u+s nginx
 
 EXPOSE 8080
 EXPOSE 443
