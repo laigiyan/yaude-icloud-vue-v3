@@ -1,11 +1,11 @@
 FROM nginx
-MAINTAINER jeecgos@163.com
+MAINTAINER buhuaqiang@163.com
 VOLUME /tmp
 ENV LANG en_US.UTF-8
 RUN echo "server {  \
-                      listen       80; \
+                      listen       8080; \
                       location ^~ /jeecg-boot { \
-                      proxy_pass              http://jeecg-boot-system:8080/jeecg-boot/; \
+                      proxy_pass              http://yaude-icloud-java:8080/yaude-boot/; \
                       proxy_set_header        Host jeecg-boot-system; \
                       proxy_set_header        X-Real-IP \$remote_addr; \
                       proxy_set_header        X-Forwarded-For \$proxy_add_x_forwarded_for; \
@@ -25,5 +25,5 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 ADD dist/ /var/www/html/
-EXPOSE 80
+EXPOSE 8080
 EXPOSE 443
