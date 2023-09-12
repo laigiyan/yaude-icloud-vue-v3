@@ -1,3 +1,4 @@
+
 FROM nginx
 MAINTAINER buhuaqiang@163.com
 VOLUME /tmp
@@ -26,9 +27,9 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 ADD dist/ /var/www/html/
-RUN useradd -r -u 1000 -g appuser
 
-USER appuser
+
+RUN useradd -r -u 1000 -g root
 
 
 EXPOSE 8080
