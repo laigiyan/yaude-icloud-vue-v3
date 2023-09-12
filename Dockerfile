@@ -1,39 +1,22 @@
+# 使用官方的 Node.js 16 镜像作为基础镜像
+FROM node:16
 
-FROM ubuntu:latest
+# 设置工作目录
+WORKDIR /app
 
-# 更新包管理器并安装 Nginx
-RUN apt-get update && apt-get install -y nginx
-
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-ENV LANG en_US.UTF-8
-RUN echo "server {  \
-                      listen       8080; \
-                      location ^~ /jeecg-boot { \
-                      proxy_pass              http://yaude-icloud-java:8080/yaude-boot/; \
-                      proxy_set_header        Host jeecg-boot-system; \
-                      proxy_set_header        X-Real-IP \$remote_addr; \
-                      proxy_set_header        X-Forwarded-For \$proxy_add_x_forwarded_for; \
-                  } \
-                  #解决Router(mode: 'history')模式下，刷新路由地址不能找到页面的问题 \
-                  location / { \
-                     root   /var/www/html/; \
-                      index  index.html index.htm; \
-                      if (!-e \$request_filename) { \
-                          rewrite ^(.*)\$ /index.html?s=\$1 last; \
-                          break; \
-                      } \
-                  } \
-                  access_log  /var/log/nginx/access.log ; \
-              } " > /etc/nginx/conf.d/default.conf \
-    &&  mkdir  -p  /var/www \
-    &&  mkdir -p /var/www/html
-
-ADD dist/ /var/www/html/
+# 复制应用程序的 package.json 和 package-lock.json 到容器中
+ADD ./*.* *.*
+COPY ./src src
+COPY ./public public
 
 
+# 安装应用程序的依赖
+RUN npm install
 
 
-EXPOSE 8080
+# 暴露应用程序监听的端口（如果需要，根据你的应用程序进行修改）
+EXPOSE 3000
 
-# 使用 ENTRYPOINT 命令来启动 Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# 启动应用程序
+#CMD ["npm", "start"]
+RUN npm run serve
