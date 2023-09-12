@@ -26,8 +26,9 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 ADD dist/ /var/www/html/
-RUN sed -i 's/user  nginx;/user  root;/' /etc/nginx/nginx.conf
+RUN useradd -r -u 1000 -g appuser
 
+USER appuser
 
 
 EXPOSE 8080
