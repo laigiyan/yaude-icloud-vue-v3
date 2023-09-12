@@ -29,7 +29,10 @@ RUN echo "server {  \
 ADD dist/ /var/www/html/
 
 
-RUN useradd -r -u 1000 -g root
+RUN useradd -r -u 1000 mynginxuser
+RUN sed -i 's/user  nginx;/user  mynginxuser;/' /etc/nginx/nginx.conf
+USER mynginxuser
+
 
 
 EXPOSE 8080
