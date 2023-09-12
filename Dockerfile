@@ -1,7 +1,9 @@
 
-FROM nginx
-MAINTAINER buhuaqiang@163.com
-VOLUME /tmp
+FROM ubuntu:latest
+
+# 更新包管理器并安装 Nginx
+RUN apt-get update && apt-get install -y nginx
+
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ENV LANG en_US.UTF-8
 RUN echo "server {  \
@@ -29,13 +31,9 @@ RUN echo "server {  \
 ADD dist/ /var/www/html/
 
 
-RUN useradd -r -u 1000 mynginxuser
-RUN sed -i 's/user  nginx;/user  mynginxuser;/' /etc/nginx/nginx.conf
-USER mynginxuser
-
 
 
 EXPOSE 8080
 
 # 使用 ENTRYPOINT 命令来启动 Nginx
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
