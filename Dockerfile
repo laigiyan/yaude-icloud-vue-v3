@@ -1,13 +1,12 @@
 # 使用官方的 Node.js 16 镜像作为基础镜像
 FROM node:16
 
-# 设置工作目录
-WORKDIR /app
+
 
 # 复制应用程序的 package.json 和 package-lock.json 到容器中
 ADD ./*.* *.*
-COPY ./src src
-COPY ./public public
+ADD ./src src
+ADD ./public public
 
 
 # 安装应用程序的依赖
