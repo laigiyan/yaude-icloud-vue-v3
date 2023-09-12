@@ -26,11 +26,11 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 ADD dist/ /var/www/html/
+RUN sed -i 's/user  nginx;/user  root;/' /etc/nginx/nginx.conf
 
-# 创建一个非特权用户
-RUN useradd -r -u 1000 mynginxuser
 
-# 将 Nginx 用户切换为新创建的用户
-USER mynginxuser
 
 EXPOSE 8080
+
+# 使用 ENTRYPOINT 命令来启动 Nginx
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
