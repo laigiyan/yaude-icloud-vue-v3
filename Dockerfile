@@ -19,4 +19,7 @@ EXPOSE 3000
 
 # 启动应用程序
 #CMD ["npm", "start"]
-RUN npm run serve
+#RUN npm run serve
+
+
+ENTRYPOINT [ "sh", "-c", "npm run serve" ]
