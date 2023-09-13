@@ -37,5 +37,6 @@ RUN mkdir -p /var/cache/nginx/uwsgi_temp &&   chmod 777 /var/cache/nginx/uwsgi_t
 RUN mkdir -p /var/run/nginx &&     chmod 777 /var/run/nginx
 RUN mkdir -p /var/lib/nginx/body && chmod 777  /var/lib/nginx/body
 RUN mkdir -p /var/log/nginx && chmod 777 /var/log/nginx
+RUN mkdir -p /var/lib/nginx/proxy && chmod 777 /var/lib/nginx/proxy
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
