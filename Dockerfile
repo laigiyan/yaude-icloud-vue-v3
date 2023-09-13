@@ -1,5 +1,5 @@
 # 使用官方的 Node.js 16 镜像作为基础镜像
-FROM node:16
+FROM node:16 as nodejs
 
 
 RUN mkdir code
@@ -37,6 +37,6 @@ RUN echo "server {  \
     &&  mkdir  -p  /var/www \
     &&  mkdir -p /var/www/html
 
-ADD ./dist/ /var/www/html/
+COPY --from=nodejs /code/dist /var/www/html/
 EXPOSE 8080
 
