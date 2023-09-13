@@ -23,7 +23,7 @@ RUN echo "server {  \
               } " > /etc/nginx/conf.d/default.conf \
     &&  mkdir  -p  /var/www \
     &&  mkdir -p /var/www/html
-
+RUN rm /etc/nginx/nginx.conf
 COPY ./nginx.conf /etc/nginx/nginx.conf
 EXPOSE 8080
 USER 1000
