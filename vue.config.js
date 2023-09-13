@@ -87,7 +87,7 @@ module.exports = {
         }
       },*/
       '/yaude-boot': {
-        target: 'http://192.168.11.6:8091', //请求本地 需要jeecg-boot后台项目
+        target: 'http://yaude-icloud-java:8080', //请求本地 需要jeecg-boot后台项目
         ws: false,
         changeOrigin: true
       },
