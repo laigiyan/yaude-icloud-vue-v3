@@ -1,16 +1,3 @@
-# 使用官方的 Node.js 16 镜像作为基础镜像
-FROM node:16 as nodejs
-
-
-RUN mkdir code
-workdir /code
-COPY ./* ./
-
-# 安装应用程序的依赖
-RUN npm install --force
-
-RUN npm run build:dev
-
 FROM nginx
 MAINTAINER buhuaqiang@163.com
 VOLUME /tmp
@@ -37,7 +24,6 @@ RUN echo "server {  \
     &&  mkdir  -p  /var/www \
     &&  mkdir -p /var/www/html
 
-COPY --from=nodejs /code/dist /var/www/html/
 EXPOSE 8080
 USER root
 
