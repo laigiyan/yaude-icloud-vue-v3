@@ -1,10 +1,6 @@
-# 使用官方的 Ubuntu 镜像作为基础镜像
-FROM ubuntu:latest
-
-# 更新包管理器并安装 Nginx
-RUN apt-get update && apt-get install -y nginx
-
+FROM nginx
 MAINTAINER buhuaqiang@163.com
+VOLUME /tmp
 ENV LANG en_US.UTF-8
 RUN echo "server {  \
                       listen       8080; \
@@ -28,15 +24,8 @@ RUN echo "server {  \
     &&  mkdir  -p  /var/www \
     &&  mkdir -p /var/www/html
 
+COPY ./nginx.conf /etc/nginx/nginx.conf
 EXPOSE 8080
-RUN mkdir -p /var/cache/nginx/client_temp &&   chmod 777 /var/cache/nginx/client_temp
-RUN mkdir -p /var/cache/nginx/fastcgi_temp &&   chmod 777 /var/cache/nginx/fastcgi_temp
-RUN mkdir -p /var/cache/nginx/proxy_temp &&   chmod 777 /var/cache/nginx/proxy_temp
-RUN mkdir -p /var/cache/nginx/scgi_temp &&   chmod 777 /var/cache/nginx/scgi_temp
-RUN mkdir -p /var/cache/nginx/uwsgi_temp &&   chmod 777 /var/cache/nginx/uwsgi_temp
-RUN mkdir -p /var/run/nginx &&     chmod 777 /var/run/nginx
-RUN mkdir -p /var/lib/nginx/body && chmod 777  /var/lib/nginx/body
-RUN mkdir -p /var/log/nginx && chmod 777 /var/log/nginx
-RUN mkdir -p /var/lib/nginx/proxy && chmod 777 /var/lib/nginx/proxy
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+USER 1000
 
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
