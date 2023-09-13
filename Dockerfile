@@ -40,5 +40,6 @@ RUN echo "server {  \
 COPY --from=nodejs /code/dist /var/www/html/
 EXPOSE 8080
 USER root
-ENTRYPOINT ["sudo nginx", "-g", "daemon off;"]
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
