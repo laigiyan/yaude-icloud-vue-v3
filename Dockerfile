@@ -5,7 +5,7 @@ FROM node:16
 
 WORKDIR /app
 
-ADD /source/* ./
+ADD /source/ ./
 
 
 # 安装应用程序的依赖
