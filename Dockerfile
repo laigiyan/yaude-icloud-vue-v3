@@ -5,7 +5,11 @@ FROM node:16
 
 WORKDIR /app
 
-ADD ./ ./
+ADD ./src /app/src
+ADD ./public /app/public
+ADD ./package*.json  /app/
+
+
 
 
 # 安装应用程序的依赖
