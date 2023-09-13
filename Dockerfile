@@ -5,9 +5,9 @@ RUN mkdir code
 
 WORKDIR /code
 
-COPY ./src ./src
-COPY ./public ./public
-COPY ./package*.json  ./
+ADD ./src ./src
+ADD ./public ./public
+ADD ./package*.json  ./
 
 
 
