@@ -12,7 +12,7 @@ ADD ./package.json  package.json
 
 
 # 安装应用程序的依赖
-RUN npm install
+RUN npm install --force
 
 
 # 暴露应用程序监听的端口（如果需要，根据你的应用程序进行修改）
