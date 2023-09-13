@@ -30,6 +30,7 @@ RUN mkdir -p /var/cache/nginx/fastcgi_temp &&   chmod 777 /var/cache/nginx/fastc
 RUN mkdir -p /var/cache/nginx/proxy_temp &&   chmod 777 /var/cache/nginx/proxy_temp
 RUN mkdir -p /var/cache/nginx/scgi_temp &&   chmod 777 /var/cache/nginx/scgi_temp
 RUN mkdir -p /var/cache/nginx/uwsgi_temp &&   chmod 777 /var/cache/nginx/uwsgi_temp
+RUN mkdir -p /var/run/nginx &&     chmod 777 /var/run/nginx
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
