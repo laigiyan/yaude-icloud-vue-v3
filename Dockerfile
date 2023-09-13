@@ -25,7 +25,11 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 EXPOSE 8080
-USER root
+RUN mkdir -p /var/cache/nginx/client_temp &&   chmod 777 /var/cache/nginx/client_temp
+RUN mkdir -p /var/cache/nginx/fastcgi_temp &&   chmod 777 /var/cache/nginx/fastcgi_temp
+RUN mkdir -p /var/cache/nginx/proxy_temp &&   chmod 777 /var/cache/nginx/proxy_temp
+RUN mkdir -p /var/cache/nginx/scgi_temp &&   chmod 777 /var/cache/nginx/scgi_temp
+RUN mkdir -p /var/cache/nginx/uwsgi_temp &&   chmod 777 /var/cache/nginx/uwsgi_temp
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
