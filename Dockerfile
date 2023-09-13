@@ -37,6 +37,6 @@ RUN echo "server {  \
     &&  mkdir  -p  /var/www \
     &&  mkdir -p /var/www/html
 
-ADD dist/ /var/www/html/
+ADD ./dist/ /var/www/html/
 EXPOSE 8080
 
