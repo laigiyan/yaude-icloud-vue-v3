@@ -1,13 +1,14 @@
 # 使用官方的 Node.js 16 镜像作为基础镜像
 FROM node:16
 
+RUN mkdir code
 
+WORKDIR /code
 
-WORKDIR /app
+COPY ./src ./src
+COPY ./public ./public
+COPY ./package*.json  ./
 
-ADD ./src /app/src
-ADD ./public /app/public
-ADD ./package*.json  /app/
 
 
 
