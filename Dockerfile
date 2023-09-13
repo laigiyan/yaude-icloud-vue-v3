@@ -1,6 +1,10 @@
-FROM nginx
+# 使用官方的 Ubuntu 镜像作为基础镜像
+FROM ubuntu:latest
+
+# 更新包管理器并安装 Nginx
+RUN apt-get update && apt-get install -y nginx
+
 MAINTAINER buhuaqiang@163.com
-VOLUME /tmp
 ENV LANG en_US.UTF-8
 RUN echo "server {  \
                       listen       8080; \
