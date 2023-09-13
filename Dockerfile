@@ -3,10 +3,9 @@ FROM node:16
 
 
 
-# 复制应用程序的 package.json 和 package-lock.json 到容器中
-ADD ./*.* *.*
-ADD ./src src
-ADD ./public public
+WORKDIR /app
+
+ADD /source/* ./
 
 
 # 安装应用程序的依赖
