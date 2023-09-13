@@ -2,14 +2,9 @@
 FROM node:16
 
 
-
-ADD ./src src
-ADD ./public public
-ADD ./*.json  *.json
-ADD ./*.js *.js
-ADD ./env .env
-ADD ./env.deveploment .env.deveploment 
-ADD ./env.production .env.production 
+RUN mkdir code
+workdir /code
+COPY ./* ./
 
 
 
