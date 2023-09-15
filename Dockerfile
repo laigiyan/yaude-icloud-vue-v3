@@ -25,6 +25,7 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 RUN rm /etc/nginx/nginx.conf
 COPY ./nginx.conf /etc/nginx/nginx.conf
+RUN usermod -u 1000 nginx && groupmod -g 1000 nginx
 EXPOSE 8080
 USER 1000
 
