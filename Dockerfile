@@ -27,6 +27,7 @@ RUN echo "server {  \
 #COPY ./nginx.conf /etc/nginx/nginx.conf
 #RUN usermod -u 1000 nginx && groupmod -g 1000 nginx
 # 更改 Nginx 进程的 UID 为 1000
+user root
 RUN usermod -u 1000 nginx && \
     groupmod -g 1000 nginx && \
     chown -R nginx:nginx /var/cache/nginx && \
