@@ -25,8 +25,15 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 #RUN rm /etc/nginx/nginx.conf
 #COPY ./nginx.conf /etc/nginx/nginx.conf
-RUN usermod -u 1000 nginx && groupmod -g 1000 nginx
+#RUN usermod -u 1000 nginx && groupmod -g 1000 nginx
+# 更改 Nginx 进程的 UID 为 1000
+RUN usermod -u 1000 nginx && \
+    groupmod -g 1000 nginx && \
+    chown -R nginx:nginx /var/cache/nginx && \
+    chown -R nginx:nginx /var/run && \
+    chown -R nginx:nginx /var/log/nginx && \
+    chown -R nginx:nginx /etc/nginx
 EXPOSE 8080
-USER 1000
+
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
