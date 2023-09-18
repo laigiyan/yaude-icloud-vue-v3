@@ -15,6 +15,7 @@ RUN npm run build:dev
 FROM httpd:latest
 COPY --from=nodejs /code/dist /usr/local/apache2/htdocs/
 COPY httpd.conf /usr/local/apache2/conf/httpd.conf
+RUN sed -i 's/#LoadModule\ mpm_event_module/LoadModule\ mpm_event_module/' /usr/local/apache2/conf/httpd.conf
 
 # 定义容器启动时运行的命令
 CMD ["httpd-foreground"]
