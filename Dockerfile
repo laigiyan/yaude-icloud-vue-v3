@@ -37,11 +37,7 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 COPY --from=nodejs /code/dist /var/www/html/
-RUN sed -i -e 's/user nginx;/user 1000;/' /etc/nginx/nginx.conf 
-
-
 EXPOSE 8080
-USER 1000
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
 
