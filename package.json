@@ -3,7 +3,7 @@
   "version": "2.4.6",
   "private": true,
   "scripts": {
-    "install": "cnpm install --legacy-peer-deps ",
+    "install": "npm install --legacy-peer-deps ",
     "serve": "export  NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
     "build:test": "export  NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build --mode test",
 	  "build:dev": "export  NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build --mode development",
