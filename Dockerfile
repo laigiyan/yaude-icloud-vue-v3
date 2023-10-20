@@ -5,6 +5,8 @@ FROM node:18.15.0 as nodejs
 RUN mkdir code
 workdir /code
 COPY ./* ./
+COPY ./src ./src
+COPY ./public ./public
 
 # 安装应用程序的依赖
 RUN yarn install 
