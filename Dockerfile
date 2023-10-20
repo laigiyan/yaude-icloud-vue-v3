@@ -1,5 +1,5 @@
 # 使用官方的 Node.js 16 镜像作为基础镜像
-FROM node:14.15.0 as nodejs
+FROM node:18.15.0 as nodejs
 
 
 RUN mkdir code
