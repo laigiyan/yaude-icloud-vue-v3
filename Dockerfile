@@ -20,7 +20,7 @@ FROM registry.access.redhat.com/ubi8/nginx-118
 MAINTAINER buhuaqiang@163.com
 ENV LANG en_US.UTF-8
 
-EXPOSE 8080
+EXPOSE 80
 
 
 
