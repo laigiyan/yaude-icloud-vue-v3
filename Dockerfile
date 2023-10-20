@@ -8,6 +8,8 @@ COPY ./* ./
 
 # 安装应用程序的依赖
 RUN yarn install 
+RUN npm -v
+RUN yarm -v
 RUN npm run build:dev
 
 
