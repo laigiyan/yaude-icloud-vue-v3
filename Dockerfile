@@ -1,5 +1,5 @@
 # 使用官方的 Node.js 16 镜像作为基础镜像
-FROM node:16 as nodejs
+FROM node:16.15.0 as nodejs
 
 
 RUN mkdir code
@@ -7,7 +7,7 @@ workdir /code
 COPY ./* ./
 
 # 安装应用程序的依赖
-RUN npm install --force
+RUN npm install 
 RUN npm run build:dev
 
 
