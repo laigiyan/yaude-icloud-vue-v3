@@ -10,6 +10,8 @@ COPY ./* ./
 RUN yarn install 
 RUN npm -v
 RUN yarn -v
+RUN npm install -g npm@10.2.1
+RUN npm -v
 RUN npm run build:dev
 
 
