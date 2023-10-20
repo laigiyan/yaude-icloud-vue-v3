@@ -19,8 +19,12 @@ RUN npm run build:dev
 FROM registry.access.redhat.com/ubi8/nginx-118
 MAINTAINER buhuaqiang@163.com
 ENV LANG en_US.UTF-8
-CMD nginx -g "daemon off;"
+
+COPY --from=nodejs /code/dist /opt/app-root/src/
+
 EXPOSE 8080
+
+CMD nginx -g "daemon off;"
 
 
 
