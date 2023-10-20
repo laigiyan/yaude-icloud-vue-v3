@@ -7,8 +7,7 @@ workdir /code
 COPY ./* ./
 
 # 安装应用程序的依赖
-RUN yarn install 
-RUN npm install -g npm@10.2.1
+RUN npm install 
 RUN npm run build:dev
 
 
