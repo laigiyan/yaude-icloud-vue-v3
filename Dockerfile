@@ -7,7 +7,7 @@ workdir /code
 COPY ./* ./
 
 # 安装应用程序的依赖
-RUN npm install 
+RUN npm install --force
 RUN npm run build:dev
 
 
