@@ -8,8 +8,9 @@ COPY ./* ./
 
 # 安装应用程序的依赖
 RUN yarn install 
-
+RUN npm install -g npm@10.2.1
 RUN npm run build:dev
+
 
 FROM nginx
 MAINTAINER buhuaqiang@163.com
