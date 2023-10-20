@@ -16,7 +16,7 @@ RUN yarn -v
 RUN npm run build:dev
 
 
-FROM nginx
+FROM registry.access.redhat.com/ubi8/nginx-118
 MAINTAINER buhuaqiang@163.com
 ENV LANG en_US.UTF-8
 RUN echo "server {  \
@@ -42,6 +42,7 @@ RUN echo "server {  \
     &&  mkdir -p /var/www/html
 
 COPY --from=nodejs /code/dist /var/www/html/
+CMD nginx -g "daemon off;"
 EXPOSE 8080
 
 
