@@ -1,5 +1,5 @@
 # 使用官方的 Node.js 16 镜像作为基础镜像
-FROM node:16.15.0 as nodejs
+FROM node:14.15.0 as nodejs
 
 
 RUN mkdir code
@@ -10,8 +10,7 @@ COPY ./* ./
 RUN yarn install 
 RUN npm -v
 RUN yarn -v
-RUN npm install -g npm@10.2.1
-RUN npm -v
+
 RUN npm run build:dev
 
 
