@@ -9,7 +9,6 @@
     "build:dev": "vue-cli-service build --mode development",
     "build:prod": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
-    "build": "yarn install --frozen-lockfile",
     "server": "node server.js"
   },
   "dependencies": {
