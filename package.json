@@ -9,7 +9,7 @@
     "build:dev": "vue-cli-service build --mode development",
     "build:prod": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
-    "build": "npm i express express-generator pm2 -g && npm install http-proxy-middleware -g && npm run build:dev"
+    "build": "npm run build:dev  && npm install http-proxy-middleware -g "
     "server": "node server.js"
   },
   "dependencies": {
