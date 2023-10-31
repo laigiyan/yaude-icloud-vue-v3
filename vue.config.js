@@ -61,17 +61,24 @@ module.exports = {
 
   },
 
-  css: {
+ css: {
     loaderOptions: {
       less: {
         modifyVars: {
           /* less 变量覆盖，用于自定义 ant design 主题 */
           'primary-color': '#1890FF',
           'link-color': '#1890FF',
-          'border-radius-base': '4px',
+          'border-radius-base': '4px'
         },
-        javascriptEnabled: true,
-      }
+        javascriptEnabled: true
+      },
+      postcss: {
+        plugins: [
+          require('autoprefixer')({
+            overrideBrowserslist: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie> 8']
+          }),
+        ],
+      },
     }
   },
 
