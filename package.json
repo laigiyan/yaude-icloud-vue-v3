@@ -10,8 +10,7 @@
     "build:prod": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
     "server": "node server.js",
-    "prestart": "cd /opt/app-root/src && npm install  && npm install -g @vue/cli && npm run build:dev ",
-    "start": "cd /opt/app-root/src && npm run serve"
+    "start": "npm run serve"
   },
   "dependencies": {
     "@antv/data-set": "^0.11.4",
