@@ -9,7 +9,7 @@
     "build:dev": "vue-cli-service build --mode development",
     "build:prod": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
-    "build": "yarn install && npm run build:dev  && npm install http-proxy-middleware -g ",
+    "build": "npm run build:dev  && npm install http-proxy-middleware -g ",
     "server": "node server.js"
   },
   "dependencies": {
