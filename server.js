@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const { createProxyMiddleware } = require('http-proxy-middleware')
+const  createProxyMiddleware  = require('http-proxy-middleware');
+
 app.use('/yaude-boot', createProxyMiddleware({
   // 代理跨域目标接口 例如htt://110.11.11.111/
   target: 'http://yaude-icloud-java:8080/yaude-boot',
