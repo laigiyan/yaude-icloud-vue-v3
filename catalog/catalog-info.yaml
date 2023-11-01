@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: yaude-icloud-vue
+  name: yaude-icloud-vue2
   description: Node VUe3.0 Sample App
   tags:
     - app-accelerator
@@ -9,7 +9,7 @@ metadata:
     - express
     - tanzu
   annotations:
-    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=yaude-icloud-vue'
+    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/part-of=yaude-icloud-vue2'
 spec:
   type: service
   lifecycle: experimental
