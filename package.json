@@ -9,7 +9,7 @@
     "build:dev": "vue-cli-service build --mode development",
     "build:prod": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
-    "build": ""npm install webpack -g && npm i express -g && npm install http-proxy-middleware --save && npm install postcss-loader autoprefixer  -g && vue-cli-service build --mode development",
+    "build": "npm install webpack -g && npm i express -g && npm install http-proxy-middleware --save && npm install postcss-loader autoprefixer  -g && vue-cli-service build --mode development",
     "server": "node server.js"
   },
   "dependencies": {
